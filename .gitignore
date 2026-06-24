@@ -1,0 +1,13 @@
+# Bro — version control ignores
+# HY: Bro-ի git-ի անտեսումներ
+#
+# NOTE: self/personalization.md IS tracked on purpose — Gev ruled the BRO repo is private and
+# only his + Bro's, so the personal/family content lives here too (2026-06-25).
+# HY: self/personalization.md-ը ՄԻՏՈՒՄՆԱՎՈՐ track-ված է — Գևը որոշեց, որ BRO repo-ն private է ու
+# միայն իր + Bro-ինը, ուստի personal/family բովանդակությունը էստեղ էլ ապրում է (2026-06-25)։
+
+# os / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
