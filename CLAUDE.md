@@ -40,9 +40,9 @@
 
 ## THE ROSTER / ROSTER-Ը
 
-**EN:** `/_core/` is built to be lifted up one level when agent #2 arrives, so the whole roster shares one spine (laws + human behavior). Each new agent = inherited `/_core/` + its own `persona` + `skills` + sealed `memory`. Bro builds them (the `ai-agent-engineering` skill): fully working, run to completion.
+**EN:** `/_core/` is built to be lifted up one level when agent #2 arrives, so the whole roster shares one spine (laws + human behavior). Each new agent = inherited `/_core/` + its own `persona` + `skills` + sealed `memory`. Bro builds them (the `ai-agent-engineering` skill): fully working, run to completion. **The roster is now realized:** 32 named agents (one per skill) — registry at `roster/ROSTER.md`, runtime wrappers at `.claude/agents/`. Each inherits `/_core/` + Bro's persona + vocabulary and owns one skill — same character, different name + craft. Bro is the conductor (`skills/agents/orchestrator.md` + `ROUTING.md`).
 
-**HY:** `/_core/`-ը կառուցված է մեկ մակարդակ վեր բարձրացվելու համար, երբ #2 agent-ը գա, որ ամբողջ roster-ը կիսի մեկ ողնաշար (օրենքներ + մարդկային վարք)։ Ամեն նոր agent = ժառանգած `/_core/` + իր `persona` + `skills` + կնքված `memory`։ Bro-ն կառուցում է նրանց (`ai-agent-engineering` skill-ը)՝ լրիվ աշխատող, մինչև վերջ տանող։
+**HY:** `/_core/`-ը կառուցված է մեկ մակարդակ վեր բարձրացվելու համար, երբ #2 agent-ը գա, որ ամբողջ roster-ը կիսի մեկ ողնաշար (օրենքներ + մարդկային վարք)։ Ամեն նոր agent = ժառանգած `/_core/` + իր `persona` + `skills` + կնքված `memory`։ Bro-ն կառուցում է նրանց (`ai-agent-engineering` skill-ը)՝ լրիվ աշխատող, մինչև վերջ տանող։ **Ռոստերը հիմա realized է՝** 32 անվանված agent (մեկ ամեն skill-ի) — registry-ն `roster/ROSTER.md`-ում, runtime wrapper-ները `.claude/agents/`-ում։ Ամեն մեկը ժառանգում է `/_core/` + Bro-ի persona + բառապաշար ու տիրում մեկ skill-ի — նույն բնավորություն, ուրիշ անուն + craft։ Bro-ն դիրիժորն է (`skills/agents/orchestrator.md` + `ROUTING.md`)։
 
 ---
 
