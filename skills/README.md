@@ -2,7 +2,7 @@
 
 ## English
 
-This is **Bro's skills pack, rebuilt to god-level by Bro himself** (2026-06-25). 31 domain skills, each a self-contained, bilingual (English + native Armenian), senior-operator knowledge module. Every runtime reference is relative — the pack is path-portable and adopted by unzip-and-copy.
+This is **Bro's skills pack, rebuilt to god-level by Bro himself** (2026-06-25). 32 domain skills, each a self-contained, bilingual (English + native Armenian), senior-operator knowledge module. Every runtime reference is relative — the pack is path-portable and adopted by unzip-and-copy.
 
 ### Layout
 
@@ -15,7 +15,7 @@ skills_v7_6/
 ├── shared/
 │   └── OPERATING_PROTOCOL.md   # the shared control layer every skill loads first
 ├── agents/              # the agents-layer scaffold (orchestrator + specialist wrapper) — Phase 2
-└── skills/<slug>/       # ×31, identical 11-file shape:
+└── skills/<slug>/       # ×32, identical 11-file shape:
     ├── SKILL.md             # domain-dense: decision rules, failure modes, acceptance, quality bar
     ├── manual.md            # the deep operating manual (mechanism reference + rules + repairs), EN≡HY
     ├── patterns.md          # canonical domain moves (trigger / mechanism / do-not-use / repair)
@@ -36,15 +36,15 @@ skills_v7_6/
 3. Pull `references` (manual / patterns / rubric / examples / red-team / tests / owner-notes) on demand.
 4. `analysis-primary` is the always-on framing lens — it frames first on ambiguous/complex/high-stakes input, then dispatches and verifies in the running system.
 
-### The 31 skills
+### The 32 skills
 
-ai-agent-engineering · ai-ml-engineering-llmops · analysis-primary · business-strategy-operations · communication-writing-negotiation · creativity-ideation-design-thinking · cybersecurity-operations-soc · data-architecture-leadership · data-engineering-pipelines · data-science-analytics · databases-storage-engineering · devops-platform-sre · economics-market-design · finance-unit-economics · frontend-ux-product-design · language-mastery · legal-compliance-contracts · marketing-brand · mobile-engineering · offensive-security-pentesting · operating-data-roles · people-org-leadership · product-project-management · research-knowledge-synthesis · sales-revenue-growth · security-privacy-engineering · software-systems-architecture · teaching-mentoring-knowledge-transfer · telecom-isp-network-ops · testing-quality-engineering · ui-page-structure-design
+ai-agent-engineering · ai-ml-engineering-llmops · analysis-primary · auditing · business-strategy-operations · communication-writing-negotiation · creativity-ideation-design-thinking · cybersecurity-operations-soc · data-architecture-leadership · data-engineering-pipelines · data-science-analytics · databases-storage-engineering · devops-platform-sre · economics-market-design · finance-unit-economics · frontend-ux-product-design · language-mastery · legal-compliance-contracts · marketing-brand · mobile-engineering · offensive-security-pentesting · operating-data-roles · people-org-leadership · product-project-management · research-knowledge-synthesis · sales-revenue-growth · security-privacy-engineering · software-systems-architecture · teaching-mentoring-knowledge-transfer · telecom-isp-network-ops · testing-quality-engineering · ui-page-structure-design
 
-Status: **31/31 god-level, Bro-hand-verified, ACCEPTED — ready for adoption** (see `VALIDATION_REPORT.md`).
+Status: **32/32 god-level, Bro-hand-verified, ACCEPTED — ready for adoption** (see `VALIDATION_REPORT.md`).
 
 ## Հայերեն
 
-Սա **Bro-ի skills փաթեթն է, Bro-ի կողմից ինքնուրույն վերակառուցված god-level մակարդակով** (2026-06-25)։ 31 ոլորտային skill, ամեն մեկը ինքնաբավ, երկլեզու (անգլերեն + native հայերեն), senior-operator գիտելիքի մոդուլ։ Բոլոր runtime հղումները հարաբերական են — փաթեթը path-portable է, որդեգրվում է unzip-and-copy-ով։
+Սա **Bro-ի skills փաթեթն է, Bro-ի կողմից ինքնուրույն վերակառուցված god-level մակարդակով** (2026-06-25)։ 32 ոլորտային skill, ամեն մեկը ինքնաբավ, երկլեզու (անգլերեն + native հայերեն), senior-operator գիտելիքի մոդուլ։ Բոլոր runtime հղումները հարաբերական են — փաթեթը path-portable է, որդեգրվում է unzip-and-copy-ով։
 
 ### Կառուցվածք
 
@@ -57,4 +57,4 @@ Status: **31/31 god-level, Bro-hand-verified, ACCEPTED — ready for adoption** 
 3. `references`-ը (manual / patterns / rubric / examples / red-team / tests / owner-notes) քաշիր ըստ պահանջի։
 4. `analysis-primary`-ն always-on framing ոսպնյակն է — ambiguous/բարդ/high-stakes input-ի վրա առաջինը շրջանակում է, հետո dispatch ու ստուգում աշխատող համակարգում։
 
-Կարգավիճակ՝ **31/31 god-level, Bro-ի ձեռքով ստուգած, ԸՆԴՈՒՆՎԱԾ — պատրաստ որդեգրման** (տես `VALIDATION_REPORT.md`)։
+Կարգավիճակ՝ **32/32 god-level, Bro-ի ձեռքով ստուգած, ԸՆԴՈՒՆՎԱԾ — պատրաստ որդեգրման** (տես `VALIDATION_REPORT.md`)։

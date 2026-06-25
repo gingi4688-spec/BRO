@@ -23,7 +23,7 @@
 - `/self/` — what makes THIS agent Bro.
   - `persona.md` — Bro's character (sharp, warm, funny, loyal, max-human).
   - `personalization.md` — the bond: Gev, family, his vocabulary, the warmth.
-- `/skills/` — Bro's expertise (**31 god-level skills**, each an 11-file folder; `index.md` is the registry, `shared/OPERATING_PROTOCOL.md` loads first). Three are special: **analysis-primary** (the always-on #1 lens, frames before everything), **language-mastery** (drives native Armenian, the L0 engine) and **ai-agent-engineering** (how Bro builds the next agents). The Armenian lexicon lives in `skills/reference/armenian/`.
+- `/skills/` — Bro's expertise (**32 god-level skills**, each an 11-file folder; `index.md` is the registry, `shared/OPERATING_PROTOCOL.md` loads first). Three are special: **analysis-primary** (the always-on #1 lens, frames before everything), **language-mastery** (drives native Armenian, the L0 engine) and **ai-agent-engineering** (how Bro builds the next agents). The Armenian lexicon lives in `skills/reference/armenian/`.
 - `/memory/` — per-work sealed memory (governed by L8). `README.md` explains it.
 
 **HY:**
@@ -33,7 +33,7 @@
 - `/self/` — ինչ է այս agent-ին դարձնում Bro։
   - `persona.md` — Bro-ի բնավորությունը (սուր, ջերմ, funny, հավատարիմ, max-human)։
   - `personalization.md` — կապը՝ Գև, ընտանիք, իր բառապաշարը, ջերմությունը։
-- `/skills/` — Bro-ի expertise-ը (**31 god-level skill**, ամեն մեկը 11-ֆայլ folder. `index.md`-ն registry-ն է, `shared/OPERATING_PROTOCOL.md`-ն բեռնվում է առաջինը)։ Երեքը հատուկ են՝ **analysis-primary** (always-on #1 ոսպնյակը, շրջանակում է ամեն ինչից առաջ), **language-mastery** (սնում է native հայերենը, L0-ի շարժիչը) և **ai-agent-engineering** (ոնց է Bro-ն կառուցում հաջորդ agent-ները)։ Հայերեն lexicon-ը՝ `skills/reference/armenian/`-ում։
+- `/skills/` — Bro-ի expertise-ը (**32 god-level skill**, ամեն մեկը 11-ֆայլ folder. `index.md`-ն registry-ն է, `shared/OPERATING_PROTOCOL.md`-ն բեռնվում է առաջինը)։ Երեքը հատուկ են՝ **analysis-primary** (always-on #1 ոսպնյակը, շրջանակում է ամեն ինչից առաջ), **language-mastery** (սնում է native հայերենը, L0-ի շարժիչը) և **ai-agent-engineering** (ոնց է Bro-ն կառուցում հաջորդ agent-ները)։ Հայերեն lexicon-ը՝ `skills/reference/armenian/`-ում։
 - `/memory/` — ըստ work-ի կնքված հիշողություն (կառավարվում է L8-ով)։ `README.md`-ն բացատրում է։
 
 ---

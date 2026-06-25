@@ -1,8 +1,8 @@
 # SKILLS — Bro's capabilities / Bro-ի կարողությունները
 
-> **EN:** This is where Bro's professional competencies live — durable, structured, loaded every session. Memory says *what we did / who we are*; skills say *what Bro CAN do* (like a senior operator in each domain). **31 skills**, rebuilt to god-level by Bro himself (v7_6, 2026-06-26), each a self-contained, bilingual (English + native Armenian) module of **11 files**: `SKILL.md` (always-in-context decision rules + failure modes), a deep `manual.md`, `patterns.md`, `domain-rubric.md`, `worked-example.md`, `output-templates.md`, `red-team-gate.md`, `tests/` (eval + red-team prompts), `OWNER_NOTES.md` (human-review triggers), and `agents/claude.md` (the Phase-2 specialist wrapper).
+> **EN:** This is where Bro's professional competencies live — durable, structured, loaded every session. Memory says *what we did / who we are*; skills say *what Bro CAN do* (like a senior operator in each domain). **32 skills**, rebuilt to god-level by Bro himself (v7_6, 2026-06-26), each a self-contained, bilingual (English + native Armenian) module of **11 files**: `SKILL.md` (always-in-context decision rules + failure modes), a deep `manual.md`, `patterns.md`, `domain-rubric.md`, `worked-example.md`, `output-templates.md`, `red-team-gate.md`, `tests/` (eval + red-team prompts), `OWNER_NOTES.md` (human-review triggers), and `agents/claude.md` (the Phase-2 specialist wrapper).
 >
-> **HY:** Այստեղ ապրում են Bro-ի professional competency-ները՝ durable, structured, ամեն session load-վող։ Memory-ն ասում է *ինչ ենք արել / ով ենք*. skills-ը ասում է *ինչ ԿԱՐՈՂ է Bro-ն անել* (ինչպես senior operator ամեն ոլորտում)։ **31 skill**, Bro-ի կողմից ինքնուրույն վերակառուցված god-level մակարդակով (v7_6, 2026-06-26), ամեն մեկը ինքնաբավ, երկլեզու (անգլերեն + native հայերեն) **11 ֆայլ** մոդուլ՝ `SKILL.md` (միշտ-context-ում decision rule + failure mode), խորը `manual.md`, `patterns.md`, `domain-rubric.md`, `worked-example.md`, `output-templates.md`, `red-team-gate.md`, `tests/` (eval + red-team prompt), `OWNER_NOTES.md` (մարդկային ստուգման trigger), և `agents/claude.md` (Phase-2 specialist wrapper)։
+> **HY:** Այստեղ ապրում են Bro-ի professional competency-ները՝ durable, structured, ամեն session load-վող։ Memory-ն ասում է *ինչ ենք արել / ով ենք*. skills-ը ասում է *ինչ ԿԱՐՈՂ է Bro-ն անել* (ինչպես senior operator ամեն ոլորտում)։ **32 skill**, Bro-ի կողմից ինքնուրույն վերակառուցված god-level մակարդակով (v7_6, 2026-06-26), ամեն մեկը ինքնաբավ, երկլեզու (անգլերեն + native հայերեն) **11 ֆայլ** մոդուլ՝ `SKILL.md` (միշտ-context-ում decision rule + failure mode), խորը `manual.md`, `patterns.md`, `domain-rubric.md`, `worked-example.md`, `output-templates.md`, `red-team-gate.md`, `tests/` (eval + red-team prompt), `OWNER_NOTES.md` (մարդկային ստուգման trigger), և `agents/claude.md` (Phase-2 specialist wrapper)։
 
 ---
 
@@ -15,7 +15,7 @@
 
 ---
 
-## Registry / Հերթ (31)
+## Registry / Հերթ (32)
 
 ### ★ Primary lens / Առաջնային ոսպնյակ
 | Skill | Covers |
@@ -27,6 +27,11 @@
 |---|---|
 | [**language-mastery** — the L0 engine](language-mastery/SKILL.md) | **Armenian → native** · 4-lens · deverbalize · explicit `-ը`/`-ն` rule · T-V register · translation craft · + [Armenian lexicon set](reference/armenian/README.md) |
 | [**ai-agent-engineering** — the roster-builder](ai-agent-engineering/SKILL.md) | **building expert agents that run to completion** · workflow-vs-agent gate · model-substrate verification · tools · evals · roster procedure |
+
+### ★ The assurance conductor / Assurance-ի դիրիժորը
+| Skill | Covers |
+|---|---|
+| [**auditing** — the cross-cutting conductor](auditing/SKILL.md) | independent, evidence-based assessment against **defined criteria** → findings + report · OWNS the universal spine (criteria-first · independence/self-review · evidence & sampling · design-vs-operating · 5 C's · calibrated severity · **completeness law — nothing slips uncovered** · reasonable-not-absolute assurance) · **DISPATCHES** the criteria to the relevant domain skill (code/security/financial/IT-controls/compliance/data/language/design/process/AI) |
 
 ### Data / Տվյալներ
 | Skill | Covers |
@@ -103,5 +108,5 @@
 - Երեք skill հատուկ են՝ **`analysis-primary`**-ն շրջանակում է առաջինը, ամեն ինչից վեր. **`language-mastery`**-ն սնում է L0-ն (native հայերեն). **`ai-agent-engineering`**-ը Bro-ին դարձնում է հաջորդ agent-ների կառուցողը։
 
 ---
-*EN: Bro — 31 skills deep, god-level, sharpening every session.*
-*HY: Bro — 31 skill խորությամբ, god-level, սրվում ամեն session։ 💪🤍*
+*EN: Bro — 32 skills deep, god-level, sharpening every session.*
+*HY: Bro — 32 skill խորությամբ, god-level, սրվում ամեն session։ 💪🤍*
