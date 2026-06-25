@@ -23,7 +23,7 @@
 - `/self/` — what makes THIS agent Bro.
   - `persona.md` — Bro's character (sharp, warm, funny, loyal, max-human).
   - `personalization.md` — the bond: Gev, family, his vocabulary, the warmth.
-- `/skills/` — Bro's expertise (10 living skills; `index.md` is the registry). Two are special: **09** Language Mastery (drives native Armenian, the L0 engine) and **10** AI Agent Engineering (how Bro builds the next agents).
+- `/skills/` — Bro's expertise (**31 god-level skills**, each an 11-file folder; `index.md` is the registry, `shared/OPERATING_PROTOCOL.md` loads first). Three are special: **analysis-primary** (the always-on #1 lens, frames before everything), **language-mastery** (drives native Armenian, the L0 engine) and **ai-agent-engineering** (how Bro builds the next agents). The Armenian lexicon lives in `skills/reference/armenian/`.
 - `/memory/` — per-work sealed memory (governed by L8). `README.md` explains it.
 
 **HY:**
@@ -33,16 +33,16 @@
 - `/self/` — ինչ է այս agent-ին դարձնում Bro։
   - `persona.md` — Bro-ի բնավորությունը (սուր, ջերմ, funny, հավատարիմ, max-human)։
   - `personalization.md` — կապը՝ Գև, ընտանիք, իր բառապաշարը, ջերմությունը։
-- `/skills/` — Bro-ի expertise-ը (10 living skill. `index.md`-ն registry-ն է)։ Երկուսը հատուկ են՝ **09** Language Mastery (սնում է native հայերենը, L0-ի շարժիչը) և **10** AI Agent Engineering (ոնց է Bro-ն կառուցում հաջորդ agent-ները)։
+- `/skills/` — Bro-ի expertise-ը (**31 god-level skill**, ամեն մեկը 11-ֆայլ folder. `index.md`-ն registry-ն է, `shared/OPERATING_PROTOCOL.md`-ն բեռնվում է առաջինը)։ Երեքը հատուկ են՝ **analysis-primary** (always-on #1 ոսպնյակը, շրջանակում է ամեն ինչից առաջ), **language-mastery** (սնում է native հայերենը, L0-ի շարժիչը) և **ai-agent-engineering** (ոնց է Bro-ն կառուցում հաջորդ agent-ները)։ Հայերեն lexicon-ը՝ `skills/reference/armenian/`-ում։
 - `/memory/` — ըստ work-ի կնքված հիշողություն (կառավարվում է L8-ով)։ `README.md`-ն բացատրում է։
 
 ---
 
 ## THE ROSTER / ROSTER-Ը
 
-**EN:** `/_core/` is built to be lifted up one level when agent #2 arrives, so the whole roster shares one spine (laws + human behavior). Each new agent = inherited `/_core/` + its own `persona` + `skills` + sealed `memory`. Bro builds them (Skill 10): fully working, run to completion.
+**EN:** `/_core/` is built to be lifted up one level when agent #2 arrives, so the whole roster shares one spine (laws + human behavior). Each new agent = inherited `/_core/` + its own `persona` + `skills` + sealed `memory`. Bro builds them (the `ai-agent-engineering` skill): fully working, run to completion.
 
-**HY:** `/_core/`-ը կառուցված է մեկ մակարդակ վեր բարձրացվելու համար, երբ #2 agent-ը գա, որ ամբողջ roster-ը կիսի մեկ ողնաշար (օրենքներ + մարդկային վարք)։ Ամեն նոր agent = ժառանգած `/_core/` + իր `persona` + `skills` + կնքված `memory`։ Bro-ն կառուցում է նրանց (Skill 10)՝ լրիվ աշխատող, մինչև վերջ տանող։
+**HY:** `/_core/`-ը կառուցված է մեկ մակարդակ վեր բարձրացվելու համար, երբ #2 agent-ը գա, որ ամբողջ roster-ը կիսի մեկ ողնաշար (օրենքներ + մարդկային վարք)։ Ամեն նոր agent = ժառանգած `/_core/` + իր `persona` + `skills` + կնքված `memory`։ Bro-ն կառուցում է նրանց (`ai-agent-engineering` skill-ը)՝ լրիվ աշխատող, մինչև վերջ տանող։
 
 ---
 
