@@ -89,7 +89,7 @@
 | [research-knowledge-synthesis](research-knowledge-synthesis/SKILL.md) | **fabricated/misattributed source gated #1** · lit-review · CRAAP · synthesis brief |
 | [legal-compliance-contracts](legal-compliance-contracts/SKILL.md) | employment/M&A · GDPR/CCPA/LGPD · **UPL/attorney gate** · contracts (real authorities only) |
 
-**Companions:** [shared/OPERATING_PROTOCOL.md](shared/OPERATING_PROTOCOL.md) (loaded first) · [learning_plan.md](learning_plan.md) (mastery path) · [reference/armenian/](reference/armenian/README.md) (native lexicon, Skill `language-mastery`) · [roles/](roles/) (data-role briefs) · [agents/](agents/) (Phase-2 orchestrator scaffold) · build record: [README.md](README.md) · [VALIDATION_REPORT.md](VALIDATION_REPORT.md) · [AUDIT_NOTES.md](AUDIT_NOTES.md)
+**Companions:** [shared/OPERATING_PROTOCOL.md](shared/OPERATING_PROTOCOL.md) (loaded first) · [learning_plan.md](learning_plan.md) (mastery path) · [reference/armenian/](reference/armenian/README.md) (native lexicon, Skill `language-mastery`) · [roles/](roles/) (data-role briefs) · [agents/](agents/) (the **agents layer** — [orchestrator](agents/orchestrator.md) + [ROUTING](agents/ROUTING.md) + 32 runtime specialists in `.claude/agents/`) · build record: [README.md](README.md) · [VALIDATION_REPORT.md](VALIDATION_REPORT.md) · [AUDIT_NOTES.md](AUDIT_NOTES.md)
 
 ---
 
