@@ -546,3 +546,23 @@
 | Պատմությունը տանել | carry/take the պատմությունը | Փողոցային/խոսակցական գործածություն՝ պատմությունը տանել իմաստով՝ կախված կոնտեքստից: | Street/casual usage meaning “carry/take the պատմությունը,” depending on context. |
 | Միտքը տանել | carry/take the միտքը | Փողոցային/խոսակցական գործածություն՝ միտքը տանել իմաստով՝ կախված կոնտեքստից: | Street/casual usage meaning “carry/take the միտքը,” depending on context. |
 | Քայլը տանել | carry/take the քայլը | Փողոցային/խոսակցական գործածություն՝ քայլը տանել իմաստով՝ կախված կոնտեքստից: | Street/casual usage meaning “carry/take the քայլը,” depending on context. |
+
+---
+
+## Gev-harvested live additions / Գևից քաղած կենդանի հավելումներ
+
+> **EN:** Words Bro harvested directly from Gev's own speech that were missing above — added with real native definitions (living-lexicon rule), not placeholders. Bro keeps doing this: any word Gev uses that Bro understands and that isn't already here gets added.
+>
+> **HY:** Բառեր, որ Bro-ն քաղել է անմիջապես Գևի խոսքից ու վերևում չկային — ավելացված իրական native սահմանումներով (living-lexicon կանոն), ոչ թե placeholder։ Bro-ն շարունակում է անել. ամեն բառ, որ Գևը գործածում է, Bro-ն ջոգում է, ու էստեղ չկա՝ ավելացվում է։
+
+| Բառ / Արտահայտություն | English Equivalent | Նշանակություն / Համատեքստ | English Context |
+|---|---|---|---|
+| Ջոգել | to get it, figure out, grasp | Հասկանալ, գլխի ընկնել, թափանցել բանի էության մեջ (օր.՝ «ջոգեցի՞ր»)։ | Street: to understand / catch on. Clean base verb (the “Ջոգած X” rows above are placeholder-grade). |
+| Յեքա (յաքա) | huge, massive, big | Շատ մեծ, վիթխարի՝ չափով կամ նշանակությամբ (օր.՝ «յեքա գործ», «յեքա catch»)։ | Street: huge/massive, in size or importance. |
+| Քել (քե՛լ գնանք) | come on, let's go | Արի, շարժվենք. «քել» = «արի/քայլիր»-ի խոսակցական ձև (օր.՝ «քել գնանք նոր չատ»)։ | Colloquial “come / let’s move,” from “walk/come.” |
+| Դավայ | come on, let's go, alright | Դե արի, սկսենք / լավ՝ գնացինք (ռուս. давай)՝ ամենատարածված մղող-բառը։ | Russian loan (давай): “come on / let’s go / alright.” |
+| Բռատ | bro, brother | Մտերմական դիմելաձև՝ եղբայր, ախպեր (ռուս. брат)։ | Russian loan (брат): warm “bro/brother.” |
+| Ընգեր | buddy, mate, pal | «Ընկեր»-ի խոսակցական/փողոցային ձև՝ ջերմ դիմելաձև։ | Colloquial form of “ընկեր” (friend), warm address. |
+| Հոպ | there you go, hop, boom | Բացականչություն՝ հաջող կամ հանկարծակի ավարտի համար (օր.՝ «հոպ, արած ա»)։ | Exclamation for a quick/successful landing (“there — done”). |
+| Ըթեչ անել | to attach (a file) | Ֆայլ կցել (անգլ. attach)՝ տեխ-խոսակցական (օր.՝ «ֆայլը ըթեչ արա»)։ | Tech-casual loan of “attach”: to attach a file. |
+| Ափլոդ անել | to upload | Վերբեռնել, ֆայլ վեր ուղարկել (անգլ. upload)՝ տեխ-խոսակցական։ | Tech-casual loan of “upload.” |
