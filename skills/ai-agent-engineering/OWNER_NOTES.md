@@ -19,7 +19,7 @@ The default posture for all of the above: produce the spec, the contracts, the g
 
 - Add a worked **prompt/tool audit** example end-to-end (an existing agent reviewed against the five dimensions, with the specific revisions), to make the audit response mode concrete.
 - Add a **multi-agent consolidation recipe** showing exactly how the orchestrator resolves a conflict between two specialists by evidence (which source/run wins and why), so "synthesize, don't concatenate" is copy-ready.
-- Add a **substrate-facts handoff pattern** with the exact verify-before-use snapshot format (source, date, what was checked), so model-fact verification is a fill-in artifact rather than a principle.
+- Keep a **live substrate snapshot for Bro's own runtime** in the repo (a dated `reference/substrate.md` filled from `output-templates.md` Template 4), so roster builds read current model facts from one verified place instead of re-checking each time. (The snapshot *pattern* now exists — `patterns.md` #7 + Template 4; this item is the live, filled instance.)
 - Add a **roster-agent build checklist** (the five layers as a literal pre-ship gate) so a new agent cannot be shipped half-wired.
 - Cross-link the runtime/reliability overlap explicitly to `devops-platform-sre` (SLOs, canary rollout of a new agent version, tool-credential secret hygiene) beyond the agent-design boundary owned here.
 
@@ -42,6 +42,6 @@ The default posture for all of the above: produce the spec, the contracts, the g
 
 - Ավելացրու worked **prompt/tool audit** օրինակ ծայրից ծայր (եղած agent՝ review-ված հինգ չափանիշի դեմ, կոնկրետ revision-ներով), որ audit response mode-ը կոնկրետ լինի։
 - Ավելացրու **multi-agent consolidation recipe**, որ ցույց տա հստակ, թե ոնց է orchestrator-ը երկու specialist-ի conflict-ը լուծում evidence-ով (որ source/run-ն է հաղթում և ինչու), որ «synthesize, ոչ concatenate»-ը copy-ready լինի։
-- Ավելացրու **substrate-facts handoff pattern** ճշգրիտ verify-before-use snapshot ֆորմատով (source, date, ինչ ստուգվեց), որ model-fact verification-ը fill-in artifact լինի, ոչ սկզբունք։
+- Պահիր **live substrate snapshot Bro-ի սեփական runtime-ի համար** repo-ում (dated `reference/substrate.md`՝ լրացված `output-templates.md` Template 4-ով), որ roster build-երը ընթացիկ model-փաստերը կարդան մեկ ստուգված տեղից, ոչ թե ամեն անգամ վերստուգեն։ (Snapshot-ի *pattern*-ն արդեն կա՝ `patterns.md` #7 + Template 4. այս կետը live, լրացված instance-ն է։)
 - Ավելացրու **roster-agent build checklist** (հինգ շերտը որպես բառացի pre-ship gate), որ նոր agent-ը չկարողանա ship-վել կիսա-wire-ված։
 - Cross-link արա runtime/reliability համընկնումը բացահայտ `devops-platform-sre`-ին (SLO, նոր agent version-ի canary rollout, tool-credential secret hygiene)՝ այստեղ տիրվող agent-design սահմանից այն կողմ։

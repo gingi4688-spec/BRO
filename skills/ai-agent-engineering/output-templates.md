@@ -43,6 +43,19 @@ Three domain-shaped deliverables. Fill the real fields; keep every model fact ve
 - **Retry policy:** max attempts · which error_codes are retryable · the fallback on repeated failure (not an identical retry)
 - **Acceptance:** schema typed · errors shaped · side effects + gate explicit · validation in place
 
+### Template 4 — Substrate snapshot (verify-before-use)
+
+- **Snapshot date / verified by:** <date> · <source-of-truth: provider docs / API>
+- **Model id:** <id> — source, checked <date>
+- **Context window:** <n tokens> — source, date
+- **Pricing (in / out):** <$ per Mtok> — source, date
+- **Rate limits:** <rpm / tpm / concurrency> — source, date
+- **Tool calling / JSON mode:** <supported? format> — source, date
+- **Knowledge cutoff:** <date> — source
+- **Other capabilities relied on:** <vision / streaming / caching / …> — source, date
+- **Verify-before-use:** any field whose source-date is older than the staleness window is re-checked before it is relied on
+- **Acceptance:** every fact carries value + source + date · nothing asserted from memory · stale fields flagged · attached to the agent spec it informs
+
 ## Հայերեն
 
 Երեք domain-ձև deliverable։ Լրացրու իրական field-երը. ամեն model-փաստ պահիր ստուգված dated աղբյուրով կամ նշված verify-before-use։ Մի՛ պնդիր model id, price կամ context window հիշողությունից։
@@ -85,3 +98,16 @@ Three domain-shaped deliverables. Fill the real fields; keep every model fact ve
 - **Validation․** name + args ստուգված schema-ի դեմ execute-ից առաջ. off-schema կամ չհայտարարված → մերժված, surface-ված որպես observation
 - **Retry policy․** max attempt · որ error_code-ներն են retryable · fallback-ը կրկնվող failure-ի դեպքում (ոչ նույնական retry)
 - **Acceptance․** schema typed · error-ները shaped · side effect + gate հստակ · validation տեղում
+
+### Template 4 — Substrate snapshot (verify-before-use)
+
+- **Snapshot-ի ամսաթիվ / verified by․** <ամսաթիվ> · <source-of-truth: provider docs / API>
+- **Model id․** <id> — source, ստուգված <ամսաթիվ>
+- **Context window․** <n token> — source, ամսաթիվ
+- **Pricing (in / out)․** <$ per Mtok> — source, ամսաթիվ
+- **Rate limit-ներ․** <rpm / tpm / concurrency> — source, ամսաթիվ
+- **Tool calling / JSON mode․** <support? format> — source, ամսաթիվ
+- **Knowledge cutoff․** <ամսաթիվ> — source
+- **Այլ կիրառվող capability-ներ․** <vision / streaming / caching / …> — source, ամսաթիվ
+- **Verify-before-use․** ցանկացած field, որի source-ամսաթիվը staleness-window-ից հին է, վերստուգվում է նախքան հենվելը
+- **Acceptance․** ամեն փաստ՝ արժեք + source + ամսաթիվ · ոչինչ հիշողությունից չպնդված · հին field-երը flag-ված · կցված agent spec-ին, որ սնում է

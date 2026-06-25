@@ -46,6 +46,13 @@ These are canonical AI agent engineering moves. Each is a mechanism for one of t
 - **Do not use when:** The need is a one-off task, not a durable roster member — then it is an agent spec or a workflow, not a full roster agent with persona and sealed memory.
 - **Failure repair:** If an agent shipped half-wired (missing a `_core` layer, two skills crammed in, or a persona with no sealed memory), stop and complete the missing layer; an agent that "almost loads" is not built.
 
+### 7. Substrate-facts snapshot (verify-before-use)
+
+- **Trigger:** A model/runtime fact is about to be used or stated — model id, context-window size, token price, rate limit, tool/JSON-mode support, or knowledge cutoff — especially when configuring or building an agent.
+- **Mechanism:** Never assert the fact from memory (training has a cutoff and these are volatile). Capture a **substrate snapshot** (see `output-templates.md` Template 4): for each fact record the value, the **source** (provider docs / API / pricing page), and the **date checked**. Treat any fact older than its snapshot window as **verify-before-use**. When handing an agent spec to a builder — or to roster agent #N — attach the snapshot so the substrate travels as dated evidence, not a guess.
+- **Do not use when:** The value is genuinely stable and non-substrate (an algorithm, a math constant, a stable protocol) — snapshotting it is overhead; reserve the snapshot for volatile substrate facts.
+- **Failure repair:** If a model id / price / context window was asserted from memory, stop and replace it with a snapshot (value + source + date), or mark it verify-before-use until checked; never let a stale substrate fact ship inside an agent spec.
+
 ## Հայերեն
 
 Սրանք canonical AI agent engineering move-եր են։ Ամեն մեկը mechanism է ոլորտի հինգ artifact-ից մեկի համար (agent spec, tool-contract, eval-harness plan, fleet-partition plan, prompt/tool audit)։ Ընտրիր այն move-ը, որ փոխում է հաջորդ որոշումը, ոչ թե ամենագեղեցիկ անունը։
@@ -91,3 +98,10 @@ These are canonical AI agent engineering moves. Each is a mechanism for one of t
 - **Մեխանիզմը․** Հավաքիր ուղիղ հինգ շերտ և կառուցիր ամբողջական՝ ժառանգած `_core` (laws + human behavior, ընդհանուր, չվերագրված), մեկ persona (այս agent-ի character և bond), ուղիղ մեկ skill նույն god-level նշաձողով, կնքված per-work memory (կառավարված memory-isolation օրենքով) և thin runtime wrapper, որ բեռնում է skill-ը և վերադարձնում structured findings։ Հետո ստուգիր running system-ում․ load է անում `_core` + persona + skill, ենթարկվում օրենքներին, memory-ն ճիշտ կնքում և անցնում իր eval harness-ը։ Տար մինչև վերջ։
 - **Երբ չօգտագործել․** Երբ կարիքը one-off task է, ոչ կայուն roster member — այն agent spec է կամ workflow, ոչ լրիվ roster agent՝ persona-ով և sealed memory-ով։
 - **Ուղղում․** Եթե agent-ը ship-վեց կիսա-wire-ված (`_core` շերտ պակաս, երկու skill խցկած, կամ persona առանց sealed memory-ի), կանգնիր և լրացրու բացակայող շերտը. agent, որ «գրեթե load է լինում», կառուցված չէ։
+
+### 7. Substrate-facts snapshot (verify-before-use)
+
+- **Երբ է պետք․** Model/runtime-ի փաստ պատրաստվում է օգտագործվել կամ ասվել — model id, context-window-ի չափ, token-ի գին, rate limit, tool/JSON-mode support, կամ knowledge cutoff — հատկապես agent config կամ build անելիս։
+- **Մեխանիզմը․** Երբեք մի՛ պնդիր փաստը հիշողությունից (training-ը cutoff ունի, սրանք volatile են)։ Բռնիր **substrate snapshot** (տես `output-templates.md` Template 4)․ ամեն փաստի համար գրիր արժեքը, **source**-ը (provider docs / API / pricing), և **ստուգման ամսաթիվը**։ Snapshot-ի window-ից հին ցանկացած փաստ համարիր **verify-before-use**։ Երբ agent spec ես հանձնում builder-ին — կամ roster agent #N-ին — կցիր snapshot-ը, որ substrate-ը dated evidence-ով ճանապարհորդի, ոչ գուշակությամբ։
+- **Երբ չօգտագործել․** Երբ արժեքը իսկապես կայուն է ու ոչ-substrate (algorithm, math constant, կայուն protocol) — snapshot-ը overhead է. պահիր volatile substrate-փաստերի համար։
+- **Ուղղում․** Եթե model id / գին / context window հիշողությունից պնդվեց, կանգնի՛ր ու փոխարինիր snapshot-ով (արժեք + source + ամսաթիվ), կամ նշիր verify-before-use, մինչև ստուգվի. երբեք մի՛ թող, որ հին substrate-փաստ ship լինի agent spec-ի ներսում։
