@@ -40,7 +40,7 @@ This gate extends the skill's final gate for the domain's artifacts (contract re
 - **Հորինված authority** — statute, article, case, deadline կամ numeric threshold՝ նշված որպես փաստ առանց ստուգելի jurisdiction/source-ի։ Հանիր. փոխարինիր source citation-ով կամ verify-before-use placeholder-ով։
 - **Unauthorized legal եզրակացություն (UPL)** — «սա enforceable/unenforceable է», «դու compliant ես», «սա այստեղ օրինակական է»՝ տրված որպես պատասխան։ Վերաձևակերպիր issue + որոշող փոփոխական + ուղղորդիր counsel-ին։
 - **Cap, որ պարտվում է իր carveout-ով** — liability cap, գովված որպես protective՝ առանց մեկ breach scenario-ի carveout-ներով անցկացման։ Անցկացրու. եթե հիմնական risk-ը uncapped է, ասա։
-- **Risk controller ≠ payer, չflag-ված** — indemnity/cap summary՝ առանց «ով է control անում ընդդեմ ով է վճարում» տողի։ Surface արա asymmetry-ն և դարձրու redline։
+- **Risk controller ≠ payer, չ-flag-ված** — indemnity/cap summary՝ առանց «ով է control անում ընդդեմ ով է վճարում» տողի։ Surface արա asymmetry-ն և դարձրու redline։
 - **Attestation՝ որպես legal shield** — SOC 2 / ISO certificate, համարված GDPR compliance-ի ապացույց, indemnity-ի բավարարում կամ breach duty-ի պատասխան։ Քարտեզագրիր իրական obligation-ը առանձին։
 - **Jurisdiction-selection risk անտեսված** — վստահ պատասխան՝ առանց «որ jurisdiction-ն է governing / որտեղ են data subject-ները» հարցի, երբ non-compete legality-ն, privacy regime-ը կամ breach duty-ն դրա վրա է։
 - **«Կառուցիր GDPR-ի և մնացածը հետևում է»** — մեկ privacy design՝ պնդված որպես multi-regime compliant՝ առանց per-regime contrast-ի (opt-in ընդդեմ opt-out-of-sale-ի, «Do Not Sell», LGPD-ի սեփական statute-ի)։

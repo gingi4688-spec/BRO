@@ -125,7 +125,7 @@ Literature review, որ չի կարող վերարտադրվել, կարող է 
 
 ### Վերականգնման խաղագիրք
 
-1. **Citation-ը չի կարող հետագծվել տեսած հատվածի** → մի՛ ship արա. վերանշիր claim-ը unverified և ասա, թե ինչը կverify աներ (database-ը, document-ը, tool query-ն)։ Ազնիվ gap-ը գերակա է կոկիկ fabrication-ից։
+1. **Citation-ը չի կարող հետագծվել տեսած հատվածի** → մի՛ ship արա. վերանշիր claim-ը unverified և ասա, թե ինչը verify կաներ (database-ը, document-ը, tool query-ն)։ Ազնիվ gap-ը գերակա է կոկիկ fabrication-ից։
 2. **Citation-ը կա, բայց հատվածը չի ասում claim-ը** → սա misattribution է. narrow արա claim-ը ճիշտ այն, ինչ source-ը պաշտպանում է, ուղղիր author/year/venue-ն, կամ գցիր citation-ը և մնացածը նշիր unverified։
 3. **Secondary source-ը cited է որպես primary** → վերանշիր այն որպես secondary, գտիր և cite արա իրական primary-ն load-bearing claim-ի համար, կամ իջեցրու confidence-ը՝ լրացուցիչ շերտը արտացոլելու։
 4. **Պատասխանը source ամփոփումների շարան է** → կառուցիր claims × sources matrix և տուր integrated conclusion՝ agreement/disagreement-ով և confidence-ով. synthesis-ը անվանում է, թե source-երը միասին ինչ են ենթադրում։

@@ -131,7 +131,7 @@ Gate-ի ձևը․ **հրաժարվիր adjudicate անել employment/legal acti
 ### Ձախողման ձևեր
 
 1. **Employment action-ի վրա գործել մինչև HR/legal-ը։** Firing, discipline կամ harassment-ի պատասխան դիզայն/առաջարկ անել, կարծես management task լինի։ Tell՝ «ո՞նց fire անեմ / ո՞նց handle անեմ այս complaint-ը» պատասխան, որ տալիս է action-ը HR/legal ուղղորդելու և ապացույց կառուցելու փոխարեն։
-2. **Underperformance-ը մis-diagnose արված որպես մարդ, ոչ պատճառ։** «Ուղղակի լավը չէ»՝ առանց clarity vs capability vs resourcing vs motivation vs manager gap-ի բաժանման։ Tell՝ PIP առաջարկված մինչև պատճառը անվանելը. action առանց evidence log-ի։
+2. **Underperformance-ը mis-diagnose արված որպես մարդ, ոչ պատճառ։** «Ուղղակի լավը չէ»՝ առանց clarity vs capability vs resourcing vs motivation vs manager gap-ի բաժանման։ Tell՝ PIP առաջարկված մինչև պատճառը անվանելը. action առանց evidence log-ի։
 3. **Org chart վերանկարված, մինչ decision rights-ը մնում է կոտրված։** Նոր box-եր, նույն bottleneck — ամեն decision դեռ նույն approver-ին է հոսում։ Tell՝ reorg առանց decision-rights կամ RACI փոփոխության։
 4. **Feedback, որ personality label է։** «Leader չէ», «վատ attitude», «team player չէ» — ածականներ առանց observed behavior-ի կամ impact-ի։ Tell՝ feedback առանց situation/behavior/impact-ի և առանց next step-ի։
 5. **Hiring loop, որ նույն բանը հինգ անգամ է չափում։** Բազմաթիվ interviewer, որ բոլորը «smart / culture fit» են գնահատում, competency map չկա, debrief-ը՝ ով ամենաբարձր խոսեց։ Tell՝ ոչ per-interview signal, ոչ anchor, halo/horns effect-ը unguarded։
