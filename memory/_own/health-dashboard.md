@@ -4,9 +4,9 @@
 > **HY:** Գեներացված read-only snapshot (ոչ live service, §2)։ Աղբյուր՝ tools/bro-health.ps1 (bro-doctor + bro-audit, read-only)։
 
 ```txt
-last_run: 2026-06-29T12:11:07+04:00
+last_run: 2026-06-29T12:11:29+04:00
 phase:    ep-rollout-beast-corrected
-doctor:   RESULT: YELLOW  (problems=0, warnings=1) (exit=1)
+doctor:   RESULT: GREEN  (problems=0, warnings=0) (exit=0)
 audit:    RESULT: GREEN  (problems=0, warnings=0)
 authority: current (verify-only; no passphrase prompt)
 enforcement: 5 structural hooks installed in .claude/settings.json (forbidden-path-write, cross-memory-read,
