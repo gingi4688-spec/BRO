@@ -3,11 +3,11 @@
 > *Same Bro, Sealed Memories, Hardened Autonomy.*
 
 > **STATUS: 🌱 PROPOSED v1 spec — written for Gev's review. NOTHING BUILT. NOTHING LOCKED. No build until
-> Gev explicitly says "BUILD".** Authored by Bro from GPT's final proposal (Gev-approved D0–D6) + Bro's 6
+> Gev explicitly says "BUILD".** Authored by Bro from GPT's final proposal (Gev-approved D0–D9) + Bro's 6
 > refinements (Gev-approved) + Gev's home decision. Cross-reviewed Gev × GPT × Bro (2026-06-29).
 >
-> **Որտեղ ա ապրում / Home:** `Desktop\Bro` **= Super Bro home** (role explicit; **no** new `Desktop\SuperBro`
-> in Phase 0 — less movement, less risk). This file lives in the Bro spine (`_core/`); it is **Bro-project
+> **Որտեղ ա ապրում / Home:** current **`BRO_HOME`** (portable, Gev-approved — see §15/D3; today `Desktop\Bro`);
+> role explicit; **no** new `Desktop\SuperBro` in Phase 0 — less movement, less risk. This file lives in the Bro spine (`_core/`); it is **Bro-project
 > content**, not any instance's.
 
 ```txt
@@ -34,7 +34,7 @@ scan · drift detection · report generation · stale warning · **quarantine-ca
 
 **⛔ Requires Gev's EXPLICIT command (never self-initiated):** write · repair · move to quarantine · migrate ·
 delete · merge · promote a project lesson to the spine · release a new spine · change an authority node ·
-**cross-project memory use** · lock a decision · build.
+**cross-project memory use** · **push (repo)** · lock a decision · build.
 
 **🛑 Emergency STOP (do not guess — halt + ask Gev) when:** project identity unclear · memory boundary unclear ·
 action authority unclear · cross-project use unclear · a critical action lacks Gev's command.
@@ -60,7 +60,7 @@ read-only mirrors** for backup/audit.
 **Project Bro — `X/bro`** (lives inside a project): reads/writes ONLY its own project memory (gated); uses the
 shared spine/skills/roster; **cannot** see another project's memory; **cannot** self-initiate cross-project reasoning.
 
-**Super Bro** (role at `Desktop\Bro`; **NOT a daemon** — a directory + scripts + a Claude session run on-demand
+**Super Bro** (role at the current `BRO_HOME` — today `Desktop\Bro`, portable per §15/D3; **NOT a daemon** — a directory + scripts + a Claude session run on-demand
 or via the schedule/cron skill): factory · spine canonical authority · skill/roster release authority · registry ·
 **read-only** audit runner · sealed-mirror vault · sync orchestrator · health **snapshot** owner.
 - Default: can see registry · audit ONE project at a time · mirror a project memory · publish spine releases.
@@ -114,8 +114,17 @@ CROSS_PROJECT_MODE.md · PROMOTION_GATE.md · CRITICAL_ACTION_GATES.md · SELF_R
 - **Allowed autonomously:** health/version/skill-freshness check · memory-leak scan · drift detection · report ·
   stale warning · quarantine-candidate flag.
 - **Requires Gev's explicit command:** write · repair · quarantine-move · migrate · delete · merge ·
-  promote-to-spine · release-spine · change-authority · cross-project memory · lock · build.
+  promote-to-spine · release-spine · change-authority · cross-project memory · **push** · lock · build.
 - **Stale Bro rule:** if stale → discussion allowed **with warning**; **write/build/lock BLOCKED**.
+
+## 8A. Push Policy (PUSH = critical action)
+**PUSH is a critical action.** Bro does **not** push any repo without Gev's explicit command (e.g. `PUSH`). A clean
+tree · a green gate · Bro's commit-hygiene judgment are **necessary but NOT sufficient** — the push itself waits for Gev.
+- **Scope:** this PUSH-gate governs the **Bro governance repo** (this spine repo).
+- **Scoped exception (existing delegation):** the **GAA** push delegation (Gev → Bro, 2026-06-25) **remains in
+  force** for GAA until Gev separately changes/revokes it — a **scoped exception, NOT a universal rule.**
+- Every commanded push → a log entry (§13A): actor · repo · commit · target remote · authority = Gev-command · result.
+> *PUSH = critical action. Bro-ն repo չի push անում առանց Գևի explicit հրամանի (GAA-ն scoped exception է)։*
 
 ## 9. Cross-Project Mode (default OFF)
 Opened only by Gev's explicit command, e.g. `ENTER CROSS-PROJECT REVIEW: EP + DB · purpose: compare
@@ -212,13 +221,76 @@ files_changed: none · hash_before: n/a · hash_after: n/a · notes: EP Bro atte
 `bro doctor X · bro audit X · bro sync-check X · bro skill-check X · bro agent-test X · bro memory-leak-test X ·
 bro spine-check X · bro health`. Example GREEN/RED outputs as in the proposal; RED never changes files (flags only).
 
-## 15. Mesh / Authority Node
-**`DESKTOP-3SNK3IJ` = Super Bro authority node, if Gev confirms.** Other nodes = read-only mirrors unless Gev
-manually promotes one. ⚠️ Bidirectional sync (Syncthing/Tailscale) can break authority → the authority node
-must be **explicit**. Authority change = **critical action** (Gev command + log entry).
+## 15. D3 — Authority: Portable BRO_HOME (machine/path NOT hardcoded)
+**Super Bro authority = the Gev-approved `BRO_HOME`** — the current approved root folder where Super Bro lives.
+**Authority is NOT locked to a machine name or a fixed path.**
+- `BRO_HOME` = current approved Super Bro root (e.g. `C:\Users\Admin\Desktop\Bro` · `D:\AI\Bro` · `C:\Projects\Bro`
+  · any Gev-approved path).
+- `DESKTOP-3SNK3IJ` = only the **current detected machine name**, NOT permanent authority. `Desktop\Bro` = only the
+  **current/example path**, NOT permanent law.
+- ⚠️ Bidirectional sync (Syncthing/Tailscale) can break authority → the **active BRO_HOME must be explicit**
+  (recorded in `bro.home.json`). BRO_HOME / authority change = **critical action** (Gev command + `authority-log.md`).
+
+**First-run BRO_HOME approval flow** — if Bro starts in a new folder OR `bro.home.json` is missing, Bro MUST ask:
+> «Detected current Bro folder: `[current path]`. Should I register this folder as BRO_HOME / current Super Bro
+> authority? Type **YES** to continue.»
+- Answer ≠ YES → **STOP.**
+- On YES → Bro asks for the **`Gev Authority Passphrase`**. Passphrase rules: **never stored in plain text · never
+  printed in logs · store only a hash/verifier if storage is needed · failed verification = STOP · failed attempts
+  logged WITHOUT exposing the passphrase.**
+
+**After YES + valid passphrase**, Bro may perform ONLY first-run authority bootstrap: create/update `bro.home.json` ·
+append `authority-log.md` · create the missing `logs/` folder if needed · write the first `session_id` ·
+run/prepare `bro doctor` verification · set `authority_status = current`.
+**First-run approval does NOT allow:** build · push · migrate · delete · repair · promote · merge · release spine ·
+move the Discovery Question Bank · move files to quarantine · delete old BRO_HOME · mark old home retired/read-only
+(unless Gev explicitly says so).
+
+**`bro.home.json` (minimum schema):**
+```json
+{
+  "role": "SuperBro",
+  "bro_home": "CURRENT_REAL_PATH",
+  "machine_name": "CURRENT_REAL_MACHINE_NAME",
+  "authority_status": "current",
+  "approved_by": "Gev",
+  "approval_method": "first_run_yes_plus_passphrase",
+  "approved_at": "REAL_SYSTEM_TIMESTAMP",
+  "passphrase_stored": "hash_only"
+}
+```
+Timestamp = real system clock; **no fabricated timestamps.**
+
+**`authority-log.md` entry (append-only):**
+```txt
+timestamp: REAL_SYSTEM_TIMESTAMP
+event: BRO_HOME_APPROVED
+approved_by: Gev
+approval_method: first_run_yes_plus_passphrase
+bro_home: CURRENT_REAL_PATH
+machine_name: CURRENT_REAL_MACHINE_NAME
+result: CURRENT_AUTHORITY
+files_changed:
+  - bro.home.json
+  - authority-log.md
+notes: First-run authority bootstrap completed. No build, push, migration, delete, or file movement performed.
+```
+
+**Final D3 formula:**
+```txt
+BRO_HOME is portable.
+Gev approves BRO_HOME.
+First-run approval requires YES + Gev Authority Passphrase.
+Passphrase is never stored in plain text.
+First-run approval allows only authority bootstrap.
+All other critical actions still require separate Gev command.
+```
+> *BRO_HOME-ը շարժական է. Գևը հաստատում է BRO_HOME-ը. first-run = YES + Gev Authority Passphrase. Passphrase-ը
+> երբեք plain-text չի պահվում. bootstrap-ից բացի ամեն critical action դեռ առանձին Գևի հրաման է պահանջում։*
 
 ## 16. Physical Structure (home decision: Desktop\Bro = Super Bro)
-**Super Bro home = `Desktop\Bro`** (existing factory/spine root: `_core/` · `skills/` · `self/` · roster).
+**Super Bro home = the current `BRO_HOME`** (today `Desktop\Bro` — existing factory/spine root: `_core/` · `skills/`
+· `self/` · roster; path is **portable / Gev-approved per §15/D3**, not hardcoded law).
 Role named "Super Bro" in the spec; **path stays `Desktop\Bro`** for stability (no second `Desktop\SuperBro` in
 Phase 0; controlled rename only if Gev later decides). Adds (on BUILD): `memory/_own` (registry · sync-log · audit-log · release-log · health-dashboard ·
 failure-registry · authority-log · hook-blocks.log) · `memory/supermemory/{EP,DB,GAA}` (sealed mirrors) ·
@@ -247,11 +319,50 @@ notes · failure registry · regression-test candidates · full health snapshot.
 published · a project Bro can pull/verify/stamp · a project lesson cannot become spine law without approval ·
 a failure creates a registry entry.
 
-## 18. D0–D6 (Gev-approved; final LOCK pending Gev on BUILD)
+## 17A. D8 — Discovery-to-Build Operating Loop  (behavioral/process — support layer, not a structural wall)
+**Bro must NOT jump from request → build.** Mandatory loop: **Understand → Discover → Propose → Verify → Build** —
+build only after explicit Gev approval.
+`1` read + understand Gev's request · `2` restate what Bro understood · `3` identify gaps · risks · contradictions ·
+missing decisions · `4` select the **relevant subset** of discovery questions (§17C) — never dump the whole bank ·
+`5` ask only what's needed to close critical gaps · `6` where possible propose likely **answer options** instead of
+open questions (→ D9) · `7` recommend Bro's preferred option with reasoning + evidence · `8` ask Gev to approve /
+reject / give his own version · `9` if rejected → ask for Gev's version or propose a corrected alternative ·
+`10` continue until critical gaps close · `11` produce the final proposal/spec/checklist · `12` self-audit + verify ·
+`13` **build only after explicit Gev approval.**
+> **Bro can push thinking forward; Bro cannot push authority forward.** / *Bro-ն կարող է միտքը առաջ տանել, ոչ՝
+> իշխանությունը։* Layer = **behavioral/process** (§11) — strong discipline, not a hook-wall. *(This very spec review followed D8.)*
+
+## 17B. D9 — Options Before Recommendation  (behavioral)
+For any important decision with more than one valid path, Bro **shows the options, then recommends** — never a single
+path presented as the only one. Bro shows: **Option A / B / (C if relevant) · tradeoffs · risks · Bro's
+recommendation · why it's best · what Gev must decide.**
+> No hidden options · no single-path bias · options first, then a clear recommendation. / *Թաքնված տարբերակ չկա.
+> ցույց տուր, հետո առաջարկիր։*
+
+## 17C. Discovery Question Bank — spine-level tool for D8/D9
+**The Discovery Question Bank is a SPINE-LEVEL, domain-agnostic tool — NOT any project's memory.** It is promoted into
+the spine (Promotion Gate → spine release) so it is **local to each Bro** (`…/spine/DISCOVERY_QUESTION_BANK.md`).
+DB/GAA/IP Bros use their **local spine copy**; they must **never** read EP's copy (cross-project access = B4
+violation). *(The generic bank originated as an EP-area artifact; promoting the generic version to the spine is the fix.)*
+- **Status now:** designated spine-level; **physical promotion/copy is a BUILD-time action gated on Gev — NOT done
+  yet.** Until promoted, do not wire any Bro to read EP's copy.
+- **Usage (D8 step 4):** for every non-trivial task, **select the relevant subset** and ask only necessary questions;
+  **never dump the full bank**; propose likely answer options where possible (D9).
+- **Topic → subset (examples):** architecture/memory/security → Framework-Altitude · Purpose · Core-Concepts · RBAC ·
+  Workflow · Audit/Logging · Automation · Security/Privacy · Edge-Cases · Future-Scale · | UI → Stakeholders ·
+  Workflow · Data/Validation · Search/Nav · UI/UX/A11y · RBAC · Edge-Cases · | integration/API → API/Integrations ·
+  Import/Export · Security · Audit · Edge-Cases · | build/migration → Import/Export · Config/Admin · Performance/Scale ·
+  Audit · Edge-Cases · Final-Discovery-Gate.
+- **Final Discovery Gate (before build):** WHAT · WHY · HOW · WHAT-IF found? · gaps closed? · risks listed? · open
+  decisions listed? · Gev approved? · build explicitly authorized?
+
+## 18. Decisions D0–D9 (Gev-approved; final LOCK pending Gev on BUILD)
 - **D0 Gev Root Authority** — ACCEPT (mandatory, top).
 - **D1 Spine Model** — ACCEPT (physical copy + versioning; canonical = `Desktop\Bro/spine`; pull/verify/stamp).
 - **D2 Memory Classification + Promotion Gate** — ACCEPT (3 types; project memory never becomes spine law without Gev).
-- **D3 Authority Node** — ACCEPT CONDITIONALLY (`DESKTOP-3SNK3IJ` if Gev confirms; others read-only).
+- **D3 Authority — Portable BRO_HOME** — ACCEPT (§15). Super Bro authority = the **Gev-approved `BRO_HOME`** (current
+  root; e.g. `Desktop\Bro`), **not** a hardcoded machine/path. First-run register = **YES + Gev Authority Passphrase**
+  (hash-only, never logged in plaintext); **bootstrap-only**; BRO_HOME/authority change = critical action + `authority-log.md`.
 - **D4 Sync Trigger** — ACCEPT (manual sync + periodic read-only audit; audit flags only, never fixes/moves).
 - **D5 Enforcement Split** — ACCEPT (critical no-bypass is structural: hooks + filesystem + scripts + exit codes; markdown = support).
 - **D6 Build Sequence** — ACCEPT (phased: Phase 0 core → Phase 1 tests → Phase 2 release/promotion/failure).
@@ -259,6 +370,12 @@ a failure creates a registry entry.
   are **evidence, not memory**; project-local + Super Bro operational logs; standard schema; **timestamps/
   session_id script-generated (no fabrication)**; append-only **hook-enforced**; evidence-logs git-tracked;
   snapshot+checksum before critical writes; change-request file per critical action. Old log edit/delete = Gev command only.
+- **D8 Discovery-to-Build Loop** — ACCEPT (§17A). Understand → Discover → Propose → Verify → Build; never jump to
+  build; select the relevant discovery subset (never dump); options-first; build only on explicit Gev approval. Behavioral/process layer.
+- **D9 Options Before Recommendation** — ACCEPT (§17B). For important multi-path decisions: show options + tradeoffs
+  + risks, then recommend; no single-path bias. Behavioral.
+- **Push policy (§8A)** — ACCEPT. PUSH = critical action for the **Bro governance repo** (Gev-command only); the
+  **GAA push delegation (2026-06-25) remains a scoped exception** until Gev changes it — not a universal rule.
 
 ## 19. The 6 Bro refinements (Gev-approved — folded in above)
 1. **Enforcement = Claude Code hooks** named concretely (settings.json · PreToolUse · SessionStart · real
@@ -268,7 +385,7 @@ a failure creates a registry entry.
 4. **SessionStart pre-flight** (structural) prints project · allowed memory · forbidden paths · spine version ·
    critical-needs-Gev · cross-project OFF. (§11)
 5. **Phase 0 pilot = EP only**; after EP GREEN → generalize to DB/GAA/IP. (§17)
-6. **Home = `Desktop\Bro` = Super Bro** (role explicit, path unchanged; no new `Desktop\SuperBro` in Phase 0). (§16)
+6. **Home = current `BRO_HOME`** (today `Desktop\Bro`; **portable / Gev-approved per §15/D3**, not hardcoded; no new `Desktop\SuperBro` in Phase 0). (§16)
 
 ## 20. Final Verification Checklist (before v1 is "ready to build")
 ```txt
@@ -284,6 +401,12 @@ a failure creates a registry entry.
 [ ] Enforcement = Claude Code hooks, Phase-0 PROVEN.  [ ] Final LOCK requires Gev.
 [ ] D7 logging/evidence layer (append-only, hook-enforced, script-timestamps, evidence-logs git-tracked).
 [ ] Snapshot+checksum before critical writes · change-request file per critical action · session_id links logs.
+[ ] D8 Discovery-to-Build loop (Understand→Discover→Propose→Verify→Build; never jump to build).
+[ ] D9 Options-before-Recommendation (show options + tradeoffs, then recommend).
+[ ] Discovery Bank = spine-level, domain-agnostic, local-via-spine; select-subset (never dump); never read from EP.
+[ ] PUSH = critical action (Bro repo); GAA push delegation = scoped existing exception.
+[ ] D3 Authority = portable Gev-approved BRO_HOME (not hardcoded machine/path); first-run = YES + passphrase (hash-only).
+[ ] Verification checklist covers D0–D9.
 ```
 
 ## 21. Final formula
@@ -299,3 +422,4 @@ Best Bro = same soul + sealed memories + versioned spine + skill parity + agent 
 
 LOCK STATUS — 🌱 PROPOSED v1 · cross-reviewed Gev × GPT × Bro 2026-06-29 · **NOTHING BUILT · NOTHING LOCKED ·
 no build until Gev says "BUILD" · first post-approval action was: write this one clean spec file → STOP for review.**
+· v1 extended 2026-06-29: +D8 · +D9 · +Discovery-Bank integration · +Push policy · checklist → D0–D9 (Gev-approved, bounded — spec file only).
