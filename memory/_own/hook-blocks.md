@@ -342,3 +342,87 @@ result: BLOCKED
 reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
 files_changed: none
 ```
+
+## BLOCK - cross-memory-read-guard
+```txt
+timestamp: 2026-06-29T09:35:09+04:00
+actor: hook
+session_id: G7
+action: CROSS_MEMORY_READ_BLOCKED
+target: C:\Users\Admin\Desktop\EP\bro\memory\MEMORY.md
+source_command: Read tool
+authority: hook
+result: BLOCKED
+reason: SuperBro (own_only) attempted a direct project-memory read of 'ep' (use a sealed mirror; B4/B6)
+files_changed: none
+```
+
+## BLOCK - cross-memory-read-guard
+```txt
+timestamp: 2026-06-29T09:35:10+04:00
+actor: hook
+session_id: G7
+action: CROSS_MEMORY_READ_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\memory\SECRET.md
+source_command: Read tool
+authority: hook
+result: BLOCKED
+reason: SuperBro (own_only) attempted a direct project-memory read of 'db' (use a sealed mirror; B4/B6)
+files_changed: none
+```
+
+## BLOCK - cross-memory-read-guard
+```txt
+timestamp: 2026-06-29T09:35:12+04:00
+actor: hook
+session_id: G7
+action: CROSS_MEMORY_READ_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\memory\SECRET.md
+source_command: Read tool
+authority: hook
+result: BLOCKED
+reason: project Bro 'ep' attempted to read project 'db' memory (cross-project, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:35:12+04:00
+actor: hook
+session_id: G7
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\memory\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:35:13+04:00
+actor: hook
+session_id: G7
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\notes.txt
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:35:14+04:00
+actor: hook
+session_id: G7
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
