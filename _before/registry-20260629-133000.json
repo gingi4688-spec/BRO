@@ -42,10 +42,10 @@
       "memory_scope": "GAA_only",
       "authority": "ProjectBro",
       "spine_version_expected": "v1.0.0",
-      "status": "INSTALLED",
+      "status": "REGISTERED",
       "last_audit": "n/a",
-      "last_sync": "2026-06-29T13:30:00+04:00",
-      "notes": "GENERAL/main project (GAAhex ISP platform); Bro installed (spine v1.0.0 392/392); brain consolidation A in progress"
+      "last_sync": "n/a",
+      "notes": "GENERAL/main project (GAAhex ISP platform); brain consolidation A in progress"
     }
   ]
 }

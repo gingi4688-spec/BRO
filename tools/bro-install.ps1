@@ -203,6 +203,15 @@ try {
   if (Test-Path 'tools/templates/project-bro/.claude') { Copy-Item 'tools/templates/project-bro/.claude' -Destination $broDir -Recurse -Force }
   if (Test-Path 'tools/templates/project-bro/tools')   { Copy-Item 'tools/templates/project-bro/tools'   -Destination $broDir -Recurse -Force }
 
+  # 8) complete the REGISTERED -> INSTALLED registry transition (a successful install IS the transition)
+  try {
+    $fts2 = Get-Date -Format "yyyyMMdd-HHmmss"
+    Copy-Item 'memory/_own/registry.json' (Join-Path '_before' "registry-$fts2.json") -Force
+    $entry.status = 'INSTALLED'; $entry.last_sync = $stampTs
+    ($reg | ConvertTo-Json -Depth 6) | Set-Content 'memory/_own/registry.json' -Encoding utf8
+    "  registry: $ProjectId status REGISTERED -> INSTALLED (snapshot _before/registry-$fts2.json)"
+  } catch { "  WARN: install ok but registry status update failed: $($_.Exception.Message)" }
+
   "  INSTALLED $ProjectId at $broDir (spine pulled $Version, VERIFIED $(@($relMf.files).Count) files, stamped)."
   "  created: $broDir\spine\  $broDir\memory\MEMORY.md  $broDir\logs\  $broDir\bro.manifest.json  $broDir\health.report.md"
   "  enforcement (from SuperBro template): $broDir\.claude\settings.json  $broDir\tools\hooks\*  (governed delivery)"
