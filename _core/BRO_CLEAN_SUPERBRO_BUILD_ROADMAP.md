@@ -30,7 +30,7 @@ Home (BRO_HOME):  ընթացիկ Gev-approved root (այսօր Desktop\Bro; շա
 1. **First build = CLEAN SUPERBRO ONLY.** Not the EP pilot. Not DB/GAA/IP. **Zero project folders touched.**
 2. **Guided Command / Command Palette is mandatory PRE-BUILD scope** — it is part of the clean SuperBro build itself, designed before any project registration/install flow and before any Project Bro rollout.
 3. **Project Bros are installed LATER** — only after SuperBro is ready and Gev chooses/registers each project through the palette.
-4. **Spec reconciliation is required.** The canonical spec (§17/D6, §19 refinement #5) currently says *"Phase 0 pilot = EP only."* This roadmap **proposes the clean correction** (Phase 0 = clean SuperBro only; project pilots move to a later phase). The actual edit to the canonical spec is a **separate Gev-gated action — NOT performed here** (this turn does not edit the canonical spec).
+4. **Spec reconciliation is required.** Several places in the canonical spec assume the EP pilot — **§17/D6**, **§17 refinement #2** ("Phase 0 first step = inventory/migration map"), **§18 D6**, **§19 refinement #5**, and the **§20 checklist** line *"Phase 0 scope clear (pilot = EP)."* This roadmap **proposes the clean correction** (Phase 0 = clean SuperBro only; project pilots move to a later phase) across **all** of those. The actual edit to the canonical spec is a **separate, future Gev-gated action — NOT performed here** (this turn does not edit the canonical spec). See §2 for the full reconciliation target list.
 
 **Depth (Q1=B):** build-ready — each component carries enough spec to build from later, **no code now.**
 **Type (Q2=C):** both — phased plan as backbone + per-component technical spec.
@@ -40,7 +40,7 @@ Home (BRO_HOME):  ընթացիկ Gev-approved root (այսօր Desktop\Bro; շա
 1. **Առաջին build = ՄԻԱՅՆ ՄԱՔՈՒՐ SuperBro։** Ոչ EP pilot։ Ոչ DB/GAA/IP։ **Զրո project folder դիպած։**
 2. **Guided Command / Command Palette-ը պարտադիր PRE-BUILD scope է** — մաս է հենց մաքուր SuperBro build-ի, նախագծվում է ցանկացած project registration/install flow-ից ու Project Bro rollout-ից առաջ։
 3. **Project Bro-ները install են լինում ՀԵՏՈ** — միայն SuperBro-ի պատրաստ լինելուց հետո, երբ Գևը palette-ով ընտրի/register անի ամեն project։
-4. **Spec-ի հաշտեցում է պետք։** Canonical spec-ը (§17/D6, §19 refinement #5) հիմա ասում է *«Phase 0 pilot = EP only»*։ Այս roadmap-ը **առաջարկում է մաքուր ուղղումը** (Phase 0 = միայն մաքուր SuperBro; project pilot-ները տեղափոխվում են ավելի ուշ phase)։ Canonical spec-ի իրական խմբագրումը **առանձին Gev-gated գործողություն է — այստեղ ՉԻ կատարվում**։
+4. **Spec-ի հաշտեցում է պետք։** Canonical-ի մի քանի տեղ ենթադրում է EP pilot-ը — **§17/D6**, **§17 refinement #2** («Phase 0 first step = inventory/migration map»), **§18 D6**, **§19 refinement #5**, ու **§20 checklist** տողը *«Phase 0 scope clear (pilot = EP)»*։ Այս roadmap-ը **առաջարկում է մաքուր ուղղումը** (Phase 0 = միայն մաքուր SuperBro; project pilot-ները ավելի ուշ phase) **բոլոր** այդ տեղերում։ Canonical-ի իրական խմբագրումը **առանձին, ապագա Gev-gated գործողություն է — այստեղ ՉԻ կատարվում**։ Լրիվ ցանկը՝ §2-ում։
 
 **Խորություն (Q1=B):** build-ready — ամ. բաղադրիչ բավարար spec ունի հետո կառուցելու, **հիմա ոչ կոդ։**
 **Տեսակ (Q2=C):** երկուսն էլ — phased plan = ողնաշար + per-component technical spec։
@@ -73,13 +73,13 @@ Home (BRO_HOME):  ընթացիկ Gev-approved root (այսօր Desktop\Bro; շա
 - **Old wording (canonical spec §17/D6 · §19 refinement #5):** *"Phase 0 — Load-bearing core, PILOT = EP only … after EP GREEN → generalize to DB/GAA/IP."*
 - **New, LOCKED direction (Gev, 2026-06-29):** **The first build is a CLEAN SUPERBRO BUILD ONLY.** No EP pilot. No DB/GAA/IP. No project folder touched. No Project Bro installed. Project Bros are installed later — by running the finished SuperBro and registering each project through the Command Palette (§17).
 - **Why the correction is safe and better:** it removes the largest Phase-0 risk (touching a live project's memory before the factory + the structural gates + the operator control layer are proven). We harden the factory and the gates first, on empty ground, then install projects one at a time behind preview→YES.
-- **Reconciliation proposal (Gev-gated, not done here):** amend canonical spec §17 (rename Phase 0 to *clean SuperBro*; move EP/DB/GAA/IP to a later "Project Rollout" phase) and §19 refinement #5 accordingly, and cross-link this roadmap. **This edit waits for a separate Gev command.**
+- **Reconciliation proposal (proposed / future Gev-gated canonical-spec edit — NOT executed now):** amend **every** EP-pilot reference in the canonical spec — **§17/D6** (rename Phase 0 to *clean SuperBro*; move EP/DB/GAA/IP to a later "Project Rollout" phase) · **§17 refinement #2** (the "Phase 0 first step = inventory/migration map" of existing project memories moves to the rollout phase, since the clean build touches no project) · **§18 D6** wording · **§19 refinement #5** · the **§20 checklist** line *"Phase 0 scope clear (pilot = EP)"* — and cross-link this roadmap. **This edit waits for a separate Gev command; this turn does not change the canonical spec.**
 
 **HY** — Սա ամբողջ roadmap-ի կրող ուղղումն է։
 - **Հին ձևակերպում (canonical §17/D6 · §19 #5):** *«Phase 0 — PILOT = միայն EP … EP GREEN-ից հետո → ընդհանրացնել DB/GAA/IP»*։
 - **Նոր, LOCK ուղղություն (Գև, 2026-06-29):** **Առաջին build-ը ՄԻԱՅՆ ՄԱՔՈՒՐ SuperBro BUILD է։** Ոչ EP pilot։ Ոչ DB/GAA/IP։ Ոչ մի project folder դիպած։ Ոչ Project Bro install։ Project Bro-ները հետո են install լինում՝ պատրաստ SuperBro-ն աշխատեցնելով ու ամեն project-ը Command Palette-ով register անելով (§17)։
 - **Ինչու է ուղղումն ապահով ու ավելի լավ:** հանում է Phase-0-ի ամենամեծ ռիսկը (live project-ի memory-ին դիպչել նախքan factory-ն + կառուցվածքային gate-երը + operator-ի control շերտը ապացուցված լինեն)։ Նախ պնդացնում ենք factory-ն ու gate-երը՝ դատարկ հողի վրա, հետո install անում project-ները մեկ առ մեկ՝ preview→YES-ի հետևում։
-- **Հաշտեցման առաջարկ (Gev-gated, այստեղ չի արվում):** խմբագրել canonical §17-ը (Phase 0-ն վերանվանել *clean SuperBro*; EP/DB/GAA/IP տեղափոխել հետագա «Project Rollout» phase) ու §19 #5-ը, ու cross-link անել այս roadmap-ը։ **Այս խմբագրումը սպասում է առանձին Գևի հրամանի։**
+- **Հաշտեցման առաջարկ (proposed / ապագա Gev-gated canonical խմբագրում — հիմա ՉԻ կատարվում):** խմբագրել canonical-ի **ամեն** EP-pilot հղում — **§17/D6** (Phase 0-ն վերանվանել *clean SuperBro*; EP/DB/GAA/IP տեղափոխել հետագա «Project Rollout» phase) · **§17 refinement #2** («Phase 0 first step = inventory/migration map»-ը գնում է rollout phase, քանի որ մաքուր build-ը ոչ մի project չի դիպչում) · **§18 D6** · **§19 refinement #5** · **§20 checklist** տողը *«Phase 0 scope clear (pilot = EP)»* — ու cross-link անել այս roadmap-ը։ **Այս խմբագրումը սպասում է առանձին Գևի հրամանի; այս քայլը canonical-ը չի փոխում։**
 
 ## 3. Target Architecture (End-State) / նպատակային ճարտարապետություն
 
@@ -126,19 +126,19 @@ Bro> SuperBro ready · BRO_HOME: <path> · spine v<ver> · mode: READ-ONLY · cr
         [1] SHOW REGISTRY     [2] SHOW HEALTH      [3] RUN DOCTOR
         [4] RUN AUDIT         [5] REVIEW QUARANTINE (flags only)
        CRITICAL — needs preview + YES (+ Gev authority)
-        [6] RELEASE SPINE     [7] REGISTER PROJECT      [8] INSTALL PROJECT BRO
+        [6] RELEASE SPINE (Phase 4+)   [7] REGISTER PROJECT   [8] INSTALL PROJECT BRO
         [9] UPDATE PROJECT BRO SPINE   [10] PROMOTE SKILL   [11] CROSS-PROJECT AUDIT
         [12] START BUILD
        [0] EXIT     [?] HELP / SHOW COMMANDS
 
 Gev> 6
-Bro> PREVIEW — RELEASE SPINE
-     Action:        publish spine release v1.0.1
-     Scope:         canonical spine  →  spine/RELEASES/v1.0.1/
-     Reads:         spine/            Writes: spine/RELEASES/v1.0.1/ + memory/_own/release-log.md
+Bro> PREVIEW — RELEASE SPINE   (illustrative example · version/paths are placeholders)
+     Action:        publish spine release v1.0.0
+     Scope:         canonical spine  →  spine/RELEASES/v1.0.0/
+     Reads:         spine/            Writes: spine/RELEASES/v1.0.0/ + memory/_own/release-log.md
      Criticality:   CRITICAL          Requires Gev authority: YES
      Backup:        _before/spine-<ts>.zip + sha256.txt
-     Rollback:      delete RELEASES/v1.0.1/; no Project Bro pulls until it stamps spine_version
+     Rollback:      delete RELEASES/v1.0.0/; no Project Bro pulls until it stamps spine_version
      Consequence:   makes a new spine version available for Bros to PULL (pull-based, never forced)
      Type YES to proceed · anything else cancels.
 Gev> YES
@@ -176,7 +176,7 @@ Command Library Entry (schema):
   preview_shown       · what the preview displays before YES
   rollback_backup     · snapshot/rollback method (n/a for read-only)
   report_format       · what the result report contains
-  availability        · CLEAN-BUILD (live) | FUTURE (designed, execution deferred)
+  availability        · CLEAN-BUILD (live) | PHASE N+ (live only after that phase) | RUNTIME (finished-SuperBro cmd) | FUTURE (designed, execution deferred)
   backing             · script/hook the command invokes (contract only — no code now)
 ```
 
@@ -190,8 +190,8 @@ Command Library Entry (schema):
 | RUN DOCTOR | READ | LOW | NO | CLEAN-BUILD | manifest/skeleton/authority self-check / self-check |
 | RUN AUDIT | READ | MED | NO | CLEAN-BUILD | read-only audit, flags only / read-only audit |
 | REVIEW QUARANTINE | READ | MED | NO | CLEAN-BUILD | list quarantine candidates (flags only) / candidate-ները |
-| RELEASE SPINE | WRITE | CRITICAL | YES | CLEAN-BUILD* | publish a spine release / spine release |
-| START BUILD | WRITE | CRITICAL | YES | CLEAN-BUILD | begin an approved build phase / approved build phase |
+| RELEASE SPINE | WRITE | CRITICAL | YES | PHASE 4+* | publish a spine release / spine release |
+| START BUILD | WRITE | CRITICAL | YES | RUNTIME† | begin an approved build phase (finished-SuperBro runtime cmd) / approved build phase |
 | REGISTER PROJECT | WRITE | CRITICAL | YES | FUTURE | register a project in the registry / register project |
 | INSTALL PROJECT BRO | WRITE | CRITICAL | YES | FUTURE | install `X/bro` into a project / Project Bro install |
 | UPDATE PROJECT BRO SPINE | WRITE | CRITICAL | YES | FUTURE | pull approved release into `X/bro` / spine update |
@@ -200,7 +200,7 @@ Command Library Entry (schema):
 | CROSS-PROJECT AUDIT MODE | READ | HIGH | YES | FUTURE | Gev-opened read-only cross-project review / cross-project |
 | EXIT | READ | LOW | NO | CLEAN-BUILD | leave the palette / դուրս գալ |
 
-> `*` RELEASE SPINE & START BUILD are defined and preview-wired in the clean build but each **run** still requires a Gev command. FUTURE commands are **designed + preview-wired now, execution deferred** to rollout.
+> `*` RELEASE SPINE is **defined + preview-wired** in the clean build but **runnable only after Phase 4** — its Spine Release system (§9/§19) must exist first; until then its preview states *"system not yet built."*  `†` START BUILD is the **finished-SuperBro runtime command** that begins an approved build phase; it comes online once the palette exists (Phase 1+). **Phase 0 itself is bootstrapped by Gev's direct approval, pre-palette** — the palette/START BUILD do not exist yet at Phase 0. Every critical **run** still requires a Gev command. FUTURE commands are **designed + preview-wired now, execution deferred** to rollout.
 
 **Fully-expanded examples (build-ready):**
 ```txt
@@ -243,7 +243,7 @@ BRO_HOME/
   bro.manifest.json                  (NEW — SuperBro manifest, see contract below)
   memory/
     _own/                            (NEW — registry + logs + metadata ONLY; no project content)
-      registry.json
+      registry.json                  (created EMPTY in Phase 0; schema/validation + REGISTER-preview in Phase 3 — §8/§19)
       sync-log.md  audit-log.md  release-log.md  authority-log.md  failure-registry.md
       health-dashboard.md            (generated snapshot, not a service)
       hook-blocks.log
@@ -251,7 +251,7 @@ BRO_HOME/
     supermemory/                     (NEW — root only, EMPTY in clean build; per-project mirror dirs created at registration = FUTURE)
     _quarantine/                     (NEW — empty; moves require Gev command)
   spine/
-    RELEASES/                        (NEW — empty; releases cut later, Gev-gated)
+    RELEASES/                        (NEW — empty; releases cut later, Gev-gated · spine physical layout is OPEN — see OD-6 §18)
   tools/                             (NEW — doctor/audit/etc. script files = written at build-time, NOT now)
   change-requests/                   (NEW — empty; one CR file per critical action)
   _before/                          (NEW — empty; snapshots before critical writes)
@@ -300,7 +300,7 @@ project_id · project_path · memory_scope · authority · spine_version_expecte
 status (REGISTERED | INSTALLED | STALE | RETIRED) · last_audit · last_sync · notes
 ```
 **Rules:** registering writes the registry only (no project files); a path that sits inside another project's memory is **refused**; status transitions are logged; SuperBro never copies project content into `_own`.
-**Clean-build scope:** registry file + schema + `SHOW REGISTRY` (read-only, live) + `REGISTER PROJECT` **preview** (designed, not executed). In the clean build the registry is **empty** (no project registered).
+**Clean-build scope:** registry file (**created empty in Phase 0**) + schema + `SHOW REGISTRY` (read-only, live, Phase 1) + `REGISTER PROJECT` **preview** (designed, not executed); **schema validation + REGISTER-preview wiring land in Phase 3** (§19). In the clean build the registry is **empty** (no project registered).
 **Success criteria:** registry exists, schema validated by doctor, drift check confirms `_own` contains no project content.
 
 **HY** — Ոնց է SuperBro-ն իմանում որ project-ները կան — **registry-ն պահում է միայն metadata, երբեք project content** (B4/§4)։ Կառուցվածք՝ `memory/_own/registry.json` (+ append-only `registry-log`); ամ. entry-ն՝ վերևի դաշտերով։ **Կանոններ:** register-ը գրում է միայն registry (ոչ project ֆայլ); ուրիշ project-ի memory-ի մեջ ընկած path = **մերժվում է**; status-ի անցումները log; SuperBro-ն երբեք project content չի պատճենում `_own`։ **Մաքուր-build scope:** registry ֆայլ + schema + `SHOW REGISTRY` (live) + `REGISTER PROJECT` preview (չկատարվող); registry-ն **դատարկ է**։ **Success:** registry կա, schema doctor-validated, drift = զրո project content `_own`-ում։
@@ -316,7 +316,7 @@ status (REGISTERED | INSTALLED | STALE | RETIRED) · last_audit · last_sync · 
 **Structure:** `spine/RELEASES/v<ver>/` (release payload + `manifest` + `sha256`), `memory/_own/release-log.md` (append-only). Broadcast = an *availability signal only* (B6 — SuperBro never writes into a Bro's memory/spine).
 **Contracts:** release manifest (files + hashes + version + notes); pull/verify/stamp procedure; promotion gate (§14/§10) is the only path a project lesson becomes spine.
 **Gates:** cutting a release = CRITICAL, Gev-command + log + snapshot. Pull is each Bro's own action (future).
-**Clean-build scope:** `RELEASES/` dir + release manifest schema + `RELEASE SPINE` preview/flow + release-log; **no Project Bro exists to pull yet**, so update execution is **FUTURE**. (Whether a v1.0.0 baseline release is cut in the clean build = open decision OD-5, §18.)
+**Clean-build scope:** `RELEASES/` dir + release manifest schema + `RELEASE SPINE` preview/flow + release-log; the **`RELEASE SPINE` command is runnable only once this Phase-4 system exists** (§19), and **no Project Bro exists to pull yet**, so update execution is **FUTURE**. (Whether a v1.0.0 baseline release is cut = open decision OD-5; where the spine physically lives = OD-6 — both §18.)
 
 **HY** — Spine-ի տարբերակված վար-հոսք (Flow 2)․ SuperBro-ն հրապարակում է approved release; Project Bro-ն pull → hash ստուգում → `spine_version` դրոշմ։ **Ոչ կույր copy/sync; երբեք forced; երբեք auto։** Կառուցվածք՝ `spine/RELEASES/v<ver>/` (payload + manifest + sha256) + `release-log.md`։ Broadcast-ը = միայն *availability signal* (B6)։ **Gate-եր:** release կտրելը = CRITICAL, Գևի հրաման + log + snapshot։ **Մաքուր-build scope:** `RELEASES/` + release manifest schema + `RELEASE SPINE` preview/flow + release-log; **pull անող Project Bro դեռ չկա** → update կատարումը FUTURE է։ (v1.0.0 baseline release-ը մաքուր build-ում կտրվի՞ = open decision OD-5, §18)։
 
@@ -383,10 +383,12 @@ SessionStart · preflight-printer
   prints: current project · allowed memory · forbidden paths · spine version · "critical needs Gev" · cross-project OFF
   inputs: session context                              outputs: printed pre-flight banner   exit: 0
 ```
+> *Note (C6):* the evidence-log path is guarded by **both** `forbidden-path-write-guard` and `log-append-only-guard` — intentional **layered defense-in-depth**, not an accidental duplicate.
+
 **Report format (hook block):** a `hook-blocks.log` entry (schema §11) with `result: BLOCKED`, target, source_command, authority=hook.
 **Clean-build scope:** all five hook **contracts** specified; in the build phase they are installed and **proven** (try a forbidden write → it is denied by exit code). Project-to-project read-block is proven once a second scope exists (first install) but the mechanism is built + unit-proven on SuperBro paths.
 
-**HY** — **Կառուցվածքային պատը** (D5/§11/B5) — critical gate-երը markdown չեն; Claude Code hook + script + exit code են։ **Հիմա միայն contract (Q6=A); կոդը build-ին։** **Phase-0 proof:** արգելված action-ը պետք է ԱՊԱՑՈՒՑՎԻ որ block է, ոչ ենթադրվի։ Հինգ hook-ի contract-ները՝ վերևում (forbidden-path-write · cross-memory-read · critical-command-gate · log-append-only · SessionStart preflight)։ **Report format:** `hook-blocks.log` entry՝ `result: BLOCKED`։ **Մաքուր-build scope:** հինգ contract-ը սահմանվում; build phase-ին install + **ապացուցվում** (արգելված write փորձ → deny exit-code-ով)։ Project-to-project read-block-ը ապացուցվում է երկրորդ scope-ի դեպքում (առաջին install), բայց մեխանիզմը SuperBro path-երի վրա build + unit-proven է։
+**HY** — **Կառուցվածքային պատը** (D5/§11/B5) — critical gate-երը markdown չեն; Claude Code hook + script + exit code են։ **Հիմա միայն contract (Q6=A); կոդը build-ին։** **Phase-0 proof:** արգելված action-ը պետք է ԱՊԱՑՈՒՑՎԻ որ block է, ոչ ենթադրվի։ Հինգ hook-ի contract-ները՝ վերևում (forbidden-path-write · cross-memory-read · critical-command-gate · log-append-only · SessionStart preflight)։ **Report format:** `hook-blocks.log` entry՝ `result: BLOCKED`։ **Մաքուր-build scope:** հինգ contract-ը սահմանվում; build phase-ին install + **ապացուցվում** (արգելված write փորձ → deny exit-code-ով)։ Project-to-project read-block-ը ապացուցվում է երկրորդ scope-ի դեպքում (առաջին install), բայց մեխանիզմը SuperBro path-երի վրա build + unit-proven է։ *Նշում (C6):* log-ի path-ը պաշտպանված է **երկու** hook-ով (`forbidden-path-write-guard` + `log-append-only-guard`) — միտումնավոր **layered defense-in-depth**, ոչ պատահական կրկնություն։
 
 ---
 
@@ -450,11 +452,12 @@ SessionStart · preflight-printer
 **EN** — Collected so nothing slips into build unresolved. Each needs Gev before the phase it touches.
 
 **Open decisions (need Gev):**
-- **OD-1 Spec reconciliation** — apply the §2 correction into canonical spec §17/D6/§19#5 (separate Gev-gated edit). *Recommend: yes, after this roadmap is accepted.*
+- **OD-1 Spec reconciliation** — apply the §2 correction across **all** EP-pilot references in the canonical spec (§17/D6 · §17 #2 · §18 D6 · §19 #5 · §20 checklist line — see §2 for the full list) as one separate Gev-gated edit. *Recommend: yes, after this roadmap is accepted.*
 - **OD-2 SuperBro path/name** — keep `Desktop\Bro` (spec §16 preference) or introduce `Desktop\SuperBro` later? *Recommend: keep `Desktop\Bro` for stability; rename only if Gev decides.*
 - **OD-3 First-run authority status** — `bro.home.json` + verifier already exist locally; confirm whether Phase 0 re-verifies or treats authority as `current`. *Recommend: doctor verifies on Phase 0 start; no re-bootstrap unless missing.*
 - **OD-4 Palette runtime form** — Bro-session-driven menu (Bro presents/asks) vs a standalone script/TUI. *Recommend: Bro-session menu backed by real scripts for side-effect actions; finalize form in the palette phase.*
 - **OD-5 Baseline spine release** — cut a `v1.0.0` baseline release in the clean build, or defer until a Project Bro needs to pull? *Recommend: define the release system now; cut `v1.0.0` only when first install needs it.*
+- **OD-6 Spine physical layout** — where the canonical spine physically lives is unresolved: the §6 tree shows `spine/RELEASES/` (implying a top-level `spine/`), but the spine *content* (`_core/ skills/ self/ roster/`) currently lives at `BRO_HOME` root. **Option A:** spine = the existing `BRO_HOME` root dirs (`_core/ skills/ self/ roster/`); `RELEASES/` (e.g. `spine/RELEASES/` or `releases/`) stores **cut release packages only**, not the live spine. **Option B:** introduce a real top-level `spine/` tree that physically holds the spine content **and** releases. *Recommendation (recommendation-only — NOT decided; final call is Gev's at build time): **Option A** — least movement, preserves the current proven layout, matches "not greenfield" (refinement #2); `RELEASES/` holds only packaged releases.*
 
 **Risks (manage during build):**
 - **R-1 Hook false-trips** — Claude Code guards can mis-fire (known: Remove-Item guard trips near `/` or `*`). *Mitigate: test hooks in isolation; use safe path patterns.*
@@ -462,7 +465,7 @@ SessionStart · preflight-printer
 - **R-3 Scope creep into projects** — accidental project touch. *Mitigate: forbidden-path hook + zero-touch rule + §16.*
 - **R-4 Over-design before proof** — building project-scoped features before Phase-0 proof. *Mitigate: phase gates; prove enforcement first.*
 
-**HY** — Հավաքված, որ ոչինչ չմտնի build՝ չլուծված։ **Բաց որոշումներ (Գև է պետք):** OD-1 spec հաշտեցում (հետո, roadmap-ի ընդունումից) · OD-2 path/name (խորհուրդ՝ պահել `Desktop\Bro`) · OD-3 first-run authority (խորհուրդ՝ doctor verify, ոչ re-bootstrap) · OD-4 palette runtime (խորհուրդ՝ Bro-session menu + real script side-effect-ի համար) · OD-5 baseline release (խորհուրդ՝ system հիմա, `v1.0.0` երբ առաջin install-ին պետք գա)։ **Ռիսկեր:** R-1 hook false-trip (test isolation-ում) · R-2 authority split sync-ից (explicit `bro.home.json`) · R-3 scope creep project-ներ (forbidden-path hook + zero-touch) · R-4 over-design proof-ից առաջ (phase gate-եր, նախ enforcement proof)։
+**HY** — Հավաքված, որ ոչինչ չմտնի build՝ չլուծված։ **Բաց որոշումներ (Գև է պետք):** OD-1 spec հաշտեցում (հետո, roadmap-ի ընդունումից) · OD-2 path/name (խորհուրդ՝ պահել `Desktop\Bro`) · OD-3 first-run authority (խորհուրդ՝ doctor verify, ոչ re-bootstrap) · OD-4 palette runtime (խորհուրդ՝ Bro-session menu + real script side-effect-ի համար) · OD-5 baseline release (խորհուրդ՝ system հիմա, `v1.0.0` երբ առաջին install-ին պետք գա) · **OD-6 spine-ի ֆիզիկական layout** — spine-ը ֆիզիկապես ո՞ւր է ապրում. **Option A** spine = `BRO_HOME` root dir-երը (`_core/ skills/ self/ roster/`), `RELEASES/` = միայն փաթեթավորված release-եր; **Option B** իրական top-level `spine/` tree՝ content + release։ *Խորհուրդ (recommendation-only, ՉԻ որոշված — վերջնականը Գևինն է build-ին)՝ **Option A** (նվազ շարժ, ապացուցված layout, «ոչ greenfield»)։* **Ռիսկեր:** R-1 hook false-trip (test isolation-ում) · R-2 authority split sync-ից (explicit `bro.home.json`) · R-3 scope creep project-ներ (forbidden-path hook + zero-touch) · R-4 over-design proof-ից առաջ (phase gate-եր, նախ enforcement proof)։
 
 ## 19. Final Build Phases / վերջնական build phase-եր
 
@@ -472,6 +475,7 @@ SessionStart · preflight-printer
 - *Scope:* create the SuperBro `_own`/`supermemory`(empty)/`_quarantine`/`tools`/`spine/RELEASES`/`change-requests`/`_before`/`logs` skeleton (§6); SuperBro `bro.manifest.json`; verify §15 authority.
 - *Deliverables:* skeleton + manifest + authority `current` + first log entries.
 - *Success (PROVEN):* doctor GREEN on skeleton · manifest real & validated · `_own` holds registry/logs only (drift = zero project content) · **no project folder touched.**
+- *Bootstrap:* Phase 0 is initiated by **Gev's direct approval (pre-palette)** — the Command Palette and `START BUILD` do not exist until Phase 1, so they cannot initiate Phase 0.
 - *Gate:* Gev reviews → command to proceed to Phase 1.
 
 **Phase 1 — Guided Command / Command Palette + Command Library.**
@@ -502,7 +506,7 @@ SessionStart · preflight-printer
 - Project Bro installs (EP/DB/GAA/IP) · Discovery Bank physical promotion · cross-project mode activation · spine v2 content · project memory migration.
 
 **HY** — Gated կատարման հաջորդականություն։ **Ոչ մի phase չի աշխատում առանց Գևի բացահայտ հրամանի; ոչ մի phase ինքն իրեն չի առաջ գնում։** Ամ. phase՝ scope · deliverable · success (ԱՊԱՑՈՒՑՎԱԾ) · Gev gate։
-- **Phase 0 — Foundation & Authority:** SuperBro skeleton + manifest + authority (§6/§15)։ Success՝ doctor GREEN, manifest real, `_own` = միայն registry/logs, **ոչ project դիպած**։
+- **Phase 0 — Foundation & Authority:** SuperBro skeleton + manifest + authority (§6/§15)։ Bootstrap՝ Phase 0-ն սկսվում է **Գևի ուղիղ հաստատմամբ (pre-palette)** — palette/`START BUILD`-ը դեռ չկան։ Success՝ doctor GREEN, manifest real, `_own` = միայն registry/logs, **ոչ project դիպած**։
 - **Phase 1 — Command Palette + Library:** palette + catalog (§4/§5)։ Success՝ read-only command-ները palette-ով, critical-ը preview ցույց + **YES-ից առանց մերժում**։
 - **Phase 2 — Enforcement + Evidence + Doctor/Audit (ԱՊԱՑՈՒՑՎԱԾ):** 5 hook + append-only log + script-եր (§13/§11/§12)։ Success՝ արգելված write **ապացուցված block**, log edit block, SessionStart pre-flight, audit առանց write։ **Keystone proof phase (D5)։**
 - **Phase 3 — Registry + Template + Rollout (dry):** registry live, template spec, rollout preview-ներ՝ **ոչ install** (§8/§7/§17)։ Success՝ registry validated, REGISTER/INSTALL preview **ոչինչ չկատարող**։
@@ -541,7 +545,33 @@ SessionStart · preflight-printer
 [ ] Final LOCK requires Gev "BUILD".
 ```
 
-**HY** — Նշիր նախքan այս roadmap-ը «build-ից ընդունված» համարելը։ Review-ն 3-way է (Gev × GPT × Bro)։ Ստուգաթերթը՝ վերևի անգլերեն block-ում (նույն կետերը)․ D0/L0 առաջին · Clean-Build Correction · spec reconciliation առաջարկ · Command Palette mandatory · Command Library full · SuperBro core · Project Bro template · registry · spine release · memory boundary · logs/evidence · doctor/audit · hooks + Phase-0 proof · Discovery Bank հետաձգված · approval gates · forbidden actions · rollout designed · risks/open decisions · build phases gated · build-ready ոչ-կոդ · bilingual · final LOCK = Գևի «BUILD»։
+**HY** — Նշիր նախքան այս roadmap-ը «build-ից ընդունված» համարելը։ Review-ն 3-way է (Gev × GPT × Bro)։
+```txt
+[ ] D0/L0 Gev Root Authority-ն առաջինն է նշված ու պահպանված ողջ ընթացքում։
+[ ] Clean-Build Correction-ն առկա է ու հստակ (առաջին build = միայն մաքուր SuperBro; ոչ EP pilot)։
+[ ] Spec-ի հաշտեցումն առաջարկված է (չկատարված)՝ canonical-ի բոլոր EP-pilot հղումների (§17/D6 · §17 #2 · §18 D6 · §19 #5 · §20 տող)։
+[ ] Command Palette-ն ներառված է որպես ՊԱՐՏԱԴԻՐ PRE-BUILD scope (§4)։
+[ ] Command Library՝ schema + starter command-ներ + interaction/preview բառեր (§5)։
+[ ] SuperBro core build-ը սահմանված է (skeleton + manifest + authority) (§6)։
+[ ] Project Bro template-ը սահմանված է (չ-install) (§7)։
+[ ] Registry համակարգը սահմանված է; registry-ն դատարկ մաքուր build-ում (§8)։
+[ ] Spine release/update համակարգը սահմանված է (Flow 2; pull/verify/stamp) (§9)։
+[ ] Memory boundary համակարգը սահմանված է (B2/B4/L8) (§10)։
+[ ] Logs/evidence համակարգը սահմանված է (append-only, script-timestamp, git-split) (§11)։
+[ ] Doctor/audit համակարգը սահմանված է (real script, exit code, միայն flag) (§12)։
+[ ] Hooks/enforcement պլանը սահմանված է (միայն contract) + Phase-0 PROOF պահանջ (§13)։
+[ ] Discovery Bank՝ մոտեցում/որոշում նկարագրված, ֆիզիկական promotion ՀԵՏԱՁԳՎԱԾ (§14)։
+[ ] Approval gate-երը թվարկված են (Gev-gated critical action) (§15)։
+[ ] Forbidden action-ները թվարկված են (§16)։
+[ ] Ապագա Project Bro rollout command-ները նախագծված են (չ-կատարված) (§17)։
+[ ] Ռիսկեր ու բաց որոշումներ՝ recommendation-ով (§18)։
+[ ] Վերջնական build phase-եր՝ gated, ԱՊԱՑՈՒՑՎԱԾ success criteria-ով (§19)։
+[ ] Խորություն = build-ready, ՈՉ կոդ, ՈՉ build այս փաստաթղթում (Q1/Q6)։
+[ ] Փաստաթղթի տեսակ = phased plan + per-component spec (Q2)։
+[ ] Ոչ մի project folder դիպած · ոչ hook install · ոչ push՝ այս roadmap-ը գրելով։
+[ ] Bilingual (EN + HY) ողջ ընթացքում (L0)։
+[ ] Final LOCK-ը պահանջում է Գևի «BUILD»։
+```
 
 ## 21. Final Formula / վերջնական բանաձև
 
