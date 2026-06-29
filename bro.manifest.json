@@ -15,6 +15,7 @@
   "last_memory_sync": "n/a",
   "last_audit": "2026-06-29T08:29:18+04:00",
   "status": "GREEN",
+  "milestone": "clean-superbro-green",
   "phase": "phase-4-release",
   "built_at": "2026-06-29T07:14:32+04:00",
   "note_en": "Clean SuperBro build COMPLETE (Phases 0-4). Phase 4 = Spine Release / Update System + Promotion Gate: bro-release (sandbox-testable cut), bro-spine-verify/pull/stamp (pull->verify->stamp), bro-promote (Promotion Gate blocks unapproved + project-specific candidates). OD-5 honored: NO v1.0.0 cut, spine/RELEASES/ stays empty (mechanism tested in sandbox only). OD-6: live spine at root. spine_version is a STATE label, not a packaged release. Hashes are real SHA-256 (no fabrication). No project touched, no Project Bro, no real registration, no Discovery Bank move, no migration, no push.",
