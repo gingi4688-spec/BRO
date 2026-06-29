@@ -110,8 +110,8 @@ backup/evidence, not source of truth. `SuperBro/memory/_quarantine/` for flagged
 
 ## 6. Spine Model
 Canonical spine = the spine content **today living at `BRO_HOME` root** (the existing `_core/` + `/skills/` + `/self/` +
-roster = spine v1.0.0); **its physical layout is an OPEN decision — see OD-6 (§18)** (root dirs vs a real top-level
-`spine/` tree). Each `X/bro` has a local physical copy. Update = Super Bro **publishes an approved release** →
+roster = spine v1.0.0); **its physical layout is 🔒 LOCKED — Option A (OD-6 §18): the live spine stays in these root dirs**
+(no top-level `spine/` content tree). Each `X/bro` has a local physical copy. Update = Super Bro **publishes an approved release** →
 Project Bro **pulls → verifies hashes → stamps `spine_version`.** No blind copy-paste / blind sync.
 Spine contents: `BRO_LAWS.md · OPERATING_PROTOCOL.md · AGENT_ROSTER.md · SKILL_REGISTRY.md ·
 CROSS_PROJECT_MODE.md · PROMOTION_GATE.md · CRITICAL_ACTION_GATES.md · SELF_REVIEW_CHECKLIST.md · HARDENING_LAYER.md`.
@@ -152,7 +152,9 @@ requires_gev(YES|NO) · mode(READ|WRITE) · files_affected · preview_shown · r
 availability(CLEAN-BUILD | PHASE N+ | RUNTIME | FUTURE) · backing(script/hook — contract only, no code in spec)
 ```
 Full schema, the ~16 starter commands, and the drafted preview wording live in roadmap §4/§5. The palette is a
-**Phase-1** deliverable of the clean SuperBro build (§17).
+**Phase-1** deliverable of the clean SuperBro build (§17). **🔒 OD-4 LOCKED Option A (Gev-approved 2026-06-29): runtime form
+= Bro-session menu + real scripts — Bro presents menu/preview/approval; scripts execute side-effects with exit codes;
+hooks/guards are the wall.**
 
 **HY** — Super Bro-ի **operator-ի control մակերեսը** — **պարտադիր pre-build scope** (կառուցվում է ցանկացած project
 registration/install flow-ից ու Project Bro rollout-ից առաջ; Գևը command չի անգիր անում)։ Վարք՝
@@ -296,6 +298,11 @@ bro spine-check X · bro health`. Example GREEN/RED outputs as in the proposal; 
 - ⚠️ Bidirectional sync (Syncthing/Tailscale) can break authority → the **active BRO_HOME must be explicit**
   (recorded in `bro.home.json`). BRO_HOME / authority change = **critical action** (Gev command + `authority-log.md`).
 
+**🔒 OD-3 LOCKED Option A (Gev-approved 2026-06-29):** at clean-build Phase 0 the default is **verify-only** — doctor
+confirms the existing `bro.home.json` + verifier are `current` and appends `authority-log`, with **no passphrase
+re-prompt**; the first-run flow below runs **only if `bro.home.json`/verifier is missing, invalid, or tampered.** /
+**🔒 OD-3 LOCKED.** Phase 0-ին default-ը verify-only է; ստորև first-run-ը միայն եթե `bro.home.json`/verifier-ը բացակա/անվավեր/tampered է։
+
 **First-run BRO_HOME approval flow** — if Bro starts in a new folder OR `bro.home.json` is missing, Bro MUST ask:
 > «Detected current Bro folder: `[current path]`. Should I register this folder as BRO_HOME / current Super Bro
 > authority? Type **YES** to continue.»
@@ -355,12 +362,13 @@ All other critical actions still require separate Gev command.
 
 ## 16. Physical Structure (home decision: Desktop\Bro = Super Bro)
 **Super Bro home = the current `BRO_HOME`** (today `Desktop\Bro` — existing factory/spine root: `_core/` · `skills/`
-· `self/` · roster; path is **portable / Gev-approved per §15/D3**, not hardcoded law).
+· `self/` · roster; path is **portable / Gev-approved per §15/D3**, not hardcoded law). **🔒 OD-2 LOCKED Option A
+(Gev-approved 2026-06-29): keep `BRO_HOME = C:\Users\Admin\Desktop\Bro` — no rename, no relocation, no `Desktop\SuperBro`.**
 Role named "Super Bro" in the spec; **path stays `Desktop\Bro`** for stability (no second `Desktop\SuperBro` in
 Phase 0; controlled rename only if Gev later decides). Adds (on BUILD): `memory/_own` (registry · sync-log · audit-log · release-log · health-dashboard ·
 failure-registry · authority-log · hook-blocks.log) · `memory/supermemory/` (sealed mirrors — **root-only/EMPTY in clean
 build; per-project `{EP,DB,GAA}` mirror dirs are FUTURE, created at registration; see R-C/§5**) ·
-`memory/_quarantine` · `tools/` (scripts) · `spine/RELEASES/` (**physical layout per OD-6 §18**) · `change-requests/` · `_before/` (snapshots).
+`memory/_quarantine` · `tools/` (scripts) · `spine/RELEASES/` (**🔒 OD-6 LOCKED Option A: packaged cuts only; live spine stays at root** · OD-5: empty in Phase 0) · `change-requests/` · `_before/` (snapshots).
 Each `X/bro` (in its own project): `spine/` (local copy) · `memory/` · **`logs/`** (session · action ·
 memory-write · local-audit · hook-blocks · errors) · `bro.manifest.json` · `health.report.md`.
 
@@ -471,7 +479,7 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 
 ## 18. Decisions D0–D10 (Gev-approved; final LOCK pending Gev on BUILD)
 - **D0 Gev Root Authority** — ACCEPT (mandatory, top).
-- **D1 Spine Model** — ACCEPT (physical copy + versioning; canonical spine at `BRO_HOME` — **physical layout OPEN per OD-6 §18**; pull/verify/stamp).
+- **D1 Spine Model** — ACCEPT (physical copy + versioning; canonical spine at `BRO_HOME` — **physical layout 🔒 LOCKED Option A per OD-6 §18: live spine = root dirs**; pull/verify/stamp).
 - **D2 Memory Classification + Promotion Gate** — ACCEPT (3 types; project memory never becomes spine law without Gev).
 - **D3 Authority — Portable BRO_HOME** — ACCEPT (§15). Super Bro authority = the **Gev-approved `BRO_HOME`** (current
   root; e.g. `Desktop\Bro`), **not** a hardcoded machine/path. First-run register = **YES + Gev Authority Passphrase**
@@ -495,10 +503,17 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 - **D10 Guided Command / Command Palette** — ACCEPT (§6B). 🔄 Added 2026-06-29 from the roadmap's held requirement:
   Super Bro's operator-facing control layer (menu → preview → explicit `YES` → run; default read-only; critical actions
   gated; command-library maintained) is **mandatory pre-build scope**, built before any project registration/install flow.
-- **OD-6 Spine physical layout** — 🟡 OPEN (recommendation-only; decided later by Gev): **Option A** spine = the existing
-  `BRO_HOME` root dirs (`_core/ skills/ self/ roster/`), `RELEASES/` stores **packaged release cuts only**; **Option B**
-  introduce a real top-level `spine/` tree holding spine content + releases. *Bro recommends **Option A** (least movement,
-  preserves the proven layout, "not greenfield"); final call = Gev at build time.*
+- **OD-6 Spine physical layout** — 🔒 **LOCKED 2026-06-29: Option A (Gev-approved).** Canonical **live spine = the existing
+  `BRO_HOME` root dirs** (`_core/ skills/ self/ roster/`); `RELEASES/` stores **packaged release cuts only** — **no content
+  relocation into a new top-level `spine/` tree, no migration.** (Option B rejected.)
+- **🔒 LOCKED operating decisions (OD-2…OD-5, Gev-approved 2026-06-29; full text in roadmap §18):** **OD-2** keep `BRO_HOME` =
+  `C:\Users\Admin\Desktop\Bro` (no rename/relocation/`Desktop\SuperBro`). **OD-3** first-run authority = **verify-only**
+  (re-bootstrap only if `bro.home.json`/verifier missing/invalid/tampered; no passphrase re-prompt when current verifies).
+  **OD-4** Command Palette = **Bro-session menu + real scripts** (Bro presents; scripts execute side-effects with exit
+  codes; hooks = the wall). **OD-5** baseline spine release = **deferred** (mechanism Phase 4; cut `v1.0.0` only at first
+  install/pull need or on Gev command; Phase 0 `RELEASES/` empty). / **🔒 LOCK որոշումներ (OD-2…OD-5, Գև 2026-06-29).**
+  OD-2 պահել `C:\Users\Admin\Desktop\Bro` · OD-3 verify-only authority · OD-4 palette = Bro-session menu + real scripts ·
+  OD-5 baseline release = deferred (Phase 4; `RELEASES/` դատարկ Phase 0-ում)։
 
 ## 19. The 6 Bro refinements (Gev-approved — folded in above)
 1. **Enforcement = Claude Code hooks** named concretely (settings.json · PreToolUse · SessionStart · real
@@ -540,7 +555,9 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 [ ] D10 Command Palette = mandatory pre-build (menu→preview→YES→run; default read-only; critical gated; command-library).
 [ ] Clean SuperBro build = 5 phases; Phase 0 = clean SuperBro only; NO project folder touch before explicit Gev approval.
 [ ] Project Bro installs + Discovery Bank physical promotion = postponed to later Project Rollout (not in clean build).
-[ ] OD-6 spine physical layout = OPEN (Option A/B; Bro recommends A; Gev decides at build).
+[ ] OD-6 spine physical layout = 🔒 LOCKED Option A (live spine = root dirs; RELEASES = packaged cuts only).
+[ ] OD-2…OD-5 = 🔒 LOCKED (Gev 2026-06-29): keep Desktop\Bro · verify-only authority · palette = session+scripts · defer baseline release.
+[ ] OD-1 spec reconciliation = ✅ RESOLVED (7f59dbb + 87a18cd, pushed).
 [ ] Verification checklist covers D0–D10.
 ```
 
