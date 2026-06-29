@@ -59,3 +59,18 @@ backup: n/a (not modified)
 result: HELD — awaiting Gev decision (fold flows into canonical, then delete; or keep as reference)
 files_changed: none
 ```
+
+## Entry 4 — Orphan spec consolidated + removed
+
+```txt
+timestamp: 2026-06-29T04:56:20+04:00
+actor: Bro
+action: CONSOLIDATE + DELETE
+source: docs/architecture/BRO_MEMORY_SKILL_ARCHITECTURE_v1.md (untracked orphan)
+target: _core/BRO_MEMORY_SKILL_ARCHITECTURE_v1.md (canonical) section 6A
+reason: orphan's only unique content (Flow 1 bottom-up skill-request + Flow 2 broadcast/release) folded into
+        canonical 6A, made v1-law-compatible (project-local request; no memory mixing; broadcast=availability-only;
+        Bros pull approved release; no auto build/push). Re-compared: no unique content remains.
+result: SUCCESS -- Flow 1/2 in canonical; orphan deleted; empty docs/architecture/ removed
+files_changed: _core/...v1.md (+section 6A); docs/architecture/...v1.md (deleted, untracked); docs/architecture/ removed
+```

@@ -1,0 +1,12 @@
+{
+  "_README": "TEMPLATE ONLY — placeholders, no real values. The real bro.home.json is local runtime authority state and is GITIGNORED (never committed). The passphrase verifier lives in memory/_own/secrets/bro-home.verifier.json (also gitignored). Never commit real authority state, machine specifics, salt, hash, or any secret.",
+  "role": "SuperBro",
+  "bro_home": "<ABSOLUTE_PATH_TO_BRO_HOME>",
+  "machine_name": "<MACHINE_NAME>",
+  "authority_status": "current",
+  "approved_by": "Gev",
+  "approval_method": "first_run_yes_plus_passphrase",
+  "approved_at": "<REAL_ISO_TIMESTAMP>",
+  "passphrase_stored": "hash_only",
+  "verifier_file": "memory/_own/secrets/bro-home.verifier.json"
+}

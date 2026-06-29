@@ -99,6 +99,27 @@ Project Bro **pulls → verifies hashes → stamps `spine_version`.** No blind c
 Spine contents: `BRO_LAWS.md · OPERATING_PROTOCOL.md · AGENT_ROSTER.md · SKILL_REGISTRY.md ·
 CROSS_PROJECT_MODE.md · PROMOTION_GATE.md · CRITICAL_ACTION_GATES.md · SELF_REVIEW_CHECKLIST.md · HARDENING_LAYER.md`.
 
+## 6A. Skill Request & Release Flow (Flow 1 / Flow 2)
+How a skill need travels up and a skill release travels down — strictly within the v1 laws (B2 · B6 · H8 · Promotion Gate).
+
+**Flow 1 — Skill request (bottom-up, project-local).** When a Project Bro needs a new/updated skill, it writes a
+**need note in its OWN project memory** (e.g. in `WARNINGS.md` / `CHANGELOG.md`: "needs skill X"). The request is
+**project-local** — never pushed across to other projects. Super Bro learns of it **only** when it does a normal
+read-only mirror **pull** of that project's memory; Super Bro does **not** cross-reason or mix project memories to
+discover needs (H8 · B6).
+
+**Flow 2 — Build + deliver + broadcast (top-down, pull-based).** Super Bro (factory) builds/updates the skill in the
+**canonical spine** and cuts an **approved release** (a project lesson becomes spine only via the Promotion Gate —
+§10). Then it (a) **notifies the requesting Bro** that an update is ready, and (b) **broadcasts update-availability to
+all Bros** — a *"a new spine release is available"* signal **only**. The broadcast is **availability, not a forced
+write**: Super Bro **never writes into a Project Bro's memory or spine** (B6). Each Bro **pulls the approved release →
+verifies hashes → stamps its `spine_version`** on its own (B2 · §6). **No automatic build or push** happens — cutting a
+spine release and any push stay **Gev-gated critical actions** (D0 · §8 · §8A).
+
+> Up = a project-local *need note* (seen on pull). Down = an *approved release* the Bros pull. Never a cross-project
+> read, never a forced write, never an auto-push. / Վեր՝ project-local need note (քաշելիս երևացող)։ Վար՝ approved
+> release, որ Bro-ները իրենք են քաշում։ Երբեք cross-project read, երբեք forced write, երբեք auto-push։
+
 ## 7. Manifest, Skill Registry, Agent Contracts
 - **`bro.manifest.json`** per `X/bro` — `bro_id · project_id · spine_version · skills_manifest_version ·
   agents_manifest_hash · memory_schema_version · memory_scope · authority · last_memory_sync · last_audit ·

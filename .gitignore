@@ -11,3 +11,10 @@
 Thumbs.db
 *.log
 *.tmp
+.vscode/
+
+# Bro local authority state + secrets — NEVER commit (local runtime only)
+bro.home.json
+memory/_own/secrets/
+*.secret.json
+*.verifier.json
