@@ -6,6 +6,14 @@
 > Gev explicitly says "BUILD".** Authored by Bro from GPT's final proposal (Gev-approved D0–D9) + Bro's 6
 > refinements (Gev-approved) + Gev's home decision. Cross-reviewed Gev × GPT × Bro (2026-06-29).
 >
+> **🔄 RECONCILED 2026-06-29 with `BRO_CLEAN_SUPERBRO_BUILD_ROADMAP.md` (pushed `67df95e`):** the build sequence is now
+> **clean SuperBro first** (Phase 0 = clean SuperBro only, NOT the EP pilot); Command Palette added (§6B / D10); OD-6
+> spine-layout left OPEN; Project Bro installs + Discovery-Bank promotion postponed to a later Rollout phase. Superseded
+> wording is marked inline ("SUPERSEDED"/strikethrough notes), **not deleted** — history preserved. / **🔄 ՀԱՇՏԵՑՎԱԾ
+> 2026-06-29** roadmap-ի հետ (push `67df95e`)՝ build-ը հիմա **մաքուր SuperBro առաջինը** (Phase 0 = միայն մաքուր SuperBro,
+> ոչ EP pilot); Command Palette ավելացված (§6B / D10); OD-6 բաց; Project Bro install-եր + Discovery-Bank promotion
+> հետաձգված։ Superseded wording-ը նշված է inline, **ոչ ջնջված** — պատմությունը պահպանված։
+>
 > **Որտեղ ա ապրում / Home:** current **`BRO_HOME`** (portable, Gev-approved — see §15/D3; today `Desktop\Bro`);
 > role explicit; **no** new `Desktop\SuperBro` in Phase 0 — less movement, less risk. This file lives in the Bro spine (`_core/`); it is **Bro-project
 > content**, not any instance's.
@@ -35,6 +43,11 @@ scan · drift detection · report generation · stale warning · **quarantine-ca
 **⛔ Requires Gev's EXPLICIT command (never self-initiated):** write · repair · move to quarantine · migrate ·
 delete · merge · promote a project lesson to the spine · release a new spine · change an authority node ·
 **cross-project memory use** · **push (repo)** · lock a decision · build.
+
+**🚫 No project-folder touch before explicit approval (reconciled 2026-06-29 with roadmap §16):** Bro does **not** read or
+write any project folder (EP/DB/GAA/IP/…) before explicit Gev approval; **zero project folders are touched in the entire
+clean SuperBro build.** / Bro-ն չի կարդում/գրում ոչ մի project folder (EP/DB/GAA/IP/…) առանց բացահայտ Գևի հաստատման;
+**մաքուր SuperBro build-ում զրո project folder է դիպչվում։**
 
 **🛑 Emergency STOP (do not guess — halt + ask Gev) when:** project identity unclear · memory boundary unclear ·
 action authority unclear · cross-project use unclear · a critical action lacks Gev's command.
@@ -91,10 +104,14 @@ or via the schedule/cron skill): factory · spine canonical authority · skill/r
 ## 5. Supermemory Vault (read-only mirrors)
 `SuperBro/memory/supermemory/{EP,DB,GAA,…}` = sealed mirrors; **never mixed** with each other; read-only
 backup/evidence, not source of truth. `SuperBro/memory/_quarantine/` for flagged candidates.
+> **🔄 Reconciled (R-C):** in the **clean SuperBro build** `supermemory/` is created **root-only / EMPTY**; each
+> per-project mirror dir (`EP`/`DB`/`GAA`/…) is a **FUTURE artifact created at registration**, never in the clean build. /
+> **Հաշտեցված (R-C):** մաքուր build-ում `supermemory/`-ն դատարկ է; per-project mirror-ները registration-ի **FUTURE** են։
 
 ## 6. Spine Model
-Canonical spine = `SuperBro/spine` (today: the existing `_core/` + `/skills/` + `/self/` + roster = spine
-v1.0.0). Each `X/bro` has a local physical copy. Update = Super Bro **publishes an approved release** →
+Canonical spine = the spine content **today living at `BRO_HOME` root** (the existing `_core/` + `/skills/` + `/self/` +
+roster = spine v1.0.0); **its physical layout is an OPEN decision — see OD-6 (§18)** (root dirs vs a real top-level
+`spine/` tree). Each `X/bro` has a local physical copy. Update = Super Bro **publishes an approved release** →
 Project Bro **pulls → verifies hashes → stamps `spine_version`.** No blind copy-paste / blind sync.
 Spine contents: `BRO_LAWS.md · OPERATING_PROTOCOL.md · AGENT_ROSTER.md · SKILL_REGISTRY.md ·
 CROSS_PROJECT_MODE.md · PROMOTION_GATE.md · CRITICAL_ACTION_GATES.md · SELF_REVIEW_CHECKLIST.md · HARDENING_LAYER.md`.
@@ -119,6 +136,32 @@ spine release and any push stay **Gev-gated critical actions** (D0 · §8 · §8
 > Up = a project-local *need note* (seen on pull). Down = an *approved release* the Bros pull. Never a cross-project
 > read, never a forced write, never an auto-push. / Վեր՝ project-local need note (քաշելիս երևացող)։ Վար՝ approved
 > release, որ Bro-ները իրենք են քաշում։ Երբեք cross-project read, երբեք forced write, երբեք auto-push։
+
+## 6B. Guided Command / Command Palette (operator control layer — MANDATORY pre-build) · 🔄 added 2026-06-29
+**EN** — Super Bro's **operator-facing control surface** — **mandatory pre-build scope** (built before any project
+registration/install flow and before any Project Bro rollout; Gev never memorizes commands). Behavior:
+**menu → collect required inputs → preview (what · where · scope · files · authority · rollback) → explicit `YES` → run.**
+**Default read-only.** **Critical actions are gated** — build/push/migrate/delete/release/promote/project-creation
+**never** run from a vague command (preview + `YES` + Gev authority required, per D0/§8). Bro recommends the next safe
+command, explains consequences, and **STOPs if scope is ambiguous** (D0). Every run → a log entry (§13A); every critical
+write → snapshot + change-request (§13A).
+**Command-library schema (one maintained entry per command):**
+```txt
+name · purpose · category(READ-ONLY|CRITICAL) · required_inputs · safe_default · criticality(LOW|MED|HIGH|CRITICAL) ·
+requires_gev(YES|NO) · mode(READ|WRITE) · files_affected · preview_shown · rollback_backup · report_format ·
+availability(CLEAN-BUILD | PHASE N+ | RUNTIME | FUTURE) · backing(script/hook — contract only, no code in spec)
+```
+Full schema, the ~16 starter commands, and the drafted preview wording live in roadmap §4/§5. The palette is a
+**Phase-1** deliverable of the clean SuperBro build (§17).
+
+**HY** — Super Bro-ի **operator-ի control մակերեսը** — **պարտադիր pre-build scope** (կառուցվում է ցանկացած project
+registration/install flow-ից ու Project Bro rollout-ից առաջ; Գևը command չի անգիր անում)։ Վարք՝
+**menu → required input հավաք → preview (ինչ · ուր · scope · ֆայլ · authority · rollback) → բացահայտ `YES` → run**։
+**Default read-only։** **Critical action-ները gated են** — build/push/migrate/delete/release/promote/project-creation
+**երբեք** vague command-ից (preview + `YES` + Gev authority, D0/§8)։ Bro-ն առաջարկում է հաջորդ ապահով command-ը,
+բացատրում հետևանքները, ու **STOP երբ scope-ը երկիմաստ է** (D0)։ Ամ. run → log entry (§13A); ամ. critical write →
+snapshot + change-request։ **Command-library schema-ն** (ամ. command = մեկ պահվող entry)՝ վերևի դաշտերով; լրիվ schema +
+~16 starter command + preview բառերը՝ roadmap §4/§5-ում։ Palette-ը մաքուր build-ի **Phase-1** deliverable է (§17)։
 
 ## 7. Manifest, Skill Registry, Agent Contracts
 - **`bro.manifest.json`** per `X/bro` — `bro_id · project_id · spine_version · skills_manifest_version ·
@@ -314,31 +357,77 @@ All other critical actions still require separate Gev command.
 · `self/` · roster; path is **portable / Gev-approved per §15/D3**, not hardcoded law).
 Role named "Super Bro" in the spec; **path stays `Desktop\Bro`** for stability (no second `Desktop\SuperBro` in
 Phase 0; controlled rename only if Gev later decides). Adds (on BUILD): `memory/_own` (registry · sync-log · audit-log · release-log · health-dashboard ·
-failure-registry · authority-log · hook-blocks.log) · `memory/supermemory/{EP,DB,GAA}` (sealed mirrors) ·
-`memory/_quarantine` · `tools/` (scripts) · `spine/RELEASES/` · `change-requests/` · `_before/` (snapshots).
+failure-registry · authority-log · hook-blocks.log) · `memory/supermemory/` (sealed mirrors — **root-only/EMPTY in clean
+build; per-project `{EP,DB,GAA}` mirror dirs are FUTURE, created at registration; see R-C/§5**) ·
+`memory/_quarantine` · `tools/` (scripts) · `spine/RELEASES/` (**physical layout per OD-6 §18**) · `change-requests/` · `_before/` (snapshots).
 Each `X/bro` (in its own project): `spine/` (local copy) · `memory/` · **`logs/`** (session · action ·
 memory-write · local-audit · hook-blocks · errors) · `bro.manifest.json` · `health.report.md`.
 
-## 17. Build Sequence (phased — NOT greenfield, refinements #2/#5)
-**Phase 0 — Load-bearing core, PILOT = EP only.**
-- **First step = inventory / migration map** (refinement #2): map the CURRENT reality → the new model — `Desktop\Bro`
-  (`_core` · `skills` · `self` · roster) · the harness auto-memory (`.claude/projects/…`) · `Desktop\EP\memory` ·
-  DB memory · GAA memory — decide what goes where **before** moving anything.
-- Build: filesystem boundaries · `bro.manifest.json` (EP) · Super Bro folder skeleton at `Desktop\Bro` ·
-  `bro doctor` script · spine_version check · memory-boundary check · **stale-write block hook** · **spine-write
-  gate hook** · SessionStart pre-flight hook · read-only audit report.
-- **Success criteria (must be PROVEN, not assumed):** EP passes doctor · a stale Bro **cannot** write/build/lock
-  (hook blocks it, demonstrated) · EP Bro **cannot** read another project's memory (hook blocks it) · audit
-  reports without writing · manifest is real and checked.
-- **Gate:** EP Phase-0 GREEN → only then generalize to DB / GAA / IP.
+## 17. Build Sequence (phased — NOT greenfield) · 🔄 RECONCILED to clean SuperBro (2026-06-29)
+> **🔄 SUPERSEDED 2026-06-29 (clean-build correction, roadmap §2):** the original Phase-0 wording — *"Phase 0 —
+> Load-bearing core, PILOT = EP only … first step = inventory/migration map of `Desktop\EP\memory` · DB · GAA memory …
+> Gate: EP Phase-0 GREEN → generalize to DB/GAA/IP"* (and the old 3-phase plan) — is **superseded**. First build =
+> **clean SuperBro ONLY**, zero project touched; the EP/DB/GAA inventory/migration map and all Project Bro installs move
+> to the later **Project Rollout** phase, behind explicit Gev approval. Old wording recorded here (not deleted) for
+> history. / **🔄 ԳԵՐԱԿԱՅՎԱԾ 2026-06-29:** սկզբնական «Phase 0 = EP pilot + EP/DB/GAA inventory map»-ն ու հին 3-phase-ը
+> **գերակայվում են**։ Առաջին build = **միայն մաքուր SuperBro**, զրո project դիպած; inventory-ն ու Project Bro install-ները
+> գնում են հետագա **Project Rollout** phase, բացահայտ Գևի հաստատման հետևում։ Հին wording-ը պահված է պատմության համար։
 
-**Phase 1 — Drift / Skill / Routing:** drift detector · skill registry + hash checks · agent contracts · routing
-eval harness · memory-leak tests. Success: missing/stale skill detected · wrong routing detected · cross-memory marker detected.
+**EN — Clean SuperBro build = 5 gated phases. No phase auto-advances; each needs Gev's explicit command; NO project
+folder is read or written in any of them.**
 
-**Phase 2 — Release / Promotion / Failure Learning:** spine release system · promotion-gate workflow · release
-notes · failure registry · regression-test candidates · full health snapshot. Success: a spine release can be
-published · a project Bro can pull/verify/stamp · a project lesson cannot become spine law without approval ·
-a failure creates a registry entry.
+**Phase 0 — Foundation & Authority (clean SuperBro skeleton).** SuperBro folder skeleton at `BRO_HOME` (`memory/_own` ·
+empty `supermemory/` · `_quarantine` · `tools/` · `spine/RELEASES/` · `change-requests/` · `_before/` · `logs/`) ·
+SuperBro `bro.manifest.json` · §15 authority verified. **Bootstrap = Gev's direct approval (pre-palette — the palette /
+`START BUILD` do not exist yet).** Success (PROVEN): doctor GREEN on skeleton · manifest real & validated · `_own` holds
+registry/logs only (drift = zero project content) · **no project folder touched.** Gate → Gev → Phase 1.
+
+**Phase 1 — Guided Command / Command Palette + Command Library (§6B / D10).** Palette runner + command-library catalog;
+read-only commands live; critical/future commands defined + preview-wired (execution gated). Success: read-only commands
+run via the palette · a critical command shows preview and **refuses without `YES`** · no vague command triggers a
+critical action. Gate → Gev → Phase 2.
+
+**Phase 2 — Enforcement + Evidence + Doctor/Audit (PROVEN — the keystone, §11/D5).** Install the structural hooks (§11) ·
+append-only evidence logs (§13A) · doctor/audit/health/spine-check scripts (§14). Success (PROVEN): a forbidden write is
+**demonstrated blocked** (exit code) · a log Edit/delete is blocked · SessionStart pre-flight prints · audit reports
+**without writing** · timestamps script-generated. Gate → Gev → Phase 3.
+
+**Phase 3 — Registry + Project Bro Template + Rollout Commands (design/dry — NO install).** Registry system live (metadata
+only) · Project Bro template specified · rollout commands wired with preview→`YES` in **dry/preview mode** — **no project
+installed, no project folder touched.** Success: registry validated by doctor · REGISTER/INSTALL previews execute nothing
+· drift confirms `_own` has no project content. Gate → Gev → Phase 4.
+
+**Phase 4 — Spine Release / Update System + Promotion Gate.** Spine release publish + pull/verify/stamp procedure +
+promotion-gate workflow (§10). Success: a release can be cut (Gev-gated, logged) · pull/verify/stamp specified &
+testable · promotion gate **blocks** unapproved spine entry. Gate → Gev declares **clean SuperBro GREEN** → clean build complete.
+
+**Postponed — explicitly NOT in the clean SuperBro build (later phases, separate Gev commands, behind palette + preview +
+`YES`):** Project Bro installs (EP/DB/GAA/IP) **and** the EP/DB/GAA inventory/migration map · Discovery Bank physical
+promotion (§17C) · cross-project mode activation (§9) · spine v2 content · project memory migration. **No project folder
+is read or written before explicit Gev approval.**
+
+> **Mapping (old → new):** the old Phase 1 (drift / skill-registry / agent-contracts / routing-eval / memory-leak) and
+> old Phase 2 (release / promotion / failure-learning) fold into **new Phase 2** (enforcement + doctor/audit incl. drift),
+> **new Phase 4** (spine release + promotion gate + failure registry), and the **Project Rollout** phase (skill/agent/
+> routing parity needs *installed* Project Bros). / **Քարտեզ (հին → նոր):** հին Phase 1-ն ու Phase 2-ը մտնում են նոր
+> Phase 2, Phase 4, ու Project Rollout (parity-test-երը պահանջում են installed Project Bro)։
+
+**HY — Մաքուր SuperBro build = 5 gated phase. Ոչ մի phase ինքն իրեն չի առաջ գնում; ամ. մեկը՝ Գևի բացահայտ հրաման; ոչ
+մի project folder չի կարդացվում/գրվում:**
+- **Phase 0 — Foundation & Authority:** SuperBro skeleton (`memory/_own` · դատարկ `supermemory/` · `_quarantine` ·
+  `tools/` · `spine/RELEASES/` · `change-requests/` · `_before/` · `logs/`) + manifest + §15 authority։ Bootstrap = Գևի
+  ուղիղ հաստատում (pre-palette)։ Success՝ doctor GREEN, manifest real, `_own` = միայն registry/logs, **ոչ project դիպած**։
+- **Phase 1 — Command Palette + Library (§6B/D10):** read-only command-ները live, critical-ը preview + **`YES`-ից
+  առանց մերժում**։
+- **Phase 2 — Enforcement + Evidence + Doctor/Audit (ԱՊԱՑՈՒՑՎԱԾ, §11/D5):** hook-եր + append-only log + script-եր։
+  Success՝ արգելված write **ապացուցված block**, log edit block, SessionStart pre-flight, audit առանց write։
+- **Phase 3 — Registry + Template + Rollout (dry, ՈՉ install):** registry (միայն metadata) + template + rollout
+  preview-ներ՝ ոչինչ չկատարող, **ոչ project դիպած**։
+- **Phase 4 — Spine Release + Promotion Gate:** publish + pull/verify/stamp + promotion gate։ Gate՝ Գևը հայտարարում է
+  **clean SuperBro GREEN**։
+- **Հետաձգված (ՈՉ մաքուր build-ում, palette + preview + `YES`-ի հետևում):** Project Bro install-եր + EP/DB/GAA inventory
+  map · Discovery Bank promotion · cross-project mode · spine v2 · memory migration։ **Ոչ մի project folder չի
+  կարդացվում/գրվում առանց բացահայտ Գևի հաստատման։**
 
 ## 17A. D8 — Discovery-to-Build Operating Loop  (behavioral/process — support layer, not a structural wall)
 **Bro must NOT jump from request → build.** Mandatory loop: **Understand → Discover → Propose → Verify → Build** —
@@ -366,7 +455,9 @@ the spine (Promotion Gate → spine release) so it is **local to each Bro** (`�
 DB/GAA/IP Bros use their **local spine copy**; they must **never** read EP's copy (cross-project access = B4
 violation). *(The generic bank originated as an EP-area artifact; promoting the generic version to the spine is the fix.)*
 - **Status now:** designated spine-level; **physical promotion/copy is a BUILD-time action gated on Gev — NOT done
-  yet.** Until promoted, do not wire any Bro to read EP's copy.
+  yet.** 🔄 **Reconciled (Item 6): physical promotion is explicitly NOT part of the clean SuperBro build — it is a later,
+  separate Gev-gated step (§17 Postponed).** Until promoted, do not wire any Bro to read EP's copy. / 🔄 **Հաշտեցված.**
+  ֆիզիկական promotion-ը **բացահայտ ՉԻ մաքուր SuperBro build-ի մաս** — հետագա, առանձին Gev-gated քայլ է (§17 Postponed)։
 - **Usage (D8 step 4):** for every non-trivial task, **select the relevant subset** and ask only necessary questions;
   **never dump the full bank**; propose likely answer options where possible (D9).
 - **Topic → subset (examples):** architecture/memory/security → Framework-Altitude · Purpose · Core-Concepts · RBAC ·
@@ -377,16 +468,19 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 - **Final Discovery Gate (before build):** WHAT · WHY · HOW · WHAT-IF found? · gaps closed? · risks listed? · open
   decisions listed? · Gev approved? · build explicitly authorized?
 
-## 18. Decisions D0–D9 (Gev-approved; final LOCK pending Gev on BUILD)
+## 18. Decisions D0–D10 (Gev-approved; final LOCK pending Gev on BUILD)
 - **D0 Gev Root Authority** — ACCEPT (mandatory, top).
-- **D1 Spine Model** — ACCEPT (physical copy + versioning; canonical = `Desktop\Bro/spine`; pull/verify/stamp).
+- **D1 Spine Model** — ACCEPT (physical copy + versioning; canonical spine at `BRO_HOME` — **physical layout OPEN per OD-6 §18**; pull/verify/stamp).
 - **D2 Memory Classification + Promotion Gate** — ACCEPT (3 types; project memory never becomes spine law without Gev).
 - **D3 Authority — Portable BRO_HOME** — ACCEPT (§15). Super Bro authority = the **Gev-approved `BRO_HOME`** (current
   root; e.g. `Desktop\Bro`), **not** a hardcoded machine/path. First-run register = **YES + Gev Authority Passphrase**
   (hash-only, never logged in plaintext); **bootstrap-only**; BRO_HOME/authority change = critical action + `authority-log.md`.
 - **D4 Sync Trigger** — ACCEPT (manual sync + periodic read-only audit; audit flags only, never fixes/moves).
 - **D5 Enforcement Split** — ACCEPT (critical no-bypass is structural: hooks + filesystem + scripts + exit codes; markdown = support).
-- **D6 Build Sequence** — ACCEPT (phased: Phase 0 core → Phase 1 tests → Phase 2 release/promotion/failure).
+- **D6 Build Sequence** — ACCEPT, 🔄 RECONCILED to the **clean SuperBro 5-phase** plan (§17): Phase 0 Foundation → 1
+  Command Palette → 2 Enforcement/Evidence/Doctor (proof) → 3 Registry/Template/Rollout-dry → 4 Spine-Release/Promotion.
+  **Phase 0 = clean SuperBro only (no EP pilot, no project touched); Project Bro installs postponed to a later Project
+  Rollout phase.** (Old 3-phase / EP-pilot wording superseded — see §17 note.)
 - **D7 Logging / Evidence Layer** — ACCEPT (§13A). Every critical action → an **append-only** log entry; logs
   are **evidence, not memory**; project-local + Super Bro operational logs; standard schema; **timestamps/
   session_id script-generated (no fabrication)**; append-only **hook-enforced**; evidence-logs git-tracked;
@@ -397,6 +491,13 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
   + risks, then recommend; no single-path bias. Behavioral.
 - **Push policy (§8A)** — ACCEPT. PUSH = critical action for the **Bro governance repo** (Gev-command only); the
   **GAA push delegation (2026-06-25) remains a scoped exception** until Gev changes it — not a universal rule.
+- **D10 Guided Command / Command Palette** — ACCEPT (§6B). 🔄 Added 2026-06-29 from the roadmap's held requirement:
+  Super Bro's operator-facing control layer (menu → preview → explicit `YES` → run; default read-only; critical actions
+  gated; command-library maintained) is **mandatory pre-build scope**, built before any project registration/install flow.
+- **OD-6 Spine physical layout** — 🟡 OPEN (recommendation-only; decided later by Gev): **Option A** spine = the existing
+  `BRO_HOME` root dirs (`_core/ skills/ self/ roster/`), `RELEASES/` stores **packaged release cuts only**; **Option B**
+  introduce a real top-level `spine/` tree holding spine content + releases. *Bro recommends **Option A** (least movement,
+  preserves the proven layout, "not greenfield"); final call = Gev at build time.*
 
 ## 19. The 6 Bro refinements (Gev-approved — folded in above)
 1. **Enforcement = Claude Code hooks** named concretely (settings.json · PreToolUse · SessionStart · real
@@ -405,7 +506,9 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 3. **Super Bro = role + scripts + Claude session, NOT a daemon**; health = snapshot, not live service. (§2)
 4. **SessionStart pre-flight** (structural) prints project · allowed memory · forbidden paths · spine version ·
    critical-needs-Gev · cross-project OFF. (§11)
-5. **Phase 0 pilot = EP only**; after EP GREEN → generalize to DB/GAA/IP. (§17)
+5. ~~**Phase 0 pilot = EP only**; after EP GREEN → generalize to DB/GAA/IP.~~ 🔄 **SUPERSEDED 2026-06-29 (clean-build
+   correction, roadmap §2):** Phase 0 = **clean SuperBro only** (no EP pilot, no project touched); EP/DB/GAA/IP Project
+   Bro installs move to a later **Project Rollout** phase, behind explicit Gev approval. (§17)
 6. **Home = current `BRO_HOME`** (today `Desktop\Bro`; **portable / Gev-approved per §15/D3**, not hardcoded; no new `Desktop\SuperBro` in Phase 0). (§16)
 
 ## 20. Final Verification Checklist (before v1 is "ready to build")
@@ -415,7 +518,7 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 [ ] Super Bro = factory/vault, not mixed memory.      [ ] Skill registry defined.
 [ ] Project Bro can't access another project memory.  [ ] Agent contracts defined.
 [ ] supermemory folders isolated.                     [ ] Critical gates split structural vs behavioral.
-[ ] Audit is read-only.                               [ ] Phase 0 scope clear (pilot = EP).
+[ ] Audit is read-only.                               [ ] Phase 0 scope clear (clean SuperBro only; project pilots postponed).
 [ ] Quarantine move requires Gev command.             [ ] Doctor planned as REAL script, not markdown.
 [ ] Cross-project mode requires Gev command.          [ ] Stale Bro rule exists.
 [ ] Promotion Gate exists.                             [ ] Failure registry exists (first entry filed).
@@ -427,7 +530,11 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 [ ] Discovery Bank = spine-level, domain-agnostic, local-via-spine; select-subset (never dump); never read from EP.
 [ ] PUSH = critical action (Bro repo); GAA push delegation = scoped existing exception.
 [ ] D3 Authority = portable Gev-approved BRO_HOME (not hardcoded machine/path); first-run = YES + passphrase (hash-only).
-[ ] Verification checklist covers D0–D9.
+[ ] D10 Command Palette = mandatory pre-build (menu→preview→YES→run; default read-only; critical gated; command-library).
+[ ] Clean SuperBro build = 5 phases; Phase 0 = clean SuperBro only; NO project folder touch before explicit Gev approval.
+[ ] Project Bro installs + Discovery Bank physical promotion = postponed to later Project Rollout (not in clean build).
+[ ] OD-6 spine physical layout = OPEN (Option A/B; Bro recommends A; Gev decides at build).
+[ ] Verification checklist covers D0–D10.
 ```
 
 ## 21. Final formula
