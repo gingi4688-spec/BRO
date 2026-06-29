@@ -35,3 +35,12 @@
 - **`templates/project-bro/`** — the install copy-source skeleton (manifest+health templates with `<PLACEHOLDER>` tokens; empty `memory/ spine/ logs/`). Nothing here is an installed Bro. Full contract: `_core/PROJECT_BRO_TEMPLATE.md`. / install copy-source.
 
 > **DRY model:** rollout commands are palette-wired (preview→YES) but **execute nothing** in the clean build — even on YES, no project is registered, no Project Bro is created, no project folder is touched. Real execution is a later, Gev-gated Rollout step (requires `BRO_GEV_APPROVED=1` + Gev command). / Rollout-ները palette-wired են (preview→YES) բայց **ոչինչ չեն կատարում**; real execution-ը հետագա Gev-gated Rollout է։
+
+### Phase 4 — Spine Release / Update System + Promotion Gate (§6A Flow 2 / §9 / §10)
+- **`bro-release.ps1`** — cut a versioned, hash-verified spine release (manifest + payload + sha256). CRITICAL, Gev-gated. **OD-5: real cut into `spine/RELEASES/` is DEFERRED** — use `-Sandbox <dir>` to TEST the mechanism without touching `spine/RELEASES/` (stays empty). / release cut (sandbox-testable).
+- **`bro-spine-verify.ps1`** — recompute every payload file's sha256 vs the manifest + rollup; **REJECT on any mismatch** (no blind copy/sync). / hash verify.
+- **`bro-spine-pull.ps1`** — copy a release payload into a target spine dir, then verify (a Bro's own pull; never forced, B6). / pull + verify.
+- **`bro-spine-stamp.ps1`** — on VERIFIED, stamp `spine_version` into the target manifest. / stamp.
+- **`bro-promote.ps1`** — **Promotion Gate**: BLOCKS unapproved candidates and project-specific candidates (altitude); only a generic, Gev-approved rule passes (dry — no spine write in the clean build). / promotion gate.
+
+> **OD-5/OD-6 honored:** the release mechanism is built and **testable only in a sandbox**; `spine/RELEASES/` stays empty (no `v1.0.0` cut); the live spine stays at the BRO_HOME root dirs. A real cut is a separate, explicit Gev command. / Release mechanism-ը testable է **միայն sandbox-ում**; `spine/RELEASES/`-ը դատարկ; live spine-ը root-ում; real cut-ը առանձին Gev հրաման է։

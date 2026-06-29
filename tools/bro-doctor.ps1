@@ -125,6 +125,17 @@ if ($libOk) {
   Check ($dryMissing.Count -eq 0) "PHASE-3-DRY rollout commands have dry backing scripts" "missing dry backings: $($dryMissing.Count)"
 }
 ""
+"[9] Phase 4 - Spine Release / Update System + Promotion Gate"
+$p4files = @(
+  '_core/RELEASE_MANIFEST_SCHEMA.md','_core/PROMOTION_GATE.md',
+  'tools/bro-release.ps1','tools/bro-spine-verify.ps1','tools/bro-spine-stamp.ps1','tools/bro-spine-pull.ps1','tools/bro-promote.ps1'
+)
+foreach ($f in $p4files) { Check (Test-Path $f) "$f" "MISSING: $f" }
+# OD-5: spine/RELEASES must be empty AND contain no cut version dirs (no real release artifact)
+$relDirs = @(Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue)
+$relFiles2 = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
+Check (($relDirs.Count -eq 0) -and ($relFiles2.Count -eq 0)) "spine/RELEASES empty - no cut, no version dir (OD-5)" "spine/RELEASES has artifacts (OD-5 violated): dirs=$($relDirs.Count) files=$($relFiles2.Count)"
+""
 $status = 'GREEN'; $code = 0
 if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }
 elseif ($script:warn.Count -gt 0) { $status = 'YELLOW'; $code = 1 }

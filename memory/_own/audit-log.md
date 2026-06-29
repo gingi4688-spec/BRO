@@ -61,3 +61,18 @@ result: GREEN
 files_changed: Phase 3 deliverables (listed in the Phase 3 commit)
 notes: registry validated + EMPTY (projects:[], sha256 unchanged across dry runs); REGISTER/INSTALL/UPDATE dry-run executed nothing; B4 forbidden cross-project path REFUSED (exit 3); Project Bro template + tools/templates/project-bro skeleton added; palette wires PHASE-3-DRY rollout to dry backings; no project touch, no Project Bro, no real registration. Note: live critical-command-gate blocked an unflagged critical-script invocation this session (R-1 proof).
 ```
+
+## Entry 5 - Phase 4 build: spine release + promotion gate
+```txt
+timestamp: 2026-06-29T08:14:43+04:00
+actor: Bro
+session_id: BRO-20260629-081443
+event: PHASE_BUILD
+action: BUILD_AND_PROVE
+target: SuperBro self
+source_command: Gev: BUILD PHASES 1-4
+authority: Gev-command
+result: GREEN
+files_changed: Phase 4 deliverables (listed in the Phase 4 commit)
+notes: Promotion Gate: unapproved BLOCKED (exit3), project-specific BLOCKED altitude (exit3), generic+approved PASSED dry (exit0). Release: defer BLOCKED (exit3), sandbox cut+verify+pull+stamp OK, tamper REJECTED. spine/RELEASES empty (0). doctor GREEN. No v1.0.0 cut, no project touch, no push.
+```

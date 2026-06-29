@@ -13,10 +13,10 @@
   "bro_home": "C:\\Users\\Admin\\Desktop\\Bro",
   "machine_name": "DESKTOP-3SNK3IJ",
   "last_memory_sync": "n/a",
-  "last_audit": "2026-06-29T08:06:45+04:00",
+  "last_audit": "2026-06-29T08:14:43+04:00",
   "status": "GREEN",
-  "phase": "phase-3-registry",
+  "phase": "phase-4-release",
   "built_at": "2026-06-29T07:14:32+04:00",
-  "note_en": "Clean SuperBro build. Phase 3 = registry system live (metadata only, projects:[] empty) + Project Bro template (tools/templates/project-bro + _core/PROJECT_BRO_TEMPLATE.md) + rollout DRY-RUN commands (bro-register/install/update-spine) palette-wired but executing NOTHING. No Project Bro created, no real project registered, no project folder touched. spine_version is a STATE label (OD-5). Hashes are real SHA-256 (no fabrication).",
-  "note_hy": "Մաքուր SuperBro build. Phase 3 = registry live (միայն metadata, projects:[] դատարկ) + Project Bro template + rollout DRY-RUN command-ներ (bro-register/install/update-spine) palette-wired բայց ՈՉԻՆՉ չկատարող։ Ոչ Project Bro, ոչ real register, ոչ project touch։ spine_version = STATE label (OD-5)։ Hash-երը real SHA-256 (ոչ fabrication)։"
+  "note_en": "Clean SuperBro build COMPLETE (Phases 0-4). Phase 4 = Spine Release / Update System + Promotion Gate: bro-release (sandbox-testable cut), bro-spine-verify/pull/stamp (pull->verify->stamp), bro-promote (Promotion Gate blocks unapproved + project-specific candidates). OD-5 honored: NO v1.0.0 cut, spine/RELEASES/ stays empty (mechanism tested in sandbox only). OD-6: live spine at root. spine_version is a STATE label, not a packaged release. Hashes are real SHA-256 (no fabrication). No project touched, no Project Bro, no real registration, no Discovery Bank move, no migration, no push.",
+  "note_hy": "Մաքուր SuperBro build ԱՎԱՐՏ (Phase 0-4)։ Phase 4 = Spine Release / Update System + Promotion Gate՝ bro-release (sandbox-testable cut), bro-spine-verify/pull/stamp, bro-promote (Promotion Gate-ը block է unapproved + project-specific candidate-ները)։ OD-5՝ ՈՉ v1.0.0 cut, spine/RELEASES/ դատարկ (mechanism-ը միայն sandbox-ում tested)։ OD-6՝ live spine root-ում։ spine_version = STATE label։ Hash-երը real SHA-256 (ոչ fabrication)։ Ոչ project touch, ոչ Project Bro, ոչ real register, ոչ Discovery Bank շարժ, ոչ migration, ոչ push։"
 }
