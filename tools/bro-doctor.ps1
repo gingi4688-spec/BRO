@@ -159,7 +159,8 @@ foreach ($rd in $relDirs) {
 }
 ""
 "[10] Git state (dirty-tree) - fail-closed posture"
-$porcelain = $null; try { $porcelain = @(& git status --porcelain 2>$null) } catch {}
+# exclude the generated health snapshot (overwrite-on-every-run derived artifact, not uncommitted 'work')
+$porcelain = $null; try { $porcelain = @(& git status --porcelain 2>$null | Where-Object { $_ -notmatch 'health-dashboard\.md' }) } catch {}
 if ($null -eq $porcelain) {
   Check $false "" "git state UNKNOWN (git unavailable) - cannot confirm a clean tree" -Warn
 } elseif ($porcelain.Count -eq 0) {
