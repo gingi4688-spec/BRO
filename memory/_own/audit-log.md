@@ -136,3 +136,18 @@ result: GREEN
 files_changed: none
 notes: scope=EP_only status=INSTALLED spine=v1.0.0 hashes=392/392
 ```
+
+## EP/BRO AUTONOMOUS ENFORCEMENT INSTALLED (Beast Gate 3)
+```txt
+timestamp: 2026-06-29T09:59:59+04:00
+actor: Bro
+session_id: BRO-20260629-095959
+event: EP_ENFORCEMENT_INSTALLED
+action: INSTALL_PROJECT_HOOKS
+target: C:\Users\Admin\Desktop\EP\bro (outside SuperBro repo)
+source_command: Gev: BEAST HARDENING PHASE
+authority: Gev-command
+result: GREEN
+files_changed: EP/bro/.claude/settings.json + EP/bro/tools/hooks/{4 guards} + EP/bro/logs/hook-blocks.md (NOT in SuperBro repo)
+notes: EP-local wall: home=EP/bro scope=EP_only; EP guards proven 6/6 (write EP\memory BLOCK, write EP\bro\memory ALLOW, write DB BLOCK, read DB BLOCK, read own EP memory ALLOW, git push BLOCK). SuperBro wall NOT weakened: tools/hooks 0 files changed; DB+EP\memory writes still BLOCK, EP\bro ALLOW (registered), reads BLOCK. Desktop\EP\memory NOT touched. EP+SuperBro doctor/audit GREEN.
+```
