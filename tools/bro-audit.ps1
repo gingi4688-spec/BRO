@@ -61,8 +61,11 @@ Chk ($regCount -eq 0) "registry empty (clean build: 0 projects)" "registry has $
 ""
 "[D] Drift / boundary (read-only)"
 foreach ($d in @('_core','skills','self','roster')) { Chk (Test-Path $d -PathType Container) "live spine present: $d/" "spine drift: missing $d/" 'SPINE_STALE' }
-$rel = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
-Chk ($rel.Count -eq 0) "RELEASES empty (OD-5)" "RELEASES not empty (OD-5)" 'SPINE_STALE'
+$relStray = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
+Chk ($relStray.Count -eq 0) "no stray files in spine/RELEASES" "stray files in RELEASES: $($relStray.Count)" 'SPINE_STALE'
+$relDirsA = @(Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue)
+$relBadA = @($relDirsA | Where-Object { -not (Test-Path (Join-Path $_.FullName 'release.manifest.json')) })
+Chk ($relBadA.Count -eq 0) "RELEASES dirs are well-formed releases (count=$($relDirsA.Count))" "malformed release dirs: $($relBadA.Count)" 'SPINE_STALE'
 # supermemory: the clean build creates NO new per-project mirror; GAAhex is a pre-existing SEALED read-only
 # evidence mirror (bootstrap; spec §5) and is whitelisted. Warn ONLY on an unexpected (non-sealed) mirror dir.
 $smKnownSealed = @('GAAhex')

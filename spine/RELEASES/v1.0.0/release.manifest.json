@@ -1,0 +1,1586 @@
+{
+  "schema_version": "v1",
+  "version": "v1.0.0",
+  "created_at": "2026-06-29T09:24:44+04:00",
+  "mode": "RELEASE",
+  "spine_dirs": [
+    "_core",
+    "skills",
+    "self",
+    "roster"
+  ],
+  "files": [
+    {
+      "path": "_core/BRO_CLEAN_SUPERBRO_BUILD_ROADMAP.md",
+      "sha256": "455e7e22a2e77089732cb448431c0d1c9a82806ee956402b2d1eb10e6dc850f9"
+    },
+    {
+      "path": "_core/BRO_MEMORY_SKILL_ARCHITECTURE_v1.md",
+      "sha256": "ab02c76052ba84b85fd52f4ddb0f9ab395a0885153ec55d81f996e8e6bf0fa99"
+    },
+    {
+      "path": "_core/COMMAND_LIBRARY.md",
+      "sha256": "c76a5c8b02967dc85fc8f6e8851c2257a93b8eaace836a8c40497d1c819a54c9"
+    },
+    {
+      "path": "_core/EP_PILOT_ASSUMPTIONS.md",
+      "sha256": "1338ccd2c8adaf025b05f108edea756fb0fbba5abe21f1353568fd850dea8eb8"
+    },
+    {
+      "path": "_core/PROJECT_BRO_TEMPLATE.md",
+      "sha256": "fc076f41c62ace5a51e725996ffaaa8b41ca3abd7e30f72bdf7742c22bae79da"
+    },
+    {
+      "path": "_core/PROMOTION_GATE.md",
+      "sha256": "80021d21862c364ba0a039d9cbae421f5021ceae0101a9a9aa10fd66bdd4040e"
+    },
+    {
+      "path": "_core/RELEASE_MANIFEST_SCHEMA.md",
+      "sha256": "bf07f4ed9fb7c14ebdf91eebb88c12b03ea6b3c7ff2567c7b47ea2eff005caad"
+    },
+    {
+      "path": "_core/behavior/human_behavior.md",
+      "sha256": "6682f04366e7ec05d17fada15b0be01e404991aafe2efebacf56b7c6ce4cfe33"
+    },
+    {
+      "path": "_core/laws/00_inviolable.md",
+      "sha256": "25ddb4afb759b6b405ccd5f97bb6b9ead83b89e757e5e9afa516996b6d25392c"
+    },
+    {
+      "path": "_core/laws/01_covenant.md",
+      "sha256": "205a26ecb1691673034fd4b7d504f235941bb1ae09a2c65758ed5c12697297f1"
+    },
+    {
+      "path": "_core/laws/02_architecture.md",
+      "sha256": "d5389408d99bd45ff50e1784e01feffb5254c6d329332391079cc62620034a1b"
+    },
+    {
+      "path": "_core/laws/03_data.md",
+      "sha256": "eee7877122175e7e9c6408f3f9fb30411360c510b8ea5a51da448c6a3648ed09"
+    },
+    {
+      "path": "_core/laws/04_security.md",
+      "sha256": "82653194755b85e1dabcf3d42cede3fde5af92c751e493f6fb219966317155a2"
+    },
+    {
+      "path": "_core/laws/05_memory_isolation.md",
+      "sha256": "83f5754f3e766e47d15cbd02809319dc1924d27815b08b9a4323c92b2e12de83"
+    },
+    {
+      "path": "skills/AUDIT_NOTES.md",
+      "sha256": "e004f2aa0f66c4a61e4a5208b585aaa8114fa3c5b0e35e8b0ca2443075af4734"
+    },
+    {
+      "path": "skills/index.md",
+      "sha256": "bf8928c2d43cfd23867b5378baa2aecd372e5b86db2a44e39495ab998d065172"
+    },
+    {
+      "path": "skills/learning_plan.md",
+      "sha256": "9f1482fb865d5dcf21bb3fc5eacf03bb14d3faadb3c34224655fd045129801a4"
+    },
+    {
+      "path": "skills/README.md",
+      "sha256": "07c74f00452ac74a5493b86e1440823828a5070c4b8f780f22eb058ed0225bd4"
+    },
+    {
+      "path": "skills/VALIDATION_REPORT.md",
+      "sha256": "ea05e69a0ee57bb02b2c36de5a9abc1ee0286415f1b1ba36ed54d3dc039f9cf6"
+    },
+    {
+      "path": "skills/agents/orchestrator.md",
+      "sha256": "ff0c44fa3697e9a9df83e5daf293d2e4ad19a00fa395592f1ea8f07e1eaf7616"
+    },
+    {
+      "path": "skills/agents/README.md",
+      "sha256": "52a58d106d39751ea712523d2842987adf99f9ee3b2cee26ea77c12ffa90ed63"
+    },
+    {
+      "path": "skills/agents/ROUTING.md",
+      "sha256": "9e00629e99d9f7248ac09ecc90d066cf365c33a356ad86f8596e244ff4c8f742"
+    },
+    {
+      "path": "skills/ai-agent-engineering/domain-rubric.md",
+      "sha256": "00887f5ea0fabbcec6f2a169963406c2d98b7a723ebb43f2355b342e3322c8ab"
+    },
+    {
+      "path": "skills/ai-agent-engineering/manual.md",
+      "sha256": "ec8a3d8ba089cf0f4000b1aed7047b1010b860bfe4fb1dcaa72ddddebdeaec5c"
+    },
+    {
+      "path": "skills/ai-agent-engineering/output-templates.md",
+      "sha256": "fea832d72899df2e5f75af412549d5b513a147662ef2ca5bb66339c3cb2625a3"
+    },
+    {
+      "path": "skills/ai-agent-engineering/OWNER_NOTES.md",
+      "sha256": "c8d6ac6d0d6f63ce856b6051dd935c5b05be5edf9b11a8318aa5310baa1ee896"
+    },
+    {
+      "path": "skills/ai-agent-engineering/patterns.md",
+      "sha256": "3c91af4c2647e639056ed7dacab9d287d5d048361e60d50d1d327b5fe9ac4f2b"
+    },
+    {
+      "path": "skills/ai-agent-engineering/red-team-gate.md",
+      "sha256": "80b63b599254fb527b617cd2b0a955853deda06dd77f26acba0bbb081e9c7cc7"
+    },
+    {
+      "path": "skills/ai-agent-engineering/SKILL.md",
+      "sha256": "7a2542515d5ec0cc3fdce24936bf3ec4c2789fd4f7db00200b48d7c082b6a59f"
+    },
+    {
+      "path": "skills/ai-agent-engineering/worked-example.md",
+      "sha256": "3c755b8a3386303a2b3c00665d14e1e1b6486b293a6af49095f099680c6ad931"
+    },
+    {
+      "path": "skills/ai-agent-engineering/agents/claude.md",
+      "sha256": "5120af987d7b9141048390b4ff4f76acdf08e27183edc54e80963771f476d9a3"
+    },
+    {
+      "path": "skills/ai-agent-engineering/tests/eval-prompts.md",
+      "sha256": "148a035097afb1ee65fd137ec9e125e4d706c72b326944561b1b26c0e24828f4"
+    },
+    {
+      "path": "skills/ai-agent-engineering/tests/red-team-prompts.md",
+      "sha256": "4f0fda2fbe24393b59151ecefa869fc7878960168c2a735e0922ddb53d5b20df"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/domain-rubric.md",
+      "sha256": "f2b3ca4833d8d90e9a7bba82c6efc6a0df64733905bf2efc211173bbdc3b0528"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/manual.md",
+      "sha256": "45cab30a54f8845c685c4b13282612d32c45aef65b06e480acb0e1d4298e5a2b"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/output-templates.md",
+      "sha256": "2f4aee573a80d15bb22a0e22f56b05a518169252c7a74dcbb610025458da0fed"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/OWNER_NOTES.md",
+      "sha256": "7d04bf6510460630608f02d5f06dd7eb142221f4c622d22570a345af5531062b"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/patterns.md",
+      "sha256": "3a2f29059692d1a4ce66b76afd50d02e8a7da81312a1baf9d35696000394cf42"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/red-team-gate.md",
+      "sha256": "30c5f63c71cf6ef2f3c36ed042e4318c200583b8f7714dcb4c02ac2fa4778195"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/SKILL.md",
+      "sha256": "97d308b823b8d60246881e94c158a605f11aa6b636e90d0f30737d9d0ba8c6b3"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/worked-example.md",
+      "sha256": "33fa8b09e47bf5b6d50007c7183b76daf922f651fd38e0895c275de0c5db7aa7"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/agents/claude.md",
+      "sha256": "b21c5ddbbeffc1cfa1226a6a520c972d2c50e1f5587e426417742523bba312d3"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/tests/eval-prompts.md",
+      "sha256": "95859011c14f939e001dceed7b6013d3580061494752e8259ca0bc33a58c1754"
+    },
+    {
+      "path": "skills/ai-ml-engineering-llmops/tests/red-team-prompts.md",
+      "sha256": "6f0baf40fe086fdb83e13c34a3fd04d92b7909ca8b1901b9d80869d117814385"
+    },
+    {
+      "path": "skills/analysis-primary/domain-rubric.md",
+      "sha256": "0b1b7e26c2212c96267ce624f0bd92ad3d539bc432006f403b28a1d9c4963bb5"
+    },
+    {
+      "path": "skills/analysis-primary/manual.md",
+      "sha256": "60f636e5f58bdd4a0eebc71eba50e6415d6241dc8c080a74f7d9397ed4a28318"
+    },
+    {
+      "path": "skills/analysis-primary/output-templates.md",
+      "sha256": "d83e4fb4ea5ddca7ffcdce42c19c60430e686163a4487bf5d44962a3d3575397"
+    },
+    {
+      "path": "skills/analysis-primary/OWNER_NOTES.md",
+      "sha256": "790506fd7254bf6f225b04ee56c6fe40d0e1062d1fe3c50888fc70f7f9838f0a"
+    },
+    {
+      "path": "skills/analysis-primary/patterns.md",
+      "sha256": "5638f61f86d884d84efa8b6e93e9558aa7b49c61913bc879b1c87bc5fce7e9d1"
+    },
+    {
+      "path": "skills/analysis-primary/red-team-gate.md",
+      "sha256": "d574887b5b82793223fff0b2847392e606d0677adcadbf054579a743ffaee19b"
+    },
+    {
+      "path": "skills/analysis-primary/SKILL.md",
+      "sha256": "9d2b162de0f25e11ee610f912b12c6ce6c535b4086eca0719a71eb6145496467"
+    },
+    {
+      "path": "skills/analysis-primary/worked-example.md",
+      "sha256": "7aad78b2ecd6ae6fa795ae30279fe470dc1a15961009d4313aedb8c764f3a323"
+    },
+    {
+      "path": "skills/analysis-primary/agents/claude.md",
+      "sha256": "d4c080be69132da5be9cd8dd6b20a0bcc278dad961a81c83fc8665735d49d09b"
+    },
+    {
+      "path": "skills/analysis-primary/tests/eval-prompts.md",
+      "sha256": "a54cda37b3952b5f237943b0788197713c13adca35734db84d6e11020e1780aa"
+    },
+    {
+      "path": "skills/analysis-primary/tests/red-team-prompts.md",
+      "sha256": "ba07fd652eeefec706e4b3ee33cd06c4c3a57b192510fa36156ad9854eab96d3"
+    },
+    {
+      "path": "skills/auditing/domain-rubric.md",
+      "sha256": "c752e9932edc68146b2e622fc10601e1c89f7fedee83cdbc281059f280ee7d29"
+    },
+    {
+      "path": "skills/auditing/manual.md",
+      "sha256": "aaf0a436e165ad8d9484373b205cecabbd255d9a3e37209106899d10b9588aed"
+    },
+    {
+      "path": "skills/auditing/output-templates.md",
+      "sha256": "5f5ce7fe9b704cfb5936f982c02675a2b590626dda979d38eef1cb5752cc0abf"
+    },
+    {
+      "path": "skills/auditing/OWNER_NOTES.md",
+      "sha256": "773ffe26981ee077ac0f2aa16b319cf7583b2de0e37824af5d17e8420e42ad6b"
+    },
+    {
+      "path": "skills/auditing/patterns.md",
+      "sha256": "c891dd6d198a3a0c809c6e8cc22856aea6979bf09b6d050990a17eaa12b46737"
+    },
+    {
+      "path": "skills/auditing/red-team-gate.md",
+      "sha256": "80ae7a70b194d897605e47f014c73b6a0c85de83555301a79ba46cecc6aa35b1"
+    },
+    {
+      "path": "skills/auditing/SKILL.md",
+      "sha256": "a3be2085be7d15f82e59fea8c137a59da0bf3ef312fc96be22d4f5b6c005f321"
+    },
+    {
+      "path": "skills/auditing/worked-example.md",
+      "sha256": "76d666d2e6313aec5095b8acec2432dd424f64896ef2c07c937bfd52eb087ad5"
+    },
+    {
+      "path": "skills/auditing/agents/claude.md",
+      "sha256": "80bdf1849b80e37590385f482e361a4cd7c92a18d96bf738e9b567f9eda7a468"
+    },
+    {
+      "path": "skills/auditing/tests/eval-prompts.md",
+      "sha256": "2256f7064cf9980386abd5fc46a84d69f0b1ef4941ca6e0660bc841a31d1d364"
+    },
+    {
+      "path": "skills/auditing/tests/red-team-prompts.md",
+      "sha256": "51ba640bcb95213064d66df00b3c5d4825f6e580c51a18252ca9d7232d0ed7a4"
+    },
+    {
+      "path": "skills/business-strategy-operations/domain-rubric.md",
+      "sha256": "f89740364a2ee011634d9d5d98758c35709c445f1018ca110af8cf95dc1e7639"
+    },
+    {
+      "path": "skills/business-strategy-operations/manual.md",
+      "sha256": "c78f71ba22ccba19915f08de35c24d8208c5809a05b4859c64cc3dbcaa6763d2"
+    },
+    {
+      "path": "skills/business-strategy-operations/output-templates.md",
+      "sha256": "993e9240889e5ac2c816f628cc12ddde44c9192591321c6879e02baf1f99cfc7"
+    },
+    {
+      "path": "skills/business-strategy-operations/OWNER_NOTES.md",
+      "sha256": "12dd341b664aa4adb351f52e79434f0cb60abb90a8c4e0a722d360cd469ee2a5"
+    },
+    {
+      "path": "skills/business-strategy-operations/patterns.md",
+      "sha256": "520d7ec691289c29984c94fefb306de545b1c4926b0ac0786a5f6ada8a9da0e3"
+    },
+    {
+      "path": "skills/business-strategy-operations/red-team-gate.md",
+      "sha256": "8244bfeb3b8c8c5d02c3f51dc5514ff9a5dccab30d21358e1c56bed09b7716b7"
+    },
+    {
+      "path": "skills/business-strategy-operations/SKILL.md",
+      "sha256": "822da1246eeb12e3d1196b80963946f043375d26cb93be3fc58eb241bb22e942"
+    },
+    {
+      "path": "skills/business-strategy-operations/worked-example.md",
+      "sha256": "490b16bfac89eba22b2556e4ae48c9a4c98528dae1cba99b1e9174280764ef2b"
+    },
+    {
+      "path": "skills/business-strategy-operations/agents/claude.md",
+      "sha256": "b35ae213b4c5d1ab57becac0d55a94a55e8b738a820879b67fa3de29a6bb3c80"
+    },
+    {
+      "path": "skills/business-strategy-operations/tests/eval-prompts.md",
+      "sha256": "dc0656661713d3d6df1947746285a11695e9dd90d7cddb1a145798c38120e7b9"
+    },
+    {
+      "path": "skills/business-strategy-operations/tests/red-team-prompts.md",
+      "sha256": "c68472dd0517265210bff437d43d768a99c6d49bbc6ca64d08e43ef62c42744f"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/domain-rubric.md",
+      "sha256": "f0e3268fb541c49d81171106946bdf45345b1ca36a68011b865345b78ba2b1c3"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/manual.md",
+      "sha256": "e133b413153a7a57e36629cfbfd58dfb8147836ddd6d139ca7174ebd05644e22"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/output-templates.md",
+      "sha256": "a827f76d3c51fdeecd54b824bfdceff4430553c6cf72708ba892357d98b297e9"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/OWNER_NOTES.md",
+      "sha256": "da31f18a10fbced55ff2ad52d6b913e5541bb3fa2f4b8e7f623f8d26a443f542"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/patterns.md",
+      "sha256": "6b65e911e0f3adc6ede044f86d6b1622c9ca60b847fae67972e39b4e3d47bbed"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/red-team-gate.md",
+      "sha256": "ebe0f773af258011a0ad6489ecfbad51e99af6300ce5a26e2f635bfd31f68b33"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/SKILL.md",
+      "sha256": "2a09210619abaddef59e808f078bdb5a6a9f2cc38b796e34a3e91e03f099b3ca"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/worked-example.md",
+      "sha256": "0659d77fe2d9292627310f54828fb35d310bb04edcb0025dbd0ca30076d08e30"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/agents/claude.md",
+      "sha256": "8e9532f91bed5c069687a557ee8f1be4998dfea0e78c2535b3c712781aa335df"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/tests/eval-prompts.md",
+      "sha256": "c323d2c34ccb2a94cff0a9a758f00a576335f4dace55e2d2c2e087ba84ec3f84"
+    },
+    {
+      "path": "skills/communication-writing-negotiation/tests/red-team-prompts.md",
+      "sha256": "a23a3cdb9c1dbed0d1cfcafeef6fe277bfaaaf2d22cc87c0ee8a0e176b91feb1"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/domain-rubric.md",
+      "sha256": "51da86edd058d5a58c3d47469056148346ac4bb21cf9db8255dc1b08c748bc3d"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/manual.md",
+      "sha256": "df1b07743c8a70e12e6bc7d23e1ef8a6cc2af87bf013938b1c1fc5cd75418a49"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/output-templates.md",
+      "sha256": "572a0b38ca3f02a344b2cda801f4f0d54327a3635df8ddd511907c987f5d99dc"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/OWNER_NOTES.md",
+      "sha256": "cc334e357193ceff5a16a88fe3e8f281715ff6521677aaab761c02b1bbfa85d9"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/patterns.md",
+      "sha256": "bbad52d681daf689fc3a7c243166e1ed6ae588d08f241ce47d079eb3e3fcfe6e"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/red-team-gate.md",
+      "sha256": "7a046b961281c8b38e9fe6a704778618974b15c44687111728eaf85e51312927"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/SKILL.md",
+      "sha256": "e1694560ef09755e790cef30470870962fd503b11b62baa8b817b6e9c948e54b"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/worked-example.md",
+      "sha256": "9b8ead871743240212de442538718048a3fdb7980878382e7a8c3fbf19bd879d"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/agents/claude.md",
+      "sha256": "5b004f64e1a9eed37675d4f05b982c1109e77cb05668e77cdb7cdddfd517016b"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/tests/eval-prompts.md",
+      "sha256": "2025d72628d7ef4c8c5d0cb3fcc4e751e6d2a353bf9f3a3c704a8bd88ec219f1"
+    },
+    {
+      "path": "skills/creativity-ideation-design-thinking/tests/red-team-prompts.md",
+      "sha256": "cfa2766d22a60a71dc9fc28bb8a76562d4f52bdf874f006e04b6ebebd5bf8aa6"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/domain-rubric.md",
+      "sha256": "b71510111e3e501b5361d300b9f2b6cda68747462e95cd14ee89161313bc2658"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/manual.md",
+      "sha256": "74638a07c4a9e9a04554eef2037a0fb7f4bf3115335024705410b25a6cdc5b10"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/output-templates.md",
+      "sha256": "da230d424a2e5bb4c23898effa5e4dc8c0021afaa367647abb635e3a6386b149"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/OWNER_NOTES.md",
+      "sha256": "d349710f380202471ebc323ff02bcf7f089cc2bd1ec9c469221777e5027eb4d8"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/patterns.md",
+      "sha256": "69be05f4b1e7f53ebd69135272c7744bf037be91c4a2b951544e5ac9e2371b98"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/red-team-gate.md",
+      "sha256": "6f9f299260f91ed4ff56e4338b136de5e6765126d7cbf64c9afafa88c5d9ee8f"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/SKILL.md",
+      "sha256": "88cb7f5cec0ee955637e0a370e5d5e17006eb01834b46676bde82b151ea3d75b"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/worked-example.md",
+      "sha256": "36397fb1681b235a4478ade814df7f3cbf4fa6ffa9fe7ba5dbb0bc1c00c4c064"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/agents/claude.md",
+      "sha256": "62b7cf921d1d1c7d11752faeaee1e5722e986bd16e01de98a785397d22084c45"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/tests/eval-prompts.md",
+      "sha256": "174bf267ecd405cd07ce02c22cc4a721c79637bc7632b4cd593d2d6ca501bf7a"
+    },
+    {
+      "path": "skills/cybersecurity-operations-soc/tests/red-team-prompts.md",
+      "sha256": "b18202931fd4632a17cbe0f080f3fd81a6807c8fd75506906f1d2a266beb2f8f"
+    },
+    {
+      "path": "skills/data-architecture-leadership/domain-rubric.md",
+      "sha256": "395a5f7176cf9495e0034de4de5ccc7785b5d0aa90299af0198b905c2638ea60"
+    },
+    {
+      "path": "skills/data-architecture-leadership/manual.md",
+      "sha256": "333a84fbfe650446bd55110378848fbeecaf503be2cf2f1f2a8af5951dc6a311"
+    },
+    {
+      "path": "skills/data-architecture-leadership/output-templates.md",
+      "sha256": "756fb15699b6bc0ec75a8871955aea0250876a86f4234a9a725ecc8346de58a8"
+    },
+    {
+      "path": "skills/data-architecture-leadership/OWNER_NOTES.md",
+      "sha256": "b1ad320d738eba0e1ac02336a4d0dc93cba78e885f2ea046d08638debbe90ee4"
+    },
+    {
+      "path": "skills/data-architecture-leadership/patterns.md",
+      "sha256": "b5324f7bfd952efc77d08078a15bdb163b7dc20fd34f9653929c8f6c8b364caf"
+    },
+    {
+      "path": "skills/data-architecture-leadership/red-team-gate.md",
+      "sha256": "f647a2c313f46de6ff5df8370da0337e5c2ffc943b2a83f6bf66a6fe237ce20e"
+    },
+    {
+      "path": "skills/data-architecture-leadership/SKILL.md",
+      "sha256": "396870780bc6bdd239a02beb9af81691d6b6fbdfa0ffec9f04125dd9b29277a7"
+    },
+    {
+      "path": "skills/data-architecture-leadership/worked-example.md",
+      "sha256": "131407289815df16ef625dffd1e796dd0dd1207e6f90a53e005a20190e409b88"
+    },
+    {
+      "path": "skills/data-architecture-leadership/agents/claude.md",
+      "sha256": "0b70ff660f1ac61c4d5986f0ead9436e4fdbab855d03d34b4b259230aa7a8e79"
+    },
+    {
+      "path": "skills/data-architecture-leadership/tests/eval-prompts.md",
+      "sha256": "336d27dd5412ebc695014acf34c3e7250b462fa99115c287061cc9beb5940168"
+    },
+    {
+      "path": "skills/data-architecture-leadership/tests/red-team-prompts.md",
+      "sha256": "33fb525cab42c72298a0e580ad8562e9910375f611a24c31830392495588f233"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/domain-rubric.md",
+      "sha256": "835033f76a9498f9a5e4ee25bc9a0389acbcb2d12ed23f858a6bfbb096bd9368"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/manual.md",
+      "sha256": "6ed963294264438d693e805c2e505dad7aee5823d8ccce5050ad441594d6bd4c"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/output-templates.md",
+      "sha256": "a942482e6a314cc818bd5f245e7febaba6d4d8753c9eed37e0b6b96c0837aaf9"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/OWNER_NOTES.md",
+      "sha256": "6d06a48e0ba4b02cde2353216a64c82645df44713200026ddba7a94cd793e6ee"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/patterns.md",
+      "sha256": "f8c8414a6f6e723e63d895065a0db24ce487467639f85c85a12f38f3ab7f852c"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/red-team-gate.md",
+      "sha256": "4381ded7dfd9a25f8e74b3ea82f96f35aeac8ec5565620afd7b7e89f6cb54190"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/SKILL.md",
+      "sha256": "f5e5825d6e1a791e2c198f2c2f0dc360408106c2ac2d5fbec395b3183dbd5bb3"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/worked-example.md",
+      "sha256": "3f892ca03de754ddaec9b8eeb914d06c18a4740b1ae518fe8ca3f2cc1b75d047"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/agents/claude.md",
+      "sha256": "6b20775494507c70cad8f10a260f9a6872775589f5ffdbdc0418f44cc2d6f546"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/tests/eval-prompts.md",
+      "sha256": "2bd14341007d960926dbb762f33d85a1c16dd865d4bdd451d6c71260af3948cd"
+    },
+    {
+      "path": "skills/data-engineering-pipelines/tests/red-team-prompts.md",
+      "sha256": "c91427bae9f2ec4bcda85b3fd00a0a1be2dc725c59d0cea78d3228dbd5086736"
+    },
+    {
+      "path": "skills/data-science-analytics/domain-rubric.md",
+      "sha256": "9a40b493162b2ffd4ad872f794525753126a768bb5440ea9b7beafb35ce93ebb"
+    },
+    {
+      "path": "skills/data-science-analytics/manual.md",
+      "sha256": "96b26258585edc5b93fb7816eff6f21423d834fe315a0505f94a2dd7531a2468"
+    },
+    {
+      "path": "skills/data-science-analytics/output-templates.md",
+      "sha256": "38a29ff3fefc1f0a30a1714a6029aca92703aa4f2e27fd2e6c370ad2df9d4e7e"
+    },
+    {
+      "path": "skills/data-science-analytics/OWNER_NOTES.md",
+      "sha256": "d6fd38453fd075bbc1478099bb744f0cbbdde1146ed5d0c2ba508bac4f98051c"
+    },
+    {
+      "path": "skills/data-science-analytics/patterns.md",
+      "sha256": "b59780483cc948fc9e0201023c159ce0d44a4932b21daa0464b94623e9669825"
+    },
+    {
+      "path": "skills/data-science-analytics/red-team-gate.md",
+      "sha256": "bea83e35f183d4a732cce5a553c71d9723b18b706c06d681dccb428811e594a8"
+    },
+    {
+      "path": "skills/data-science-analytics/SKILL.md",
+      "sha256": "93dff4bdd8a1af21062cf9322bcb871149df00a99a068ceedcca326861deb776"
+    },
+    {
+      "path": "skills/data-science-analytics/worked-example.md",
+      "sha256": "ddd6477773cffab388ee90d05a5976c6541d1b3f961474629a99e48cb12273ea"
+    },
+    {
+      "path": "skills/data-science-analytics/agents/claude.md",
+      "sha256": "943e5368cde09d0c22359728a1665bdee2a8a16798bcf53c3dac020022e66067"
+    },
+    {
+      "path": "skills/data-science-analytics/tests/eval-prompts.md",
+      "sha256": "4500eb0b772b3bd44e1bc2fd08564d969f4f04fbef640a16cb35d7562099041c"
+    },
+    {
+      "path": "skills/data-science-analytics/tests/red-team-prompts.md",
+      "sha256": "77ab092f533c0c0bc0425e93c19949f91bb65d23a9b5173b98d7e78310ce2499"
+    },
+    {
+      "path": "skills/databases-storage-engineering/domain-rubric.md",
+      "sha256": "e634c6008efab0a1239cb1e1c46e1bf5ee877504d969489ee24210e07320bc0d"
+    },
+    {
+      "path": "skills/databases-storage-engineering/manual.md",
+      "sha256": "ab2c048feca7d9abf538bb5a09df8bddc6abb091733c40e91826297639232f55"
+    },
+    {
+      "path": "skills/databases-storage-engineering/output-templates.md",
+      "sha256": "de784fb2fbf12d259f33082f7faf48bdae0565d0f2b8f64bfb4a22a581a21d7e"
+    },
+    {
+      "path": "skills/databases-storage-engineering/OWNER_NOTES.md",
+      "sha256": "cf439aff478dae07ea40cb5bd199dfbbc1ab56e532fc2085f5fe074d74a0e6fd"
+    },
+    {
+      "path": "skills/databases-storage-engineering/patterns.md",
+      "sha256": "12b3025aec0d202275df10b7b13cfcf3de2fa8e709a5bf8bc3306e4fac467c4a"
+    },
+    {
+      "path": "skills/databases-storage-engineering/red-team-gate.md",
+      "sha256": "047e77a5191587ce7acb2712fd6b8db80910ae9f04d96ad023aedb1f16a0c9ae"
+    },
+    {
+      "path": "skills/databases-storage-engineering/SKILL.md",
+      "sha256": "5e0fdfd1d3a731e380d73e6ff49da1fe28a95b05ccb4e8c756ec56ce412a8bed"
+    },
+    {
+      "path": "skills/databases-storage-engineering/worked-example.md",
+      "sha256": "0af82fb3b190dff3c20f59ddb550da0911c2fdb038c76ea2d021d1901343f1f8"
+    },
+    {
+      "path": "skills/databases-storage-engineering/agents/claude.md",
+      "sha256": "576517111551b591adbedf5b5d052598f9553582155ae654034c1343ebe30e00"
+    },
+    {
+      "path": "skills/databases-storage-engineering/tests/eval-prompts.md",
+      "sha256": "d6f5dcf8d5e821d53fac23dfa169c934b7c478a9f5dadd30a87e3143b4af5a3e"
+    },
+    {
+      "path": "skills/databases-storage-engineering/tests/red-team-prompts.md",
+      "sha256": "ea03a02c0342e8f1acf30fb6200715be8a097caf95c995391fe2995bd2ab4d15"
+    },
+    {
+      "path": "skills/devops-platform-sre/domain-rubric.md",
+      "sha256": "4973467f277ea8fc97614a1ee5ac4c50a0f21b53f780038b4bf80100ff741816"
+    },
+    {
+      "path": "skills/devops-platform-sre/manual.md",
+      "sha256": "03d3e223c29292eb9d2e711164a0d18c2116718f7fe0193b181a73379441c526"
+    },
+    {
+      "path": "skills/devops-platform-sre/output-templates.md",
+      "sha256": "63ad20820d3761d0021c35803ce8ee8ec4fbef70b2588f3a42596a3856c6df3a"
+    },
+    {
+      "path": "skills/devops-platform-sre/OWNER_NOTES.md",
+      "sha256": "82ac6a8de0fd91d9925c9b19cdc0443eeadbf41d4f7a91b6568ab9cefcd35a24"
+    },
+    {
+      "path": "skills/devops-platform-sre/patterns.md",
+      "sha256": "490ca5e379e957175b4c6920b3347d2ede991278ef33d5fc22d840a230e2fd9c"
+    },
+    {
+      "path": "skills/devops-platform-sre/red-team-gate.md",
+      "sha256": "59b602e7731f6e4534f21bcf81687086584d71c2829e799372fc8f7ef340de08"
+    },
+    {
+      "path": "skills/devops-platform-sre/SKILL.md",
+      "sha256": "88abda021b998aee22d20bae57a5ee4ddd2da885b1852de13d0da0655bbc185e"
+    },
+    {
+      "path": "skills/devops-platform-sre/worked-example.md",
+      "sha256": "78949aa6583d9ea1372b7f9f01ca41162e4f36df01c95ad94b293209af05d27e"
+    },
+    {
+      "path": "skills/devops-platform-sre/agents/claude.md",
+      "sha256": "61fbfdc6d085f1c3eebd8f75edf9c96394b2fe34adef5d4786a0e225187fd3cf"
+    },
+    {
+      "path": "skills/devops-platform-sre/tests/eval-prompts.md",
+      "sha256": "d20a419881900ee8298dc2f5427d9185038bdbb5c0ea5da2c17c4496cd60412f"
+    },
+    {
+      "path": "skills/devops-platform-sre/tests/red-team-prompts.md",
+      "sha256": "24db79bab8e4e2bce34d7f1a98aa6730249f914f12dfe53256eb95af154a81d5"
+    },
+    {
+      "path": "skills/economics-market-design/domain-rubric.md",
+      "sha256": "ffc9d909d4bc23c2116e5bed4f3aaa493162b4ce22f072cda7c377dec211cdc0"
+    },
+    {
+      "path": "skills/economics-market-design/manual.md",
+      "sha256": "333332816e1e7c3f1700ef7a24c8e1ee88c7025783e6883d13f473515cfcc3c9"
+    },
+    {
+      "path": "skills/economics-market-design/output-templates.md",
+      "sha256": "7b530d1a5fed06f6870367a571dba5baeb0c898314ed620f265276115e80f2a7"
+    },
+    {
+      "path": "skills/economics-market-design/OWNER_NOTES.md",
+      "sha256": "b52e9fbc1a2bb14f2010d7def0ce4e17bcff55afb6aa214735fe9f685fa735bc"
+    },
+    {
+      "path": "skills/economics-market-design/patterns.md",
+      "sha256": "c1ef10b3d6402f91109ea275e6965e153c618cf81a6a0b82c2261ed837dd7902"
+    },
+    {
+      "path": "skills/economics-market-design/red-team-gate.md",
+      "sha256": "ecd262e24ae439c441a5c7cdd546af34bba629f0eb9c7a1b2427049158ab19ed"
+    },
+    {
+      "path": "skills/economics-market-design/SKILL.md",
+      "sha256": "47a9257ba3bb893facdb582222056b914ff95f211549a82e20f0b73741c95813"
+    },
+    {
+      "path": "skills/economics-market-design/worked-example.md",
+      "sha256": "7c0336f581c5f00d14a37e74b1cc289d4dab6b2419f041d919c20f2091a6eda6"
+    },
+    {
+      "path": "skills/economics-market-design/agents/claude.md",
+      "sha256": "fb336a5f4c4f534f250b7a8b952270568921aaa0f2f42f5526ecdf1c24148a96"
+    },
+    {
+      "path": "skills/economics-market-design/tests/eval-prompts.md",
+      "sha256": "b55fdbc46118ba7aea3ba48949cd28539e8e7c6f6b4406a50b011a60be35ee3c"
+    },
+    {
+      "path": "skills/economics-market-design/tests/red-team-prompts.md",
+      "sha256": "5c1e14d1a88d3427d1ce74bb9278181960d9cbb30b407f4802b3a8cd4746fbeb"
+    },
+    {
+      "path": "skills/finance-unit-economics/domain-rubric.md",
+      "sha256": "c00694e9489db0afafee47a44c1e354ce55710cb3a1e9677ea9ac849632649c4"
+    },
+    {
+      "path": "skills/finance-unit-economics/manual.md",
+      "sha256": "b007c80b9a82c579a2fa7c1c2517b107625fcb3d0ddacc7c1d4769bb12d7e96a"
+    },
+    {
+      "path": "skills/finance-unit-economics/output-templates.md",
+      "sha256": "18347499f88eb5dfd1b9b1d8ba7f890abc8601626bf76b0c338f594c85c4a50c"
+    },
+    {
+      "path": "skills/finance-unit-economics/OWNER_NOTES.md",
+      "sha256": "10fd19354a8598740e3484dd4f2b25925d20221630246a3b1539e51d8cd2d742"
+    },
+    {
+      "path": "skills/finance-unit-economics/patterns.md",
+      "sha256": "2300e638cd507bea213915c5362a38000862a20a97cde17dde103d8a9ee650ec"
+    },
+    {
+      "path": "skills/finance-unit-economics/red-team-gate.md",
+      "sha256": "8981414616ab81450ebdb238cc5910b58984e288b355782164c0472df2eacbd9"
+    },
+    {
+      "path": "skills/finance-unit-economics/SKILL.md",
+      "sha256": "34513ad7568c7249cfeed88dfe1f96b7a1295b7a4141c684fb4bcbf07247e631"
+    },
+    {
+      "path": "skills/finance-unit-economics/worked-example.md",
+      "sha256": "e13fbacc27cc34bf23a1f9de9ac374a99417d6e8ba275850ce6a6dd1d74515fb"
+    },
+    {
+      "path": "skills/finance-unit-economics/agents/claude.md",
+      "sha256": "4c7ab51d6fa3af8c7b3494238b49b969f8fa8568892c51be4beaf925a77f9fe7"
+    },
+    {
+      "path": "skills/finance-unit-economics/tests/eval-prompts.md",
+      "sha256": "7f682a82db27d608860b18469499c208a1c4db92074b295ebeebad03d41c0cb0"
+    },
+    {
+      "path": "skills/finance-unit-economics/tests/red-team-prompts.md",
+      "sha256": "82d1b35a69c43f8a8b718559218b64dfcd6c4476233cd869763c0e5efa3af19d"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/domain-rubric.md",
+      "sha256": "75e6d30aa24f2a1669f05f6d006e082e28a8d2938afaf95ec8a0e77d33cc80a6"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/manual.md",
+      "sha256": "500ba955be4e8b54dbf35a33a41ac4626ccabae09272ef61fba08432c9f3b8f9"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/output-templates.md",
+      "sha256": "c74e196cf94112761de527200fda0a2cad93ecdd77e2c8bb22e6ba667f6dd461"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/OWNER_NOTES.md",
+      "sha256": "5d54e2748da9df79d5a575f5d5796286db21e01c52d59fd8f2cb0a4aa5007e23"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/patterns.md",
+      "sha256": "d361903b4d5d68b05cd6d94847ac23602a3c5a745b6400b5ad79e355617abf85"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/red-team-gate.md",
+      "sha256": "f9788ca894b7c97cee4928b89445e464768c0376ba68eb99ebc34c77f17d1c45"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/SKILL.md",
+      "sha256": "3f664a5834ebd5560cbe85c2b681a7844009a4819337c1e07dbf3eee1b861783"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/worked-example.md",
+      "sha256": "18976b62aecf41df920675ad36795540a4d0cbbe971affa6ab576b46859d7715"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/agents/claude.md",
+      "sha256": "d6b559d9abd74790bb9eb2dfdda0707ae6cbc442787a22d62a411e24632e8c2e"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/tests/eval-prompts.md",
+      "sha256": "f56330841c8a3d4fd986fbb9ad85069b34046598836444f5cb4bda41f6841196"
+    },
+    {
+      "path": "skills/frontend-ux-product-design/tests/red-team-prompts.md",
+      "sha256": "245bf06929eac59a532a08d0fed964163efabb356e3d2ec4b676b588f8d2ef66"
+    },
+    {
+      "path": "skills/language-mastery/domain-rubric.md",
+      "sha256": "8fef5829253cf78925c1b597e9adc324b025633054cc5e16055d9222609509e2"
+    },
+    {
+      "path": "skills/language-mastery/manual.md",
+      "sha256": "19164c285a02c0a49dd657c44730170531b1f1e87522f355dc61b21104603d78"
+    },
+    {
+      "path": "skills/language-mastery/output-templates.md",
+      "sha256": "eca87f8f9d9754989358b34029df5a5e7ca3fe564ce5a166c32a3883ff8b7cb7"
+    },
+    {
+      "path": "skills/language-mastery/OWNER_NOTES.md",
+      "sha256": "6a0de541be8ab9139a00ba2bdfebc523d374d9f0e85ee1e0f697c510aa93c8ec"
+    },
+    {
+      "path": "skills/language-mastery/patterns.md",
+      "sha256": "1d8136b38f60874a88a9656f84cdc0384e2c6b1aa31c992b3a973a5a007ccb15"
+    },
+    {
+      "path": "skills/language-mastery/red-team-gate.md",
+      "sha256": "e734bcbfa35cf6660997ad14ed07439767549d00b8fc9317a80c467c0b2d3b19"
+    },
+    {
+      "path": "skills/language-mastery/SKILL.md",
+      "sha256": "e4063bcbdef259635038dbc20d8ba414343d7301753c74568f93b375b7725b91"
+    },
+    {
+      "path": "skills/language-mastery/worked-example.md",
+      "sha256": "d26ff7ed681c81539308e3ab8bcdab75cfc48d5893e7afc3c55021c3c1b43642"
+    },
+    {
+      "path": "skills/language-mastery/agents/claude.md",
+      "sha256": "7c8ba6a1eeb7e2fe71678dc2ceb9817917d0b10fd70fd2b60b7886233e2daf70"
+    },
+    {
+      "path": "skills/language-mastery/tests/eval-prompts.md",
+      "sha256": "2b71d60c60f5d8de336a98c387139ca50b72e4604a328f8a64c6472b4fbbdca1"
+    },
+    {
+      "path": "skills/language-mastery/tests/red-team-prompts.md",
+      "sha256": "1ae2c4d3caaa9d4951989e3a1a1cc420bcf38f987086c5ec8989054a1f8b0eed"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/domain-rubric.md",
+      "sha256": "3ec697bc791045bc117d653ba7577dc8d1da51bb163dec3ba9f6f98cc8a8e3e9"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/manual.md",
+      "sha256": "65d16fb582013b1a9e034a31113114ca4a661fb4d7ef8d4468aa30bdde4dc303"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/output-templates.md",
+      "sha256": "9db6d7f85bea97e1462073cbd4acd414c473dfb0e101eca928545f5e3a30f645"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/OWNER_NOTES.md",
+      "sha256": "a9520e440eb98440f8ca8217fd7375306080bb6ad7bb6689a9f47816e7062909"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/patterns.md",
+      "sha256": "8b3548ab513a3b472b39a59e45f468989b86dce94da6dd77a7e21528d3e0314a"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/red-team-gate.md",
+      "sha256": "06edd7d5c5ee982be464cb9b025d14c76b43b3185b76acd2329ae2c19da0901a"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/SKILL.md",
+      "sha256": "51a6765c8573e8b846fca2b7300419b318f66b02be783e1f0174a8b966226c32"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/worked-example.md",
+      "sha256": "ed24a9473d88ba6c4b0e1f7c335f30ecbad873a3521082c2bedf5e243476846b"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/agents/claude.md",
+      "sha256": "9e5c5896d5fe22a65f85293822e47dd90da19d3ec848584b9d76ff82ed677639"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/tests/eval-prompts.md",
+      "sha256": "d3a612f218e18ef3c263e65b2f6ff54b93785416fefb6af1e190c25852742acc"
+    },
+    {
+      "path": "skills/legal-compliance-contracts/tests/red-team-prompts.md",
+      "sha256": "8b994616de7d7514d24776e27b25caf658d8f064d68a20a770411a14cbd730fa"
+    },
+    {
+      "path": "skills/marketing-brand/domain-rubric.md",
+      "sha256": "51451db2f7c0993271592dae005263148709102ebc0c23a802cd9c604a9f6a43"
+    },
+    {
+      "path": "skills/marketing-brand/manual.md",
+      "sha256": "2ca203b5f4a4bb2cbc83fb2fe14d1f6b7a7729965f218caf20d2d6aa75943043"
+    },
+    {
+      "path": "skills/marketing-brand/output-templates.md",
+      "sha256": "6ca7d7c41ff19f2749cdd454c1ea381e45f850455bf600745174cb399135fbb7"
+    },
+    {
+      "path": "skills/marketing-brand/OWNER_NOTES.md",
+      "sha256": "3174acbb491bb7dd443df7c9c5326df2512c5bd12c5c9577a5afa27008424aea"
+    },
+    {
+      "path": "skills/marketing-brand/patterns.md",
+      "sha256": "7df25ecf634f54699e617067a344cf61d36383cbb1f9e4c71ccf626c7d6544cc"
+    },
+    {
+      "path": "skills/marketing-brand/red-team-gate.md",
+      "sha256": "ec8b98b4a2917410be8b67d6f196c75261531c8fd8b275b40fe2238be74184c3"
+    },
+    {
+      "path": "skills/marketing-brand/SKILL.md",
+      "sha256": "1d0f9762ce93db724b21008b9dce769be31fa8165466cbbd6d5b8b033c1b603b"
+    },
+    {
+      "path": "skills/marketing-brand/worked-example.md",
+      "sha256": "c29a043a1301e27cd7c3068752c0310b5170ebadccd3e6c4200511f2ea07d304"
+    },
+    {
+      "path": "skills/marketing-brand/agents/claude.md",
+      "sha256": "49fb0f65e745ed55a88564a06da68601b248bc9ce938c1cbe0ac1c4576acf760"
+    },
+    {
+      "path": "skills/marketing-brand/tests/eval-prompts.md",
+      "sha256": "44213af973cdcb7e79d8c4cca1d73cc697f8ef3d3091deff0532a04f0b187e95"
+    },
+    {
+      "path": "skills/marketing-brand/tests/red-team-prompts.md",
+      "sha256": "64d113080905fabe1b970379d975867405329564b3fc982a3b58c19db7a07cb9"
+    },
+    {
+      "path": "skills/mobile-engineering/domain-rubric.md",
+      "sha256": "8ede020825dd466e74548e10bd2c0161a80f21a45e3b388aea107c8fe1197648"
+    },
+    {
+      "path": "skills/mobile-engineering/manual.md",
+      "sha256": "20a444765c90baeb53fe30db9ee070bace6d9138f49379880aba4697d8f8254f"
+    },
+    {
+      "path": "skills/mobile-engineering/output-templates.md",
+      "sha256": "9cc2b484825baa2a2df2f064b3914e4175dbfe52899e7b9fb8b7af8f1ddc1b99"
+    },
+    {
+      "path": "skills/mobile-engineering/OWNER_NOTES.md",
+      "sha256": "4f2988e85e82436432140b1693f8f2165bf7066fb5c2850b5d867c924bce2079"
+    },
+    {
+      "path": "skills/mobile-engineering/patterns.md",
+      "sha256": "f0bdb51d9cc17795beeb0e61b2030f5c101da2f7b5aef0bc8fa9fe68afa990c5"
+    },
+    {
+      "path": "skills/mobile-engineering/red-team-gate.md",
+      "sha256": "5c78bef5374623cdb91bfbe00d9e5e9f0a7a18e9a9d92eb43d7f924c5604e2d2"
+    },
+    {
+      "path": "skills/mobile-engineering/SKILL.md",
+      "sha256": "a7a92e304abc5927f187caf29b1c9d1ee68f72d444d6e98edc120a0e642614d5"
+    },
+    {
+      "path": "skills/mobile-engineering/worked-example.md",
+      "sha256": "611605f67bd146129458448f444c99378fe80a86e71646cd3a2088cc4d4d9b2b"
+    },
+    {
+      "path": "skills/mobile-engineering/agents/claude.md",
+      "sha256": "fa675d64b390867b286add63d8fdb8d453e760c522c016c8a9855123150fdcd3"
+    },
+    {
+      "path": "skills/mobile-engineering/tests/eval-prompts.md",
+      "sha256": "66d639433a2d0c5fde8181a8c64fee51a4151d0d729f182c922a6a492d757b72"
+    },
+    {
+      "path": "skills/mobile-engineering/tests/red-team-prompts.md",
+      "sha256": "55e1b98b4be59f4a9239211a4fa769786b2cceb300b6e44534a591f0e7e23782"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/domain-rubric.md",
+      "sha256": "73faf131d6625ac292c48f315ac6730e5b2f5a721ffef293a082ab2b1016d7b4"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/manual.md",
+      "sha256": "28613c6ee7a0f22f047894e413eacb840ab6410bae96d300e98ade52f2ae4b83"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/output-templates.md",
+      "sha256": "4cc96abf9c8834af6af81689dbd7a53a6dd9f3edda7cc73dc4cea0c3d7bda84a"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/OWNER_NOTES.md",
+      "sha256": "d5b94b937715f5a15f758111475627e5d29036465dfdfb2e2166517bf4265319"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/patterns.md",
+      "sha256": "fe6b66b0f6d9e2a6e699f69b33b1d289d3560f6e00507c8d273fcda66aa24589"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/red-team-gate.md",
+      "sha256": "32528cf63b0ad1612d9c33e60e2d36e12b34e825b8dd5bba9c4d6347fa278373"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/SKILL.md",
+      "sha256": "af63abeecd53b0d5ccb97678c749277e77b83983b075c8420f145964a28eb970"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/worked-example.md",
+      "sha256": "fda34ef97a578908b985cedabfa16a864459e83449c219a41c0272a336eb7851"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/agents/claude.md",
+      "sha256": "098fc8d8a6a8a8db2899c5062f916f6af6f8d9e9363a8f0743c02f484ccf484c"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/tests/eval-prompts.md",
+      "sha256": "fab82288aa8af1f0b2d30dc189070fd7d012b77c53029d0f5aa019de9baef05a"
+    },
+    {
+      "path": "skills/offensive-security-pentesting/tests/red-team-prompts.md",
+      "sha256": "319e989de5a87b2e0ce2efde8527370c16e957e10e76c7624a85e5b404bd0169"
+    },
+    {
+      "path": "skills/operating-data-roles/domain-rubric.md",
+      "sha256": "edd9caff872eaa19c164c709ba7eb82b4c33ffd6f07ffbf45465b8d7780e2724"
+    },
+    {
+      "path": "skills/operating-data-roles/manual.md",
+      "sha256": "441739d4ddb3a860ce1d9633e31cfb1427fce52c9e1862d7e01f0d3107e64008"
+    },
+    {
+      "path": "skills/operating-data-roles/output-templates.md",
+      "sha256": "2b2efb3b701cf64845488d62fa36c0cafe0df3d3538b5eb35215958270a9a715"
+    },
+    {
+      "path": "skills/operating-data-roles/OWNER_NOTES.md",
+      "sha256": "2986aeb5ae82b0d88b7fa965e675067b945911c5925bbef9a6dee61cbc7fd720"
+    },
+    {
+      "path": "skills/operating-data-roles/patterns.md",
+      "sha256": "94c15d15b54a6c7c66698974597671e171c6dfd20efbc4706d1a104ff6aa34ce"
+    },
+    {
+      "path": "skills/operating-data-roles/red-team-gate.md",
+      "sha256": "60dc6e9daa367ad75462cc01960cb03a53c09d2d4657339897c87b5a80a6a67b"
+    },
+    {
+      "path": "skills/operating-data-roles/SKILL.md",
+      "sha256": "127b62dc0424629916582f8f5fddfe961fbe7b7156f5d754e587a47c083bc969"
+    },
+    {
+      "path": "skills/operating-data-roles/worked-example.md",
+      "sha256": "817e96c9e6a07bfb6af6726fee76a3159e3485c6b190f5b151165d01861cebb8"
+    },
+    {
+      "path": "skills/operating-data-roles/agents/claude.md",
+      "sha256": "90ae4b70dc19805f84aaa7dd9c491ec23df3bbe4e3179f1151f0abc06d837d2e"
+    },
+    {
+      "path": "skills/operating-data-roles/tests/eval-prompts.md",
+      "sha256": "93d20672c0d0e53e7150711353dbb27ddebc479d97b7a9223cd7487120316af9"
+    },
+    {
+      "path": "skills/operating-data-roles/tests/red-team-prompts.md",
+      "sha256": "808f51e3206ea2a0ff5b7746107dedb6cf959401ca3b082476a7591661ac153e"
+    },
+    {
+      "path": "skills/people-org-leadership/domain-rubric.md",
+      "sha256": "d9cb5b358bdc35861251a14d143c478bfd63c54568c8ecc6a4723500e307cc1e"
+    },
+    {
+      "path": "skills/people-org-leadership/manual.md",
+      "sha256": "b454c5b1b2ed23d11db5516142c8e39599dece30ef737b228809f498efd3aac6"
+    },
+    {
+      "path": "skills/people-org-leadership/output-templates.md",
+      "sha256": "258bbd61294f0f77244927028bfed1375d7093142c78646c77dd6899ca707090"
+    },
+    {
+      "path": "skills/people-org-leadership/OWNER_NOTES.md",
+      "sha256": "8769d9da8ec5f140ae53a82c46f3e6a50fd39545909298f6901529b961349277"
+    },
+    {
+      "path": "skills/people-org-leadership/patterns.md",
+      "sha256": "834f634829b6fbbeaf135fb16b5086889db524aa1bd176144b04cc0dc114ea18"
+    },
+    {
+      "path": "skills/people-org-leadership/red-team-gate.md",
+      "sha256": "b8c8d0677beba3d89e4a4d0ccaba48e4b3066009fb6b6eb26e470095df131570"
+    },
+    {
+      "path": "skills/people-org-leadership/SKILL.md",
+      "sha256": "933a82f348da74a15a4d8bb22a7d25a65499315f71fbefd7236b06b866ea6646"
+    },
+    {
+      "path": "skills/people-org-leadership/worked-example.md",
+      "sha256": "e96e61c460ea82f02965e0477b2fff1e094507ff17b7fa048931092e01ac75d3"
+    },
+    {
+      "path": "skills/people-org-leadership/agents/claude.md",
+      "sha256": "f3a76a2a14f7fe97426f37d2616488e40d9f81b841bd449ad21c1a4f5e9f5395"
+    },
+    {
+      "path": "skills/people-org-leadership/tests/eval-prompts.md",
+      "sha256": "4d81c8e0c0998dc38f20d7675c0091ce685aba74abcefc63ebe37157f099c283"
+    },
+    {
+      "path": "skills/people-org-leadership/tests/red-team-prompts.md",
+      "sha256": "98be8ed908079b704adb3e4a23fa1fb0f097b068c5074cfca6a7ad24f06abbda"
+    },
+    {
+      "path": "skills/product-project-management/domain-rubric.md",
+      "sha256": "068941b36dbf02cc39af31b8a2bd63c7f9e69e92d28ddff2fd125ab5511b4c51"
+    },
+    {
+      "path": "skills/product-project-management/manual.md",
+      "sha256": "495d9fcc7c8341026bfe1d0042e6ff8987a403efa48e23efd0a315636b4edb24"
+    },
+    {
+      "path": "skills/product-project-management/output-templates.md",
+      "sha256": "5ecaf549d7ee096380b944181916dc67449a8d21a146fbfc85e2d96345da284c"
+    },
+    {
+      "path": "skills/product-project-management/OWNER_NOTES.md",
+      "sha256": "d99f77515f115f762a92e1d76e2770790027dc7ce6268d88a9d3d3c900788a3d"
+    },
+    {
+      "path": "skills/product-project-management/patterns.md",
+      "sha256": "0ab0729028d5b87830bd2da630e6af03070d674aebce4f27aa2cf0d2b1cd59ed"
+    },
+    {
+      "path": "skills/product-project-management/red-team-gate.md",
+      "sha256": "1b1dc80815500d66861ddf203b1a7aa112dab9dcc9ad6428e1c2be6db9500013"
+    },
+    {
+      "path": "skills/product-project-management/SKILL.md",
+      "sha256": "294538e08294dc9a66eb32838252964c12617df5fb158c4102dde212c0006a98"
+    },
+    {
+      "path": "skills/product-project-management/worked-example.md",
+      "sha256": "8293c36e869c41bcaf311ee733516ad1a8b266c90d00cf5883db04e230f60fd6"
+    },
+    {
+      "path": "skills/product-project-management/agents/claude.md",
+      "sha256": "628a03839e9c5a6b7da619e79a8aaffd661d163ac371a1a5e001918a4254f2c8"
+    },
+    {
+      "path": "skills/product-project-management/tests/eval-prompts.md",
+      "sha256": "b6092165eb206b25b551010270422e3adfacea60e251940b126c7fcd92fbff53"
+    },
+    {
+      "path": "skills/product-project-management/tests/red-team-prompts.md",
+      "sha256": "39f65cc7b01463ea20dd46cad0caf153792f164359d0721f62acd5fbbc4d911e"
+    },
+    {
+      "path": "skills/reference/substrate.md",
+      "sha256": "30ac393bb7ea72b595ac6823cba771f751a569d5bc41ff3d54cad6ed325531f5"
+    },
+    {
+      "path": "skills/reference/armenian/21+.md",
+      "sha256": "e7c0ece3f51794a3aeaf8d94c3e48b7a6efc032c42269eb83571a3d144ef0eec"
+    },
+    {
+      "path": "skills/reference/armenian/business_terminology.md",
+      "sha256": "4c128174a59f09410c6dccd2631cac62598299176c83d06b1d210e23268f8241"
+    },
+    {
+      "path": "skills/reference/armenian/dictionary_lexicon.md",
+      "sha256": "2fadf25ec1933c4931f47c491e8ec0fd62b1487639cd62f24de7d6054ef0f6e9"
+    },
+    {
+      "path": "skills/reference/armenian/README.md",
+      "sha256": "95236f840c45e6633ba3d4ea9d681f25c48b2e24f6a88a576e3ad6dce8f662ec"
+    },
+    {
+      "path": "skills/reference/armenian/rude_words.md",
+      "sha256": "7ce8d265b8d14b4728207ccb595fc26443e22ab55aa1930485890063533c336f"
+    },
+    {
+      "path": "skills/reference/armenian/street_conflict_phrases.md",
+      "sha256": "9cfc9bfad9c1f1d4f1c653a024af3f68b8b879de0dd3f448b15a476897adc382"
+    },
+    {
+      "path": "skills/reference/armenian/street_slang.md",
+      "sha256": "025dfe22fff233da343a11e55ebc823c154700c6402e0c01211b56ff396b7054"
+    },
+    {
+      "path": "skills/reference/armenian/strictly_formal.md",
+      "sha256": "4031caabed458823db41a8070f415da8646e2cd341d9abcde70b19c2240a588a"
+    },
+    {
+      "path": "skills/reference/armenian/warm_friendly.md",
+      "sha256": "cc4f10e1279f85c642991bf604b56e716da64f308757b8afe2087eec17295ede"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/domain-rubric.md",
+      "sha256": "c430d29216dd4f132e74709b114def2d36c7240aa40cc76f8942e3eae8778a1e"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/manual.md",
+      "sha256": "e16fe37953de0af21602b047deb941f19e6fa61661338a1e0682c0c72bc5c804"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/output-templates.md",
+      "sha256": "a3fa4e81c348cfd9eda199a0b9fb094ecc799ff964325403645dd1a2db03f952"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/OWNER_NOTES.md",
+      "sha256": "d351c861b4607c3a3c47f839c0f5e5f515918d7e2f6007b36f492e592c4f9a1c"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/patterns.md",
+      "sha256": "1bac3f1f3a73b1e622194f83231041673fcc4445c66d4da3274cfd08a449c3f8"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/red-team-gate.md",
+      "sha256": "26ce032d7ab4cec944c95673f506b99aee4a468f90f022faa838670092443094"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/SKILL.md",
+      "sha256": "bf6ae3cccfe98b32830c7ac7395079c1e1c144c5ecc39f4c688435a1fb4f76fd"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/worked-example.md",
+      "sha256": "7124031d9701ce9983f46bf38d8a5da0b4ac64433c5fd663212042d301f8c189"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/agents/claude.md",
+      "sha256": "364a54ed47926bf9a07c9548da6ea962656711ec51fab70a9c25a2bc268d6c14"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/tests/eval-prompts.md",
+      "sha256": "1342ff6adca18e1c9a33dd1a0dbb121a904d6a6ef38062235c6a054350001422"
+    },
+    {
+      "path": "skills/research-knowledge-synthesis/tests/red-team-prompts.md",
+      "sha256": "1c2df76da2ebb11f00798af813f3fd68b5f11ff1c446a763cd44975801f01c39"
+    },
+    {
+      "path": "skills/roles/01_enterprise_data_architect.md",
+      "sha256": "7161a7b0190b0b95e5762057eae93a86fc6dae687c931ac7193382d9cfd2e3f5"
+    },
+    {
+      "path": "skills/roles/02_chief_data_architect.md",
+      "sha256": "a7a13738ee9946d8a647f727ad75614c55ea1475dbf0e2c348881bf9710ec467"
+    },
+    {
+      "path": "skills/roles/03_chief_data_officer.md",
+      "sha256": "97cd37d8ccb95dbc535080ccccefc5422cc69c9b6dc869d221e22e05af852a55"
+    },
+    {
+      "path": "skills/sales-revenue-growth/domain-rubric.md",
+      "sha256": "14ef1a6f31472aeb2e5a4e7d56516e104c2540c915c70f708b5e598a5c2406eb"
+    },
+    {
+      "path": "skills/sales-revenue-growth/manual.md",
+      "sha256": "13ea0ba9bcd49466930f2b511f63719a77c3cf78f0f22379ac508fdeee76556a"
+    },
+    {
+      "path": "skills/sales-revenue-growth/output-templates.md",
+      "sha256": "9436f84f9beb53435bf6414b55c5dd8858115c703a5b2592434108d28fffa8b3"
+    },
+    {
+      "path": "skills/sales-revenue-growth/OWNER_NOTES.md",
+      "sha256": "8e34b6f3b36f744cfdc0a79e9ba0d5a9009c0ff051dea95978c5a04d859af178"
+    },
+    {
+      "path": "skills/sales-revenue-growth/patterns.md",
+      "sha256": "16ced742298bbaca4f15a07a79051ea7209789623f53eceec521e407d1c41c68"
+    },
+    {
+      "path": "skills/sales-revenue-growth/red-team-gate.md",
+      "sha256": "05e7fa0a9c1e507ef1af486e01a12fed61c3d99bd96e029938e6d533b0fa049e"
+    },
+    {
+      "path": "skills/sales-revenue-growth/SKILL.md",
+      "sha256": "a3681906371d8de70855492ab3ae5b348c5bd898c248aeb20ae20ae919101b3a"
+    },
+    {
+      "path": "skills/sales-revenue-growth/worked-example.md",
+      "sha256": "78a609183e3966c0a5318d3db5b0102e1d8c180e133943358bdda04408f94242"
+    },
+    {
+      "path": "skills/sales-revenue-growth/agents/claude.md",
+      "sha256": "64506b5fbfe2f4916bfde987ffeb499b848cb9321cdd531dcb1b1a7b2c172ddf"
+    },
+    {
+      "path": "skills/sales-revenue-growth/tests/eval-prompts.md",
+      "sha256": "f1c8a7f32f67ea17aa6c685a6fd094af049321474d0306409d168648333448e3"
+    },
+    {
+      "path": "skills/sales-revenue-growth/tests/red-team-prompts.md",
+      "sha256": "fe64900e6e64891948ceb6bb8fc398dd504293b41e3f5671db01b53b0065feb7"
+    },
+    {
+      "path": "skills/security-privacy-engineering/domain-rubric.md",
+      "sha256": "a0b39e00a00975a74a4d8c6eecb8bb656e8abf1d3219386410a4f07853d25e14"
+    },
+    {
+      "path": "skills/security-privacy-engineering/manual.md",
+      "sha256": "b7cd78015baa1c15a5c30d96713e5c39b0c3e170c0ea5b96c278551e34d0b2f8"
+    },
+    {
+      "path": "skills/security-privacy-engineering/output-templates.md",
+      "sha256": "c19f7cc448fcb6f64121ae9027b30250b3ffdb5604f1b6436919a3bb1002bde6"
+    },
+    {
+      "path": "skills/security-privacy-engineering/OWNER_NOTES.md",
+      "sha256": "68663769d44c78d79dee81fa72b03cc34536ae3980311f4edcca4e5cb7ba9eb9"
+    },
+    {
+      "path": "skills/security-privacy-engineering/patterns.md",
+      "sha256": "19f27b167497e986273dd8a5feea7a0f419741019984d4ea9e69b3c807b956fb"
+    },
+    {
+      "path": "skills/security-privacy-engineering/red-team-gate.md",
+      "sha256": "6d5329c7e4a3132abc01e5a56db0907ea18ff825c441f710d9dc38c10656c5c0"
+    },
+    {
+      "path": "skills/security-privacy-engineering/SKILL.md",
+      "sha256": "8c82deaaf1bbb951625663690ca0e53eb5c55854ab82e8ee1f8b79f811fd3329"
+    },
+    {
+      "path": "skills/security-privacy-engineering/worked-example.md",
+      "sha256": "ccdd79fedc8c5b3ef809be290d0d39d5c1a22e451e3c9d8bd69056556cc083cf"
+    },
+    {
+      "path": "skills/security-privacy-engineering/agents/claude.md",
+      "sha256": "ba6ed6ffacb4594eeb5a2b29a5158987cab2a340fb2c4896ef5766c91034a04d"
+    },
+    {
+      "path": "skills/security-privacy-engineering/tests/eval-prompts.md",
+      "sha256": "cc5185c8519e075cb8786b5a12bc4c5f9b7af92ec044e441b3a375dd6ef17608"
+    },
+    {
+      "path": "skills/security-privacy-engineering/tests/red-team-prompts.md",
+      "sha256": "e3e1cc87b623946e1522fb13991d284d2d851c57f7e5a5c2c64aa60b01b4c96a"
+    },
+    {
+      "path": "skills/shared/OPERATING_PROTOCOL.md",
+      "sha256": "87fc43f854143737decf500a206c752971c9877ddc8c30da24c90e19771184c5"
+    },
+    {
+      "path": "skills/software-systems-architecture/domain-rubric.md",
+      "sha256": "3b8a79978891e6f49336e6aca22a5cc16a0da74477ff73edd6d58fc166ff3b73"
+    },
+    {
+      "path": "skills/software-systems-architecture/manual.md",
+      "sha256": "495f58fd90184d1a1744f45f2f432a613e23d10b4a6df7407f906bf588e9bdd7"
+    },
+    {
+      "path": "skills/software-systems-architecture/output-templates.md",
+      "sha256": "80611b654f71cfd51301537fceb7f861d1d573fa938fd784881cd01044ddfa01"
+    },
+    {
+      "path": "skills/software-systems-architecture/OWNER_NOTES.md",
+      "sha256": "7de9d7b56c965adb46dd3add5f36743dc36151f9e4357da93c3d1abcc453551d"
+    },
+    {
+      "path": "skills/software-systems-architecture/patterns.md",
+      "sha256": "683198481a22d910ab1a2adb42148bcd889cea61ea654354683f3f40c0d45f69"
+    },
+    {
+      "path": "skills/software-systems-architecture/red-team-gate.md",
+      "sha256": "31fb5513170736bd0ee7c567b6e439ba388f788033ac7409197990427ca7f95a"
+    },
+    {
+      "path": "skills/software-systems-architecture/SKILL.md",
+      "sha256": "0ceebf5b3390c30362036dfe920bc9c13bf8729fff997425db2360ada8754745"
+    },
+    {
+      "path": "skills/software-systems-architecture/worked-example.md",
+      "sha256": "e6b4e6098fba971184fe4f7838a961baceba6092b4d02418055c5aecfebd47cf"
+    },
+    {
+      "path": "skills/software-systems-architecture/agents/claude.md",
+      "sha256": "46598ecd91f644937de1940f150a55252dff6e08cb6f2c80b1f6c91da02b5fc6"
+    },
+    {
+      "path": "skills/software-systems-architecture/tests/eval-prompts.md",
+      "sha256": "471cb193ef14680cd7fd3932802ff0e8b6c320398cd33d11edee3ca9be1fc205"
+    },
+    {
+      "path": "skills/software-systems-architecture/tests/red-team-prompts.md",
+      "sha256": "60a7cb9da0132f9732ae9590466c192ffaa37ff771a426f22ad1e7fec1156a56"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/domain-rubric.md",
+      "sha256": "30927f1a86e906c882f962d6385a5db33e8932333cd021362985e679f4e79a01"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/manual.md",
+      "sha256": "583c70afd1a37de78d46414cfdd37c21bf737448bf2634ff5cf77d05be26b8ee"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/output-templates.md",
+      "sha256": "1611b30e10ac5d0e523a90292b1ece2d5826fd258511bfe29c3ab10c6c39e9df"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/OWNER_NOTES.md",
+      "sha256": "d7a294473510c76a2fa838fd7b4c82360370fe9c41de66b6157316b9a37395e1"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/patterns.md",
+      "sha256": "af491a69189949710fdeb2d16fcd80411cec396861f923b12c2ba4b186a6facd"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/red-team-gate.md",
+      "sha256": "670e4eba0bd4fedfb94ff0d642d34cae1bd3fe9a8334a5bf03a382e86e5725fa"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/SKILL.md",
+      "sha256": "c287fb4cc79c4c63a897a8eb5c5e16e47d12a1d008df07fb6e02600821051db1"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/worked-example.md",
+      "sha256": "97828ad954975db1675249f22e80922eb8cb8c5fa15ee4213a33bd4a9e9bede4"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/agents/claude.md",
+      "sha256": "8b823414b0cedadb0b54f65addaa46efb0801e5d458ddd8f504b6f41fbb18195"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/tests/eval-prompts.md",
+      "sha256": "2d9eae96b5b7ab274f5f4761544b3a42824ae7ce2003938d1c3914590c1bd7a7"
+    },
+    {
+      "path": "skills/teaching-mentoring-knowledge-transfer/tests/red-team-prompts.md",
+      "sha256": "318a41a3f8a191052a80ad4a2f634604e4015e8543ce874fb947ba58c8670f32"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/domain-rubric.md",
+      "sha256": "28b27deb0a70abc131379174f724e0325ceba059ca72474a3c120094fd7f321e"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/manual.md",
+      "sha256": "0f8c47eeca587f5c04aff0909c6a72950a13826f31f478147997fc3f5f826f29"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/output-templates.md",
+      "sha256": "22e2d1240bc8d4935a37514859ffd01294aae9ac721885ddfb6eff84572e7e62"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/OWNER_NOTES.md",
+      "sha256": "8b819bb2223153c4bbb455ab6c83972ea3f467d6b2f76fcab9895b17593c0f44"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/patterns.md",
+      "sha256": "60d93af79b62cbc36d91049f4bb66a7cdc7d58b27ef6115d4e4b11d07baf3dcc"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/red-team-gate.md",
+      "sha256": "5ed5c8abe0cf55efa6c675220b73734c00018be9b55bf8e1978c85190fd7eb9e"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/SKILL.md",
+      "sha256": "eb3bfc9cb56b78d6928639a24d087d8831846197961c35a1f6c99dedaf66f042"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/worked-example.md",
+      "sha256": "231e4eb364a710eed1a3e9cbd220276e02630408d514f3b57d32f5ef64bafa17"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/agents/claude.md",
+      "sha256": "4c8a1aad193b534f5816f71176fe5ef2f65421f2a4c5d17cb7f8af9705e89238"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/tests/eval-prompts.md",
+      "sha256": "26b89f8fab8e2a0e401993b6810cc3fa8f6e2cb5b81a12d2994bf80fe115dbe3"
+    },
+    {
+      "path": "skills/telecom-isp-network-ops/tests/red-team-prompts.md",
+      "sha256": "08ddd41efd9f931f163012c864d4dcfb5f7cee55348591cea8567319ff289edd"
+    },
+    {
+      "path": "skills/testing-quality-engineering/domain-rubric.md",
+      "sha256": "44e0e1e63cac9455adb678243f6ec01d595de43e8a63f2d78a3c50d9c57c9f07"
+    },
+    {
+      "path": "skills/testing-quality-engineering/manual.md",
+      "sha256": "14567b86eb72fb59524c9a8d8c0bb7760f9fab8a32117dc14a537a21c1743b85"
+    },
+    {
+      "path": "skills/testing-quality-engineering/output-templates.md",
+      "sha256": "d0bc4d4fc420c32b5bcfbe73af26d24323f6a8c5c8465c40689119724b18a74b"
+    },
+    {
+      "path": "skills/testing-quality-engineering/OWNER_NOTES.md",
+      "sha256": "dd026507767304ab599c51572909bbad1dd1bc6dafd72997d62480f878862411"
+    },
+    {
+      "path": "skills/testing-quality-engineering/patterns.md",
+      "sha256": "25d5d38db53cc91f7f1e244fb2db6c5d887fae3e19c4c1e9118d1343ecaa24c0"
+    },
+    {
+      "path": "skills/testing-quality-engineering/red-team-gate.md",
+      "sha256": "25f9d53c027d80d45795411c013bbb3aad75791a8954efd027f162d5993e1108"
+    },
+    {
+      "path": "skills/testing-quality-engineering/SKILL.md",
+      "sha256": "f0adb39fedc81e2d583b2bf0d93b55dbe0b5591d08faec8030d6e92e9480e104"
+    },
+    {
+      "path": "skills/testing-quality-engineering/worked-example.md",
+      "sha256": "01bea2242df82149cc1909b899f059faa7df774e37d4be6ee93dbc7560e3d1d0"
+    },
+    {
+      "path": "skills/testing-quality-engineering/agents/claude.md",
+      "sha256": "5199b0e07c24044522a7f593845023d98947c363bf63c900d2d54e2fc93660d3"
+    },
+    {
+      "path": "skills/testing-quality-engineering/tests/eval-prompts.md",
+      "sha256": "a0e57a3e12622f7e63eeea77b0ccf4c56e8691c83a6e426d7c632cdbda88fae6"
+    },
+    {
+      "path": "skills/testing-quality-engineering/tests/red-team-prompts.md",
+      "sha256": "dce8db32c238cb0c3f8271d35411e506ed08553ac29b2a75654e1c1bb2a157ff"
+    },
+    {
+      "path": "skills/ui-page-structure-design/domain-rubric.md",
+      "sha256": "964b97371d8ee9323188664f7f691424613762cdc70741aba8a9761d317877f2"
+    },
+    {
+      "path": "skills/ui-page-structure-design/manual.md",
+      "sha256": "5fcc80680fb985415cc8facd1de933b96dd44d8d385bc0c585d53cd4493a6c36"
+    },
+    {
+      "path": "skills/ui-page-structure-design/output-templates.md",
+      "sha256": "a8d4a269b49e22ed7dacb7a5921d5ce588461fd304c17966e222c4b6c8f1899c"
+    },
+    {
+      "path": "skills/ui-page-structure-design/OWNER_NOTES.md",
+      "sha256": "b30b4f3230a9d531524f7bfa32c24faed465f5d8d0e5e31f692547526f07faf7"
+    },
+    {
+      "path": "skills/ui-page-structure-design/patterns.md",
+      "sha256": "e514f2f2f296d456efce3c76ce07886c6c6543383dd83b0af9cd911817971f31"
+    },
+    {
+      "path": "skills/ui-page-structure-design/red-team-gate.md",
+      "sha256": "982c95f6cacb9d7b958e76af43e91425242c15fe8f2047e70a63911829dbd685"
+    },
+    {
+      "path": "skills/ui-page-structure-design/SKILL.md",
+      "sha256": "cc81074b18db559c2679baf3fb424008f7f898887db6d1b0deeb650f5a70b317"
+    },
+    {
+      "path": "skills/ui-page-structure-design/worked-example.md",
+      "sha256": "0b4c220e4c692e83738b3de47889fccdb0509503583baaa420f28c709acad539"
+    },
+    {
+      "path": "skills/ui-page-structure-design/agents/claude.md",
+      "sha256": "ca06eecec12032912b9a4b16f8dbdcba7b479f3e9553d9cac819e9bb5f0c9e96"
+    },
+    {
+      "path": "skills/ui-page-structure-design/tests/eval-prompts.md",
+      "sha256": "25d7c770eaf94756bd018621a135c26ef6885503f43d860ea3981091f626775b"
+    },
+    {
+      "path": "skills/ui-page-structure-design/tests/red-team-prompts.md",
+      "sha256": "e934860fdeab5df59325c00462ddc3aae593b30160d3513c822db81f16c8bf1c"
+    },
+    {
+      "path": "self/persona.md",
+      "sha256": "b8d181539f8b0034332af0fb44099a4c4643e4f527598ebc31c2d639b6e4d79f"
+    },
+    {
+      "path": "self/personalization.md",
+      "sha256": "c36bcf4791b44fef95405e5e93ae34786c24611572968b761b5a80fdfaf6fc6f"
+    },
+    {
+      "path": "roster/README.md",
+      "sha256": "5db4c68359728908701d4bbbac059ebbd1d2790c2530b5066c9d8a5f5af2832e"
+    },
+    {
+      "path": "roster/ROSTER.md",
+      "sha256": "9736afbf68031ed03afa4a73dd2772a4f424aeeffbf014f9cfb9949f77417995"
+    }
+  ],
+  "rollup_sha256": "5bbd97f33affe5248a0738e54f0a3eb1c079360501119c9dd58368b5e6287faf",
+  "cut_by": "Bro",
+  "authority": "Gev-command",
+  "notes": "spine release cut from the live spine (392 files)"
+}

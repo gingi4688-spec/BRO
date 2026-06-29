@@ -24,9 +24,12 @@ $mf = $null; try { $mf = Get-Content -Raw 'bro.manifest.json' | ConvertFrom-Json
 Chk ($null -ne $mf) "manifest readable" "manifest unreadable"
 if ($mf) { Chk (("$($mf.spine_version)") -match '^v\d') "spine_version = $($mf.spine_version)" "spine_version missing/odd" }
 
-"[D] RELEASES empty (OD-5, no cut)"
-$rel = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
-Chk ($rel.Count -eq 0) "spine/RELEASES empty (no cut)" "RELEASES not empty (OD-5 violated): $($rel.Count) file(s)"
+"[D] RELEASES well-formed"
+$relStray = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
+Chk ($relStray.Count -eq 0) "no stray files in spine/RELEASES" "stray files in RELEASES: $($relStray.Count)"
+$relDirsS = @(Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue)
+$relBadS = @($relDirsS | Where-Object { -not (Test-Path (Join-Path $_.FullName 'release.manifest.json')) })
+Chk ($relBadS.Count -eq 0) "RELEASES dirs well-formed ($($relDirsS.Count) release(s))" "malformed release dirs: $($relBadS.Count)"
 
 $status='GREEN'; $code=0
 if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$status='YELLOW';$code=1}

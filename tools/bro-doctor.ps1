@@ -59,10 +59,16 @@ $ownDirs = Get-ChildItem 'memory/_own' -Directory | Select-Object -ExpandPropert
 $strayDirs = @($ownDirs | Where-Object { $_ -ne 'secrets' })
 Check ($strayDirs.Count -eq 0) "_own dirs = secrets only" "stray dirs in _own: $($strayDirs -join ', ')"
 ""
-"[5] Live spine at root (OD-6) + RELEASES empty (OD-5)"
+"[5] Live spine at root (OD-6) + RELEASES well-formed"
 foreach ($d in @('_core','skills','self','roster')) { Check (Test-Path $d -PathType Container) "live spine dir: $d/" "missing spine dir: $d/" }
-$rel = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
-Check ($rel.Count -eq 0) "spine/RELEASES empty (no cut, OD-5)" "RELEASES not empty (OD-5 violated)"
+$relStray = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
+Check ($relStray.Count -eq 0) "no stray files in spine/RELEASES" "stray files in RELEASES: $($relStray -join ', ')"
+$relDirs0 = @(Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue)
+if ($relDirs0.Count -eq 0) { "  [OK]   spine/RELEASES has no cut yet" }
+foreach ($rd in $relDirs0) {
+  $valid = ($rd.Name -match '^v\d') -and (Test-Path (Join-Path $rd.FullName 'release.manifest.json'))
+  Check $valid "release $($rd.Name) well-formed (release.manifest.json present)" "malformed release dir: $($rd.Name)"
+}
 ""
 "[6] Phase 1 - Command Palette + Library (read-only)"
 $p1files = @('_core/COMMAND_LIBRARY.md','tools/command-library.json','tools/bro-palette.ps1','tools/bro-show-registry.ps1','tools/bro-show-health.ps1')
@@ -131,10 +137,15 @@ $p4files = @(
   'tools/bro-release.ps1','tools/bro-spine-verify.ps1','tools/bro-spine-stamp.ps1','tools/bro-spine-pull.ps1','tools/bro-promote.ps1'
 )
 foreach ($f in $p4files) { Check (Test-Path $f) "$f" "MISSING: $f" }
-# OD-5: spine/RELEASES must be empty AND contain no cut version dirs (no real release artifact)
+# OD-5 lifted on Gev command: each spine/RELEASES/v* must be a well-formed release (manifest valid)
 $relDirs = @(Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue)
-$relFiles2 = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
-Check (($relDirs.Count -eq 0) -and ($relFiles2.Count -eq 0)) "spine/RELEASES empty - no cut, no version dir (OD-5)" "spine/RELEASES has artifacts (OD-5 violated): dirs=$($relDirs.Count) files=$($relFiles2.Count)"
+if ($relDirs.Count -eq 0) { "  [OK]   spine/RELEASES has no cut yet (OD-5 default)" }
+foreach ($rd in $relDirs) {
+  $mfp = Join-Path $rd.FullName 'release.manifest.json'
+  $rmfOk = $false
+  try { $rmf = Get-Content -Raw $mfp | ConvertFrom-Json; $rmfOk = ((("$($rmf.version)") -ne '') -and (("$($rmf.rollup_sha256)") -match '^[0-9a-f]{64}$') -and (@($rmf.files).Count -gt 0)) } catch {}
+  Check $rmfOk "release $($rd.Name): manifest valid (version + rollup + files=$(@($rmf.files).Count))" "release $($rd.Name): manifest invalid/missing"
+}
 ""
 $status = 'GREEN'; $code = 0
 if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }
