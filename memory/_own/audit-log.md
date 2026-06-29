@@ -106,3 +106,18 @@ result: GREEN
 files_changed: memory/_own/audit-log.md (append) + bro.manifest.json (milestone field)
 notes: declared_by: Gev | baseline: 6740407 | phases: Phase 0-4 + R-1 complete | palette: live | wall: live | doctor: GREEN | audit: GREEN | registry: [] | RELEASES: empty | no project touched | no Project Bro installed | no release cut | no migration | no Discovery Bank move
 ```
+
+## Entry 8 - EP PILOT ASSUMPTIONS SEALED (plan only)
+```txt
+timestamp: 2026-06-29T08:58:24+04:00
+actor: Bro
+session_id: BRO-20260629-085824
+event: EP_PILOT_ASSUMPTIONS_SEALED
+action: SEAL_DECISION
+target: EP Project Bro pilot (plan only)
+source_command: Gev: CLOSE EP PROJECT BRO PILOT ASSUMPTIONS
+authority: Gev-command (explicit)
+result: GREEN
+files_changed: _core/EP_PILOT_ASSUMPTIONS.md (new) + memory/_own/audit-log.md (append)
+notes: path=C:\Users\Admin\Desktop\EP | project_id=EP | memory_scope=EP_only | install=Desktop\EP\bro | memory_source=FRESH | existing Desktop\EP\memory UNTOUCHED | no adopt | no migrate | no mirror | authority=ProjectBro under SuperBro | EP pulls future v1.0.0 | PLAN ONLY: no register, no install, no release cut, no migration, no EP read/write, no push
+```
