@@ -1,17 +1,18 @@
 <#
-  forbidden-path-write-guard.ps1 — PreToolUse hook (matcher: Write|Edit) · Phase 2 + R-1 refinement (§11 / B5 / D5)
-  EN: Blocks Write/Edit to a forbidden path: (a) memory/supermemory/** (sealed read-only mirror),
-      (b) memory/_own/secrets/** (verifier vault), (c) anything OUTSIDE BRO_HOME by default (clean-build zero-touch;
-      another project's memory is the named case, B4/L8).
-      R-1 REFINEMENT: a NARROW, slug-keyed WHITELIST allows the harness's legitimate, project-scoped paths that
-      Claude/Bro need to operate -- THIS project's auto-memory (~/.claude/projects/<slug>/) and THIS project's
-      scratchpad (...\Temp\claude\<slug>\). The slug is derived from BRO_HOME, so another project's harness memory
-      (e.g. ...-EP) and every EP/DB/GAA/IP project folder remain BLOCKED. Evidence logs (inside BRO_HOME) stay
-      protected by log-append-only-guard -- the whitelist only affects OUTSIDE-BRO_HOME paths.
-  HY: Block Write/Edit արգելված path-ին՝ supermemory, secrets, կամ BRO_HOME-ից ԴՈՒՐՍ (default)։
-      R-1 ՈՒՂՂՈՒՄ՝ NEGH, slug-keyed WHITELIST թույլ է տալիս ԱՅՍ project-ի harness auto-memory-ն ու scratchpad-ը։
-      slug-ը BRO_HOME-ից է -> ուրիշ project-ի harness memory-ն ու ամ. EP/DB/GAA/IP folder մնում են BLOCKED։
+  forbidden-path-write-guard.ps1 — PreToolUse hook (matcher: Write|Edit) · Phase 2 + R-1 + Gate-2 (§11 / B5 / D5)
+  EN: Blocks Write/Edit to a forbidden path. Allowed by default: nothing outside BRO_HOME, except two NARROW
+      exceptions:
+        (R-1) THIS project's harness paths (slug-keyed): ~/.claude/projects/<slug>/ and ...\Temp\claude\<slug>\
+        (Gate-2) a REGISTERED project's approved install subtree: <project_path>\bro\  ONLY, validated against the
+                 registry (status REGISTERED|INSTALLED). NOT the project root, NOT <project_path>\memory, NOT an
+                 unregistered project, NOT another project. The registration is the Gev-gated approval.
+      Still blocks: memory/supermemory/**, memory/_own/secrets/**, another project's memory, project roots, and any
+      other outside-BRO_HOME path. Evidence-log edit/delete stays protected by log-append-only-guard.
+  HY: Block Write/Edit արգելված path-ին։ Default-ով՝ ոչինչ BRO_HOME-ից դուրս, բացի երկու ՆԵՂ բացառությունից՝
+        (R-1) այս project-ի harness paths (slug-keyed), (Gate-2) REGISTERED project-ի `<path>\bro\` ՄԻԱՅՆ
+        (registry-validated; ոչ root, ոչ `\memory`, ոչ unregistered, ոչ ուրիշ project)։
   SAFETY: fail-OPEN on any internal/parse error (exit 0); deny ONLY on a confirmed forbidden match. Allow=0, Deny=2.
+          Registry source = $env:BRO_REGISTRY_PATH if set (test seam), else memory/_own/registry.json.
 #>
 try {
   $raw = [Console]::In.ReadToEnd()
@@ -28,21 +29,35 @@ try {
   $superL  = ($broHome.ToLower().TrimEnd('\') + '\memory\supermemory\')
   $secretL = ($broHome.ToLower().TrimEnd('\') + '\memory\_own\secrets\')
 
-  # R-1 whitelist: THIS project's harness slug, derived from BRO_HOME (portable, D3).
+  # R-1 harness whitelist (slug-keyed to THIS project)
   $slugL = (($broHome.Substring(0,1).ToLower() + $broHome.Substring(1)) -replace ':','-' -replace '\\','-').ToLower()
-  $wlMem     = '\.claude\projects\' + $slugL + '\'   # ~/.claude/projects/<slug>/ (harness auto-memory + state)
-  $wlScratch = '\temp\claude\'      + $slugL + '\'   # ...\Temp\claude\<slug>\ (scratchpad/temp)
+  $wlMem     = '\.claude\projects\' + $slugL + '\'
+  $wlScratch = '\temp\claude\'      + $slugL + '\'
   $whitelisted = $absL.Contains($wlMem) -or $absL.Contains($wlScratch)
+
+  # Gate-2 registry-keyed /bro/ exception: allow only a REGISTERED project's <project_path>\bro\ subtree.
+  function Test-RegisteredBro([string]$targetL, [string]$bh) {
+    $regPath = if ($env:BRO_REGISTRY_PATH) { $env:BRO_REGISTRY_PATH } else { Join-Path $bh 'memory\_own\registry.json' }
+    try {
+      $reg = Get-Content -Raw $regPath | ConvertFrom-Json
+      foreach ($p in @($reg.projects)) {
+        if ("$($p.status)" -in @('REGISTERED','INSTALLED')) {
+          $pbro = ((("$($p.project_path)") -replace '/','\').TrimEnd('\') + '\bro\').ToLower()
+          if ($targetL.StartsWith($pbro)) { return $true }
+        }
+      }
+    } catch {}
+    return $false
+  }
 
   $forbidden = $false; $why = ''
   if ($absL.StartsWith($superL)) { $forbidden = $true; $why = 'write into sealed read-only supermemory mirror (B6)' }
   elseif ($absL.StartsWith($secretL)) { $forbidden = $true; $why = 'write into secrets/verifier vault' }
   elseif (-not $absL.StartsWith($homePrefix)) {
-    if ($whitelisted) {
-      exit 0   # R-1: legitimate, project-scoped harness-memory / scratchpad write -> allow
-    }
+    if ($whitelisted) { exit 0 }                                  # R-1 harness whitelist
+    if (Test-RegisteredBro $absL $broHome) { exit 0 }             # Gate-2 registered <project>\bro\ exception
     $forbidden = $true
-    if ($absL -match '\\(ep|db|gaa|gaahex|ip)\\') { $why = 'write into another project memory (cross-project, B4/L8)' }
+    if ($absL -match '\\(ep|db|gaa|gaahex|ip)\\') { $why = 'write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)' }
     else { $why = 'write outside BRO_HOME (clean-build zero-touch)' }
   }
 

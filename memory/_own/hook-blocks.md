@@ -230,3 +230,115 @@ result: BLOCKED
 reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:43+04:00
+actor: hook
+session_id: G2
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\notes.txt
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:43+04:00
+actor: hook
+session_id: G2
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\memory\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:44+04:00
+actor: hook
+session_id: G2
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\bro\memory\seed.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:45+04:00
+actor: hook
+session_id: G2
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:46+04:00
+actor: hook
+session_id: G2
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\memory\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:46+04:00
+actor: hook
+session_id: G2
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\notes.txt
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:47+04:00
+actor: hook
+session_id: G2
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:14:48+04:00
+actor: hook
+session_id: G1
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\bro\memory\PROJECT_MEMORY.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
