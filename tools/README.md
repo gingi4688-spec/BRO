@@ -23,7 +23,10 @@
 - **`bro-log.ps1`** — the ONLY sanctioned append-only evidence writer; **script-generated** timestamps + session_id (no fabrication). / append-only evidence writer.
 - **`bro-audit.ps1`** — read-only audit suite (manifest · authority · `_own` boundary · drift · enforcement deliverables); flags only, never fixes. `-Log` appends one audit-log entry. F3 whitelist: filename-based `_own` check + GAAhex sealed-mirror whitelist. / read-only audit.
 - **`bro-health.ps1`** — regenerates `memory/_own/health-dashboard.md` from doctor+audit (a generated snapshot, overwrite — not append-only). / health snapshot generator.
-- **`bro-spine-check.ps1`** — read-only spine integrity (live spine at root OD-6 · key content · spine_version · RELEASES empty OD-5). / spine integrity.
+- **`bro-spine-check.ps1`** — read-only spine integrity (live spine at root OD-6 · key content · spine_version · RELEASES well-formed). / spine integrity.
+
+### Beast hardening — project-scoped tooling
+- **`bro-project-doctor.ps1`** — read-only, **fail-closed** project-scoped doctor: cross-checks an INSTALLED Project Bro against the registry + its pulled spine release (skeleton · manifest validity · project_id/memory_scope/authority/status/spine_version match · 392/392 spine hash verify · memory/logs/health existence · no unexpected supermemory mirror). Unknown / missing / mismatched → **RED**. Reads metadata only — never the project's sealed memory content (B4/L8). `-RegistryPath` is an explicit test parameter (no env bypass). / fail-closed project doctor.
 
 > **Enforcement model:** hooks **fail OPEN** on any internal error (never brick a session) and **DENY (exit 2)** only on a confirmed forbidden match; matchers are narrow. Hooks are installed in `.claude/settings.json` (separate from the preserved `settings.local.json`) and proven by direct invocation (exit codes); **live enforcement applies on the next session load**. / Hook-երը fail-OPEN են error-ին, DENY միայն confirmed match-ին; proven exit-code-ով; live enforcement-ը հաջորդ session-ից։
 
