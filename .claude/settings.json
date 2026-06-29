@@ -1,0 +1,34 @@
+{
+  "_comment_en": "SuperBro structural enforcement hooks (clean-build Phase 2, §11/D5/B5). The WALL: critical gates are scripts + exit codes, not markdown. Narrow matchers; each guard fails OPEN on internal error and DENIES (exit 2) only on a confirmed forbidden match. This file holds ONLY SuperBro hooks; settings.local.json is separate and untouched.",
+  "_comment_hy": "SuperBro-ի կառուցվածքային enforcement hook-եր (Phase 2, §11/D5/B5)։ ՊԱՏԸ՝ critical gate-երը script + exit code են, ոչ markdown։ Narrow matcher; ամ. guard fail-OPEN է error-ի դեպքում ու DENY (exit 2) միայն confirmed forbidden match-ին։ Այս ֆայլը պահում է ՄԻԱՅՆ SuperBro hook-երը; settings.local.json-ը առանձին է ու անձեռնմխելի։",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/forbidden-path-write-guard.ps1\"" },
+          { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/log-append-only-guard.ps1\"" }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/cross-memory-read-guard.ps1\"" }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/critical-command-gate.ps1\"" }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/preflight-printer.ps1\"" }
+        ]
+      }
+    ]
+  }
+}

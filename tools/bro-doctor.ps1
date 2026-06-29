@@ -85,6 +85,24 @@ if ($libOk) {
   Check ($critLive.Count -eq 0) "no critical command is live in the clean build (all gated)" "critical commands wrongly live: $($critLive.Count)"
 }
 ""
+"[7] Phase 2 - Enforcement + Evidence + Doctor/Audit"
+$p2files = @(
+  'tools/hooks/forbidden-path-write-guard.ps1','tools/hooks/cross-memory-read-guard.ps1',
+  'tools/hooks/critical-command-gate.ps1','tools/hooks/log-append-only-guard.ps1','tools/hooks/preflight-printer.ps1',
+  'tools/bro-log.ps1','tools/bro-audit.ps1','tools/bro-health.ps1','tools/bro-spine-check.ps1'
+)
+foreach ($f in $p2files) { Check (Test-Path $f) "$f" "MISSING: $f" }
+$setOk = $false; $set = $null
+try { $set = Get-Content -Raw '.claude/settings.json' | ConvertFrom-Json; $setOk = $true } catch {}
+Check $setOk ".claude/settings.json is valid JSON" ".claude/settings.json INVALID/missing"
+if ($setOk) {
+  Check ($null -ne $set.hooks.PreToolUse) "settings.json registers PreToolUse hooks" "no PreToolUse hooks registered"
+  Check ($null -ne $set.hooks.SessionStart) "settings.json registers SessionStart hook" "no SessionStart hook registered"
+}
+Check (Test-Path '.claude/settings.local.json') "settings.local.json preserved (untouched)" "settings.local.json MISSING (must be preserved)"
+$crs = @(Get-ChildItem 'change-requests' -File -Filter 'CR-*.md' -ErrorAction SilentlyContinue)
+Check ($crs.Count -ge 1) "change-request recorded for hook install ($($crs.Count))" "no change-request file found"
+""
 $status = 'GREEN'; $code = 0
 if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }
 elseif ($script:warn.Count -gt 0) { $status = 'YELLOW'; $code = 1 }

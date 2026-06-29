@@ -1,0 +1,35 @@
+<#
+  bro-spine-check.ps1 — READ-ONLY spine integrity check (clean-build Phase 2, §6 / OD-6 / OD-5)
+  EN: Verifies the live spine is present at BRO_HOME root dirs (OD-6), key spine content exists, the manifest
+      carries a spine_version, and spine/RELEASES is empty (OD-5, no cut). Read-only; writes nothing.
+  HY: Ստուգում է live spine-ը root-ում (OD-6), key spine content, manifest spine_version, ու RELEASES դատարկ (OD-5)։
+  Exit: 0=GREEN 1=YELLOW 2=RED 3=CRITICAL.
+#>
+$ErrorActionPreference = 'Stop'
+Set-Location -Path (Join-Path $PSScriptRoot '..')
+$problems = @(); $warn = @()
+function Chk([bool]$c,[string]$ok,[string]$bad,[switch]$W){ if($c){"  [OK]   $ok"} elseif($W){"  [WARN] $bad";$script:warn+=$bad} else {"  [FAIL] $bad";$script:problems+=$bad} }
+
+"bro-spine-check - READ-ONLY"
+"[A] Live spine at BRO_HOME root (OD-6)"
+foreach ($d in @('_core','skills','self','roster')) { Chk (Test-Path $d -PathType Container) "live spine dir: $d/" "missing spine dir: $d/" }
+
+"[B] Key spine content present"
+foreach ($f in @('_core/laws/00_inviolable.md','_core/laws/05_memory_isolation.md','self/persona.md','skills')) {
+  Chk (Test-Path $f) "present: $f" "missing key spine item: $f"
+}
+
+"[C] Manifest spine_version"
+$mf = $null; try { $mf = Get-Content -Raw 'bro.manifest.json' | ConvertFrom-Json } catch {}
+Chk ($null -ne $mf) "manifest readable" "manifest unreadable"
+if ($mf) { Chk (("$($mf.spine_version)") -match '^v\d') "spine_version = $($mf.spine_version)" "spine_version missing/odd" }
+
+"[D] RELEASES empty (OD-5, no cut)"
+$rel = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
+Chk ($rel.Count -eq 0) "spine/RELEASES empty (no cut)" "RELEASES not empty (OD-5 violated): $($rel.Count) file(s)"
+
+$status='GREEN'; $code=0
+if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$status='YELLOW';$code=1}
+"RESULT: $status  (problems=$($problems.Count), warnings=$($warn.Count))"
+"NOTE: read-only - no files changed."
+exit $code

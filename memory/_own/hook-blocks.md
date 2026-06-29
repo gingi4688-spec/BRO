@@ -4,3 +4,73 @@
 > **HY:** Append-only evidence — ամ. structural-hook-ի block։ **Tracked `.md` (P0-R2):** `*.log`-ը gitignored է, ուստի այս evidence-ը `.md` է՝ Git-ում tamper-evident մնալու։ Hook-երը install են **Phase 2**-ում — մինչ այդ դատարկ։
 
 <!-- block entries appended below by the append-only script; do not hand-edit (D7/§13A) -->
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T07:54:41+04:00
+actor: hook
+session_id: P2TEST
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\bro\memory\PROJECT_MEMORY.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into another project memory (cross-project, B4/L8)
+files_changed: none
+```
+
+## BLOCK - log-append-only-guard
+```txt
+timestamp: 2026-06-29T07:54:42+04:00
+actor: hook
+session_id: P2TEST
+action: LOG_EDIT_BLOCKED
+target: C:\Users\Admin\Desktop\Bro\memory\_own\audit-log.md
+source_command: Edit tool
+authority: hook
+result: BLOCKED
+reason: evidence logs are append-only (use tools/bro-log.ps1); edit/delete requires explicit Gev command
+files_changed: none
+```
+
+## BLOCK - cross-memory-read-guard
+```txt
+timestamp: 2026-06-29T07:54:43+04:00
+actor: hook
+session_id: P2TEST
+action: CROSS_MEMORY_READ_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\memory\SECRET.md
+source_command: Read tool
+authority: hook
+result: BLOCKED
+reason: cross-project memory read forbidden (B4/L8); a Bro reads only its own project's memory
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-06-29T07:54:44+04:00
+actor: hook
+session_id: P2TEST
+action: CRITICAL_COMMAND_BLOCKED
+target: git push origin main
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T07:54:46+04:00
+actor: hook
+session_id: P2TEST
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\bro\memory\PROJECT_MEMORY.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into another project memory (cross-project, B4/L8)
+files_changed: none
+```
