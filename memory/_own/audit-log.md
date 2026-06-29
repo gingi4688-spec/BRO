@@ -121,3 +121,18 @@ result: GREEN
 files_changed: _core/EP_PILOT_ASSUMPTIONS.md (new) + memory/_own/audit-log.md (append)
 notes: path=C:\Users\Admin\Desktop\EP | project_id=EP | memory_scope=EP_only | install=Desktop\EP\bro | memory_source=FRESH | existing Desktop\EP\memory UNTOUCHED | no adopt | no migrate | no mirror | authority=ProjectBro under SuperBro | EP pulls future v1.0.0 | PLAN ONLY: no register, no install, no release cut, no migration, no EP read/write, no push
 ```
+
+## PROJECT_AUDIT (EP)
+```txt
+timestamp: 2026-06-29T09:55:03+04:00
+actor: Bro
+session_id: BRO-20260629-095503
+event: PROJECT_AUDIT
+action: READ_ONLY_AUDIT
+target: project EP (C:\Users\Admin\Desktop\EP)
+source_command: tools/bro-project-audit.ps1
+authority: Bro
+result: GREEN
+files_changed: none
+notes: scope=EP_only status=INSTALLED spine=v1.0.0 hashes=392/392
+```
