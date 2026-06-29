@@ -181,3 +181,33 @@ result: GREEN
 files_changed: none
 notes: audit GREEN; problems=0 warnings=0; codes=[]; commit=5d47a8f; tree=clean; spine=v1.0.0; skills=v7_6
 ```
+
+## PROJECT_AUDIT (DB) commit=479236b
+```txt
+timestamp: 2026-06-29T12:11:05+04:00
+actor: Bro
+session_id: BRO-20260629-121105
+event: PROJECT_AUDIT
+action: READ_ONLY_AUDIT
+target: project DB (C:\Users\Admin\Desktop\DB)
+source_command: tools/bro-project-audit.ps1
+authority: Bro
+result: GREEN
+files_changed: none
+notes: scope=DB_only status=INSTALLED spine=v1.0.0 hashes=392/392 commit=479236b
+```
+
+## AUDIT_RUN (bro-audit.ps1) commit=479236b
+```txt
+timestamp: 2026-06-29T12:11:06+04:00
+actor: Bro
+session_id: BRO-20260629-121106
+event: AUDIT_RUN
+action: READ_ONLY_AUDIT
+target: SuperBro self
+source_command: tools/bro-audit.ps1
+authority: Bro
+result: GREEN
+files_changed: none
+notes: audit GREEN; problems=0 warnings=0; codes=[]; commit=479236b; tree=DIRTY; spine=v1.0.0; skills=v7_6
+```
