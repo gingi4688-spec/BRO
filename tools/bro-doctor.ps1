@@ -121,8 +121,13 @@ try { $reg2 = Get-Content -Raw 'memory/_own/registry.json' | ConvertFrom-Json; $
 Check $reg2Ok "registry.json valid JSON" "registry.json INVALID"
 if ($reg2Ok) {
   $pc = @($reg2.projects).Count
-  Check ($pc -eq 0) "registry EMPTY (clean build: 0 projects)" "registry has $pc entries (clean build expects 0)"
+  "  [OK]   registry has $pc registered project(s) (metadata only)"
   Check ($null -ne $reg2.entry_schema) "registry entry_schema present" "registry entry_schema missing"
+  $reqf = @('project_id','project_path','memory_scope','authority','status')
+  $badEntries = @($reg2.projects | Where-Object { $e=$_; @($reqf | Where-Object { -not $e.$_ }).Count -gt 0 })
+  Check ($badEntries.Count -eq 0) "all registry entries carry required metadata fields" "incomplete registry entries: $($badEntries.Count)"
+  $b4bad = @($reg2.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\(ep|db|gaa|gaahex|ip)\\bro\\memory' })
+  Check ($b4bad.Count -eq 0) "no registry path inside another project's memory (B4)" "B4-violating registry paths: $($b4bad.Count)"
 }
 # the PHASE-3-DRY rollout commands must have their dry backings present (and stay non-CLEAN-BUILD = gated/dry)
 if ($libOk) {

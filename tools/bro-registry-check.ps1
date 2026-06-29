@@ -21,7 +21,7 @@ if ($ok) {
   Chk ($null -ne $reg.entry_schema) "entry_schema present" "entry_schema missing"
   $projects = @($reg.projects)
   Chk ($null -ne $reg.projects) "projects is present (count=$($projects.Count))" "projects key missing"
-  Chk ($projects.Count -eq 0) "registry EMPTY (clean build: 0 projects)" "registry has $($projects.Count) entries (clean build expects 0)" -W
+  "  [OK]   registry has $($projects.Count) registered project(s) (metadata only)"
   foreach ($p in $projects) {
     foreach ($k in @('project_id','project_path','memory_scope','status')) {
       Chk ($null -ne $p.$k) "entry $($p.project_id): field $k present" "entry missing field $k"

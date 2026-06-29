@@ -56,8 +56,10 @@ Chk ($strayDirs.Count -eq 0) "_own dirs = secrets only" "stray dirs in _own: $($
 # registry holds metadata only; in the clean build it must be empty
 $reg=$null; try { $reg = Get-Content -Raw 'memory/_own/registry.json' | ConvertFrom-Json } catch {}
 $regCount = if ($reg) { @($reg.projects).Count } else { -1 }
-Chk ($regCount -ge 0) "registry.json valid" "registry.json missing/invalid" 'SUPER_OWN_POLLUTION'
-Chk ($regCount -eq 0) "registry empty (clean build: 0 projects)" "registry has $regCount entries (clean build expects 0)" 'CROSS_PROJECT_CONTAMINATION' -W
+Chk ($regCount -ge 0) "registry.json valid ($regCount registered project(s), metadata only)" "registry.json missing/invalid" 'SUPER_OWN_POLLUTION'
+$regContentBad = @()
+if ($regCount -gt 0) { $regContentBad = @($reg.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\(ep|db|gaa|gaahex|ip)\\bro\\memory' }) }
+Chk ($regContentBad.Count -eq 0) "no registry path inside another project's memory (B4)" "B4-violating registry paths: $($regContentBad.Count)" 'CROSS_PROJECT_CONTAMINATION'
 ""
 "[D] Drift / boundary (read-only)"
 foreach ($d in @('_core','skills','self','roster')) { Chk (Test-Path $d -PathType Container) "live spine present: $d/" "spine drift: missing $d/" 'SPINE_STALE' }
