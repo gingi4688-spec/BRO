@@ -151,3 +151,18 @@ result: GREEN
 files_changed: EP/bro/.claude/settings.json + EP/bro/tools/hooks/{4 guards} + EP/bro/logs/hook-blocks.md (NOT in SuperBro repo)
 notes: EP-local wall: home=EP/bro scope=EP_only; EP guards proven 6/6 (write EP\memory BLOCK, write EP\bro\memory ALLOW, write DB BLOCK, read DB BLOCK, read own EP memory ALLOW, git push BLOCK). SuperBro wall NOT weakened: tools/hooks 0 files changed; DB+EP\memory writes still BLOCK, EP\bro ALLOW (registered), reads BLOCK. Desktop\EP\memory NOT touched. EP+SuperBro doctor/audit GREEN.
 ```
+
+## BOUNDARY CORRECTION - SuperBro-only strengthening (L10)
+```txt
+timestamp: 2026-06-29T10:34:41+04:00
+actor: Bro
+session_id: BRO-20260629-103441
+event: BOUNDARY_CORRECTION
+action: ROLLBACK_AND_RELOCATE
+target: EP/bro local enforcement (wrongly added in Beast Gate 3)
+source_command: Gev: CORRECT BEAST HARDENING BOUNDARY
+authority: Gev-command
+result: GREEN
+files_changed: removed EP/bro/{.claude,tools,logs/hook-blocks.md}; added tools/templates/project-bro/{.claude,tools/hooks}; bro-install delivers template enforcement; _core/laws/02_architecture.md L10; README/template/project-audit framing fixed
+notes: LAW: Only SuperBro strengthens; Project Bros are consumers (L10). Beast Gate 3 wrongly gave EP/bro its OWN local enforcement as 'autonomous EP strengthening' - boundary violation. CORRECTED: EP-local enforcement files ROLLED BACK (EP/bro back to install baseline); enforcement skeleton RELOCATED to the SuperBro template, delivered via governed bro-install. EP remains an installed, isolated, NON-self-evolving instance. Desktop\EP\memory NOT touched; no adopt/migrate/mirror; no project content into _own. NOTE: 304bd0f was already pushed last turn (forward-fix, no history rewrite).
+```

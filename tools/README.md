@@ -31,7 +31,15 @@
 
 - **`bro-beast-check.ps1`** — the **whole-factory regression matrix**: one runner aggregating git state · SuperBro doctor/audit/spine-check/registry-check · project doctor + audit (EP) · release v1.0.0 verify · live guard regression (cross-project write/read BLOCK, in-home ALLOW, evidence-log edit BLOCK, push BLOCK, approved push ALLOW) · isolation proof · no-secret/pre-push dry check → single **GREEN/RED** verdict (exit 0/2). Guard tests run via `Start-Process` stdin and log block evidence to a temp file (test-mode `BRO_HOOKBLOCKS_PATH`, gated by `BRO_TEST_MODE=1`) so the canonical `hook-blocks.md` stays clean and the runner is idempotent. / factory-wide regression matrix.
 
-> **EP/bro autonomous enforcement (Beast Gate 3):** the EP Project Bro carries its OWN local wall at `C:\Users\Admin\Desktop\EP\bro\` — `.claude/settings.json` + `tools/hooks/{forbidden-path-write,cross-memory-read,critical-command-gate,preflight-printer}.ps1` (EP-adapted: home = EP/bro, scope EP_only, evidence → `EP/bro/logs/hook-blocks.md`). These live OUTSIDE the SuperBro repo (not committed here). They enforce EP_only scope, block reads/writes to non-EP project memory, block writes outside `EP\bro\`, and gate push/critical on `BRO_GEV_APPROVED=1` — WITHOUT weakening the SuperBro wall (SuperBro `tools/hooks` unchanged). / EP-ի սեփական wall EP/bro-ում, SuperBro-ից դուրս, SuperBro-ն չթուլացնելով։
+> **Project Bro enforcement = SuperBro-owned template, governed delivery (corrected, L10):** the Project Bro
+> enforcement skeleton (`.claude/settings.json` + `tools/hooks/{forbidden-path-write,cross-memory-read,critical-command-gate,preflight-printer}.ps1`,
+> evidence → the project's `logs/hook-blocks.md`) is **authored in SuperBro** at `tools/templates/project-bro/` and
+> **delivered into a Project Bro by `bro-install`** (governed). A Project Bro is a **CONSUMER**, never the source of
+> new enforcement (L10 — Only SuperBro strengthens). **Boundary correction:** an earlier Beast gate wrongly added these
+> files directly to `Desktop\EP\bro` as "EP autonomous strengthening" — that was rolled back; the skeleton now lives in
+> the SuperBro template and reaches any Project Bro only through a governed install/update. EP remains an installed,
+> isolated instance that does **not** self-evolve. / Project Bro-ի enforcement-ը SuperBro-ի template-ում է, governed
+> delivery-ով (L10); Project Bro-ն CONSUMER է, ոչ աղբյուր. EP-ի ուղիղ ավելացումը rolled back է։
 
 > **Enforcement model:** hooks **fail OPEN** on any internal error (never brick a session) and **DENY (exit 2)** only on a confirmed forbidden match; matchers are narrow. Hooks are installed in `.claude/settings.json` (separate from the preserved `settings.local.json`) and proven by direct invocation (exit codes); **live enforcement applies on the next session load**. / Hook-երը fail-OPEN են error-ին, DENY միայն confirmed match-ին; proven exit-code-ով; live enforcement-ը հաջորդ session-ից։
 

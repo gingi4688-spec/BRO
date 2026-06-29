@@ -1,0 +1,14 @@
+{
+  "_comment_en": "Project Bro LOCAL enforcement, AUTHORED BY SUPERBRO and DELIVERED via bro-install (governed). Scope = the installed project's memory_scope. This is NOT project-owned evolution; it is a SuperBro-controlled template. Guards compute home from their own location (X/bro). Critical actions require BRO_GEV_APPROVED=1.",
+  "_comment_hy": "Project Bro-ի LOCAL enforcement, ՀԵՂԻՆԱԿԸ SuperBro-ն է, DELIVERED է bro-install-ով (governed)։ Սա ՈՉ project-owned evolution է; SuperBro-controlled template է։ Critical action-ները պահանջում են BRO_GEV_APPROVED=1.",
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Write|Edit", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/forbidden-path-write-guard.ps1\"" } ] },
+      { "matcher": "Read", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/cross-memory-read-guard.ps1\"" } ] },
+      { "matcher": "Bash|PowerShell", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/critical-command-gate.ps1\"" } ] }
+    ],
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/preflight-printer.ps1\"" } ] }
+    ]
+  }
+}

@@ -58,7 +58,7 @@ $rg = 'tools/hooks/cross-memory-read-guard.ps1'
 $scopeAware = (Test-Path $rg) -and ((Get-Content -Raw $rg) -match 'memory_scope' -and (Get-Content -Raw $rg) -match 'targetProj')
 "  isolation_guard:   scope-aware cross-memory-read-guard present=$scopeAware (a Bro reads only its own scope's memory; live block proof in beast-regression)"
 "  touched_boundaries: writable surface = $broDir\  ONLY  |  $ppath\memory NOT writable  |  project root NOT writable (registry grants only \bro\)"
-"  known_limitations: EP/bro own enforcement hooks land in Beast Gate 3; guard test-seams hardened in Beast Gate 4; sealed memory content never read by audit (B4/L8)."
+"  known_limitations: Project Bro enforcement is SuperBro-owned (authored in the template, delivered by governed install; L10) - NOT project-local evolution; guard test-seams hardened behind BRO_TEST_MODE; sealed memory content never read by audit (B4/L8)."
 
 # project doctor verdict (reused, fail-closed)
 "[project doctor verdict]"

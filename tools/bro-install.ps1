@@ -118,8 +118,14 @@ try {
   )
   Set-Content -Path (Join-Path $broDir 'health.report.md') -Value $health -Encoding utf8
 
+  # 7) deliver the SuperBro-authored enforcement skeleton (governed delivery; NOT project-local evolution).
+  #    Project Bros are CONSUMERS of SuperBro template/tooling (see _core/laws/02_architecture.md L10).
+  if (Test-Path 'tools/templates/project-bro/.claude') { Copy-Item 'tools/templates/project-bro/.claude' -Destination $broDir -Recurse -Force }
+  if (Test-Path 'tools/templates/project-bro/tools')   { Copy-Item 'tools/templates/project-bro/tools'   -Destination $broDir -Recurse -Force }
+
   "  INSTALLED $ProjectId at $broDir (spine pulled $Version, VERIFIED $(@($relMf.files).Count) files, stamped)."
   "  created: $broDir\spine\  $broDir\memory\MEMORY.md  $broDir\logs\  $broDir\bro.manifest.json  $broDir\health.report.md"
+  "  enforcement (from SuperBro template): $broDir\.claude\settings.json  $broDir\tools\hooks\*  (governed delivery)"
   exit 0
 } catch {
   "  ERROR during install: $($_.Exception.Message)"
