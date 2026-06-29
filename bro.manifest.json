@@ -13,10 +13,10 @@
   "bro_home": "C:\\Users\\Admin\\Desktop\\Bro",
   "machine_name": "DESKTOP-3SNK3IJ",
   "last_memory_sync": "n/a",
-  "last_audit": "2026-06-29T07:14:32+04:00",
+  "last_audit": "2026-06-29T07:43:31+04:00",
   "status": "GREEN",
-  "phase": "phase-0-foundation",
+  "phase": "phase-1-command-palette",
   "built_at": "2026-06-29T07:14:32+04:00",
-  "note_en": "Clean SuperBro Phase 0 foundation. spine_version is a STATE label (in-place _core+skills+self+roster), NOT a packaged release (OD-5). Full skill/agent registry = Phase 1. Hashes are real SHA-256 over current content (no fabrication).",
-  "note_hy": "Մաքուր SuperBro Phase 0 foundation. spine_version-ը STATE label է (in-place spine), ոչ release (OD-5)։ Լրիվ registry = Phase 1։ Hash-երը real SHA-256 են (ոչ fabrication)։"
+  "note_en": "Clean SuperBro build. Phase 1 = Guided Command Palette + Command Library (read-only commands live; critical/future commands preview-wired but execution-gated). spine_version is a STATE label (in-place _core+skills+self+roster), NOT a packaged release (OD-5). Hashes are real SHA-256 over current content (no fabrication).",
+  "note_hy": "Մաքուր SuperBro build. Phase 1 = Guided Command Palette + Command Library (read-only-ները live; critical/future-ները preview-wired բայց execution-gated)։ spine_version-ը STATE label է (in-place spine), ոչ release (OD-5)։ Hash-երը real SHA-256 են (ոչ fabrication)։"
 }

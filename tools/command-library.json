@@ -1,0 +1,156 @@
+{
+  "schema_version": "v1",
+  "comment_en": "Command Library — the maintained catalog behind the Guided Command Palette (§6B / roadmap §5). READ-ONLY commands are live in the clean build; CRITICAL/FUTURE commands are preview-wired but execution-gated. Backing values are CONTRACTS the palette dispatches by name (no arbitrary execution). Bilingual per L0.",
+  "comment_hy": "Command Library — Guided Command Palette-ի հետևի պահվող catalog (§6B / roadmap §5)։ READ-ONLY-ները live են մաքուր build-ում; CRITICAL/FUTURE-ները preview-wired են բայց execution-gated։ backing-ը contract է, palette-ը dispatch է անում ըստ անվան (ոչ arbitrary execution)։ Երկլեզու՝ L0։",
+  "availability_legend": "CLEAN-BUILD = live now | PHASE-N = live after that phase | RUNTIME = finished-SuperBro cmd | FUTURE = designed, execution deferred to Rollout",
+  "commands": [
+    {
+      "name": "HELP",
+      "purpose_en": "List commands and what is safe to run now.",
+      "purpose_hy": "Թվարկել command-ները ու ինչն է հիմա ապահով.",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "CLEAN-BUILD", "backing": "internal", "files_affected": "none",
+      "preview_en": "Prints the command catalog; reads nothing on disk except this library.",
+      "preview_hy": "Տպում է catalog-ը; ոչինչ չի կարդում disk-ից բացի այս library-ից."
+    },
+    {
+      "name": "SHOW REGISTRY",
+      "purpose_en": "Show registered projects (none yet in the clean build).",
+      "purpose_hy": "Ցույց տալ registered project-ները (մաքուր build-ում դեռ ոչ մեկը).",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "CLEAN-BUILD", "backing": "tools/bro-show-registry.ps1",
+      "files_affected": "reads memory/_own/registry.json",
+      "preview_en": "Reads and prints registry.json (metadata only). Writes nothing.",
+      "preview_hy": "Կարդում ու տպում է registry.json (միայն metadata)։ Ոչինչ չի գրում."
+    },
+    {
+      "name": "SHOW HEALTH",
+      "purpose_en": "Print the last health snapshot.",
+      "purpose_hy": "Տպել վերջին health snapshot-ը.",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "CLEAN-BUILD", "backing": "tools/bro-show-health.ps1",
+      "files_affected": "reads memory/_own/health-dashboard.md",
+      "preview_en": "Reads and prints the generated health-dashboard snapshot. Writes nothing.",
+      "preview_hy": "Կարդում ու տպում է health-dashboard snapshot-ը։ Ոչինչ չի գրում."
+    },
+    {
+      "name": "RUN DOCTOR",
+      "purpose_en": "Run the read-only skeleton/manifest/authority self-check.",
+      "purpose_hy": "Վազեցնել read-only skeleton/manifest/authority self-check-ը.",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "CLEAN-BUILD", "backing": "tools/bro-doctor.ps1",
+      "files_affected": "reads bro.manifest.json, bro.home.json, memory/_own/*, spine/* ; writes none",
+      "preview_en": "Runs bro-doctor (read-only). Returns GREEN/YELLOW/RED/CRITICAL + exit code. Changes nothing.",
+      "preview_hy": "Վազեցնում է bro-doctor (read-only)։ Վերադարձնում է GREEN/YELLOW/RED/CRITICAL + exit code։ Ոչինչ չի փոխում."
+    },
+    {
+      "name": "RUN AUDIT",
+      "purpose_en": "Read-only audit: drift + manifest + hash + boundary; flags only.",
+      "purpose_hy": "Read-only audit՝ drift + manifest + hash + boundary; միայն flag.",
+      "category": "CRITICAL", "criticality": "MED", "requires_gev": false, "mode": "READ",
+      "availability": "PHASE-2", "backing": "tools/bro-audit.ps1",
+      "files_affected": "reads only; writes none (audit never fixes/moves/deletes)",
+      "preview_en": "Backing audit suite lands in Phase 2. Until then this command previews only and runs nothing.",
+      "preview_hy": "Audit suite-ը գալիս է Phase 2-ում։ Մինչ այդ՝ միայն preview, ոչինչ չի վազում."
+    },
+    {
+      "name": "REVIEW QUARANTINE",
+      "purpose_en": "List quarantine candidates (flags only; no file moved).",
+      "purpose_hy": "Թվարկել quarantine candidate-ները (միայն flag; ոչ ֆայլ շարժած).",
+      "category": "CRITICAL", "criticality": "MED", "requires_gev": false, "mode": "READ",
+      "availability": "PHASE-2", "backing": "tools/bro-audit.ps1",
+      "files_affected": "reads memory/_quarantine/ ; writes none",
+      "preview_en": "Quarantine review lands in Phase 2 (audit suite). Flags candidates only; the move itself is a separate Gev-gated action.",
+      "preview_hy": "Quarantine review-ը Phase 2-ում է։ Միայն flag; շարժը առանձին Gev-gated action է."
+    },
+    {
+      "name": "RELEASE SPINE",
+      "purpose_en": "Publish an approved spine release (versioned, pull-based).",
+      "purpose_hy": "Հրապարակել approved spine release (versioned, pull-based).",
+      "category": "CRITICAL", "criticality": "CRITICAL", "requires_gev": true, "mode": "WRITE",
+      "availability": "PHASE-4", "backing": "tools/bro-release.ps1",
+      "files_affected": "writes spine/RELEASES/v<ver>/ + memory/_own/release-log.md (append)",
+      "preview_en": "Release system lands in Phase 4. OD-5: the v1.0.0 cut is deferred. Requires Gev authority + YES. Runs nothing now.",
+      "preview_hy": "Release system-ը Phase 4-ում է։ OD-5՝ v1.0.0 cut-ը հետաձգված է։ Պահանջում է Gev authority + YES։ Հիմա ոչինչ չի վազում."
+    },
+    {
+      "name": "START BUILD",
+      "purpose_en": "Begin an approved build phase (finished-SuperBro runtime command).",
+      "purpose_hy": "Սկսել approved build phase (finished-SuperBro runtime command).",
+      "category": "CRITICAL", "criticality": "CRITICAL", "requires_gev": true, "mode": "WRITE",
+      "availability": "RUNTIME", "backing": "GATED",
+      "files_affected": "depends on the approved phase plan",
+      "preview_en": "Runtime command. A build phase begins ONLY on Gev's explicit command. Never from a vague input. Runs nothing now.",
+      "preview_hy": "Runtime command։ Build phase սկսվում է ՄԻԱՅՆ Գևի բացահայտ հրամանով։ Երբեք vague input-ից։ Հիմա ոչինչ չի վազում."
+    },
+    {
+      "name": "REGISTER PROJECT",
+      "purpose_en": "Register a project in the registry (metadata only, no project files).",
+      "purpose_hy": "Register անել project registry-ում (միայն metadata, ոչ project ֆայլ).",
+      "category": "CRITICAL", "criticality": "HIGH", "requires_gev": true, "mode": "WRITE",
+      "availability": "PHASE-3-DRY", "backing": "tools/bro-register.ps1",
+      "files_affected": "writes memory/_own/registry.json (metadata only); touches NO project content",
+      "preview_en": "Registry rollout lands in Phase 3 as DRY-RUN only (executes nothing). Refuses a path inside another project's memory.",
+      "preview_hy": "Registry rollout-ը Phase 3-ում է՝ միայն DRY-RUN (ոչինչ չի կատարում)։ Մերժում է ուրիշ project-ի memory-ի մեջ ընկած path."
+    },
+    {
+      "name": "INSTALL PROJECT BRO",
+      "purpose_en": "Install X/bro into a project from the template + pull a spine release.",
+      "purpose_hy": "Install անել X/bro project-ի մեջ template-ից + pull spine release.",
+      "category": "CRITICAL", "criticality": "CRITICAL", "requires_gev": true, "mode": "WRITE",
+      "availability": "PHASE-3-DRY", "backing": "tools/bro-install.ps1",
+      "files_affected": "would create X/bro/ (FUTURE — dry only); touches NO project content in the clean build",
+      "preview_en": "Install rollout lands in Phase 3 as DRY-RUN only (executes nothing, creates no Project Bro).",
+      "preview_hy": "Install rollout-ը Phase 3-ում է՝ միայն DRY-RUN (ոչինչ չի կատարում, ոչ Project Bro)."
+    },
+    {
+      "name": "UPDATE PROJECT BRO SPINE",
+      "purpose_en": "Pull an approved release into X/bro, verify hashes, stamp spine_version.",
+      "purpose_hy": "Pull approved release X/bro-ի մեջ, hash verify, spine_version stamp.",
+      "category": "CRITICAL", "criticality": "CRITICAL", "requires_gev": true, "mode": "WRITE",
+      "availability": "PHASE-3-DRY", "backing": "tools/bro-update-spine.ps1",
+      "files_affected": "would write X/bro/spine/ + manifest (FUTURE — dry only)",
+      "preview_en": "Spine update rollout lands in Phase 3 as DRY-RUN only; the pull/verify/stamp procedure itself lands in Phase 4.",
+      "preview_hy": "Spine update-ը Phase 3-ում է՝ միայն DRY-RUN; pull/verify/stamp procedure-ը Phase 4-ում."
+    },
+    {
+      "name": "RUN PROJECT AUDIT",
+      "purpose_en": "Audit one registered project (read-only).",
+      "purpose_hy": "Audit անել մեկ registered project (read-only).",
+      "category": "CRITICAL", "criticality": "MED", "requires_gev": false, "mode": "READ",
+      "availability": "FUTURE", "backing": "tools/bro-audit.ps1",
+      "files_affected": "reads one project's mirror; writes none",
+      "preview_en": "Project audit needs an installed Project Bro (Rollout). No project exists in the clean build. Runs nothing now.",
+      "preview_hy": "Project audit-ը պահանջում է installed Project Bro (Rollout)։ Մաքուր build-ում project չկա։ Հիմա ոչինչ չի վազում."
+    },
+    {
+      "name": "PROMOTE SKILL",
+      "purpose_en": "Promote a project lesson to the spine (Promotion Gate).",
+      "purpose_hy": "Promote անել project lesson spine (Promotion Gate).",
+      "category": "CRITICAL", "criticality": "CRITICAL", "requires_gev": true, "mode": "WRITE",
+      "availability": "PHASE-4", "backing": "tools/bro-promote.ps1",
+      "files_affected": "writes a candidate spine rule via the Promotion Gate (Gev-gated)",
+      "preview_en": "Promotion Gate lands in Phase 4. No project-specific fact enters the spine without it + Gev approval. Runs nothing now.",
+      "preview_hy": "Promotion Gate-ը Phase 4-ում է։ Ոչ մի project-fact spine չի մտնում առանց դրա + Գևի։ Հիմա ոչինչ չի վազում."
+    },
+    {
+      "name": "CROSS-PROJECT AUDIT",
+      "purpose_en": "Gev-opened, read-only, scoped cross-project review (default OFF).",
+      "purpose_hy": "Գևի բացած, read-only, scoped cross-project review (default OFF).",
+      "category": "CRITICAL", "criticality": "HIGH", "requires_gev": true, "mode": "READ",
+      "availability": "FUTURE", "backing": "GATED",
+      "files_affected": "reads ≥2 project mirrors; output to one project or Super Bro own-log; exit log required",
+      "preview_en": "Cross-project mode is default OFF and opens ONLY by explicit Gev command. No projects exist yet. Runs nothing now.",
+      "preview_hy": "Cross-project mode-ը default OFF է ու բացվում է ՄԻԱՅՆ Գևի բացահայտ հրամանով։ Դեռ project չկա։ Հիմա ոչինչ չի վազում."
+    },
+    {
+      "name": "EXIT",
+      "purpose_en": "Leave the palette.",
+      "purpose_hy": "Դուրս գալ palette-ից.",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "CLEAN-BUILD", "backing": "internal", "files_affected": "none",
+      "preview_en": "Exits the palette loop. Changes nothing.",
+      "preview_hy": "Դուրս է գալիս palette-ից։ Ոչինչ չի փոխում."
+    }
+  ]
+}

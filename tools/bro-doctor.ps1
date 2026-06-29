@@ -64,6 +64,27 @@ foreach ($d in @('_core','skills','self','roster')) { Check (Test-Path $d -PathT
 $rel = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
 Check ($rel.Count -eq 0) "spine/RELEASES empty (no cut, OD-5)" "RELEASES not empty (OD-5 violated)"
 ""
+"[6] Phase 1 - Command Palette + Library (read-only)"
+$p1files = @('_core/COMMAND_LIBRARY.md','tools/command-library.json','tools/bro-palette.ps1','tools/bro-show-registry.ps1','tools/bro-show-health.ps1')
+foreach ($f in $p1files) { Check (Test-Path $f) "$f" "MISSING: $f" }
+$libOk = $false; $lib = $null
+try { $lib = Get-Content -Raw 'tools/command-library.json' | ConvertFrom-Json; $libOk = $true } catch {}
+Check $libOk "command-library.json is valid JSON" "command-library.json INVALID/missing JSON"
+if ($libOk) {
+  $cmds = @($lib.commands)
+  Check ($cmds.Count -ge 5) "library has commands ($($cmds.Count))" "library has too few commands"
+  $reqKeys = @('name','category','requires_gev','mode','availability','backing')
+  $badSchema = @($cmds | Where-Object { $c = $_; @($reqKeys | Where-Object { $null -eq $c.$_ }).Count -gt 0 })
+  Check ($badSchema.Count -eq 0) "every command carries the required schema keys" "schema-incomplete commands: $($badSchema.Count)"
+  # read-only live commands must resolve to an existing backing (or 'internal')
+  $liveRO = @($cmds | Where-Object { $_.category -eq 'READ-ONLY' -and $_.availability -eq 'CLEAN-BUILD' })
+  $unresolved = @($liveRO | Where-Object { $_.backing -ne 'internal' -and -not (Test-Path $_.backing) })
+  Check ($unresolved.Count -eq 0) "live read-only commands resolve to a backing script" "unresolved read-only backings: $($unresolved.Count)"
+  # no critical command has a live (CLEAN-BUILD) execution path
+  $critLive = @($cmds | Where-Object { $_.category -eq 'CRITICAL' -and $_.availability -eq 'CLEAN-BUILD' })
+  Check ($critLive.Count -eq 0) "no critical command is live in the clean build (all gated)" "critical commands wrongly live: $($critLive.Count)"
+}
+""
 $status = 'GREEN'; $code = 0
 if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }
 elseif ($script:warn.Count -gt 0) { $status = 'YELLOW'; $code = 1 }
