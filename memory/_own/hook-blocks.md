@@ -426,3 +426,73 @@ result: BLOCKED
 reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-06-29T09:58:15+04:00
+actor: hook
+session_id: G1
+action: CRITICAL_COMMAND_BLOCKED
+target: git push origin main
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:59:02+04:00
+actor: hook
+session_id: EP
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T09:59:03+04:00
+actor: hook
+session_id: EP
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\memory\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)
+files_changed: none
+```
+
+## BLOCK - cross-memory-read-guard
+```txt
+timestamp: 2026-06-29T09:59:04+04:00
+actor: hook
+session_id: EP
+action: CROSS_MEMORY_READ_BLOCKED
+target: C:\Users\Admin\Desktop\DB\bro\memory\s.md
+source_command: Read tool
+authority: hook
+result: BLOCKED
+reason: SuperBro (own_only) attempted a direct project-memory read of 'db' (use a sealed mirror; B4/B6)
+files_changed: none
+```
+
+## BLOCK - cross-memory-read-guard
+```txt
+timestamp: 2026-06-29T09:59:05+04:00
+actor: hook
+session_id: EP
+action: CROSS_MEMORY_READ_BLOCKED
+target: C:\Users\Admin\Desktop\EP\bro\memory\MEMORY.md
+source_command: Read tool
+authority: hook
+result: BLOCKED
+reason: SuperBro (own_only) attempted a direct project-memory read of 'ep' (use a sealed mirror; B4/B6)
+files_changed: none
+```
