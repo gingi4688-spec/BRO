@@ -91,6 +91,16 @@ or via the schedule/cron skill): factory · spine canonical authority · skill/r
   boundaries · harness hooks · real scripts · exit codes · manifest checks · hash checks.** *(See §11 — enforcement.)*
 - **B6 Super Bro does not write down** — Super Bro reads project memory for mirror/audit; writes spine releases;
   does **not** repair/rewrite project memory without Gev's command.
+- **B7 Brain Preservation (adopt-vs-fresh)** — a project that ALREADY has a brain (existing memory) **ADOPTS** it
+  into its own Project Bro's sealed memory (`X/bro/memory`, `X_only`, hash-verified, project-root memory vacated) —
+  never start from 0 and lose existing work; a project with NO brain starts **fresh** (empty seed). Either way the
+  result is `X_only` sealed memory that lives INSIDE that project's bro and the brain **NEVER** enters SuperBro
+  (B4/B6 hold; adopt is project-internal: root → `X/bro/memory`, not project → SuperBro). *(Operationalized later by a
+  Gev-gated `bro-install -Adopt` mode — currently `bro-install` seeds fresh only; DB was adopted manually + verified.
+  EP's earlier `fresh / never-touch` seal (EP_PILOT_ASSUMPTIONS) was a narrower per-project call, now reconciled to
+  this general rule; whether to adopt EP's own brain is a separate pending Gev decision. Candidate law: **L12**.)*
+  · HY: եթե project-ն արդեն ուղեղ ունի → **ADOPT** իր Bro-ի sealed memory (`X/bro/memory`, `X_only`, hash-verified,
+  root դատարկվում); ուղեղ չունի → **fresh**։ Ուղեղը ապրում է project-ի ՆԵՐՍՈՒՄ ու ԵՐԲԵՔ SuperBro չի մտնում։
 
 ## 4. Memory Model (3 types)
 1. **Identity / Spine memory** (same for all Bros) — language/Armenian-first, persona, laws, operating protocol,

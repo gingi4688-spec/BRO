@@ -1,5 +1,13 @@
 # EP PROJECT BRO PILOT — ASSUMPTIONS SEALED (PLAN ONLY) / EP pilot-ի assumption-ների կնիք
 
+> **⚠️ RECONCILIATION (Gev 2026-06-29, post-DB): the general factory rule is now ADOPT-vs-FRESH (spine B7).**
+> A project that already has a brain **adopts** it into `X/bro/memory` (`X_only`, hash-verified, root vacated) — it is
+> a waste to start from 0; a project with no brain starts fresh. The brain NEVER enters SuperBro either way (B4/B6).
+> EP's sealed assumptions below (**#5 fresh · #6 untouched · #7 no-adopt · #8 no-migrate**) were a **narrower
+> earlier per-project call**; EP HAS a brain (`Desktop\EP\memory`, incl. the GENESIS roadmap), so under the new rule
+> EP would ADOPT it. **Whether to adopt EP's brain is a separate, still-pending Gev decision — `Desktop\EP\memory`
+> stays UNTOUCHED until Gev explicitly says so.** Candidate law: **L12** (flagged, awaiting Gev's dictation).
+>
 > **STATUS: 🔒 SEALED by Gev — 2026-06-29 · baseline `a74dd2f` (CLEAN SUPERBRO GREEN). PLAN ONLY.**
 > **EN:** These are the locked assumptions for the FIRST Project Bro pilot (EP). Sealing them changes **nothing**
 > operationally: EP is **not** registered, **not** installed, **no** `Desktop\EP` file is read or written, **no**
