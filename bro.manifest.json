@@ -13,10 +13,10 @@
   "bro_home": "C:\\Users\\Admin\\Desktop\\Bro",
   "machine_name": "DESKTOP-3SNK3IJ",
   "last_memory_sync": "n/a",
-  "last_audit": "2026-06-29T07:57:32+04:00",
+  "last_audit": "2026-06-29T08:06:45+04:00",
   "status": "GREEN",
-  "phase": "phase-2-enforcement",
+  "phase": "phase-3-registry",
   "built_at": "2026-06-29T07:14:32+04:00",
-  "note_en": "Clean SuperBro build. Phase 2 = structural enforcement (5 hooks in .claude/settings.json) + append-only evidence (bro-log) + full read-only doctor/audit/health/spine-check. KEYSTONE PROVEN: forbidden write/read + git push blocked (exit 2); evidence-log edit blocked; SessionStart pre-flight prints; audit reports without writing. Hooks fail-open on error, deny only on confirmed match; live enforcement applies next session. spine_version is a STATE label (OD-5). Hashes are real SHA-256 (no fabrication).",
-  "note_hy": "Մաքուր SuperBro build. Phase 2 = կառուցվածքային enforcement (5 hook .claude/settings.json-ում) + append-only evidence (bro-log) + full read-only doctor/audit/health/spine-check։ KEYSTONE ԱՊԱՑՈՒՑՎԱԾ՝ forbidden write/read + git push block (exit 2); evidence-log edit block; SessionStart pre-flight; audit առանց write։ Hook-երը fail-open են error-ին, deny միայն confirmed match-ին; live enforcement հաջորդ session-ից։ spine_version = STATE label (OD-5)։ Hash-երը real SHA-256 (ոչ fabrication)։"
+  "note_en": "Clean SuperBro build. Phase 3 = registry system live (metadata only, projects:[] empty) + Project Bro template (tools/templates/project-bro + _core/PROJECT_BRO_TEMPLATE.md) + rollout DRY-RUN commands (bro-register/install/update-spine) palette-wired but executing NOTHING. No Project Bro created, no real project registered, no project folder touched. spine_version is a STATE label (OD-5). Hashes are real SHA-256 (no fabrication).",
+  "note_hy": "Մաքուր SuperBro build. Phase 3 = registry live (միայն metadata, projects:[] դատարկ) + Project Bro template + rollout DRY-RUN command-ներ (bro-register/install/update-spine) palette-wired բայց ՈՉԻՆՉ չկատարող։ Ոչ Project Bro, ոչ real register, ոչ project touch։ spine_version = STATE label (OD-5)։ Hash-երը real SHA-256 (ոչ fabrication)։"
 }

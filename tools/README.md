@@ -26,3 +26,12 @@
 - **`bro-spine-check.ps1`** — read-only spine integrity (live spine at root OD-6 · key content · spine_version · RELEASES empty OD-5). / spine integrity.
 
 > **Enforcement model:** hooks **fail OPEN** on any internal error (never brick a session) and **DENY (exit 2)** only on a confirmed forbidden match; matchers are narrow. Hooks are installed in `.claude/settings.json` (separate from the preserved `settings.local.json`) and proven by direct invocation (exit codes); **live enforcement applies on the next session load**. / Hook-երը fail-OPEN են error-ին, DENY միայն confirmed match-ին; proven exit-code-ով; live enforcement-ը հաջորդ session-ից։
+
+### Phase 3 — Registry + Project Bro Template + Rollout Dry-Run (design/dry, NO install)
+- **`bro-register.ps1`** — REGISTER PROJECT, **DRY-RUN only**: previews the metadata-only registry entry it WOULD write and executes nothing; refuses a path inside another project's memory or inside BRO_HOME (B4). / DRY register.
+- **`bro-install.ps1`** — INSTALL PROJECT BRO, **DRY-RUN only**: previews the `X/bro` skeleton it WOULD create from the template; creates nothing, touches no project. / DRY install.
+- **`bro-update-spine.ps1`** — UPDATE PROJECT BRO SPINE, **DRY-RUN only**: previews the pull→verify→stamp plan; executes nothing (the procedure itself is Phase 4). / DRY spine update.
+- **`bro-registry-check.ps1`** — read-only registry validator (schema + empty + no cross-project path, B4). / read-only registry check.
+- **`templates/project-bro/`** — the install copy-source skeleton (manifest+health templates with `<PLACEHOLDER>` tokens; empty `memory/ spine/ logs/`). Nothing here is an installed Bro. Full contract: `_core/PROJECT_BRO_TEMPLATE.md`. / install copy-source.
+
+> **DRY model:** rollout commands are palette-wired (preview→YES) but **execute nothing** in the clean build — even on YES, no project is registered, no Project Bro is created, no project folder is touched. Real execution is a later, Gev-gated Rollout step (requires `BRO_GEV_APPROVED=1` + Gev command). / Rollout-ները palette-wired են (preview→YES) բայց **ոչինչ չեն կատարում**; real execution-ը հետագա Gev-gated Rollout է։

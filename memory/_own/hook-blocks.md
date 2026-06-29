@@ -74,3 +74,19 @@ result: BLOCKED
 reason: write into another project memory (cross-project, B4/L8)
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-06-29T08:04:15+04:00
+actor: hook
+session_id: 491f71cd-7f98-4db3-961f-5d814326a60c
+action: CRITICAL_COMMAND_BLOCKED
+target: cd "C:/Users/Admin/Desktop/Bro"
+echo "=== [1] DOCTOR (Phase 3) ==="
+pwsh -NoProfile -Command "& ./tools/bro-doctor.ps1 | Select-Object -Last 2; 'doctor exit=' +
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script invocation requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```

@@ -103,6 +103,28 @@ Check (Test-Path '.claude/settings.local.json') "settings.local.json preserved (
 $crs = @(Get-ChildItem 'change-requests' -File -Filter 'CR-*.md' -ErrorAction SilentlyContinue)
 Check ($crs.Count -ge 1) "change-request recorded for hook install ($($crs.Count))" "no change-request file found"
 ""
+"[8] Phase 3 - Registry + Project Bro Template + Rollout Dry-Run"
+$p3files = @(
+  '_core/PROJECT_BRO_TEMPLATE.md','tools/templates/project-bro/bro.manifest.template.json',
+  'tools/templates/project-bro/README.md','tools/templates/project-bro/health.report.template.md',
+  'tools/bro-register.ps1','tools/bro-install.ps1','tools/bro-update-spine.ps1','tools/bro-registry-check.ps1'
+)
+foreach ($f in $p3files) { Check (Test-Path $f) "$f" "MISSING: $f" }
+$reg2=$null; $reg2Ok=$false
+try { $reg2 = Get-Content -Raw 'memory/_own/registry.json' | ConvertFrom-Json; $reg2Ok=$true } catch {}
+Check $reg2Ok "registry.json valid JSON" "registry.json INVALID"
+if ($reg2Ok) {
+  $pc = @($reg2.projects).Count
+  Check ($pc -eq 0) "registry EMPTY (clean build: 0 projects)" "registry has $pc entries (clean build expects 0)"
+  Check ($null -ne $reg2.entry_schema) "registry entry_schema present" "registry entry_schema missing"
+}
+# the PHASE-3-DRY rollout commands must have their dry backings present (and stay non-CLEAN-BUILD = gated/dry)
+if ($libOk) {
+  $dry = @($lib.commands | Where-Object { $_.availability -eq 'PHASE-3-DRY' })
+  $dryMissing = @($dry | Where-Object { $_.backing -ne 'GATED' -and -not (Test-Path $_.backing) })
+  Check ($dryMissing.Count -eq 0) "PHASE-3-DRY rollout commands have dry backing scripts" "missing dry backings: $($dryMissing.Count)"
+}
+""
 $status = 'GREEN'; $code = 0
 if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }
 elseif ($script:warn.Count -gt 0) { $status = 'YELLOW'; $code = 1 }

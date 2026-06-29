@@ -1,27 +1,26 @@
 <#
-  bro-palette.ps1 — Guided Command Palette runner (clean-build Phase 1, §6B / D10 / OD-4)
+  bro-palette.ps1 — Guided Command Palette runner (clean-build Phase 1 + Phase 3 dry rollout, §6B / D10 / OD-4)
   EN: SuperBro's operator-facing control surface. Menu -> preview -> explicit YES -> run.
-      READ-ONLY commands (CLEAN-BUILD) execute via named, explicit dispatch (NO arbitrary execution).
-      CRITICAL / not-yet-available commands are preview-wired but EXECUTION-GATED: they show a preview and
-      refuse to run (cancel on non-YES; refuse-with-reason even on YES until their phase/system exists + Gev authority).
+      READ-ONLY (CLEAN-BUILD) commands execute via named, explicit dispatch (NO arbitrary execution).
+      PHASE-3-DRY rollout commands (REGISTER/INSTALL/UPDATE) dispatch to their DRY backing on YES and EXECUTE NOTHING.
+      Other CRITICAL / not-yet-available commands are preview-wired but EXECUTION-GATED (refuse even on YES).
   HY: SuperBro-ի operator-control մակերեսը։ Menu -> preview -> բացահայտ YES -> run։
-      READ-ONLY (CLEAN-BUILD)-ները՝ explicit dispatch (ոչ arbitrary execution)։
-      CRITICAL / դեռ-անհասանելի-ները preview-wired են բայց EXECUTION-GATED։
-
+      READ-ONLY-ները՝ explicit dispatch; PHASE-3-DRY rollout-ները՝ dry backing (ոչինչ չեն կատարում); մնացած critical-ները gated։
   Usage:
-    pwsh ./tools/bro-palette.ps1                         # interactive menu (for Gev)
-    pwsh ./tools/bro-palette.ps1 -Command "SHOW HEALTH"  # run one command, non-interactive
-    pwsh ./tools/bro-palette.ps1 -Command "RELEASE SPINE" -Confirm YES   # attempt a critical cmd (will refuse, gated)
+    pwsh ./tools/bro-palette.ps1                          # interactive menu (for Gev)
+    pwsh ./tools/bro-palette.ps1 -Command "SHOW HEALTH"   # run one command, non-interactive
+    pwsh ./tools/bro-palette.ps1 -Command "RELEASE SPINE" -Confirm YES   # critical -> refuse (gated)
+    pwsh ./tools/bro-palette.ps1 -Command "REGISTER PROJECT" -Confirm YES # PHASE-3-DRY -> dry backing (nothing executed)
   Exit: 0 OK/handled · 2 unknown command · 3 backing missing.
-  NOTE: display text flows to stdout (bare strings / Write-Output); the exit code is carried in $script:ExitCode
-        so function output is never swallowed by assignment-capture.
+  NOTE: display text flows to stdout; the exit code is carried in $script:ExitCode (no assignment-capture).
+        Avoid PowerShell read-only automatic vars ($home, $pid) for locals.
 #>
 param(
   [string]$Command = '',
   [string]$Confirm = ''
 )
 $ErrorActionPreference = 'Stop'
-Set-Location -Path (Join-Path $PSScriptRoot '..')   # run from BRO_HOME
+Set-Location -Path (Join-Path $PSScriptRoot '..')
 $script:ExitCode = 0
 
 $libPath = 'tools/command-library.json'
@@ -42,7 +41,7 @@ function Show-Help {
   }
   Write-Output ''
   Write-Output 'Read-only commands run after a light confirm. Critical commands always require preview + YES (+ Gev authority).'
-  Write-Output 'Critical commands NEVER run from a vague input. Full catalog: _core/COMMAND_LIBRARY.md.'
+  Write-Output 'PHASE-3-DRY rollout commands run their DRY backing (execute nothing). Full catalog: _core/COMMAND_LIBRARY.md.'
 }
 
 function Show-Banner {
@@ -55,7 +54,7 @@ function Show-Banner {
   Write-Output '  READ-ONLY (live)'
   $i = 0
   foreach ($c in $commands) { $i++; if ($c.category -eq 'READ-ONLY' -and $c.availability -eq 'CLEAN-BUILD') { Write-Output ("   [{0,2}] {1}" -f $i, $c.name) } }
-  Write-Output '  CRITICAL / FUTURE - preview + YES (+ Gev authority); execution gated until their phase'
+  Write-Output '  CRITICAL / FUTURE - preview + YES (+ Gev authority); rollout (PHASE-3-DRY) runs dry, others gated'
   $i = 0
   foreach ($c in $commands) { $i++; if (-not ($c.category -eq 'READ-ONLY' -and $c.availability -eq 'CLEAN-BUILD')) { Write-Output ("   [{0,2}] {1}   ({2})" -f $i, $c.name, $c.availability) } }
   Write-Output ''
@@ -80,13 +79,33 @@ function Show-Preview($entry) {
   Write-Output ("  Action:        {0}" -f $entry.purpose_en)
   Write-Output ("  Category:      {0}  -  Criticality: {1}  -  Requires Gev: {2}" -f $entry.category, $entry.criticality, $entry.requires_gev)
   Write-Output ("  Mode:          {0}  -  Files: {1}" -f $entry.mode, $entry.files_affected)
-  Write-Output ("  Availability:  {0}   (execution gated in the clean build)" -f $entry.availability)
+  Write-Output ("  Availability:  {0}" -f $entry.availability)
   Write-Output ("  Consequence:   {0}" -f $entry.preview_en)
-  Write-Output '  Rollback:      n/a (nothing is executed in the clean build for this command)'
   Write-Output '  >> Type YES to attempt - anything else cancels.'
 }
 
-function Invoke-Critical($entry, [string]$answer) {
+function Invoke-DryRollout($entry, [bool]$interactive) {
+  Write-Output ''
+  Write-Output 'DRY-RUN dispatch (clean build) - the rollout command EXECUTES NOTHING:'
+  switch ($entry.name.ToUpper()) {
+    'REGISTER PROJECT' {
+      if ($interactive) { $projId = Read-Host '  project_id'; $projPath = Read-Host '  project_path'; & pwsh -NoProfile -File 'tools/bro-register.ps1' -ProjectId $projId -ProjectPath $projPath -Yes }
+      else { & pwsh -NoProfile -File 'tools/bro-register.ps1' }
+    }
+    'INSTALL PROJECT BRO' {
+      if ($interactive) { $projId = Read-Host '  project_id'; $projPath = Read-Host '  project_path'; & pwsh -NoProfile -File 'tools/bro-install.ps1' -ProjectId $projId -ProjectPath $projPath -Yes }
+      else { & pwsh -NoProfile -File 'tools/bro-install.ps1' }
+    }
+    'UPDATE PROJECT BRO SPINE' {
+      if ($interactive) { $projId = Read-Host '  project_id'; & pwsh -NoProfile -File 'tools/bro-update-spine.ps1' -ProjectId $projId -Yes }
+      else { & pwsh -NoProfile -File 'tools/bro-update-spine.ps1' }
+    }
+    default { Write-Output '  (no dry backing wired)' }
+  }
+  $script:ExitCode = 0
+}
+
+function Invoke-Critical($entry, [string]$answer, [bool]$interactive) {
   Show-Preview $entry
   if ($answer.Trim().ToUpper() -ne 'YES') {
     Write-Output ''
@@ -94,7 +113,10 @@ function Invoke-Critical($entry, [string]$answer) {
     $script:ExitCode = 0
     return
   }
-  # YES given, but every critical / not-yet-available command is execution-gated in the clean build.
+  if ($entry.availability -eq 'PHASE-3-DRY') {
+    Invoke-DryRollout $entry $interactive
+    return
+  }
   $gevNote = if ($entry.requires_gev) { ' and it requires explicit Gev authority' } else { '' }
   Write-Output ''
   Write-Output ("REFUSED - execution gated. '{0}' is not runnable in the clean build." -f $entry.name)
@@ -104,22 +126,14 @@ function Invoke-Critical($entry, [string]$answer) {
   $script:ExitCode = 0
 }
 
-function Dispatch($entry, [string]$answer) {
-  if ($null -eq $entry) { Write-Output 'PALETTE: unknown command.'; $script:ExitCode = 2; return }
-  if ($entry.category -eq 'READ-ONLY' -and $entry.availability -eq 'CLEAN-BUILD') {
-    Invoke-ReadOnly $entry
-  } else {
-    Invoke-Critical $entry $answer
-  }
-}
-
 # ---- non-interactive single command ----
 if ($Command -ne '') {
   $name = $Command
   if ($name.Trim() -eq '?') { $name = 'HELP' }
   $entry = Get-Entry $name
   if ($null -eq $entry) { Write-Output ("PALETTE: unknown command '{0}'. Try HELP." -f $Command); exit 2 }
-  Dispatch $entry $Confirm
+  if ($entry.category -eq 'READ-ONLY' -and $entry.availability -eq 'CLEAN-BUILD') { Invoke-ReadOnly $entry }
+  else { Invoke-Critical $entry $Confirm $false }
   exit $script:ExitCode
 }
 
@@ -141,9 +155,8 @@ while ($true) {
   if ($entry.category -eq 'READ-ONLY' -and $entry.availability -eq 'CLEAN-BUILD') {
     Invoke-ReadOnly $entry
   } else {
-    Show-Preview $entry
     $ans = Read-Host 'Type YES to attempt'
-    Invoke-Critical $entry $ans
+    Invoke-Critical $entry $ans $true
   }
 }
 exit $script:ExitCode

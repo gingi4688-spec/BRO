@@ -1,0 +1,16 @@
+{
+  "_template_note_en": "Project Bro manifest TEMPLATE. <PLACEHOLDER> tokens are filled at install time (a later, Gev-gated Rollout step). This file is NOT an installed manifest; it is the copy source. No project is touched in the clean build.",
+  "_template_note_hy": "Project Bro manifest-ի TEMPLATE. <PLACEHOLDER> token-ները լցվում են install-ի ժամանակ (հետագա, Gev-gated Rollout)։ Սա installed manifest չէ; copy-source է։ Մաքուր build-ում ոչ մի project չի դիպչվում։",
+  "bro_id": "<PROJECT_ID>-bro",
+  "project_id": "<PROJECT_ID>",
+  "project_path": "<PROJECT_ABS_PATH>",
+  "spine_version": "<PULLED_SPINE_VERSION>",
+  "skills_manifest_version": "<SPINE_SKILLS_VERSION>",
+  "agents_manifest_hash": "<SPINE_AGENTS_HASH>",
+  "memory_schema_version": "v1",
+  "memory_scope": "<PROJECT_ID>_only",
+  "authority": "ProjectBro",
+  "last_memory_sync": "n/a",
+  "last_audit": "n/a",
+  "status": "UNINSTALLED-TEMPLATE"
+}
