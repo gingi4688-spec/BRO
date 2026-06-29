@@ -1,0 +1,2 @@
+# placeholder — keeps logs/ tracked (empty). Noise logs (session/action/errors = *.log) are gitignored & rotated (§13A git-split). Empty in Phase 0.
+# placeholder — logs/-ը track (դատարկ)։ Noise log-երը (session/action/errors = *.log) gitignored ու rotated են (§13A)։ Phase 0-ում դատարկ։

@@ -1,0 +1,10 @@
+{
+  "schema_version": "v1",
+  "comment_en": "SuperBro project registry — metadata only, NEVER project content (B4/L8). Empty in clean-build Phase 0; entries are added later via REGISTER PROJECT (Gev-gated, Phase 3+).",
+  "comment_hy": "SuperBro project registry — միայն metadata, ԵՐԲԵՔ project content (B4/L8). Մաքուր-build Phase 0-ում դատարկ; entry-ները ավելացվում են հետո՝ REGISTER PROJECT-ով (Gev-gated, Phase 3+)։",
+  "entry_schema": [
+    "project_id", "project_path", "memory_scope", "authority", "spine_version_expected",
+    "status (REGISTERED|INSTALLED|STALE|RETIRED)", "last_audit", "last_sync", "notes"
+  ],
+  "projects": []
+}

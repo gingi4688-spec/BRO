@@ -1,0 +1,72 @@
+<#
+  bro-doctor.ps1 — MINIMAL read-only bootstrap doctor (clean-build Phase 0 scope)
+  EN: Verifies the clean SuperBro skeleton + manifest + verify-only authority + _own structure.
+      READ-ONLY: writes nothing, changes nothing, moves nothing. Flags only.
+  HY: Ստուգում է մաքուր SuperBro skeleton + manifest + verify-only authority + _own structure։
+      READ-ONLY: ոչինչ չի գրում/փոխում/տեղափոխում։ Միայն flag։
+  Exit: 0=GREEN 1=YELLOW 2=RED 3=CRITICAL. Full audit/drift/skill/spine suite = Phase 2.
+#>
+$ErrorActionPreference = 'Stop'
+Set-Location -Path (Join-Path $PSScriptRoot '..')   # run from BRO_HOME
+$script:problems = @(); $script:warn = @()
+function Check([bool]$cond, [string]$okmsg, [string]$failmsg, [switch]$Warn) {
+  if ($cond) { "  [OK]   $okmsg" }
+  elseif ($Warn) { "  [WARN] $failmsg"; $script:warn += $failmsg }
+  else { "  [FAIL] $failmsg"; $script:problems += $failmsg }
+}
+"bro-doctor (Phase 0 minimal) - READ-ONLY"
+"BRO_HOME: $((Get-Location).Path)"
+""
+"[1] Skeleton presence"
+$need = @(
+  'bro.manifest.json','memory/_own/registry.json','memory/_own/sync-log.md','memory/_own/audit-log.md',
+  'memory/_own/release-log.md','memory/_own/failure-registry.md','memory/_own/health-dashboard.md',
+  'memory/_own/hook-blocks.md','memory/_own/authority-log.md','memory/_quarantine/.gitkeep',
+  'spine/RELEASES/.gitkeep','tools/bro-doctor.ps1','tools/README.md','change-requests/.gitkeep',
+  '_before/.gitkeep','logs/.gitkeep'
+)
+foreach ($f in $need) { Check (Test-Path $f) "$f" "MISSING: $f" }
+""
+"[2] Manifest valid + required fields"
+$mfOk = $false; $mf = $null
+try { $mf = Get-Content -Raw 'bro.manifest.json' | ConvertFrom-Json; $mfOk = $true } catch {}
+Check $mfOk "bro.manifest.json is valid JSON" "bro.manifest.json INVALID/missing JSON"
+if ($mfOk) {
+  foreach ($k in @('bro_id','role','project_id','spine_version','memory_scope','authority','status')) {
+    Check ($null -ne $mf.$k -and "$($mf.$k)" -ne '') "field $k = $($mf.$k)" "manifest missing field: $k"
+  }
+  Check ($mf.role -eq 'SuperBro') "role = SuperBro" "role != SuperBro"
+  Check ($mf.memory_scope -eq 'own_only') "memory_scope = own_only" "memory_scope != own_only"
+}
+""
+"[3] Authority (verify-only, OD-3)"
+$bhOk = $false; $bh = $null
+try { $bh = Get-Content -Raw 'bro.home.json' | ConvertFrom-Json; $bhOk = $true } catch {}
+Check $bhOk "bro.home.json valid JSON" "bro.home.json INVALID/missing"
+if ($bhOk) {
+  Check ($bh.authority_status -eq 'current') "authority_status = current" "authority_status != current"
+  Check ((($bh.bro_home -replace '/','\').TrimEnd('\')) -ieq ((Get-Location).Path.TrimEnd('\'))) "bro_home matches cwd" "bro_home != cwd (path mismatch -> STOP)"
+  Check ($bh.machine_name -ieq $env:COMPUTERNAME) "machine matches" "machine mismatch -> STOP"
+}
+Check (Test-Path 'memory/_own/secrets/bro-home.verifier.json') "verifier present" "verifier MISSING -> STOP"
+""
+"[4] _own structure (no stray project content; light Phase-0 check)"
+$allowed = @('registry.json','sync-log.md','audit-log.md','release-log.md','failure-registry.md','health-dashboard.md','hook-blocks.md','authority-log.md','cleanup-log.md')
+$ownFiles = Get-ChildItem 'memory/_own' -File | Select-Object -ExpandProperty Name
+$stray = @($ownFiles | Where-Object { $_ -notin $allowed })
+Check ($stray.Count -eq 0) "_own files all known evidence/metadata" "stray files in _own: $($stray -join ', ')"
+$ownDirs = Get-ChildItem 'memory/_own' -Directory | Select-Object -ExpandProperty Name
+$strayDirs = @($ownDirs | Where-Object { $_ -ne 'secrets' })
+Check ($strayDirs.Count -eq 0) "_own dirs = secrets only" "stray dirs in _own: $($strayDirs -join ', ')"
+""
+"[5] Live spine at root (OD-6) + RELEASES empty (OD-5)"
+foreach ($d in @('_core','skills','self','roster')) { Check (Test-Path $d -PathType Container) "live spine dir: $d/" "missing spine dir: $d/" }
+$rel = @(Get-ChildItem 'spine/RELEASES' -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne '.gitkeep' })
+Check ($rel.Count -eq 0) "spine/RELEASES empty (no cut, OD-5)" "RELEASES not empty (OD-5 violated)"
+""
+$status = 'GREEN'; $code = 0
+if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }
+elseif ($script:warn.Count -gt 0) { $status = 'YELLOW'; $code = 1 }
+"RESULT: $status  (problems=$($script:problems.Count), warnings=$($script:warn.Count))"
+"NOTE: doctor is READ-ONLY - no files changed."
+exit $code

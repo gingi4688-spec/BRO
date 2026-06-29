@@ -1,0 +1,22 @@
+{
+  "bro_id": "superbro-DESKTOP-3SNK3IJ",
+  "role": "SuperBro",
+  "project_id": "_super",
+  "spine_version": "v1.0.0",
+  "skills_manifest_version": "v7_6",
+  "skills_manifest_hash": "sha256:308ab3efee44d27cd73fe8d336f259c9032c986e9993861249efe22cdd10d9b3",
+  "agents_manifest_hash": "sha256:315b8d2d69c47b645043e29820c1cd7b848a4858803652c3c03a3879873a7574",
+  "memory_schema_version": "v1",
+  "memory_scope": "own_only",
+  "authority": "SuperBro",
+  "authority_status": "current",
+  "bro_home": "C:\\Users\\Admin\\Desktop\\Bro",
+  "machine_name": "DESKTOP-3SNK3IJ",
+  "last_memory_sync": "n/a",
+  "last_audit": "2026-06-29T07:14:32+04:00",
+  "status": "GREEN",
+  "phase": "phase-0-foundation",
+  "built_at": "2026-06-29T07:14:32+04:00",
+  "note_en": "Clean SuperBro Phase 0 foundation. spine_version is a STATE label (in-place _core+skills+self+roster), NOT a packaged release (OD-5). Full skill/agent registry = Phase 1. Hashes are real SHA-256 over current content (no fabrication).",
+  "note_hy": "Մաքուր SuperBro Phase 0 foundation. spine_version-ը STATE label է (in-place spine), ոչ release (OD-5)։ Լրիվ registry = Phase 1։ Hash-երը real SHA-256 են (ոչ fabrication)։"
+}
