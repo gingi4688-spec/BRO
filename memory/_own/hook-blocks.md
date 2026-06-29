@@ -650,3 +650,31 @@ result: BLOCKED
 reason: evidence logs are append-only (use tools/bro-log.ps1); edit/delete requires explicit Gev command
 files_changed: none
 ```
+
+## BLOCK - log-append-only-guard
+```txt
+timestamp: 2026-06-29T10:12:10+04:00
+actor: hook
+session_id: n/a
+action: LOG_EDIT_BLOCKED
+target: C:\Users\Admin\Desktop\Bro\memory\_own\audit-log.md
+source_command: Edit tool
+authority: hook
+result: BLOCKED
+reason: evidence logs are append-only (use tools/bro-log.ps1); edit/delete requires explicit Gev command
+files_changed: none
+```
+
+## BLOCK - log-append-only-guard
+```txt
+timestamp: 2026-06-29T10:12:20+04:00
+actor: hook
+session_id: n/a
+action: LOG_EDIT_BLOCKED
+target: C:\Users\Admin\Desktop\Bro\memory\_own\audit-log.md
+source_command: Edit tool
+authority: hook
+result: BLOCKED
+reason: evidence logs are append-only (use tools/bro-log.ps1); edit/delete requires explicit Gev command
+files_changed: none
+```
