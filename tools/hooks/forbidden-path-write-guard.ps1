@@ -82,7 +82,8 @@ try {
       "files_changed: none",
       "``````"
     )
-    try { Add-Content -Path (Join-Path $broHome 'memory\_own\hook-blocks.md') -Value $entry -Encoding utf8 } catch {}
+    $hbPath = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_HOOKBLOCKS_PATH) { $env:BRO_HOOKBLOCKS_PATH } else { Join-Path $broHome 'memory\_own\hook-blocks.md' }
+    try { Add-Content -Path $hbPath -Value $entry -Encoding utf8 } catch {}
     [Console]::Error.WriteLine("DENIED by forbidden-path-write-guard: $why -> $abs")
     exit 2
   }
