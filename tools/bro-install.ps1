@@ -48,6 +48,8 @@ $entry = @($reg.projects) | Where-Object { "$($_.project_id)" -eq $ProjectId } |
 if (-not $entry) { "  REFUSED: project '$ProjectId' is not REGISTERED (register first)."; exit 4 }
 # release must exist
 if (-not (Test-Path $relMfPath)) { "  REFUSED: release $Version not found at $relMfPath (cut it first)."; exit 4 }
+# project root must already exist (install INTO an existing project; never create a phantom EP)
+if (-not (Test-Path $ProjectPath -PathType Container)) { "  REFUSED: project root $ProjectPath does not exist (will not create a phantom project). STOP."; exit 4 }
 # fresh install: bro/ must not already exist
 if (Test-Path $broDir) { "  REFUSED: $broDir already exists (fresh install only; not overwriting)."; exit 6 }
 

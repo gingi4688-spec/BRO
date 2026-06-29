@@ -20,9 +20,9 @@
       "memory_scope": "EP_only",
       "authority": "ProjectBro",
       "spine_version_expected": "v1.0.0",
-      "status": "INSTALLED",
+      "status": "REGISTERED",
       "last_audit": "n/a",
-      "last_sync": "2026-06-29T09:32:25+04:00",
+      "last_sync": "n/a",
       "notes": "founding pilot (EP)"
     }
   ]
