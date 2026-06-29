@@ -76,3 +76,18 @@ result: GREEN
 files_changed: Phase 4 deliverables (listed in the Phase 4 commit)
 notes: Promotion Gate: unapproved BLOCKED (exit3), project-specific BLOCKED altitude (exit3), generic+approved PASSED dry (exit0). Release: defer BLOCKED (exit3), sandbox cut+verify+pull+stamp OK, tamper REJECTED. spine/RELEASES empty (0). doctor GREEN. No v1.0.0 cut, no project touch, no push.
 ```
+
+## Entry 6 - R-1 hook guard refinement
+```txt
+timestamp: 2026-06-29T08:29:17+04:00
+actor: Bro
+session_id: BRO-20260629-082917
+event: GUARD_REFINEMENT
+action: REFINE_AND_PROVE
+target: tools/hooks/{forbidden-path-write-guard,critical-command-gate}.ps1
+source_command: Gev: REFINE R-1 HOOK GUARDS
+authority: Gev-command
+result: GREEN
+files_changed: 2 hook scripts + tools/README.md (listed in the refine commit)
+notes: forbidden-path-write: slug-keyed whitelist for THIS project's harness-memory (~/.claude/projects/<slug>) + scratchpad (Temp/claude/<slug>); other-project harness + EP/DB/GAA/IP still blocked. critical-command-gate: scrub heredoc+quoted strings, anchor to real git push + actual -File/command-position script execution. Regression 12/12 PASS: cross-project WRITE blocked, other-project harness blocked, evidence-log EDIT blocked, unapproved push blocked, real script-exec blocked; in-home/harness/scratchpad writes allowed, git status allowed, approved push allowed, git-add-script-path allowed, commit-heredoc-naming-scripts allowed. Wall stays active; no real protection weakened.
+```

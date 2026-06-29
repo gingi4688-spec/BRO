@@ -4,7 +4,7 @@
 > **HY:** Գեներացված read-only snapshot (ոչ live service, §2)։ Աղբյուր՝ tools/bro-health.ps1 (bro-doctor + bro-audit, read-only)։
 
 ```txt
-last_run: 2026-06-29T08:14:40+04:00
+last_run: 2026-06-29T08:29:15+04:00
 phase:    phase-4-release
 doctor:   RESULT: GREEN  (problems=0, warnings=0) (exit=0)
 audit:    RESULT: GREEN  (problems=0, warnings=0)

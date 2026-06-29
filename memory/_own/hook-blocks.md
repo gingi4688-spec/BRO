@@ -90,3 +90,73 @@ result: BLOCKED
 reason: critical SuperBro script invocation requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T08:28:19+04:00
+actor: hook
+session_id: R1
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\EP\bro\memory\PROJECT_MEMORY.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write into another project memory (cross-project, B4/L8)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-06-29T08:28:20+04:00
+actor: hook
+session_id: R1
+action: WRITE_BLOCKED
+target: C:\Users\Admin\.claude\projects\c--Users-Admin-Desktop-EP\memory\x.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write outside BRO_HOME (clean-build zero-touch)
+files_changed: none
+```
+
+## BLOCK - log-append-only-guard
+```txt
+timestamp: 2026-06-29T08:28:21+04:00
+actor: hook
+session_id: R1
+action: LOG_EDIT_BLOCKED
+target: C:\Users\Admin\Desktop\Bro\memory\_own\audit-log.md
+source_command: Edit tool
+authority: hook
+result: BLOCKED
+reason: evidence logs are append-only (use tools/bro-log.ps1); edit/delete requires explicit Gev command
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-06-29T08:28:21+04:00
+actor: hook
+session_id: R1
+action: CRITICAL_COMMAND_BLOCKED
+target: git push origin main
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-06-29T08:28:22+04:00
+actor: hook
+session_id: R1
+action: CRITICAL_COMMAND_BLOCKED
+target: pwsh -NoProfile -File ./tools/bro-release.ps1 -Version v1
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```

@@ -1,14 +1,18 @@
 <#
-  critical-command-gate.ps1 — PreToolUse hook (matcher: Bash|PowerShell) · clean-build Phase 2 (§8 / §8A / D0)
+  critical-command-gate.ps1 — PreToolUse hook (matcher: Bash|PowerShell) · Phase 2 + R-1 refinement (§8 / §8A / D0)
   EN: Blocks Gev-gated critical commands unless an explicit approval flag is present. Gated set:
-      - `git push` (push = critical action for the governance repo, §8A) — including --force/-f.
-      - invoking a critical SuperBro script (bro-release / bro-promote / bro-register / bro-install /
-        bro-update-spine) without approval.
+        - a real `git push` (push = critical action for the governance repo, §8A), and
+        - actual EXECUTION of a critical SuperBro script (bro-release / bro-promote / bro-register / bro-install /
+          bro-update-spine) via `pwsh -File ...` or a direct command-position invocation.
       Approval flag = env BRO_GEV_APPROVED=1 OR the literal token BRO_GEV_APPROVED=1 in the command.
-  HY: Block Gev-gated critical command-ները առանց բացահայտ approval flag-ի։ Gated՝ `git push` (push = critical,
-      §8A), ու critical SuperBro script-երի invocation առանց approval։ Flag = env BRO_GEV_APPROVED=1 կամ token-ը command-ում։
+      R-1 REFINEMENT: detection runs on a SCRUBBED copy of the command with heredoc bodies and quoted strings
+      removed, and is anchored to actual command tokens / execution. So a critical word inside a commit message,
+      prose, comment, or a file-path argument (e.g. `git add tools/bro-register.ps1`) NO LONGER false-blocks.
+  HY: Block Gev-gated critical command-ները առանց approval flag-ի՝ real `git push` ու critical SuperBro script-ի
+      ԻՐԱԿԱՆ ԿԱՏԱՐՈՒՄ։ R-1 ՈՒՂՂՈՒՄ՝ detection-ը scrubbed command-ի վրա է (heredoc + quoted string հանված) ու
+      anchored է actual command token-ին -> commit-message/prose/path-ում critical բառը այլևս չի false-block անում։
   SAFETY: fail-OPEN on error (exit 0); deny only on a confirmed gated command without approval. Allow=0, Deny=2.
-          Does NOT touch git commit/add/status or generic file ops — narrow by design.
+          Does NOT touch git commit/add/status or generic file ops.
 #>
 try {
   $raw = [Console]::In.ReadToEnd()
@@ -19,14 +23,28 @@ try {
   $cmd = "$($j.tool_input.command)"
   if (-not $cmd) { exit 0 }
 
+  # approval check on the RAW command (the env-prefix token is not inside a string)
   $approved = ($env:BRO_GEV_APPROVED -eq '1') -or ($cmd -match 'BRO_GEV_APPROVED=1')
   if ($approved) { exit 0 }
 
-  $isPush = $cmd -match '(?i)\bgit\b[^\n;|&]*\bpush\b'
-  $isCriticalScript = $cmd -match '(?i)bro-(release|promote|register|install|update-spine)\.ps1'
+  # R-1 scrub: remove heredoc bodies, then double-quoted, then single-quoted strings,
+  # so critical words inside commit messages / prose / -m "..." cannot be mistaken for commands.
+  $scrub = $cmd
+  $scrub = [regex]::Replace($scrub, "(?s)<<-?\s*['""]?(\w+)['""]?.*?\r?\n\1\b", ' ')
+  $scrub = [regex]::Replace($scrub, '"[^"]*"', ' ')
+  $scrub = [regex]::Replace($scrub, "'[^']*'", ' ')
+
+  # 1) real git push (anchored: a git ... push command segment, no separator between)
+  $isPush = $scrub -match '(?i)\bgit\b[^\n;|&]*\bpush\b'
+  # 2) actual execution of a critical script (via -File, or at a command position) - NOT a mere path argument
+  $crit = 'bro-(release|promote|register|install|update-spine)\.ps1'
+  $execViaFile = $scrub -match ("(?i)-File\b[^\n;|&]*\b" + $crit)
+  $execAtStart = $scrub -match ("(?im)(^|[;&|]|&&|\|\|)\s*&?\s*(\.?[\\/])?(tools[\\/])?" + $crit)
+  $isCriticalScript = $execViaFile -or $execAtStart
+
   if (-not ($isPush -or $isCriticalScript)) { exit 0 }
 
-  $which = if ($isPush) { 'git push (push = Gev-gated critical action, §8A)' } else { 'critical SuperBro script invocation' }
+  $which = if ($isPush) { 'git push (push = Gev-gated critical action, §8A)' } else { 'critical SuperBro script execution' }
   $broHome = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
   $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
   $sid = if ($j.session_id) { "$($j.session_id)" } else { 'n/a' }
