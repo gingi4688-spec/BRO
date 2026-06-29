@@ -3,7 +3,7 @@
 > *Same Bro, Sealed Memories, Hardened Autonomy.*
 
 > **STATUS: 🌱 PROPOSED v1 spec — written for Gev's review. NOTHING BUILT. NOTHING LOCKED. No build until
-> Gev explicitly says "BUILD".** Authored by Bro from GPT's final proposal (Gev-approved D0–D9) + Bro's 6
+> Gev explicitly says "BUILD".** Authored by Bro from GPT's final proposal (Gev-approved D0–D9; *D10 added later via reconciliation — §18*) + Bro's 6
 > refinements (Gev-approved) + Gev's home decision. Cross-reviewed Gev × GPT × Bro (2026-06-29).
 >
 > **🔄 RECONCILED 2026-06-29 with `BRO_CLEAN_SUPERBRO_BUILD_ROADMAP.md` (pushed `67df95e`):** the build sequence is now
@@ -210,8 +210,9 @@ harness = Claude Code**:
 - **Real scripts** (PowerShell/Python) for doctor/audit/drift/skill/spine checks — return **exit codes**;
   invoked by hooks or on-demand, not "by eye".
 - **Manifest + hash checks** = the comparison source of truth.
-- **Phase-0 proof requirement:** we must *demonstrate* a forbidden action is **actually blocked** by a hook
-  ("we tried → it stopped"), not "we believe it will stop."
+- **Enforcement-phase proof requirement (clean build Phase 2):** we must *demonstrate* a forbidden action is
+  **actually blocked** by a hook ("we tried → it stopped"), not "we believe it will stop." *(🔄 Reconciled: in the
+  5-phase plan the enforcement proof lives in **Phase 2 (§17)**, not Phase 0; the proof requirement itself is unchanged.)*
 > Behavioral layer (the §0 pre-flight, the laws) is the SUPPORT layer; the hooks/scripts/exit-codes are the WALL.
 
 ## 12. Audit · Drift · Quarantine (all read-only; D0)
@@ -501,8 +502,14 @@ violation). *(The generic bank originated as an EP-area artifact; promoting the 
 
 ## 19. The 6 Bro refinements (Gev-approved — folded in above)
 1. **Enforcement = Claude Code hooks** named concretely (settings.json · PreToolUse · SessionStart · real
-   scripts · exit-code blocking); **Phase 0 must PROVE a forbidden action is blocked.** (§11)
-2. **Not greenfield** → Phase 0 first step = existing inventory / migration map. (§17)
+   scripts · exit-code blocking); **the enforcement phase (clean build Phase 2) must PROVE a forbidden action is
+   blocked** (🔄 reconciled 2026-06-29 — block-proof moved from Phase 0 to Phase 2; requirement preserved). (§11/§17)
+2. **Not greenfield** (the spine already exists). 🔄 **SUPERSEDED 2026-06-29 (clean-build correction):** the old
+   *"Phase 0 first step = existing inventory / migration map"* of EP/DB/GAA memory is **moved out of Phase 0 to the later
+   Project Rollout phase** — **the clean SuperBro build touches no project folders**; the "not greenfield" principle
+   itself stays. (§17) / **Not greenfield** (spine-ն արդեն կա)։ 🔄 **ԳԵՐԱԿԱՅՎԱԾ 2026-06-29.** հին «Phase 0 first step =
+   inventory/migration map»-ը (EP/DB/GAA memory) **տեղափոխված է Phase 0-ից հետագա Project Rollout phase** — **մաքուր
+   SuperBro build-ը ոչ մի project folder չի դիպչում**; «not greenfield» սկզբունքը մնում է։ (§17)
 3. **Super Bro = role + scripts + Claude session, NOT a daemon**; health = snapshot, not live service. (§2)
 4. **SessionStart pre-flight** (structural) prints project · allowed memory · forbidden paths · spine version ·
    critical-needs-Gev · cross-project OFF. (§11)
@@ -551,3 +558,5 @@ Best Bro = same soul + sealed memories + versioned spine + skill parity + agent 
 LOCK STATUS — 🌱 PROPOSED v1 · cross-reviewed Gev × GPT × Bro 2026-06-29 · **NOTHING BUILT · NOTHING LOCKED ·
 no build until Gev says "BUILD" · first post-approval action was: write this one clean spec file → STOP for review.**
 · v1 extended 2026-06-29: +D8 · +D9 · +Discovery-Bank integration · +Push policy · checklist → D0–D9 (Gev-approved, bounded — spec file only).
+· v1 reconciled 2026-06-29 with `BRO_CLEAN_SUPERBRO_BUILD_ROADMAP.md` (`67df95e`): clean SuperBro first · §17 5-phase · +§6B/D10 Command Palette · +OD-6 · installs/Discovery-promotion postponed · checklist → D0–D10. (commit `7f59dbb`)
+· v1 consistency fix 2026-06-29: F1 §19#2 superseded (inventory map → Rollout) · F2 "Phase-0 proof" → enforcement Phase 2 (§11/§19#1) · F3 changelog → D0–D10. (this commit)
