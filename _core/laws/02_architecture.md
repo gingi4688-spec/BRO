@@ -17,7 +17,15 @@ HY: Վերականգնումը snapshot-restore + forward-fix է — ԵՐԲԵՔ 
 
 Enforcement / Կիրառում — EN: If a fix would require rewriting published history or a force-push, STOP and use a forward-fix commit (or request a separate explicit Gev FORCE authority); if the working tree is dirty at a release/seal, STOP and resolve it first; never delete an active instance — retire it; never let rollback touch sealed memory. · HY: Եթե ուղղումը կպահանջի հրապարակված history վերագրել կամ force-push, ԿԱՆԳՆԻՐ ու արա forward-fix commit (կամ խնդրիր առանձին բացահայտ Gev FORCE authority). եթե release/seal-ի պահին tree-ն dirty է, ԿԱՆԳՆԻՐ ու նախ լուծիր. երբեք չջնջես active instance — retire արա. երբեք թույլ չտաս որ rollback-ը դիպչի sealed memory-ին։
 
-L12: <pending>
+L12 — BRAIN PRESERVATION: ADOPT, NEVER START FROM ZERO · ABSOLUTE (dictated by Gev 2026-06-29)
+
+EN: A project that already has a brain (existing memory) ADOPTS it into its own Project Bro's sealed memory (`X/bro/memory`, scope `X_only`, hash-verified, project-root memory vacated) — a Project Bro is NEVER started from zero when usable memory already exists; a project with no brain starts FRESH (empty seed). Either way the brain lives ONLY inside that project's bro and NEVER enters SuperBro or another project (B4/B6/B7/L8 hold). Adoption is project-internal (root → `X/bro/memory`), Gev-gated, and hash-verified; it never blends, never treats a SuperBro mirror as authoritative, never copies a brain to SuperBro.
+
+HY: Project, որ արդեն ուղեղ ունի, ADOPT է անում այն իր Project Bro-ի sealed memory (`X/bro/memory`, scope `X_only`, hash-verified, project-root memory դատարկվում) — Project Bro-ն ԵՐԲԵՔ 0-ից չի սկսվում, երբ օգտագործելի ուղեղ կա. ուղեղ չունեցողը սկսում է FRESH։ Ուղեղն ապրում է ՄԻԱՅՆ իր project-ի bro-ում ու ԵՐԲԵՔ չի մտնում SuperBro կամ ուրիշ project (B4/B6/B7/L8)։ Adopt-ը project-internal է (root → `X/bro/memory`), Gev-gated, hash-verified. երբեք չի blend անում, երբեք SuperBro mirror-ը authoritative չի համարում, երբեք ուղեղ չի պատճենում SuperBro։
+
+Enforcement / Կիրառում — EN: If a project with an existing brain would be installed FRESH (losing its memory), STOP — adopt the brain (Gev-gated, hash-verified, root vacated only after the destination verifies); never copy a brain to SuperBro or another project; never blend. · HY: Եթե ուղեղ ունեցող project-ը FRESH install-վեր (ուղեղը կորցնելով), ԿԱՆԳՆԻՐ — adopt արա (Gev-gated, hash-verified, root-ը դատարկիր ՄԻԱՅՆ destination-ի verify-ից հետո); երբեք ուղեղ չպատճենես SuperBro/ուրիշ project, երբեք չblend անես։
+
+L13: <pending>
 
 > **POLICY — INTENTIONALLY EMPTY · NOT FORGOTTEN / ՄԻՏՈՒՄՆԱՎՈՐ ԴԱՏԱՐԿ · ՉԻ ՄՈՌԱՑՎԵԼ**
 >

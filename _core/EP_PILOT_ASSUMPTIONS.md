@@ -4,9 +4,11 @@
 > A project that already has a brain **adopts** it into `X/bro/memory` (`X_only`, hash-verified, root vacated) — it is
 > a waste to start from 0; a project with no brain starts fresh. The brain NEVER enters SuperBro either way (B4/B6).
 > EP's sealed assumptions below (**#5 fresh · #6 untouched · #7 no-adopt · #8 no-migrate**) were a **narrower
-> earlier per-project call**; EP HAS a brain (`Desktop\EP\memory`, incl. the GENESIS roadmap), so under the new rule
-> EP would ADOPT it. **Whether to adopt EP's brain is a separate, still-pending Gev decision — `Desktop\EP\memory`
-> stays UNTOUCHED until Gev explicitly says so.** Candidate law: **L12** (flagged, awaiting Gev's dictation).
+> earlier per-project call** and are now **SUPERSEDED**: EP had a brain (`Desktop\EP\memory`: `MEMORY.md` + the
+> GENESIS mandate), so per **L12** Gev commanded the adopt ("ep — texapoxel", 2026-06-29).
+> **✅ DONE — EP brain ADOPTED:** `Desktop\EP\memory` (2 files) → `Desktop\EP\bro\memory` (hash-verified:
+> `MEMORY.md` `303171d1…`, `genesis-track-and-mandate.md` `073cc303…`), project-root memory **vacated**. EP's brain
+> now lives ONLY in `EP\bro\memory` (`EP_only`); SuperBro holds zero EP content (B4/B6/B7); project-doctor/audit EP GREEN.
 >
 > **STATUS: 🔒 SEALED by Gev — 2026-06-29 · baseline `a74dd2f` (CLEAN SUPERBRO GREEN). PLAN ONLY.**
 > **EN:** These are the locked assumptions for the FIRST Project Bro pilot (EP). Sealing them changes **nothing**

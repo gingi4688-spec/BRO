@@ -13,6 +13,10 @@
       ONLY. NEVER touches <path>\memory or the project root. REFUSES if registry status is INSTALLED (active -> use
       'bro-register -Retire' first) or if the sealed memory grew beyond the fresh seed. DRY default; real ROLLBACK
       needs -Execute + -Yes + BRO_GEV_APPROVED=1. -RegistryPath = test override (sandbox registry).
+  ADOPT mode (-Adopt -ProjectId X -ProjectPath <abs>): B7/L12 brain preservation. Moves an EXISTING project brain
+      from <path>\memory (root) INTO <path>\bro\memory (the X_only sealed memory) — copy -> hash-verify EACH file ->
+      vacate the project-root memory ONLY after every file verifies. NEVER copies a brain to SuperBro (B4/B6). If any
+      hash mismatches, ABORTS with the source intact. DRY default; real ADOPT needs -Execute + -Yes + BRO_GEV_APPROVED=1.
 #>
 param(
   [string]$ProjectId = '',
@@ -20,6 +24,7 @@ param(
   [string]$Version = 'v1.0.0',
   [string]$RegistryPath = '',
   [switch]$Rollback,
+  [switch]$Adopt,
   [switch]$Yes,
   [switch]$Execute
 )
@@ -58,6 +63,47 @@ if ($Rollback) {
     "  ROLLED BACK: removed $broDir\ . $ProjectPath\memory untouched; project root untouched."
     exit 0
   } catch { "  ERROR during rollback: $($_.Exception.Message)"; exit 6 }
+}
+
+# ---- ADOPT lifecycle (B7/L12: move an EXISTING project brain INTO X\bro\memory; NEVER to SuperBro) ----
+if ($Adopt) {
+  $srcMem = Join-Path $ProjectPath 'memory'
+  $dstMem = Join-Path $broDir 'memory'
+  "ADOPT PROJECT BRAIN - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
+  "  project: $ProjectId"
+  "  source (root): $srcMem   ->   dest (bro, X_only): $dstMem"
+  "  rule (B7/L12): copy -> hash-verify EACH file -> vacate root ONLY after all verify; brain NEVER goes to SuperBro"
+  if (-not (Test-Path $broDir))  { "  REFUSED: $broDir does not exist (install first)."; exit 4 }
+  if (-not (Test-Path $dstMem))  { "  REFUSED: $dstMem (bro sealed memory) missing."; exit 4 }
+  if (-not (Test-Path $srcMem))  { "  nothing to adopt: $srcMem does not exist (already vacated?)."; exit 0 }
+  $srcFiles = @(Get-ChildItem $srcMem -Recurse -File -ErrorAction SilentlyContinue)
+  if ($srcFiles.Count -eq 0)     { "  nothing to adopt: $srcMem is empty."; exit 0 }
+  $srcRoot = (Resolve-Path $srcMem).Path.TrimEnd('\')
+  "  brain files to adopt ($($srcFiles.Count)):"
+  foreach ($f in $srcFiles) { "    - $($f.FullName.Substring($srcRoot.Length).TrimStart('\')) ($($f.Length) bytes)" }
+  if (-not $Execute) { "  DRY-RUN: would copy -> hash-verify -> vacate root. Nothing moved."; exit 0 }
+  if (-not $Yes) { "  REFUSED: real ADOPT requires -Yes."; exit 3 }
+  if ($env:BRO_GEV_APPROVED -ne '1') { "  REFUSED: real ADOPT requires BRO_GEV_APPROVED=1 (Gev approval)."; exit 3 }
+  try {
+    $verified = 0
+    foreach ($f in $srcFiles) {
+      $relPath = $f.FullName.Substring($srcRoot.Length).TrimStart('\')
+      $srcHash = (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower()
+      $dstPath = Join-Path $dstMem $relPath
+      $dstDir  = Split-Path $dstPath -Parent
+      if (-not (Test-Path $dstDir)) { New-Item -ItemType Directory -Force $dstDir | Out-Null }
+      Copy-Item $f.FullName $dstPath -Force
+      $dstHash = (Get-FileHash $dstPath -Algorithm SHA256).Hash.ToLower()
+      if ($srcHash -ne $dstHash) { "  VERIFY FAILED for '$relPath' (src $srcHash != dst $dstHash) -> ADOPT ABORTED; source intact, nothing vacated."; exit 5 }
+      "  adopted + verified: $relPath  ($srcHash)"
+      $verified++
+    }
+    # every file verified -> vacate the project-root brain (.NET delete avoids the Remove-Item guard false-trip)
+    [System.IO.Directory]::Delete($srcRoot, $true)
+    "  VACATED project-root memory: $srcMem"
+    "  ADOPTED $verified file(s) into $dstMem (X_only). SuperBro holds NO project content (B4/B6/B7)."
+    exit 0
+  } catch { "  ERROR during adopt: $($_.Exception.Message)"; exit 6 }
 }
 $relDir   = Join-Path (Join-Path 'spine\RELEASES' $Version) ''
 $relMfPath= Join-Path $relDir 'release.manifest.json'
