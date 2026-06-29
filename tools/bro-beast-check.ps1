@@ -74,7 +74,9 @@ try { Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue } catch {}
 # 11) no-secret / pre-push dry check (unpushed diff)
 $diffFiles = @(git diff --name-only origin/main..HEAD)
 $secretHit = @($diffFiles | Where-Object { $_ -match '(?i)bro\.home\.json|verifier|secrets/' })
-$epPathHit = @($diffFiles | Where-Object { $_ -match '(?i)(^|/)(EP|DB|GAA|GAAhex|IP)/' })
+# exclude the sanctioned sealed-mirror location memory/supermemory/ (it legitimately holds project-derived
+# mirrors; whitelisted by the audit) so a mirror add/remove is not mis-flagged as cross-project contamination.
+$epPathHit = @($diffFiles | Where-Object { ($_ -match '(?i)(^|/)(EP|DB|GAA|GAAhex|IP)/') -and ($_ -notmatch '(?i)memory/supermemory/') })
 Rec 'no secret files in unpushed diff' ($secretHit.Count -eq 0) "secret-files=$($secretHit.Count)"
 Rec 'no project-folder paths in diff'  ($epPathHit.Count -eq 0) "project-paths=$($epPathHit.Count) (EP/bro is outside repo)"
 
