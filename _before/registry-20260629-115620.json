@@ -31,10 +31,10 @@
       "memory_scope": "DB_only",
       "authority": "ProjectBro",
       "spine_version_expected": "v1.0.0",
-      "status": "INSTALLED",
+      "status": "REGISTERED",
       "last_audit": "n/a",
-      "last_sync": "2026-06-29T11:56:20+04:00",
-      "notes": "SST (Scout Mgmt System); brain adopted DB\\memory -> DB\\bro\\memory (4 files, hash-verified); project-root memory vacated per Gev"
+      "last_sync": "n/a",
+      "notes": ""
     }
   ]
 }
