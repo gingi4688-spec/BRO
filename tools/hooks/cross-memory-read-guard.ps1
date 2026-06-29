@@ -26,8 +26,9 @@ try {
   if ($absL -notmatch '\\(ep|db|gaa|gaahex|ip)\\bro\\memory') { exit 0 }
   $targetProj = $Matches[1]
 
-  # current scope: env override (test) else the local manifest's memory_scope
-  $scope = if ($env:BRO_SCOPE) { "$($env:BRO_SCOPE)" } else { try { (Get-Content -Raw (Join-Path $broHome 'bro.manifest.json') | ConvertFrom-Json).memory_scope } catch { 'own_only' } }
+  # current scope: the local manifest's memory_scope by default. The $env:BRO_SCOPE override is TEST-ONLY and is
+  # honored ONLY when $env:BRO_TEST_MODE='1'. In production (no BRO_TEST_MODE) the override is IGNORED -> manifest.
+  $scope = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_SCOPE) { "$($env:BRO_SCOPE)" } else { try { (Get-Content -Raw (Join-Path $broHome 'bro.manifest.json') | ConvertFrom-Json).memory_scope } catch { 'own_only' } }
   $ownProj = if ($scope -ne 'own_only' -and $scope -match '^(.+)_only$') { $Matches[1].ToLower() } else { '' }
 
   if ($ownProj -and $targetProj -eq $ownProj) { exit 0 }   # a Project Bro reading ITS OWN memory -> allow

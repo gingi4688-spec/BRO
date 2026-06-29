@@ -37,7 +37,9 @@ try {
 
   # Gate-2 registry-keyed /bro/ exception: allow only a REGISTERED project's <project_path>\bro\ subtree.
   function Test-RegisteredBro([string]$targetL, [string]$bh) {
-    $regPath = if ($env:BRO_REGISTRY_PATH) { $env:BRO_REGISTRY_PATH } else { Join-Path $bh 'memory\_own\registry.json' }
+    # Registry source: canonical by default. The $env:BRO_REGISTRY_PATH override is TEST-ONLY and is honored
+    # ONLY when $env:BRO_TEST_MODE='1'. In production (no BRO_TEST_MODE) the override is IGNORED -> canonical registry.
+    $regPath = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_REGISTRY_PATH) { $env:BRO_REGISTRY_PATH } else { Join-Path $bh 'memory\_own\registry.json' }
     try {
       $reg = Get-Content -Raw $regPath | ConvertFrom-Json
       foreach ($p in @($reg.projects)) {
