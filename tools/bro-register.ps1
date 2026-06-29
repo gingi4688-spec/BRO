@@ -7,6 +7,9 @@
       գրում է ՃԻՇՏ ՄԵԿ registry entry (միայն metadata, B4)՝ registry-ի snapshot-ից հետո։ Մերժում է ուրիշ project-ի
       memory-ի / BRO_HOME-ի մեջ ընկած path։ ԵՐԲԵՔ project content չի պատճենում։
   Exit: 0 ok · 2 missing inputs · 3 refused (B4 / no approval) · 4 write error.
+  RETIRE mode (-Retire -ProjectId X): flips registry status -> RETIRED (metadata only; NO file deletion; instance
+      left in place). DRY default; real RETIRE needs -Execute + -Yes + BRO_GEV_APPROVED=1. Refuses unknown id or
+      already-RETIRED. -RegistryPath = test override (sandbox registry; canonical = memory/_own/registry.json).
 #>
 param(
   [string]$ProjectId = '',
@@ -15,12 +18,38 @@ param(
   [string]$Authority = 'ProjectBro',
   [string]$SpineVersionExpected = 'v1.0.0',
   [string]$Notes = '',
+  [string]$RegistryPath = '',
+  [switch]$Retire,
   [switch]$Yes,
   [switch]$Execute
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
 $broHome = (Get-Location).Path
+$regFile = if ($RegistryPath) { $RegistryPath } else { 'memory/_own/registry.json' }
+
+# ---- RETIRE lifecycle (metadata-only status transition; no file deletion) ----
+if ($Retire) {
+  if (-not $ProjectId) { "RETIRE PROJECT - usage: bro-register.ps1 -Retire -ProjectId <id> [-Execute -Yes]"; exit 2 }
+  "RETIRE PROJECT - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
+  "  project_id: $ProjectId   registry: $regFile"
+  $rreg = $null; try { $rreg = Get-Content -Raw $regFile | ConvertFrom-Json } catch {}
+  if (-not $rreg) { "  REFUSED: registry invalid/missing at $regFile."; exit 4 }
+  $rentry = @($rreg.projects) | Where-Object { "$($_.project_id)" -eq $ProjectId } | Select-Object -First 1
+  if (-not $rentry) { "  REFUSED: unknown project_id '$ProjectId' (cannot retire what is not registered)."; exit 3 }
+  if ("$($rentry.status)" -eq 'RETIRED') { "  REFUSED: project '$ProjectId' is already RETIRED (no-op)."; exit 3 }
+  "  transition: status $($rentry.status) -> RETIRED  (metadata only; NO file deletion; instance left in place)"
+  if (-not $Execute) { "  DRY-RUN: nothing written. registry unchanged."; exit 0 }
+  if (-not $Yes) { "  REFUSED: real RETIRE requires -Yes."; exit 3 }
+  if ($env:BRO_GEV_APPROVED -ne '1') { "  REFUSED: real RETIRE requires BRO_GEV_APPROVED=1 (Gev approval)."; exit 3 }
+  try {
+    if (-not $RegistryPath) { $fts = Get-Date -Format "yyyyMMdd-HHmmss"; Copy-Item $regFile (Join-Path '_before' "registry-$fts.json") -Force }
+    foreach ($p in @($rreg.projects)) { if ("$($p.project_id)" -eq $ProjectId) { $p.status = 'RETIRED' } }
+    ($rreg | ConvertTo-Json -Depth 6) | Set-Content $regFile -Encoding utf8
+    "  RETIRED $ProjectId (status -> RETIRED)$(if(-not $RegistryPath){"; snapshot: _before/registry-$fts.json"})."
+    exit 0
+  } catch { "  ERROR writing registry: $($_.Exception.Message)"; exit 4 }
+}
 
 if (-not $ProjectId -or -not $ProjectPath) {
   "REGISTER PROJECT - usage: bro-register.ps1 -ProjectId <id> -ProjectPath <abs-path> [-Execute -Yes]"

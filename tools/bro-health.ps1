@@ -24,6 +24,20 @@ $audOut = & pwsh -NoProfile -File 'tools/bro-audit.ps1'
 $audResult = ($audOut | Where-Object { $_ -match '^RESULT:' } | Select-Object -First 1)
 if (-not $audResult) { $audResult = "RESULT: (unknown)" }
 
+# capture project-doctor verdict for each registered Project Bro (read-only; metadata only, never sealed memory)
+$projLines = @()
+try {
+  $regH = Get-Content -Raw 'memory/_own/registry.json' | ConvertFrom-Json
+  foreach ($p in @($regH.projects)) {
+    $pOut = & pwsh -NoProfile -File 'tools/bro-project-doctor.ps1' -ProjectId "$($p.project_id)"
+    $pCode = $LASTEXITCODE
+    $pRes = ($pOut | Where-Object { $_ -match '^RESULT:' } | Select-Object -First 1)
+    if (-not $pRes) { $pRes = "RESULT: (unknown)" }
+    $projLines += "project[$($p.project_id)]: $pRes (exit=$pCode, registry-status=$($p.status), consumer-only L10)"
+  }
+} catch {}
+if ($projLines.Count -eq 0) { $projLines = @("projects: none registered") }
+
 $lines = @(
   "# Health Dashboard (snapshot) / Health Dashboard (snapshot)",
   "",
@@ -38,8 +52,10 @@ $lines = @(
   "authority: current (verify-only; no passphrase prompt)",
   "enforcement: 5 structural hooks installed in .claude/settings.json (forbidden-path-write, cross-memory-read,",
   "             critical-command-gate, log-append-only, SessionStart preflight); evidence logs append-only.",
-  "scope:    clean SuperBro - no project touch, no Project Bro, no real registration, no Discovery Bank move,",
-  "          no migration, no release cut, no push.",
+  "projects:"
+) + ($projLines | ForEach-Object { "  $_" }) + @(
+  "scope:    SuperBro factory GREEN; registered Project Bro(s) INSTALLED + isolated + consumer-only (L10);",
+  "          Desktop\EP\memory untouched; no second project; no adopt/migrate/mirror; no release re-cut; no push.",
   "``````"
 )
 [System.IO.File]::WriteAllText((Join-Path (Get-Location).Path 'memory/_own/health-dashboard.md'), ($lines -join "`r`n") + "`r`n")

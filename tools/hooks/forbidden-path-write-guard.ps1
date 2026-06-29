@@ -11,8 +11,11 @@
   HY: Block Write/Edit արգելված path-ին։ Default-ով՝ ոչինչ BRO_HOME-ից դուրս, բացի երկու ՆԵՂ բացառությունից՝
         (R-1) այս project-ի harness paths (slug-keyed), (Gate-2) REGISTERED project-ի `<path>\bro\` ՄԻԱՅՆ
         (registry-validated; ոչ root, ոչ `\memory`, ոչ unregistered, ոչ ուրիշ project)։
-  SAFETY: fail-OPEN on any internal/parse error (exit 0); deny ONLY on a confirmed forbidden match. Allow=0, Deny=2.
-          Registry source = $env:BRO_REGISTRY_PATH if set (test seam), else memory/_own/registry.json.
+  SAFETY / FAIL POLICY (topist): fail-OPEN ONLY on un-parseable harness input (exit 0 — never brick a session);
+          deny ONLY on a confirmed forbidden match. FAIL-CLOSED where it matters: an out-of-BRO_HOME path whose
+          registry/bro-exception cannot be validated is treated as FORBIDDEN (deny), not allowed. Test seam:
+          $env:BRO_REGISTRY_PATH is honored ONLY when $env:BRO_TEST_MODE=1; in production the override is IGNORED ->
+          canonical memory/_own/registry.json. Allow=0, Deny=2.
 #>
 try {
   $raw = [Console]::In.ReadToEnd()

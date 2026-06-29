@@ -8,7 +8,10 @@
   HY: Կիրառում է memory isolation-ը Read-ի վրա։ Bro-ն կարդում է ՄԻԱՅՆ իր project-ի memory-ն; ուրիշ project-ի կնքված
       memory կարդալը BLOCKED է։ Scope-ը՝ bro.manifest.json-ի memory_scope-ից (override՝ $env:BRO_SCOPE test-ի համար)։
         - 'own_only' (SuperBro)՝ block ամ. project memory · '<X>_only' (Project Bro X)՝ allow X-ի, block մյուսները։
-  SAFETY: fail-OPEN on error (exit 0); deny only on a confirmed cross-project memory read. Allow=0, Deny=2.
+  SAFETY / FAIL POLICY (topist): fail-OPEN ONLY on un-parseable harness input (never brick a session); deny on a
+          confirmed cross-project memory read. FAIL-CLOSED default: if memory_scope cannot be determined, it defaults
+          to 'own_only' — the MOST restrictive scope (blocks reading ANY project memory). $env:BRO_SCOPE override is
+          honored ONLY when $env:BRO_TEST_MODE=1; in production it is IGNORED -> manifest. Allow=0, Deny=2.
 #>
 try {
   $raw = [Console]::In.ReadToEnd()

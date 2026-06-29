@@ -5,7 +5,10 @@
   HY: Ստուգում է մաքուր SuperBro skeleton + manifest + verify-only authority + _own structure։
       READ-ONLY: ոչինչ չի գրում/փոխում/տեղափոխում։ Միայն flag։
   Exit: 0=GREEN 1=YELLOW 2=RED 3=CRITICAL. Full audit/drift/skill/spine suite = Phase 2.
+      FAIL-CLOSED: any missing/unconfirmable structural element -> RED (never a silent pass). Topist adds [10] git
+      dirty-tree (YELLOW; -Strict -> RED) and [11] consolidated isolation verdict (B4/L8/L10).
 #>
+param([switch]$Strict)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')   # run from BRO_HOME
 $script:problems = @(); $script:warn = @()
@@ -82,13 +85,16 @@ if ($libOk) {
   $reqKeys = @('name','category','requires_gev','mode','availability','backing')
   $badSchema = @($cmds | Where-Object { $c = $_; @($reqKeys | Where-Object { $null -eq $c.$_ }).Count -gt 0 })
   Check ($badSchema.Count -eq 0) "every command carries the required schema keys" "schema-incomplete commands: $($badSchema.Count)"
-  # read-only live commands must resolve to an existing backing (or 'internal')
-  $liveRO = @($cmds | Where-Object { $_.category -eq 'READ-ONLY' -and $_.availability -eq 'CLEAN-BUILD' })
-  $unresolved = @($liveRO | Where-Object { $_.backing -ne 'internal' -and -not (Test-Path $_.backing) })
-  Check ($unresolved.Count -eq 0) "live read-only commands resolve to a backing script" "unresolved read-only backings: $($unresolved.Count)"
-  # no critical command has a live (CLEAN-BUILD) execution path
+  # read-LIVE commands (mode READ + availability CLEAN-BUILD/PHASE-2/LIVE) must resolve to an existing backing
+  $liveRO = @($cmds | Where-Object { $_.mode -eq 'READ' -and $_.availability -in @('CLEAN-BUILD','PHASE-2','LIVE') })
+  $unresolved = @($liveRO | Where-Object { $_.backing -notin @('internal','GATED') -and -not (Test-Path $_.backing) })
+  Check ($unresolved.Count -eq 0) "read-live commands resolve to a backing script" "unresolved read-live backings: $($unresolved.Count)"
+  # no critical command is live read-only in the clean build (CLEAN-BUILD is reserved for the read-only starter set)
   $critLive = @($cmds | Where-Object { $_.category -eq 'CRITICAL' -and $_.availability -eq 'CLEAN-BUILD' })
-  Check ($critLive.Count -eq 0) "no critical command is live in the clean build (all gated)" "critical commands wrongly live: $($critLive.Count)"
+  Check ($critLive.Count -eq 0) "no critical command wrongly marked CLEAN-BUILD" "critical commands wrongly CLEAN-BUILD: $($critLive.Count)"
+  # NO GATE BYPASS: every WRITE-mode command must require Gev authority
+  $writeNoGev = @($cmds | Where-Object { $_.mode -eq 'WRITE' -and $_.requires_gev -ne $true })
+  Check ($writeNoGev.Count -eq 0) "every WRITE command requires Gev (no gate bypass)" "WRITE commands missing requires_gev: $(@($writeNoGev | ForEach-Object { $_.name }) -join ', ')"
 }
 ""
 "[7] Phase 2 - Enforcement + Evidence + Doctor/Audit"
@@ -129,11 +135,11 @@ if ($reg2Ok) {
   $b4bad = @($reg2.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\(ep|db|gaa|gaahex|ip)\\bro\\memory' })
   Check ($b4bad.Count -eq 0) "no registry path inside another project's memory (B4)" "B4-violating registry paths: $($b4bad.Count)"
 }
-# the PHASE-3-DRY rollout commands must have their dry backings present (and stay non-CLEAN-BUILD = gated/dry)
+# the ROLLOUT-GATED rollout commands must have their backing scripts present (palette runs them DRY; real = gated)
 if ($libOk) {
-  $dry = @($lib.commands | Where-Object { $_.availability -eq 'PHASE-3-DRY' })
+  $dry = @($lib.commands | Where-Object { $_.availability -eq 'ROLLOUT-GATED' })
   $dryMissing = @($dry | Where-Object { $_.backing -ne 'GATED' -and -not (Test-Path $_.backing) })
-  Check ($dryMissing.Count -eq 0) "PHASE-3-DRY rollout commands have dry backing scripts" "missing dry backings: $($dryMissing.Count)"
+  Check ($dryMissing.Count -eq 0) "ROLLOUT-GATED rollout commands have backing scripts" "missing rollout backings: $($dryMissing.Count)"
 }
 ""
 "[9] Phase 4 - Spine Release / Update System + Promotion Gate"
@@ -151,6 +157,28 @@ foreach ($rd in $relDirs) {
   try { $rmf = Get-Content -Raw $mfp | ConvertFrom-Json; $rmfOk = ((("$($rmf.version)") -ne '') -and (("$($rmf.rollup_sha256)") -match '^[0-9a-f]{64}$') -and (@($rmf.files).Count -gt 0)) } catch {}
   Check $rmfOk "release $($rd.Name): manifest valid (version + rollup + files=$(@($rmf.files).Count))" "release $($rd.Name): manifest invalid/missing"
 }
+""
+"[10] Git state (dirty-tree) - fail-closed posture"
+$porcelain = $null; try { $porcelain = @(& git status --porcelain 2>$null) } catch {}
+if ($null -eq $porcelain) {
+  Check $false "" "git state UNKNOWN (git unavailable) - cannot confirm a clean tree" -Warn
+} elseif ($porcelain.Count -eq 0) {
+  Check $true "working tree clean" ""
+} elseif ($Strict) {
+  Check $false "" "working tree DIRTY ($($porcelain.Count) change(s)) [-Strict -> RED]"
+} else {
+  Check $false "" "working tree DIRTY ($($porcelain.Count) change(s)) - explain before any release/seal" -Warn
+}
+""
+"[11] Isolation verdict (B4/L8/L10 - proof-bound; mirrors bro-audit [F])"
+$smKnownSealed = @('GAAhex')
+$smDirs = @(Get-ChildItem 'memory/supermemory' -Directory -ErrorAction SilentlyContinue)
+$smUnexpected = @($smDirs | Where-Object { $_.Name -notin $smKnownSealed })
+$isoFail = @()
+if ($stray.Count -ne 0)        { $isoFail += "_own stray file(s): $($stray -join ', ')" }
+if ($strayDirs.Count -ne 0)    { $isoFail += "_own stray dir(s): $($strayDirs -join ', ')" }
+if ($smUnexpected.Count -ne 0) { $isoFail += "unexpected supermemory mirror(s): $(($smUnexpected | Select-Object -ExpandProperty Name) -join ', ')" }
+Check ($isoFail.Count -eq 0) "ISOLATION: PASS - _own metadata only; supermemory sealed-only; no project-local self-evolution (L10)" "ISOLATION: FAIL - $($isoFail -join '; ')"
 ""
 $status = 'GREEN'; $code = 0
 if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }

@@ -8,7 +8,9 @@
   HY: Անկախ, evidence-backed audit մեկ Project Bro-ի։ ՄԵՐԺՈՒՄ է (exit 3) եթե manifest-ն ու registry-ն չհամընկնեն
       project_id/scope/status-ով։ Այլապես՝ evidence report + project doctor-ի verdict։ Կարդում է միայն metadata +
       manifest + spine hash; երբեք sealed memory content։
-  Exit: 0=GREEN 1=YELLOW 2=RED 3=REFUSED(mismatch/unknown).
+  Exit: 0=GREEN 1=YELLOW 2=RED 3=REFUSED(mismatch/unknown) 4=BLACK(tamper/evidence-missing).
+      BLACK (topist) = a spine payload hash mismatch on the project's pulled spine (tamper/corruption evidence) OR no
+      commit evidence for a seal. A commit-bound BLACK-tamper IS logged (it is the finding); a no-commit seal is REFUSED.
 #>
 param([Parameter(Mandatory=$true)][string]$ProjectId, [string]$RegistryPath = '', [switch]$Log)
 $ErrorActionPreference = 'Stop'
@@ -69,11 +71,35 @@ $docCode = $LASTEXITCODE
 ($docOut | Where-Object { $_ -match '^RESULT:' } | Select-Object -First 1) | ForEach-Object { "  doctor $_" }
 
 $status = switch ($docCode) { 0 {'GREEN'} 1 {'YELLOW'} 2 {'RED'} default {'RED'} }
+$finalCode = $docCode
+# BLACK (tamper): any spine payload hash mismatch on the project's pulled spine = tamper/corruption evidence.
+if ($htotal -gt 0 -and $hbad -gt 0) { $status='BLACK'; $finalCode=4 }
+# commit evidence (no-evidence-no-seal)
+$commit = $null; try { $commit = (& git rev-parse --short HEAD 2>$null); if ($commit) { $commit = "$commit".Trim() } } catch {}
+if (-not $commit -and $status -ne 'BLACK') { $status='BLACK'; $finalCode=4 }
+
 "================================================================"
 "AUDIT RESULT: $status  (hashes $hok/$htotal · doctor exit $docCode)"
 "NOTE: read-only evidence audit - flags only; sealed memory content never read."
+""
+"SEAL (project-audit evidence) / SEAL (project-audit-ի evidence)"
+"  commit:        $(if($commit){$commit}else{'n/a (NO EVIDENCE)'})"
+"  scope:         project $ProjectId ($ppath) - metadata + manifest + spine hashes ONLY"
+"  commands:      tools/bro-project-audit.ps1 -ProjectId $ProjectId  (+ bro-project-doctor)"
+"  exit:          $finalCode ($status)"
+"  changed_files: none (read-only)"
+"  touched_paths: $broDir\bro.manifest.json, $broDir\spine\* (hash), registry (READ ONLY); NEVER $ppath\memory"
+"  version-bound: spine_version=$($mf.spine_version) (registry expected $expVer)"
+"  limitations:   metadata/hash-level; sealed project memory content NEVER read (B4/L8); enforcement is SuperBro-owned (L10), not project-local evolution."
+"  GREEN does NOT mean: the project's sealed memory is correct, its code works, or a spine update is unneeded - ONLY that registry<->manifest agree, spine payload hashes verify, and isolation posture holds at THIS commit."
+if (-not $commit) { ""; "RESULT: BLACK  (no commit evidence - seal REFUSED)" }
+
 if ($Log) {
-  & pwsh -NoProfile -File 'tools/bro-log.ps1' -Log 'audit-log' -Heading "PROJECT_AUDIT ($ProjectId)" -Event 'PROJECT_AUDIT' -Action 'READ_ONLY_AUDIT' -Target "project $ProjectId ($ppath)" -Result $status -Source 'tools/bro-project-audit.ps1' -Authority 'Bro' -FilesChanged 'none' -Notes "scope=$($mf.memory_scope) status=$($mf.status) spine=$($mf.spine_version) hashes=$hok/$htotal" | Out-Null
-  "(audit-log entry appended)"
+  if (-not $commit) {
+    "(NO-EVIDENCE-NO-SEAL: no commit - refusing to write a project-audit seal)"
+  } else {
+    & pwsh -NoProfile -File 'tools/bro-log.ps1' -Log 'audit-log' -Heading "PROJECT_AUDIT ($ProjectId) commit=$commit" -Event 'PROJECT_AUDIT' -Action 'READ_ONLY_AUDIT' -Target "project $ProjectId ($ppath)" -Result $status -Source 'tools/bro-project-audit.ps1' -Authority 'Bro' -FilesChanged 'none' -Notes "scope=$($mf.memory_scope) status=$($mf.status) spine=$($mf.spine_version) hashes=$hok/$htotal commit=$commit" | Out-Null
+    "(audit-log entry appended)"
+  }
 }
-exit $docCode
+exit $finalCode

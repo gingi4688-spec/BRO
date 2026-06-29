@@ -11,8 +11,11 @@
   HY: Block Gev-gated critical command-ները առանց approval flag-ի՝ real `git push` ու critical SuperBro script-ի
       ԻՐԱԿԱՆ ԿԱՏԱՐՈՒՄ։ R-1 ՈՒՂՂՈՒՄ՝ detection-ը scrubbed command-ի վրա է (heredoc + quoted string հանված) ու
       anchored է actual command token-ին -> commit-message/prose/path-ում critical բառը այլևս չի false-block անում։
-  SAFETY: fail-OPEN on error (exit 0); deny only on a confirmed gated command without approval. Allow=0, Deny=2.
-          Does NOT touch git commit/add/status or generic file ops.
+  SAFETY / FAIL POLICY (topist): fail-OPEN ONLY on un-parseable harness input (never brick a session). FAIL-CLOSED
+          where it matters — a recognized critical command (release/promote/register/install/update-spine) or a real
+          `git push` WITHOUT an explicit approval flag is DENIED by default (default-deny on critical). Approval =
+          env BRO_GEV_APPROVED=1 OR the literal token in the command. Does NOT touch git commit/add/status or generic
+          file ops. Allow=0, Deny=2.
 #>
 try {
   $raw = [Console]::In.ReadToEnd()

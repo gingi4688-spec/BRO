@@ -5,7 +5,9 @@
       Evidence set: audit-log, hook-blocks, authority-log, release-log, failure-registry, sync-log (.md).
   HY: Block Write/Edit append-only EVIDENCE log-երի վրա (միայն bro-log.ps1-ով append, ոչ ձեռքով edit/delete)։
       forbidden-path-write-guard-ի հետ layered defense-in-depth (C6)։
-  SAFETY: fail-OPEN on error (exit 0); deny only on a confirmed evidence-log target. Allow=0, Deny=2.
+  SAFETY / FAIL POLICY (topist): fail-OPEN ONLY on un-parseable harness input (never brick a session); deny on a
+          confirmed evidence-log target (filename in the evidence set AND inside _own). Layered defense-in-depth with
+          forbidden-path-write-guard (C6). Edit/delete of evidence requires an explicit Gev command. Allow=0, Deny=2.
 #>
 try {
   $raw = [Console]::In.ReadToEnd()

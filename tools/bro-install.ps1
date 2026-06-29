@@ -9,22 +9,56 @@
       Ստեղծում է ՄԻԱՅՆ <ProjectPath>\bro\ (fresh, դատարկ sealed memory), manifest template-ից, pull release ->
       verify ամ. hash -> stamp -> health.report.md։ ԵՐԲԵՔ չի դիպչում <ProjectPath>\memory-ին։
   Exit: 0 ok · 2 inputs · 3 refused · 4 not registered / release missing · 5 verify fail · 6 write/exists error.
+  ROLLBACK mode (-Rollback -ProjectId X -ProjectPath <abs>): undo a FAILED/partial install by removing <path>\bro\
+      ONLY. NEVER touches <path>\memory or the project root. REFUSES if registry status is INSTALLED (active -> use
+      'bro-register -Retire' first) or if the sealed memory grew beyond the fresh seed. DRY default; real ROLLBACK
+      needs -Execute + -Yes + BRO_GEV_APPROVED=1. -RegistryPath = test override (sandbox registry).
 #>
 param(
   [string]$ProjectId = '',
   [string]$ProjectPath = '',
   [string]$Version = 'v1.0.0',
+  [string]$RegistryPath = '',
+  [switch]$Rollback,
   [switch]$Yes,
   [switch]$Execute
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+$regFile = if ($RegistryPath) { $RegistryPath } else { 'memory/_own/registry.json' }
 
 if (-not $ProjectId -or -not $ProjectPath) {
-  "INSTALL PROJECT BRO - usage: bro-install.ps1 -ProjectId <id> -ProjectPath <abs> -Version v<ver> [-Execute -Yes]"
+  "INSTALL PROJECT BRO - usage: bro-install.ps1 -ProjectId <id> -ProjectPath <abs> -Version v<ver> [-Execute -Yes] | -Rollback"
   exit 2
 }
 $broDir   = Join-Path $ProjectPath 'bro'
+
+# ---- ROLLBACK lifecycle (undo a FAILED/partial install; removes <path>\bro\ ONLY) ----
+if ($Rollback) {
+  "ROLLBACK PROJECT BRO - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
+  "  project: $ProjectId   path: $ProjectPath"
+  "  removes: $broDir\  ONLY  |  NEVER $ProjectPath\memory  |  NEVER project root"
+  if (-not (Test-Path $broDir)) { "  nothing to roll back: $broDir does not exist."; exit 0 }
+  $rbMf = $null; try { $rbMf = Get-Content -Raw (Join-Path $broDir 'bro.manifest.json') | ConvertFrom-Json } catch {}
+  if (-not $rbMf) { "  REFUSED: $broDir has no valid bro.manifest.json - not a recognized install artifact. STOP (manual inspection)."; exit 3 }
+  if ("$($rbMf.project_id)" -ne $ProjectId) { "  REFUSED: manifest project_id ($($rbMf.project_id)) != $ProjectId. STOP."; exit 3 }
+  $rbReg = $null; try { $rbReg = Get-Content -Raw $regFile | ConvertFrom-Json } catch {}
+  $rbEntry = if ($rbReg) { @($rbReg.projects) | Where-Object { "$($_.project_id)" -eq $ProjectId } | Select-Object -First 1 } else { $null }
+  if ($rbEntry -and "$($rbEntry.status)" -eq 'INSTALLED') { "  REFUSED: registry status INSTALLED (active Project Bro). Use 'bro-register -Retire' first; rollback is for a FAILED/partial install only. STOP."; exit 3 }
+  $memDir = Join-Path $broDir 'memory'
+  $memExtra = @(Get-ChildItem $memDir -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne 'MEMORY.md' })
+  $seedish = $false; $memFile = Join-Path $memDir 'MEMORY.md'
+  if (Test-Path $memFile) { $seedish = ((Get-Content -Raw $memFile) -match 'sealed memory \(FRESH\)') }
+  if ($memExtra.Count -gt 0 -or -not $seedish) { "  REFUSED: $memDir has content beyond the fresh seed (real sealed memory) -> rollback would destroy it. Use 'bro-register -Retire', never delete. STOP."; exit 3 }
+  if (-not $Execute) { "  DRY-RUN: would remove $broDir\ (clean fresh/failed-install artifact). $ProjectPath\memory + project root left intact. Nothing removed."; exit 0 }
+  if (-not $Yes) { "  REFUSED: real ROLLBACK requires -Yes."; exit 3 }
+  if ($env:BRO_GEV_APPROVED -ne '1') { "  REFUSED: real ROLLBACK requires BRO_GEV_APPROVED=1 (Gev approval)."; exit 3 }
+  try {
+    [System.IO.Directory]::Delete((Resolve-Path $broDir).Path, $true)   # .NET delete (avoids Remove-Item guard); ONLY \bro\
+    "  ROLLED BACK: removed $broDir\ . $ProjectPath\memory untouched; project root untouched."
+    exit 0
+  } catch { "  ERROR during rollback: $($_.Exception.Message)"; exit 6 }
+}
 $relDir   = Join-Path (Join-Path 'spine\RELEASES' $Version) ''
 $relMfPath= Join-Path $relDir 'release.manifest.json'
 

@@ -76,6 +76,26 @@ $hasMirror = Test-Path $smProj
 if ($AllowMirror) { Chk $true "supermemory mirror check skipped (-AllowMirror)" "" }
 else { Chk (-not $hasMirror) "no supermemory mirror for $ProjectId (none expected)" "unexpected supermemory mirror: $smProj" }
 
+"[E] no project-local self-evolution (L10 - enforcement is SuperBro-authored only)"
+$projHooks = Join-Path $broDir 'tools\hooks'
+$tmplHooks = 'tools/templates/project-bro/tools/hooks'
+if (-not (Test-Path $projHooks)) {
+  Chk $true "no local enforcement present (consumer; governed delivery pending) - NOT self-evolved" ""
+} else {
+  $tmplFiles = @{}
+  foreach ($f in Get-ChildItem $tmplHooks -File -Filter *.ps1 -ErrorAction SilentlyContinue) { $tmplFiles[$f.Name.ToLower()] = (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower() }
+  $rogue = @(); $modified = @(); $installedNames = @()
+  foreach ($f in Get-ChildItem $projHooks -File -Filter *.ps1 -ErrorAction SilentlyContinue) {
+    $n = $f.Name.ToLower(); $installedNames += $n
+    if (-not $tmplFiles.ContainsKey($n)) { $rogue += $f.Name }
+    elseif ((Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower() -ne $tmplFiles[$n]) { $modified += $f.Name }
+  }
+  Chk ($rogue.Count -eq 0) "no project-authored hooks (all are SuperBro-template originals)" "PROJECT-AUTHORED hook(s) = L10 self-evolution VIOLATION: $($rogue -join ', ')"
+  Chk ($modified.Count -eq 0) "no modified governed hooks (template hashes match)" "MODIFIED governed hook(s) = L10 self-evolution VIOLATION: $($modified -join ', ')"
+  $behind = @($tmplFiles.Keys | Where-Object { $_ -notin $installedNames })
+  if ($behind.Count -gt 0) { "  [INFO] $($behind.Count) template hook(s) not yet delivered (governed update available, not a fault): $($behind -join ', ')" }
+}
+
 $status='GREEN'; $code=0
 if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$status='YELLOW';$code=1}
 "RESULT: $status  (problems=$($problems.Count), warnings=$($warn.Count))"

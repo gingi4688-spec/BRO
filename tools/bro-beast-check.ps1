@@ -2,7 +2,8 @@
   bro-beast-check.ps1 — BEAST regression matrix: one runner for the whole factory (Beast Gate-5)
   EN: Runs every critical check and aggregates a single GREEN/YELLOW/RED verdict with evidence. Components:
       git state · SuperBro doctor · audit · spine-check · registry-check · project doctor EP · project audit EP ·
-      release verify (v1.0.0) · guard regression · isolation proof · no-secret/pre-push dry check.
+      release verify (v1.0.0) · guard regression · isolation proof · no-secret/pre-push dry check ·
+      law L10 · no-duplicate-skills · no-Project-Bro-self-evolution · idempotency (topist additions).
       Read-only except that the live guard regression appends append-only hook-block evidence (by design).
       Exit: 0=GREEN (all pass) · 2=RED (any fail).
   HY: Մեկ runner ամ. critical check-ի համար՝ aggregate GREEN/YELLOW/RED evidence-ով։ Read-only, բացի որ guard
@@ -74,6 +75,35 @@ $secretHit = @($diffFiles | Where-Object { $_ -match '(?i)bro\.home\.json|verifi
 $epPathHit = @($diffFiles | Where-Object { $_ -match '(?i)(^|/)(EP|DB|GAA|GAAhex|IP)/' })
 Rec 'no secret files in unpushed diff' ($secretHit.Count -eq 0) "secret-files=$($secretHit.Count)"
 Rec 'no project-folder paths in diff'  ($epPathHit.Count -eq 0) "project-paths=$($epPathHit.Count) (EP/bro is outside repo)"
+
+# 12) law L10 present (SuperBro-only strengthening)
+$l10txt = ''; try { $l10txt = Get-Content -Raw '_core/laws/02_architecture.md' } catch {}
+$l10ok = ($l10txt -match '\bL10\b') -and ($l10txt -match '(?i)only superbro strengthens')
+Rec 'law L10 present (SuperBro-only strengthening)' $l10ok 'architecture L10'
+
+# 13) no duplicate skill scripts (no -v2/-copy/-new/-old/-bak siblings)
+$dupSkill = @(Get-ChildItem 'tools' -File -Filter '*.ps1' -ErrorAction SilentlyContinue | Where-Object { $_.BaseName -match '(?i)(-v\d+|-copy|-new|-old|-bak|-2)$' })
+Rec 'no duplicate skill scripts (no -v2/-copy/-new/-old)' ($dupSkill.Count -eq 0) "dup-suffixed=$($dupSkill.Count)"
+
+# 14) no Project Bro self-evolution: an INSTALLED project may carry ONLY SuperBro-template hooks (L10)
+$selfEvo = @()
+try {
+  $regB = Get-Content -Raw 'memory/_own/registry.json' | ConvertFrom-Json
+  $tmplNames = @(Get-ChildItem 'tools/templates/project-bro/tools/hooks' -File -Filter *.ps1 -ErrorAction SilentlyContinue | ForEach-Object { $_.Name.ToLower() })
+  foreach ($p in @($regB.projects | Where-Object { "$($_.status)" -eq 'INSTALLED' })) {
+    $ph = Join-Path "$($p.project_path)" 'bro\tools\hooks'
+    if (Test-Path $ph) { foreach ($f in Get-ChildItem $ph -File -Filter *.ps1 -ErrorAction SilentlyContinue) { if ($f.Name.ToLower() -notin $tmplNames) { $selfEvo += "$($p.project_id):$($f.Name)" } } }
+  }
+} catch {}
+Rec 'no Project Bro self-evolution (only template hooks)' ($selfEvo.Count -eq 0) "rogue-hooks=$($selfEvo.Count)"
+
+# 15) idempotency: read-only checks mutate no tracked file (run twice, compare working tree)
+$treeBefore = (@(git status --porcelain) -join "`n")
+& pwsh -NoProfile -File 'tools/bro-doctor.ps1' *> $null
+& pwsh -NoProfile -File 'tools/bro-audit.ps1' *> $null
+& pwsh -NoProfile -File 'tools/bro-registry-check.ps1' *> $null
+$treeAfter = (@(git status --porcelain) -join "`n")
+Rec 'idempotency: read-only checks mutate no tracked file' ($treeBefore -eq $treeAfter) 'doctor+audit+registry-check re-run'
 
 # render + verdict
 ""

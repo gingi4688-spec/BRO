@@ -3,7 +3,7 @@
   "_comment_hy": "Project Bro-ի LOCAL enforcement, ՀԵՂԻՆԱԿԸ SuperBro-ն է, DELIVERED է bro-install-ով (governed)։ Սա ՈՉ project-owned evolution է; SuperBro-controlled template է։ Critical action-ները պահանջում են BRO_GEV_APPROVED=1.",
   "hooks": {
     "PreToolUse": [
-      { "matcher": "Write|Edit", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/forbidden-path-write-guard.ps1\"" } ] },
+      { "matcher": "Write|Edit", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/forbidden-path-write-guard.ps1\"" }, { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/log-append-only-guard.ps1\"" } ] },
       { "matcher": "Read", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/cross-memory-read-guard.ps1\"" } ] },
       { "matcher": "Bash|PowerShell", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/tools/hooks/critical-command-gate.ps1\"" } ] }
     ],

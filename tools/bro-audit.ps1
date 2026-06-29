@@ -8,7 +8,10 @@
   HY: Անկախ read-only audit՝ manifest · authority · _own boundary · drift · enforcement deliverable-ներ։ Միայն
       flag — երբեք fix/move/delete (D0/§12)։ Default-ով ոչինչ չի գրում; -Log-ով մեկ audit-log entry (bro-log-ով)։
       F3 WHITELIST՝ _own-ի ստուգումը FILE NAME-երով է, ոչ թե evidence-ի բովանդակությունը grep անելով։
-  Exit: 0=GREEN 1=YELLOW 2=RED 3=CRITICAL.  Issue codes per §12.
+  Exit: 0=GREEN 1=YELLOW 2=RED 3=CRITICAL 4=BLACK.  Issue codes per §12.
+      BLACK (topist) = evidence missing / tamper / unsealed: distinct from RED (policy fail). A GREEN/RED seal is
+      ONLY written with -Log when commit evidence exists (no-evidence-no-seal); otherwise status escalates to BLACK
+      and NO audit-log entry is written. The seal is commit-bound AND version-bound.
 #>
 param([switch]$Log)
 $ErrorActionPreference = 'Stop'
@@ -86,15 +89,51 @@ foreach ($f in $need) { Chk (Test-Path $f) "present: $f" "missing deliverable: $
 $setOk=$false; try { $set = Get-Content -Raw '.claude/settings.json' | ConvertFrom-Json; $setOk = ($null -ne $set.hooks.PreToolUse) } catch {}
 Chk $setOk ".claude/settings.json registers PreToolUse hooks" "settings.json missing/has no PreToolUse hooks" 'MANIFEST_MISSING'
 ""
+"[F] Isolation verdict (B4/L8/L10 - the wall, proof-bound)"
+# Aggregates the isolation-specific signals into ONE named verdict; an unexpected (non-sealed) supermemory
+# mirror is RED here (topist hardening) even though [D] flags it as a warning. A GREEN audit REQUIRES PASS.
+$isoFail = @()
+if ($stray.Count -ne 0)        { $isoFail += "_own stray file(s): $($stray -join ', ')" }
+if ($strayDirs.Count -ne 0)    { $isoFail += "_own stray dir(s): $($strayDirs -join ', ')" }
+if ($regContentBad.Count -ne 0){ $isoFail += "registry B4 path(s): $($regContentBad.Count)" }
+if ($smUnexpected.Count -ne 0) { $isoFail += "unexpected supermemory mirror(s): $(($smUnexpected | Select-Object -ExpandProperty Name) -join ', ')" }
+Chk ($isoFail.Count -eq 0) "ISOLATION: PASS - _own metadata/evidence only; supermemory sealed-only; registry metadata-only; no project-local self-evolution (L10)" "ISOLATION: FAIL - $($isoFail -join '; ')" 'CROSS_PROJECT_CONTAMINATION'
+""
 $status='GREEN'; $code=0
 if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$status='YELLOW';$code=1}
 $codesUniq = ($codes | Select-Object -Unique) -join ', '
 "RESULT: $status  (problems=$($problems.Count), warnings=$($warn.Count))"
 if ($codesUniq) { "ISSUE CODES: $codesUniq" }
 "NOTE: read-only audit - flags only, never fixes/moves/deletes. No files changed."
+
+# --- Topist SEAL (commit-bound + version-bound + evidence-checked) ---
+$commit = $null; try { $commit = (& git rev-parse --short HEAD 2>$null); if ($commit) { $commit = "$commit".Trim() } } catch {}
+$treeState = 'n/a'; try { $treeState = (@(& git status --porcelain 2>$null).Count -gt 0) ? 'DIRTY' : 'clean' } catch {}
+$spineVer  = if ($mfOk) { "$($mf.spine_version)" } else { 'n/a' }
+$skillsVer = if ($mfOk) { "$($mf.skills_manifest_version)" } else { 'n/a' }
+""
+"SEAL (audit evidence) / SEAL (audit-ի evidence)"
+"  commit:        $(if($commit){$commit}else{'n/a (NO EVIDENCE)'})"
+"  tree:          $treeState"
+"  scope:         SuperBro self (BRO_HOME)"
+"  commands:      tools/bro-audit.ps1"
+"  exit:          $code ($status)"
+"  changed_files: none (read-only audit; never fixes/moves/deletes)"
+"  touched_paths: bro.manifest.json, bro.home.json, memory/_own/*, spine/*, .claude/settings.json, tools/hooks/* (READ ONLY)"
+"  version-bound: spine_version=$spineVer  skills_manifest_version=$skillsVer"
+"  limitations:   filename/metadata-level; does NOT read sealed project memory; does NOT recompute spine payload hashes (use bro-spine-verify) or run the full factory matrix (use bro-beast-check)."
+"  GREEN does NOT mean: code is bug-free, a release is safe to cut, a push is authorized, sealed project memory is clean, or spine payload hashes were recomputed - ONLY that these read-only structural checks passed at THIS commit + version."
+
+# no-evidence-no-seal: a seal must be commit-bound. Without commit evidence, refuse to seal -> BLACK(4), write nothing.
+if (-not $commit) { $status='BLACK'; $code=4; ""; "RESULT: BLACK  (no commit evidence - seal REFUSED; no audit-log entry written)" }
+
 if ($Log) {
-  $note = "audit $status; problems=$($problems.Count) warnings=$($warn.Count); codes=[$codesUniq]"
-  & pwsh -NoProfile -File 'tools/bro-log.ps1' -Log 'audit-log' -Heading 'AUDIT_RUN (bro-audit.ps1)' -Event 'AUDIT_RUN' -Action 'READ_ONLY_AUDIT' -Target 'SuperBro self' -Result $status -Source 'tools/bro-audit.ps1' -Authority 'Bro' -FilesChanged 'none' -Notes $note | Out-Null
-  "(audit-log entry appended via bro-log.ps1)"
+  if ($status -eq 'BLACK') {
+    "(NO-EVIDENCE-NO-SEAL: status BLACK - refusing to write an audit-log seal)"
+  } else {
+    $note = "audit $status; problems=$($problems.Count) warnings=$($warn.Count); codes=[$codesUniq]; commit=$commit; tree=$treeState; spine=$spineVer; skills=$skillsVer"
+    & pwsh -NoProfile -File 'tools/bro-log.ps1' -Log 'audit-log' -Heading "AUDIT_RUN (bro-audit.ps1) commit=$commit" -Event 'AUDIT_RUN' -Action 'READ_ONLY_AUDIT' -Target 'SuperBro self' -Result $status -Source 'tools/bro-audit.ps1' -Authority 'Bro' -FilesChanged 'none' -Notes $note | Out-Null
+    "(audit-log entry appended via bro-log.ps1)"
+  }
 }
 exit $code
