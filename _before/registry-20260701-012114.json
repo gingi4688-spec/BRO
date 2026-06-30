@@ -53,21 +53,10 @@
       "memory_scope": "SCOUT_only",
       "authority": "ProjectBro",
       "spine_version_expected": "v1.0.0",
-      "status": "INSTALLED",
+      "status": "REGISTERED",
       "last_audit": "n/a",
-      "last_sync": "2026-07-01T01:23:01+04:00",
+      "last_sync": "n/a",
       "notes": "first project (HMEM-HASK scout system); DB-from-0 clean rebuild; brain in bro/memory wrapped+adopted"
-    },
-    {
-      "project_id": "MENQ",
-      "project_path": "C:\\Users\\Admin\\Desktop\\Menq",
-      "memory_scope": "MENQ_only",
-      "authority": "ProjectBro",
-      "spine_version_expected": "v1.0.0",
-      "status": "INSTALLED",
-      "last_audit": "n/a",
-      "last_sync": "2026-07-01T01:25:30+04:00",
-      "notes": "MenQ Studio own site (landing+admin, AI business); brain adopted from harness memory"
     }
   ]
 }
