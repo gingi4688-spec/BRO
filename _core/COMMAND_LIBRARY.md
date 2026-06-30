@@ -45,11 +45,15 @@ availability(CLEAN-BUILD | PHASE-N | LIVE | ROLLOUT-GATED | RUNTIME | FUTURE) ·
 | **UPDATE PROJECT BRO SPINE** | CRITICAL | YES | WRITE | ROLLOUT-GATED | pull approved release into X/bro / spine update |
 | **ROLLBACK PROJECT BRO** | CRITICAL | YES | WRITE | ROLLOUT-GATED | undo a failed install (removes X\bro only) / rollback |
 | **RETIRE PROJECT** | CRITICAL | YES | WRITE | ROLLOUT-GATED | status → RETIRED (metadata only) / retire |
+| **NEW PROJECT** | CRITICAL | YES | WRITE | ROLLOUT-GATED | factory: born-correct project (mkdir→register→install→wall-to-root→CLAUDE.md→intake→READY) / նոր project factory |
+| **WIRE WALL TO ROOT** | CRITICAL | YES | WRITE | ROLLOUT-GATED | retrofit the 5-hook wall to a project ROOT (refresh hooks + root .claude + gitignore; copy/skip/MERGE) / wall-to-root retrofit |
+| **LIST DOCS PACK** | READ-ONLY | NO | READ | LIVE | browse the governed STANDARD_PROJECT_DOCS_PACK master (catalog / section) / docs-pack browse |
+| **DELIVER DOCS** | CRITICAL | YES | WRITE | ROLLOUT-GATED | deliver a LEAN selection of doc sections into a project's docs/ (select-don't-copy) / docs deliver |
 | **PROMOTE SKILL** | CRITICAL | YES | WRITE | PHASE-4 | promote a lesson to spine (Promotion Gate) / promote |
 | **CROSS-PROJECT AUDIT** | CRITICAL | YES | READ | FUTURE | Gev-opened read-only cross-project review / cross-project |
 | **EXIT** | READ-ONLY | NO | READ | CLEAN-BUILD | leave the palette / դուրս գալ |
 
-> **Live read-only set / live read-only հավաքածու:** `HELP · SHOW REGISTRY · SHOW HEALTH · RUN DOCTOR · RUN AUDIT · REVIEW QUARANTINE · RUN PROJECT AUDIT · VERIFY PROJECT BRO · EXIT` run from the menu (read-only).
+> **Live read-only set / live read-only հավաքածու:** `HELP · SHOW REGISTRY · SHOW HEALTH · RUN DOCTOR · RUN AUDIT · REVIEW QUARANTINE · RUN PROJECT AUDIT · VERIFY PROJECT BRO · LIST DOCS PACK · EXIT` run from the menu (read-only).
 > **WRITE/critical commands** show a **preview**; `ROLLOUT-GATED` ones run a **DRY** backing in the menu (execute nothing) — real execution requires `-Execute -Yes BRO_GEV_APPROVED=1` outside the menu; others are gated. **The palette NEVER bypasses a gate.** /
 > READ-live-ները run են; WRITE/critical-ները preview; `ROLLOUT-GATED`-ները menu-ում DRY (real = explicit Gev-flags); palette-ը ԵՐԲԵՔ gate չի bypass անում։
 

@@ -37,7 +37,7 @@ try {
   # 1) real git push (anchored: a git ... push command segment, no separator between)
   $isPush = $scrub -match '(?i)\bgit\b[^\n;|&]*\bpush\b'
   # 2) actual execution of a critical script (via -File, or at a command position) - NOT a mere path argument
-  $crit = 'bro-(release|promote|register|install|update-spine)\.ps1'
+  $crit = 'bro-(release|promote|register|install|update-spine|new-project|wire-root)\.ps1'
   $execViaFile = $scrub -match ("(?i)-File\b[^\n;|&]*\b" + $crit)
   $execAtStart = $scrub -match ("(?im)(^|[;&|]|&&|\|\|)\s*&?\s*(\.?[\\/])?(tools[\\/])?" + $crit)
   $isCriticalScript = $execViaFile -or $execAtStart

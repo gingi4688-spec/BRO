@@ -4,7 +4,10 @@
       and the project must be REGISTERED. Real install creates ONLY <ProjectPath>\bro\ (fresh, empty sealed
       memory), fills the manifest from the template, PULLS the named spine release into <ProjectPath>\bro\spine,
       VERIFIES every hash against the release manifest, STAMPS spine_version, and writes health.report.md.
-      It NEVER touches <ProjectPath>\memory or any existing project file outside \bro\. No adopt, migrate, or mirror.
+      WALL-TO-ROOT: it also delivers the root wall entry <ProjectPath>\.claude\settings.json (so the 5-hook wall
+      auto-activates when the project ROOT is opened) and appends Bro-infra ignores to <ProjectPath>\.gitignore
+      (idempotent). It NEVER touches <ProjectPath>\memory, app source, or any pre-existing file (a pre-existing root
+      .claude is backed up first). No adopt, migrate, or mirror.
   HY: Default = DRY preview։ Real install-ը պահանջում է -Execute + -Yes + BRO_GEV_APPROVED=1 ու REGISTERED project։
       Ստեղծում է ՄԻԱՅՆ <ProjectPath>\bro\ (fresh, դատարկ sealed memory), manifest template-ից, pull release ->
       verify ամ. hash -> stamp -> health.report.md։ ԵՐԲԵՔ չի դիպչում <ProjectPath>\memory-ին։
@@ -111,7 +114,8 @@ $relMfPath= Join-Path $relDir 'release.manifest.json'
 "INSTALL PROJECT BRO - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
 "  project:  $ProjectId   path: $ProjectPath   release: $Version"
 "  creates:  $broDir\ { spine/ memory/(fresh,empty) logs/ bro.manifest.json health.report.md }"
-"  NEVER touches: $ProjectPath\memory  (existing project files outside \bro\)"
+"  wall-to-root: delivers $ProjectPath\.claude\ (root wall entry) + appends Bro-infra ignores to .gitignore"
+"  NEVER touches: $ProjectPath\memory  ·  app source  ·  any pre-existing file (root .claude backed up if present)"
 
 if (-not $Execute) {
   "  DRY-RUN: nothing executed. No X/bro created. No project folder touched. No release pulled."
@@ -202,6 +206,30 @@ try {
   #    Project Bros are CONSUMERS of SuperBro template/tooling (see _core/laws/02_architecture.md L10).
   if (Test-Path 'tools/templates/project-bro/.claude') { Copy-Item 'tools/templates/project-bro/.claude' -Destination $broDir -Recurse -Force }
   if (Test-Path 'tools/templates/project-bro/tools')   { Copy-Item 'tools/templates/project-bro/tools'   -Destination $broDir -Recurse -Force }
+
+  # 7b) WALL-TO-ROOT: deliver the ROOT-open wall entry to <project>\.claude so the 5-hook wall auto-activates when the
+  #     project ROOT is opened (the daily driver), not only bro/. Hook SCRIPTS stay contained under bro\tools\hooks.
+  $rootClaudeSrc = 'tools/templates/project-bro/root/.claude'
+  if (Test-Path $rootClaudeSrc) {
+    $rootClaudeDst = Join-Path $ProjectPath '.claude'
+    $existingSettings = Join-Path $rootClaudeDst 'settings.json'
+    if (Test-Path $existingSettings) {                              # defensive: never clobber a pre-existing app .claude
+      $bakTs = Get-Date -Format "yyyyMMdd-HHmmss"
+      Copy-Item $existingSettings ("$existingSettings.bak-$bakTs") -Force
+      "  note: pre-existing $existingSettings backed up to settings.json.bak-$bakTs before wall delivery"
+    }
+    Copy-Item $rootClaudeSrc -Destination $ProjectPath -Recurse -Force
+  }
+
+  # 7c) gitignore the re-deliverable infra in the PROJECT's repo (idempotent): the root wall entry + the bulky bro/ infra
+  #     (spine/tools/wall/manifest/health/logs). bro\memory (sealed brain) + docs STAY TRACKED (Gev decision 2026-07-01).
+  $pgi = Join-Path $ProjectPath '.gitignore'
+  $giExisting = if (Test-Path $pgi) { Get-Content -Raw $pgi } else { '' }
+  if ($giExisting -notmatch '(?m)^# --- Bro infra') {
+    $giBlock = @('', '# --- Bro infra (SuperBro-governed, re-deliverable; do NOT commit) ---', '/.claude/', '/bro/spine/', '/bro/tools/', '/bro/.claude/', '/bro/bro.manifest.json', '/bro/health.report.md', '/bro/logs/', '/bro/_before/') -join "`r`n"
+    Add-Content -Path $pgi -Value $giBlock -Encoding utf8
+    "  gitignore: appended Bro-infra ignores to $pgi (bro\memory + docs stay tracked)"
+  } else { "  gitignore: Bro-infra block already present (idempotent, skipped)" }
 
   # 8) complete the REGISTERED -> INSTALLED registry transition (a successful install IS the transition)
   try {

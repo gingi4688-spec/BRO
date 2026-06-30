@@ -1,0 +1,14 @@
+{
+  "_comment_en": "Project Bro ROOT-open enforcement, AUTHORED BY SUPERBRO and DELIVERED to <project>\\.claude by bro-install (governed; wall-to-root). This is the daily-driver entry: opening the project ROOT activates the 5-hook wall. Hook SCRIPTS stay contained under <project>\\bro\\tools\\hooks; here $CLAUDE_PROJECT_DIR = the project root, so paths carry the bro/ prefix. The bro/\\.claude variant (no prefix) still covers opening bro/ directly. The guards compute home from their own location (X/bro), so behavior is identical at either open-point. Critical actions require BRO_GEV_APPROVED=1. This file is governed delivery: a Project Bro must not edit it (forbidden-path-write-guard protects <root>\\.claude).",
+  "_comment_hy": "Project Bro-ի ROOT-open enforcement, ՀԵՂԻՆԱԿԸ SuperBro-ն է, DELIVERED է <project>\\.claude-ին bro-install-ով (governed; wall-to-root)։ Սա ամենօրյա մուտքն է՝ project ROOT բացելը ակտիվացնում է 5-hook պատը։ Hook SCRIPT-ները մնում են <project>\\bro\\tools\\hooks-ում; այստեղ $CLAUDE_PROJECT_DIR = project root, ուստի path-երը կրում են bro/ prefix։ Guard-ները home-ը հաշվում են իրենց տեղից (X/bro) -> պահվածքը նույնն է երկու open-point-ին։ Critical = BRO_GEV_APPROVED=1։ Governed delivery է՝ Project Bro-ն չի խմբագրում (forbidden-path-write-guard-ը պաշտպանում է <root>\\.claude)։",
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Write|Edit", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/bro/tools/hooks/forbidden-path-write-guard.ps1\"" }, { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/bro/tools/hooks/log-append-only-guard.ps1\"" } ] },
+      { "matcher": "Read", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/bro/tools/hooks/cross-memory-read-guard.ps1\"" } ] },
+      { "matcher": "Bash|PowerShell", "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/bro/tools/hooks/critical-command-gate.ps1\"" } ] }
+    ],
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "pwsh -NoProfile -File \"$CLAUDE_PROJECT_DIR/bro/tools/hooks/preflight-printer.ps1\"" } ] }
+    ]
+  }
+}

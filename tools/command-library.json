@@ -174,6 +174,46 @@
       "preview_hy": "Cross-project mode-ը default OFF է ու բացվում է ՄԻԱՅՆ Գևի բացահայտ հրամանով։ Palette-ը միայն preview."
     },
     {
+      "name": "NEW PROJECT",
+      "purpose_en": "Scaffold a brand-new project, born correct (folder + register + install + wall-to-root + CLAUDE.md + intake).",
+      "purpose_hy": "Կառուցել բոլորովին նոր project՝ ճիշտ ծնված (folder + register + install + wall-to-root + CLAUDE.md + intake).",
+      "category": "CRITICAL", "criticality": "CRITICAL", "requires_gev": true, "mode": "WRITE",
+      "availability": "ROLLOUT-GATED", "backing": "tools/bro-new-project.ps1",
+      "files_affected": "creates <path>\\ (new project) + <path>\\bro\\ + <path>\\CLAUDE.md + <path>\\.claude + <path>\\docs; NEVER another project",
+      "preview_en": "LIVE + GATED. One governed flow (mkdir -> register -> install -> CLAUDE.md L8 -> docs intake -> READY). Real run needs -Execute -Yes BRO_GEV_APPROVED=1; refuses a duplicate id or a non-empty target. Inverse = -Rollback. The palette runs a DRY preview only.",
+      "preview_hy": "LIVE + GATED։ Մեկ governed flow (mkdir -> register -> install -> CLAUDE.md L8 -> docs intake -> READY)։ Real = -Execute -Yes BRO_GEV_APPROVED=1; refuse duplicate id / non-empty target։ Inverse = -Rollback։ Palette-ը միայն DRY preview."
+    },
+    {
+      "name": "WIRE WALL TO ROOT",
+      "purpose_en": "Retrofit an installed Project Bro so its 5-hook wall auto-activates at the project ROOT (refresh hooks + root .claude + gitignore).",
+      "purpose_hy": "Retrofit installed Project Bro՝ որ պատը auto-active լինի project ROOT-ին (թարմ hooks + root .claude + gitignore).",
+      "category": "CRITICAL", "criticality": "HIGH", "requires_gev": true, "mode": "WRITE",
+      "availability": "ROLLOUT-GATED", "backing": "tools/bro-wire-root.ps1",
+      "files_affected": "writes <path>\\bro\\tools\\hooks, <path>\\bro\\.claude, <path>\\.claude, <path>\\.gitignore; backs up each overwrite/merge to <path>\\bro\\_before; NEVER bro\\memory or app source",
+      "preview_en": "LIVE + GATED. CLEAN-COPY if no root .claude, SKIP if already wired, or MERGE the wall into a pre-existing app .claude (app preserved). Backup + SHA256 verify (nothing lost). Real run needs -Execute -Yes BRO_GEV_APPROVED=1. The palette runs a DRY preview only.",
+      "preview_hy": "LIVE + GATED։ CLEAN-COPY / SKIP / MERGE (app պահպանված)։ Backup + SHA256 verify (ոչ մի բան չկորի)։ Real = -Execute -Yes BRO_GEV_APPROVED=1։ Palette-ը միայն DRY preview."
+    },
+    {
+      "name": "LIST DOCS PACK",
+      "purpose_en": "Browse the governed STANDARD_PROJECT_DOCS_PACK master (the catalog / one section).",
+      "purpose_hy": "Browse governed STANDARD_PROJECT_DOCS_PACK master-ը (catalog / մեկ section).",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "LIVE", "backing": "tools/bro-docs.ps1",
+      "files_affected": "reads tools/templates/standard-docs-pack/ ; writes none",
+      "preview_en": "LIVE (read-only). Prints the docs-pack catalog (PACK_INDEX) or a section's files. Writes nothing.",
+      "preview_hy": "LIVE (read-only)։ Տպում է docs-pack catalog-ը (PACK_INDEX) կամ section-ի ֆայլերը։ Ոչինչ չի գրում."
+    },
+    {
+      "name": "DELIVER DOCS",
+      "purpose_en": "Deliver a LEAN selection of docs-pack sections into a project's docs/ (select-don't-copy).",
+      "purpose_hy": "Հասցնել docs-pack section-ների LEAN ընտրություն project-ի docs/-ում (select-don't-copy).",
+      "category": "CRITICAL", "criticality": "MED", "requires_gev": true, "mode": "WRITE",
+      "availability": "ROLLOUT-GATED", "backing": "tools/bro-docs.ps1",
+      "files_affected": "writes <project>\\docs\\<selected sections> (backs up existing to docs\\_before); never the whole universe; never bro\\memory or app source",
+      "preview_en": "LIVE + GATED. Copies ONLY the named sections into <project>\\docs\\ (select-don't-copy). Real run needs -Sections + -Execute -Yes BRO_GEV_APPROVED=1; existing sections backed up first. The palette runs a DRY preview only.",
+      "preview_hy": "LIVE + GATED։ Պատճենում է ՄԻԱՅՆ նշված section-ները <project>\\docs\\-ում (select-don't-copy)։ Real = -Sections + -Execute -Yes BRO_GEV_APPROVED=1; existing-ը backup։ Palette-ը միայն DRY preview."
+    },
+    {
       "name": "EXIT",
       "purpose_en": "Leave the palette.",
       "purpose_hy": "Դուրս գալ palette-ից.",

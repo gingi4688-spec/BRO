@@ -678,3 +678,59 @@ result: BLOCKED
 reason: evidence logs are append-only (use tools/bro-log.ps1); edit/delete requires explicit Gev command
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-01T03:42:05+04:00
+actor: hook
+session_id: n/a
+action: CRITICAL_COMMAND_BLOCKED
+target: pwsh -NoProfile -File tools/bro-new-project.ps1 -ProjectId X -Execute -Yes
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-01T03:42:06+04:00
+actor: hook
+session_id: n/a
+action: CRITICAL_COMMAND_BLOCKED
+target: pwsh -NoProfile -File tools/bro-wire-root.ps1 -ProjectId EP -Execute -Yes
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-01T03:42:07+04:00
+actor: hook
+session_id: n/a
+action: CRITICAL_COMMAND_BLOCKED
+target: pwsh -NoProfile -File tools/bro-install.ps1 -ProjectId X -Execute -Yes
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-01T03:42:08+04:00
+actor: hook
+session_id: n/a
+action: CRITICAL_COMMAND_BLOCKED
+target: git push origin main
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```

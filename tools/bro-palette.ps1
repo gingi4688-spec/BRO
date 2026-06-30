@@ -78,6 +78,10 @@ function Invoke-ReadLive($entry, [bool]$interactive) {
       if ($interactive) { $pj = Read-Host '  project_id'; & pwsh -NoProfile -File 'tools/bro-project-doctor.ps1' -ProjectId $pj; $script:ExitCode = $LASTEXITCODE }
       else { Write-Output '  VERIFY PROJECT BRO is read-only but needs a -ProjectId (use the interactive menu, or tools/bro-project-doctor.ps1 -ProjectId X).'; $script:ExitCode = 0 }
     }
+    'LIST DOCS PACK' {
+      if ($interactive) { $sec = Read-Host '  section number (blank = full catalog)'; if ($sec) { & pwsh -NoProfile -File 'tools/bro-docs.ps1' -List -Section $sec } else { & pwsh -NoProfile -File 'tools/bro-docs.ps1' -List }; $script:ExitCode = $LASTEXITCODE }
+      else { & pwsh -NoProfile -File 'tools/bro-docs.ps1' -List; $script:ExitCode = $LASTEXITCODE }
+    }
     'EXIT'          { Write-Output 'Leaving palette. Bye.'; $script:ExitCode = 0 }
     default         { Write-Output ("PALETTE: '{0}' has no read-live backing wired." -f $entry.name); $script:ExitCode = 2 }
   }
@@ -117,6 +121,18 @@ function Invoke-DryRollout($entry, [bool]$interactive) {
     'RETIRE PROJECT' {
       if ($interactive) { $projId = Read-Host '  project_id'; & pwsh -NoProfile -File 'tools/bro-register.ps1' -Retire -ProjectId $projId }
       else { Write-Output '  RETIRE PROJECT (DRY) needs -ProjectId; use the interactive menu.' }
+    }
+    'NEW PROJECT' {
+      if ($interactive) { $projId = Read-Host '  project_id'; $desc = Read-Host '  description'; & pwsh -NoProfile -File 'tools/bro-new-project.ps1' -ProjectId $projId -Description $desc }
+      else { Write-Output '  NEW PROJECT (DRY) needs -ProjectId; use the interactive menu.' }
+    }
+    'WIRE WALL TO ROOT' {
+      if ($interactive) { $projId = Read-Host '  project_id'; & pwsh -NoProfile -File 'tools/bro-wire-root.ps1' -ProjectId $projId }
+      else { Write-Output '  WIRE WALL TO ROOT (DRY) needs -ProjectId; use the interactive menu.' }
+    }
+    'DELIVER DOCS' {
+      if ($interactive) { $projId = Read-Host '  project_id'; $secs = Read-Host '  sections (e.g. 00,01,08)'; & pwsh -NoProfile -File 'tools/bro-docs.ps1' -Deliver -ProjectId $projId -Sections $secs }
+      else { Write-Output '  DELIVER DOCS (DRY) needs -ProjectId -Sections; use the interactive menu.' }
     }
     default { Write-Output '  (no dry backing wired)' }
   }
