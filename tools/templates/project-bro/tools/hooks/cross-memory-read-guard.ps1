@@ -44,7 +44,8 @@ try {
     "action: CROSS_MEMORY_READ_BLOCKED", "target: $abs", "source_command: Read tool",
     "authority: hook", "result: BLOCKED", "reason: $reason", "files_changed: none", "``````"
   )
-  $hbPath = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_HOOKBLOCKS_PATH) { $env:BRO_HOOKBLOCKS_PATH } else { Join-Path $broHome 'memory\_own\hook-blocks.md' }
+  # Project Bro evidence lives under <home>\logs\ (protected by log-append-only-guard); NOT memory\_own\ (SuperBro-only). / Project Bro-ի evidence-ը <home>\logs\-ում է (log-append-only-guard-ով պաշտպանված), ՈՉ memory\_own\ (միայն SuperBro)։
+  $hbPath = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_HOOKBLOCKS_PATH) { $env:BRO_HOOKBLOCKS_PATH } else { Join-Path $broHome 'logs\hook-blocks.md' }
   try { Add-Content -Path $hbPath -Value $entry -Encoding utf8 } catch {}
   [Console]::Error.WriteLine("DENIED by cross-memory-read-guard: $reason -> $abs")
   exit 2
