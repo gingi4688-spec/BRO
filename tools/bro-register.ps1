@@ -60,7 +60,7 @@ if (-not $MemoryScope) { $MemoryScope = "${ProjectId}_only" }
 # B4 validation (applies to dry AND real): no path inside another project's memory, none inside BRO_HOME
 $pl = ($ProjectPath -replace '/','\').ToLower()
 $refuse = ''
-if ($pl -match '\\(ep|db|gaa|gaahex|ip)\\bro\\memory') { $refuse = 'path is inside another project''s memory (B4/L8)' }
+if ($pl -match '\\bro\\memory(\\|$)') { $refuse = 'path is inside another project''s sealed memory (B4/L8)' }
 elseif ($pl.StartsWith(($broHome.ToLower().TrimEnd('\') + '\'))) { $refuse = 'path is inside BRO_HOME (a project must live in its own root)' }
 
 "REGISTER PROJECT - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })

@@ -1,13 +1,12 @@
 <#
-  cross-memory-read-guard.ps1 — PreToolUse hook (matcher: Read) · Phase 2 + Gate-7 scope-aware (§11 / B4 / L8)
-  EN: Enforces memory isolation on Read. A Bro may read ONLY its own project's memory; reading ANY other project's
-      sealed memory is BLOCKED. The current scope is read from memory_scope in the local bro.manifest.json
-      (override: $env:BRO_SCOPE for testing). Rules:
-        - scope 'own_only' (SuperBro): block reading ANY project's \bro\memory (it uses sealed mirrors, not direct reads).
-        - scope '<X>_only' (Project Bro X): allow reading <X>\bro\memory; block every other project's \bro\memory.
-  HY: Կիրառում է memory isolation-ը Read-ի վրա։ Bro-ն կարդում է ՄԻԱՅՆ իր project-ի memory-ն; ուրիշ project-ի կնքված
-      memory կարդալը BLOCKED է։ Scope-ը՝ bro.manifest.json-ի memory_scope-ից (override՝ $env:BRO_SCOPE test-ի համար)։
-        - 'own_only' (SuperBro)՝ block ամ. project memory · '<X>_only' (Project Bro X)՝ allow X-ի, block մյուսները։
+  cross-memory-read-guard.ps1 (Project Bro template) — PreToolUse hook (matcher: Read) · Phase 2 + PATH-based isolation (§11 / B4 / L8)
+  AUTHORED BY SUPERBRO, delivered by bro-install. Enforces memory isolation on Read for a PROJECT Bro (which has no
+  registry): its OWN sealed brain is <broHome>\memory (= <project>\bro\memory). ANY other "*\bro\memory" path is a
+  DIFFERENT project's sealed brain -> BLOCKED. PATH-based, so it is robust to folder names ("Scout Project", "Menq")
+  with no hardcoded slug list. (SuperBro's own copy uses a registry-driven variant to map paths -> project ids.)
+  EN: allow reading THIS project's bro\memory; block every other project's bro\memory. Non-memory paths are ignored.
+  HY: թույլ է տալիս կարդալ ԱՅՍ project-ի bro\memory-ն; block ամեն ուրիշ project-ի bro\memory։ PATH-based՝ folder-name-
+      ից անկախ (ոչ hardcoded slug)։ Ոչ-memory path-երը անտեսվում են։
   SAFETY: fail-OPEN on error (exit 0); deny only on a confirmed cross-project memory read. Allow=0, Deny=2.
 #>
 try {
@@ -22,20 +21,16 @@ try {
   $abs = try { [System.IO.Path]::GetFullPath($fp) } catch { $fp }
   $absL = $abs.ToLower()
 
-  # Only project sealed-memory paths are in scope for this guard.
-  if ($absL -notmatch '\\(ep|db|gaa|gaahex|ip)\\bro\\memory') { exit 0 }
-  $targetProj = $Matches[1]
+  # A Project Bro has no registry, so isolation is PATH-based: its OWN sealed brain is <broHome>\memory. ANY other
+  # "*\bro\memory" path is a DIFFERENT project's sealed brain -> BLOCK. Robust to folder names ("Scout Project"/"Menq"),
+  # no hardcoded slug list. (SuperBro uses a registry-driven variant; this template is delivered to project bros only.)
+  $ownMem = ($broHome.ToLower().TrimEnd('\') + '\memory')
+  if ($absL -notmatch '\\bro\\memory(\\|$)') { exit 0 }                   # not a sealed-memory path at all
+  if ($absL -eq $ownMem -or $absL.StartsWith($ownMem + '\')) { exit 0 }   # reading THIS project's OWN brain -> allow
 
-  # current scope: the local manifest's memory_scope by default. The $env:BRO_SCOPE override is TEST-ONLY and is
-  # honored ONLY when $env:BRO_TEST_MODE='1'. In production (no BRO_TEST_MODE) the override is IGNORED -> manifest.
-  $scope = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_SCOPE) { "$($env:BRO_SCOPE)" } else { try { (Get-Content -Raw (Join-Path $broHome 'bro.manifest.json') | ConvertFrom-Json).memory_scope } catch { 'own_only' } }
-  $ownProj = if ($scope -ne 'own_only' -and $scope -match '^(.+)_only$') { $Matches[1].ToLower() } else { '' }
-
-  if ($ownProj -and $targetProj -eq $ownProj) { exit 0 }   # a Project Bro reading ITS OWN memory -> allow
-
-  # otherwise: SuperBro reading any project memory, or a Project Bro reading another project's memory -> BLOCK
-  $reason = if ($ownProj) { "project Bro '$ownProj' attempted to read project '$targetProj' memory (cross-project, B4/L8)" }
-            else { "SuperBro (own_only) attempted a direct project-memory read of '$targetProj' (use a sealed mirror; B4/B6)" }
+  # otherwise: a read into some OTHER bro's sealed memory -> BLOCK (cross-project, B4/L8)
+  $ownScope = try { (Get-Content -Raw (Join-Path $broHome 'bro.manifest.json') | ConvertFrom-Json).memory_scope } catch { 'this project' }
+  $reason = "cross-project sealed-memory read blocked (scope '$ownScope' may read ONLY its own bro\memory; target is another project's sealed brain, B4/L8)"
   $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
   $sid = if ($j.session_id) { "$($j.session_id)" } else { 'n/a' }
   $entry = @(

@@ -47,7 +47,7 @@ if ($ok) {
     $pp = "$($p.project_path)"
     Chk ($pp -match '^[A-Za-z]:\\') "entry ${pjid}: project_path is absolute" "entry ${pjid}: project_path not absolute: $pp"
     $pl = ($pp -replace '/','\').ToLower()
-    Chk (-not ($pl -match '\\(ep|db|gaa|gaahex|ip)\\bro\\memory')) "entry ${pjid}: path not inside another project's memory (B4)" "entry ${pjid}: path inside another project memory (B4 violation)"
+    Chk (-not ($pl -match '\\bro\\memory(\\|$)')) "entry ${pjid}: path not inside another project's memory (B4)" "entry ${pjid}: path inside another project memory (B4 violation)"
   }
 }
 $status='GREEN'; $code=0

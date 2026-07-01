@@ -61,7 +61,7 @@ $reg=$null; try { $reg = Get-Content -Raw 'memory/_own/registry.json' | ConvertF
 $regCount = if ($reg) { @($reg.projects).Count } else { -1 }
 Chk ($regCount -ge 0) "registry.json valid ($regCount registered project(s), metadata only)" "registry.json missing/invalid" 'SUPER_OWN_POLLUTION'
 $regContentBad = @()
-if ($regCount -gt 0) { $regContentBad = @($reg.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\(ep|db|gaa|gaahex|ip)\\bro\\memory' }) }
+if ($regCount -gt 0) { $regContentBad = @($reg.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\bro\\memory(\\|$)' }) }
 Chk ($regContentBad.Count -eq 0) "no registry path inside another project's memory (B4)" "B4-violating registry paths: $($regContentBad.Count)" 'CROSS_PROJECT_CONTAMINATION'
 ""
 "[D] Drift / boundary (read-only)"

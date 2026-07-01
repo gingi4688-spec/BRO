@@ -132,7 +132,7 @@ if ($reg2Ok) {
   $reqf = @('project_id','project_path','memory_scope','authority','status')
   $badEntries = @($reg2.projects | Where-Object { $e=$_; @($reqf | Where-Object { -not $e.$_ }).Count -gt 0 })
   Check ($badEntries.Count -eq 0) "all registry entries carry required metadata fields" "incomplete registry entries: $($badEntries.Count)"
-  $b4bad = @($reg2.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\(ep|db|gaa|gaahex|ip)\\bro\\memory' })
+  $b4bad = @($reg2.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\bro\\memory(\\|$)' })
   Check ($b4bad.Count -eq 0) "no registry path inside another project's memory (B4)" "B4-violating registry paths: $($b4bad.Count)"
 }
 # the ROLLOUT-GATED rollout commands must have their backing scripts present (palette runs them DRY; real = gated)

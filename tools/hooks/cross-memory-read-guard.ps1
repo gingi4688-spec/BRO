@@ -1,10 +1,12 @@
 <#
   cross-memory-read-guard.ps1 — PreToolUse hook (matcher: Read) · Phase 2 + Gate-7 scope-aware (§11 / B4 / L8)
   EN: Enforces memory isolation on Read. A Bro may read ONLY its own project's memory; reading ANY other project's
-      sealed memory is BLOCKED. The current scope is read from memory_scope in the local bro.manifest.json
-      (override: $env:BRO_SCOPE for testing). Rules:
-        - scope 'own_only' (SuperBro): block reading ANY project's \bro\memory (it uses sealed mirrors, not direct reads).
-        - scope '<X>_only' (Project Bro X): allow reading <X>\bro\memory; block every other project's \bro\memory.
+      sealed memory is BLOCKED. The TARGET project is resolved by REGISTRY path (robust to folder names like
+      "Scout Project"/"Menq"; not a hardcoded slug list); SuperBro's own Desktop\Bro\memory is not a registered
+      project, so it is never in scope. Own scope is read from memory_scope in bro.manifest.json (override: $env:BRO_SCOPE
+      in test mode). Rules:
+        - scope 'own_only' (SuperBro): block reading ANY registered project's \bro\memory (it uses sealed mirrors).
+        - scope '<X>_only' (Project Bro X): allow reading X's \bro\memory; block every other registered project's.
   HY: Կիրառում է memory isolation-ը Read-ի վրա։ Bro-ն կարդում է ՄԻԱՅՆ իր project-ի memory-ն; ուրիշ project-ի կնքված
       memory կարդալը BLOCKED է։ Scope-ը՝ bro.manifest.json-ի memory_scope-ից (override՝ $env:BRO_SCOPE test-ի համար)։
         - 'own_only' (SuperBro)՝ block ամ. project memory · '<X>_only' (Project Bro X)՝ allow X-ի, block մյուսները։
@@ -25,9 +27,19 @@ try {
   $abs = try { [System.IO.Path]::GetFullPath($fp) } catch { $fp }
   $absL = $abs.ToLower()
 
-  # Only project sealed-memory paths are in scope for this guard.
-  if ($absL -notmatch '\\(ep|db|gaa|gaahex|ip)\\bro\\memory') { exit 0 }
-  $targetProj = $Matches[1]
+  # Identify the target project by REGISTRY path (robust to folder names like "Scout Project"/"Menq"; NOT a hardcoded
+  # slug list). SuperBro's own memory (Desktop\Bro\memory) is NOT a registered project, so it is never in scope here.
+  # Registry source: canonical by default; $env:BRO_REGISTRY_PATH honored ONLY when $env:BRO_TEST_MODE=1.
+  $regPath = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_REGISTRY_PATH) { $env:BRO_REGISTRY_PATH } else { Join-Path $broHome 'memory\_own\registry.json' }
+  $targetProj = ''
+  try {
+    $reg = Get-Content -Raw $regPath | ConvertFrom-Json
+    foreach ($p in @($reg.projects)) {
+      $pmem = ((("$($p.project_path)") -replace '/','\').TrimEnd('\') + '\bro\memory').ToLower()
+      if ($absL -eq $pmem -or $absL.StartsWith($pmem + '\')) { $targetProj = "$($p.project_id)".ToLower(); break }
+    }
+  } catch {}
+  if (-not $targetProj) { exit 0 }   # not a registered project's sealed memory -> not in scope for this guard
 
   # current scope: the local manifest's memory_scope by default. The $env:BRO_SCOPE override is TEST-ONLY and is
   # honored ONLY when $env:BRO_TEST_MODE='1'. In production (no BRO_TEST_MODE) the override is IGNORED -> manifest.
