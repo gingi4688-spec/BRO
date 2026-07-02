@@ -1,0 +1,14 @@
+{
+  "schema_version": "v1",
+  "comment_en": "Gev-authorized, scoped, time-expiring CROSS-PROJECT access grants for the MAIN BRO (SuperBro) ONLY (L8-G). Default-deny stays; autonomous crossing is forbidden; Project Bros NEVER cross (grant or no grant). Every use is LOGGED. Grants are created/revoked ONLY via tools/bro-cross-grant.ps1 with BRO_GEV_APPROVED=1 (Gev's explicit command). A grant authorizes REACH, never contamination — writing one project's content into another's brain stays forbidden; secrets, supermemory mirrors, and the evidence log are never grantable.",
+  "comment_hy": "Gev-ի կողմից լիազորված, scoped, ժամկետով-ավարտվող CROSS-PROJECT access grant-եր՝ ՄԻԱՅՆ MAIN BRO-ի (SuperBro) համար (L8-G)։ Default = կողպած; autonomous crossing արգելված; Project Bro-ները ԵՐԲԵՔ չեն հատում (grant ունեն թե չունեն)։ Ամեն օգտագործում LOGGED է։ Grant-երը ստեղծվում/չեղարկվում են ՄԻԱՅՆ tools/bro-cross-grant.ps1-ով՝ BRO_GEV_APPROVED=1-ով (Գևի բացահայտ հրաման)։ Grant-ը լիազորում է ՀԱՍԱՆԵԼԻՈՒԹՅՈՒՆ, ոչ երբեք contamination։",
+  "grant_schema": [
+    "project_id (must be a REGISTERED project)",
+    "scope (read | read-write)",
+    "task (why Gev authorized it)",
+    "granted_by (Gev)",
+    "granted_at (ISO8601)",
+    "expires_at (ISO8601)"
+  ],
+  "grants": []
+}

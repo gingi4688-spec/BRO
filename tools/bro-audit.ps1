@@ -49,7 +49,7 @@ if ($bhOk) {
 Chk (Test-Path 'memory/_own/secrets/bro-home.verifier.json') "verifier present" "verifier MISSING" 'AUTHORITY_MISMATCH'
 ""
 "[C] _own boundary (SUPER_OWN_POLLUTION) - filename whitelist, NOT content grep (F3)"
-$allowed = @('registry.json','sync-log.md','audit-log.md','release-log.md','failure-registry.md','health-dashboard.md','hook-blocks.md','authority-log.md','cleanup-log.md')
+$allowed = @('registry.json','sync-log.md','audit-log.md','release-log.md','failure-registry.md','health-dashboard.md','hook-blocks.md','authority-log.md','cleanup-log.md','cross-grants.json')
 $ownFiles = Get-ChildItem 'memory/_own' -File | Select-Object -ExpandProperty Name
 $stray = @($ownFiles | Where-Object { $_ -notin $allowed })
 Chk ($stray.Count -eq 0) "_own files are known evidence/metadata only" "stray files in _own: $($stray -join ', ')" 'SUPER_OWN_POLLUTION'

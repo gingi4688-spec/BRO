@@ -54,7 +54,7 @@ if ($bhOk) {
 Check (Test-Path 'memory/_own/secrets/bro-home.verifier.json') "verifier present" "verifier MISSING -> STOP"
 ""
 "[4] _own structure (no stray project content; light Phase-0 check)"
-$allowed = @('registry.json','sync-log.md','audit-log.md','release-log.md','failure-registry.md','health-dashboard.md','hook-blocks.md','authority-log.md','cleanup-log.md')
+$allowed = @('registry.json','sync-log.md','audit-log.md','release-log.md','failure-registry.md','health-dashboard.md','hook-blocks.md','authority-log.md','cleanup-log.md','cross-grants.json')
 $ownFiles = Get-ChildItem 'memory/_own' -File | Select-Object -ExpandProperty Name
 $stray = @($ownFiles | Where-Object { $_ -notin $allowed })
 Check ($stray.Count -eq 0) "_own files all known evidence/metadata" "stray files in _own: $($stray -join ', ')"

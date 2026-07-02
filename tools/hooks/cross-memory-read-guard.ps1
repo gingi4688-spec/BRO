@@ -48,6 +48,36 @@ try {
 
   if ($ownProj -and $targetProj -eq $ownProj) { exit 0 }   # a Project Bro reading ITS OWN memory -> allow
 
+  # --- L8-G: Gev-authorized grant override. The MAIN BRO ONLY (scope own_only => $ownProj empty) may cross a seal
+  #     under an explicit, scoped, NON-EXPIRED, LOGGED Gev grant. Default-deny stays; autonomous crossing forbidden;
+  #     Project Bros ($ownProj set) NEVER take this path. Grants live in SuperBro's own memory/_own/cross-grants.json
+  #     (created only via bro-cross-grant.ps1 with BRO_GEV_APPROVED=1). Test seam: BRO_CROSS_GRANTS_PATH when TEST_MODE. ---
+  if (-not $ownProj) {
+    $grantsPath = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_CROSS_GRANTS_PATH) { $env:BRO_CROSS_GRANTS_PATH } else { Join-Path $broHome 'memory\_own\cross-grants.json' }
+    try {
+      $grants = Get-Content -Raw $grantsPath | ConvertFrom-Json
+      foreach ($gr in @($grants.grants)) {
+        if ("$($gr.project_id)".ToLower() -eq $targetProj -and ("$($gr.scope)" -in @('read','read-write'))) {
+          $exp = try { [datetimeoffset]::Parse("$($gr.expires_at)") } catch { $null }
+          if ($exp -and $exp -gt (Get-Date)) {
+            $gts = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
+            $gsid = if ($j.session_id) { "$($j.session_id)" } else { 'n/a' }
+            $gentry = @(
+              "", "## AUTHORIZED - cross-memory-read-guard (L8-G Gev grant)", "``````txt",
+              "timestamp: $gts", "actor: hook", "session_id: $gsid",
+              "action: AUTHORIZED_CROSS_MEMORY_READ", "target: $abs", "source_command: Read tool",
+              "authority: Gev grant ($($gr.scope), expires $($gr.expires_at))", "result: ALLOWED",
+              "reason: Main Bro read of '$targetProj' under explicit Gev grant - task: $($gr.task)", "files_changed: none", "``````"
+            )
+            $ghb = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_HOOKBLOCKS_PATH) { $env:BRO_HOOKBLOCKS_PATH } else { Join-Path $broHome 'memory\_own\hook-blocks.md' }
+            try { Add-Content -Path $ghb -Value $gentry -Encoding utf8 } catch {}
+            exit 0
+          }
+        }
+      }
+    } catch {}
+  }
+
   # otherwise: SuperBro reading any project memory, or a Project Bro reading another project's memory -> BLOCK
   $reason = if ($ownProj) { "project Bro '$ownProj' attempted to read project '$targetProj' memory (cross-project, B4/L8)" }
             else { "SuperBro (own_only) attempted a direct project-memory read of '$targetProj' (use a sealed mirror; B4/B6)" }
