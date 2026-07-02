@@ -29,7 +29,7 @@ $date  = Get-Date -Format 'yyyy-MM-dd'
 $brief = @("# Bro autopilot briefing — $stamp", "", "mode: $Mode")
 
 # 1) self-check (Bro's own integrity) --------------------------------------------------------------
-$sa = & pwsh -NoProfile -File 'tools/bro-selfaudit.ps1' -Quick 2>&1
+$sa = & pwsh -NoProfile -File 'tools/bro-selfaudit.ps1' -Quick -Log 2>&1
 $verdictLine = (@($sa | ForEach-Object { "$_" -replace "\x1b\[[0-9;]*m", '' } | Where-Object { $_ -match '^OVERALL:' }) | Select-Object -Last 1)
 $isRed = "$verdictLine" -match 'OVERALL:\s*RED'
 $brief += "", "## self-check", "  $verdictLine"

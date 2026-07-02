@@ -17,7 +17,8 @@ param(
   [string]$Time = '11:00',
   [switch]$Register,
   [switch]$Remove,
-  [switch]$Status
+  [switch]$Status,
+  [switch]$Autopilot
 )
 $ErrorActionPreference = 'Stop'
 $broHome  = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -63,16 +64,20 @@ if ($Time -notmatch '^\d{1,2}:\d{2}$') { Fail "REFUSED: -Time must be HH:mm 24h 
 $pwsh = (Get-Command pwsh -ErrorAction SilentlyContinue).Source
 if (-not $pwsh) { $pwsh = (Get-Command powershell -ErrorAction SilentlyContinue).Source }
 if (-not $pwsh) { Fail "scheduler error: no pwsh/powershell on PATH to run the task." 5 }
-$script = Join-Path $broHome 'tools\bro-selfaudit.ps1'
+# -Autopilot flips the daily task to the full autopilot (self-check -> bounded dispatch -> briefing); the
+# autopilot's step-1 self-check runs with -Log, so the heartbeat log (surfaced at session-open) keeps updating.
+$script = if ($Autopilot) { Join-Path $broHome 'tools\bro-autopilot.ps1' } else { Join-Path $broHome 'tools\bro-selfaudit.ps1' }
+$argStr = if ($Autopilot) { "-NoProfile -File `"$script`" -Mode Live -Notify" } else { "-NoProfile -File `"$script`" -Log -Notify" }
+$desc   = if ($Autopilot) { "Bro Main-Bro daily AUTOPILOT (self-check -> BOUNDED dispatch of project bros on their own branches -> briefing; NEVER pushes)" } else { "Bro Main-Bro daily self-audit heartbeat (doctor + audit + beast); verdict -> logs/selfaudit-heartbeat.log" }
 try {
-  $action  = New-ScheduledTaskAction -Execute $pwsh -Argument ("-NoProfile -File `"$script`" -Log -Notify") -WorkingDirectory $broHome
+  $action  = New-ScheduledTaskAction -Execute $pwsh -Argument $argStr -WorkingDirectory $broHome
   $trigger = New-ScheduledTaskTrigger -Daily -At $Time
   $set     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
   $prin    = New-ScheduledTaskPrincipal -UserId ("{0}\{1}" -f $env:USERDOMAIN, $env:USERNAME) -LogonType Interactive -RunLevel Limited
-  Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $set -Principal $prin `
-    -Description "Bro Main-Bro daily self-audit heartbeat (doctor + audit + beast); verdict -> logs/selfaudit-heartbeat.log" -Force | Out-Null
-  Write-Host ("  REGISTERED daily scheduled task 'BroSelfAudit' at {0} (current user, runs when logged on)." -f $Time)
-  Write-Host ("  action:  {0} -NoProfile -File `"{1}`" -Log -Notify" -f $pwsh, $script)
+  Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $set -Principal $prin -Description $desc -Force | Out-Null
+  Write-Host ("  REGISTERED daily '{0}' at {1} (current user, runs when logged on)." -f $taskName, $Time)
+  Write-Host ("  mode:    {0}" -f $(if ($Autopilot) { 'AUTOPILOT (self-check -> bounded dispatch -> briefing; no push)' } else { 'self-audit heartbeat' }))
+  Write-Host ("  action:  {0} {1}" -f $pwsh, $argStr)
   Write-Host  "  log:     logs/selfaudit-heartbeat.log (gitignored — never dirties the tree)"
   Write-Host  "  manage:  bro-schedule.ps1 -Status   |   -Remove (BRO_GEV_APPROVED=1)"
   exit 0
