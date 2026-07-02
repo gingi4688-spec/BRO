@@ -10,10 +10,11 @@
 #>
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $script:problems = 0
 function Chk($ok, $okMsg, $failMsg) { if ($ok) { "  [OK]   $okMsg" } else { "  [FAIL] $failMsg"; $script:problems++ } }
 
-"bro-ci-check (repo-only integrity)"
+"bro-ci-check (repo-only integrity / միայն repo-ից ամբողջականություն)"
 ""
 "[1] JSON validity"
 foreach ($j in @('bro.manifest.json','memory/_own/registry.json','tools/command-library.json')) {

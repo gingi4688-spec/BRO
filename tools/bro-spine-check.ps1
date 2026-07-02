@@ -7,10 +7,11 @@
 #>
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $problems = @(); $warn = @()
 function Chk([bool]$c,[string]$ok,[string]$bad,[switch]$W){ if($c){"  [OK]   $ok"} elseif($W){"  [WARN] $bad";$script:warn+=$bad} else {"  [FAIL] $bad";$script:problems+=$bad} }
 
-"bro-spine-check - READ-ONLY"
+"bro-spine-check - READ-ONLY / միայն կարդալ — spine-ի ամբողջականություն"
 "[A] Live spine at BRO_HOME root (OD-6)"
 foreach ($d in @('_core','skills','self','roster')) { Chk (Test-Path $d -PathType Container) "live spine dir: $d/" "missing spine dir: $d/" }
 
@@ -34,5 +35,5 @@ Chk ($relBadS.Count -eq 0) "RELEASES dirs well-formed ($($relDirsS.Count) releas
 $status='GREEN'; $code=0
 if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$status='YELLOW';$code=1}
 "RESULT: $status  (problems=$($problems.Count), warnings=$($warn.Count))"
-"NOTE: read-only - no files changed."
+"NOTE / ՆՇՈՒՄ: read-only - no files changed / միայն կարդալ, ոչ մի ֆայլ չի փոխվել։"
 exit $code
