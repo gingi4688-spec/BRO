@@ -21,9 +21,10 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')   # run from BRO_HOME
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 
 $allowed = @('audit-log','hook-blocks','authority-log','release-log','failure-registry','sync-log')
-if ($allowed -notcontains $Log) { "bro-log: unknown log '$Log' (allowed: $($allowed -join ', '))"; exit 2 }
+if ($allowed -notcontains $Log) { "bro-log: unknown log / անհայտ log '$Log' (allowed: $($allowed -join ', '))"; exit 2 }
 $path = "memory/_own/$Log.md"
 if (-not (Test-Path $path)) { "bro-log: log file missing: $path"; exit 2 }
 
@@ -51,5 +52,5 @@ if ($Notes) { $lines += "notes: $Notes" }
 $lines += "``````"
 
 Add-Content -Path $path -Value $lines -Encoding utf8
-"bro-log: appended to $path (timestamp $ts, session $sid)"
+"bro-log: appended to / կցվեց $path (timestamp $ts, session $sid)"
 exit 0

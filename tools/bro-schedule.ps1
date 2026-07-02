@@ -21,6 +21,7 @@ param(
   [switch]$Autopilot
 )
 $ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $broHome  = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $taskName = 'BroSelfAudit'
 function Fail([string]$m, [int]$c) { [Console]::Error.WriteLine($m); exit $c }
@@ -54,7 +55,7 @@ if ($env:BRO_GEV_APPROVED -ne '1') {
 if ($Remove) {
   try {
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false -ErrorAction Stop
-    Write-Host "  REMOVED scheduled task 'BroSelfAudit'. The daily heartbeat is off."
+    Write-Host "  REMOVED / ՀԵՌԱՑՎԱԾ scheduled task 'BroSelfAudit'. The daily heartbeat is off / ամենօրյա heartbeat-ն անջատված է."
     exit 0
   } catch { Fail "scheduler error (remove): $($_.Exception.Message)" 5 }
 }
@@ -77,7 +78,7 @@ try {
   $set     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit ([TimeSpan]::Zero)
   $prin    = New-ScheduledTaskPrincipal -UserId ("{0}\{1}" -f $env:USERDOMAIN, $env:USERNAME) -LogonType Interactive -RunLevel Limited
   Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $set -Principal $prin -Description $desc -Force | Out-Null
-  Write-Host ("  REGISTERED daily '{0}' at {1} (current user, runs when logged on)." -f $taskName, $Time)
+  Write-Host ("  REGISTERED / ԳՐԱՆՑՎԱԾ daily '{0}' at {1} (current user, runs when logged on)." -f $taskName, $Time)
   Write-Host ("  mode:    {0}" -f $(if ($Autopilot) { 'AUTOPILOT (self-check -> bounded dispatch -> briefing; no push)' } else { 'self-audit heartbeat' }))
   Write-Host ("  action:  {0} {1}" -f $pwsh, $argStr)
   Write-Host  "  log:     logs/selfaudit-heartbeat.log (gitignored — never dirties the tree)"

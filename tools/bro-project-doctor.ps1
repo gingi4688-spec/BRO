@@ -16,10 +16,11 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $problems = @(); $warn = @()
 function Chk([bool]$c,[string]$ok,[string]$bad,[switch]$W){ if($c){"  [OK]   $ok"} elseif($W){"  [WARN] $bad";$script:warn+=$bad} else {"  [FAIL] $bad";$script:problems+=$bad} }
 
-"bro-project-doctor - READ-ONLY - project: $ProjectId"
+"bro-project-doctor - READ-ONLY / միայն կարդալ - project: $ProjectId"
 $regPath = if ($RegistryPath) { $RegistryPath } else { 'memory/_own/registry.json' }
 
 # registry entry (fail-closed: must exist)
@@ -99,5 +100,5 @@ if (-not (Test-Path $projHooks)) {
 $status='GREEN'; $code=0
 if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$status='YELLOW';$code=1}
 "RESULT: $status  (problems=$($problems.Count), warnings=$($warn.Count))"
-"NOTE: read-only - no files changed; project sealed memory CONTENT never read."
+"NOTE / ՆՇՈՒՄ: read-only - no files changed; project sealed memory CONTENT never read / միայն կարդալ, project-ի կնքված memory-ի CONTENT-ը երբեք չի կարդացվում։"
 exit $code
