@@ -11,10 +11,11 @@
 param([string]$Version = '', [string]$Sandbox = '', [switch]$Yes, [switch]$Execute)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $broHome = (Get-Location).Path
 $spineDirs = @('_core','skills','self','roster')
 
-if (-not $Version) { "bro-release: -Version required (e.g. -Version v1.0.0)"; exit 2 }
+if (-not $Version) { "bro-release: -Version required / -Version պահանջվում է (e.g. -Version v1.0.0)"; exit 2 }
 
 if ($Sandbox) {
   $dest = Join-Path $Sandbox $Version; $mode = 'SANDBOX'

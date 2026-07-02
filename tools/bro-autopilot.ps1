@@ -23,6 +23,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $broHome = (Get-Location).Path
 $stamp = Get-Date -Format 'yyyy-MM-ddTHH:mm:sszzz'
 $date  = Get-Date -Format 'yyyy-MM-dd'

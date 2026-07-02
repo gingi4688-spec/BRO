@@ -33,10 +33,11 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $regFile = if ($RegistryPath) { $RegistryPath } else { 'memory/_own/registry.json' }
 
 if (-not $ProjectId -or -not $ProjectPath) {
-  "INSTALL PROJECT BRO - usage: bro-install.ps1 -ProjectId <id> -ProjectPath <abs> -Version v<ver> [-Execute -Yes] | -Rollback"
+  "INSTALL PROJECT BRO / ՏԵՂԱԴՐԵԼ PROJECT BRO - usage: bro-install.ps1 -ProjectId <id> -ProjectPath <abs> -Version v<ver> [-Execute -Yes] | -Rollback"
   exit 2
 }
 $broDir   = Join-Path $ProjectPath 'bro'

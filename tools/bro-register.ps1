@@ -25,13 +25,14 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $broHome = (Get-Location).Path
 $regFile = if ($RegistryPath) { $RegistryPath } else { 'memory/_own/registry.json' }
 
 # ---- RETIRE lifecycle (metadata-only status transition; no file deletion) ----
 if ($Retire) {
   if (-not $ProjectId) { "RETIRE PROJECT - usage: bro-register.ps1 -Retire -ProjectId <id> [-Execute -Yes]"; exit 2 }
-  "RETIRE PROJECT - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
+  "RETIRE PROJECT / ԹՈՇԱԿԻ ՀԱՆԵԼ - " + $(if ($Execute) { 'REAL mode / ԻՐԱԿԱՆ' } else { 'DRY-RUN (preview) / ՉՈՐ ԱՆՑՈՒՄ' })
   "  project_id: $ProjectId   registry: $regFile"
   $rreg = $null; try { $rreg = Get-Content -Raw $regFile | ConvertFrom-Json } catch {}
   if (-not $rreg) { "  REFUSED: registry invalid/missing at $regFile."; exit 4 }

@@ -26,9 +26,10 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $broHome = (Get-Location).Path
 
-if (-not $ProjectId) { "NEW PROJECT FACTORY - usage: bro-new-project.ps1 -ProjectId <ID> [-ProjectPath <abs>] [-Name <name>] [-Description <text>] [-Execute -Yes] | -Rollback"; exit 2 }
+if (-not $ProjectId) { "NEW PROJECT FACTORY / ՆՈՐ ՊՐՈՅԵԿՏԻ ԳՈՐԾԱՐԱՆ - usage: bro-new-project.ps1 -ProjectId <ID> [-ProjectPath <abs>] [-Name <name>] [-Description <text>] [-Execute -Yes] | -Rollback"; exit 2 }
 if (-not $Name) { $Name = $ProjectId }
 if (-not $ProjectPath) { $ProjectPath = Join-Path (Join-Path $env:USERPROFILE 'Desktop') $ProjectId }
 $broDir = Join-Path $ProjectPath 'bro'

@@ -16,8 +16,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 
-if (-not $ProjectId) { "UPDATE PROJECT BRO SPINE - usage: -ProjectId <id> -ProjectPath <abs> -Version v<ver> [-Execute -Yes]"; exit 2 }
+if (-not $ProjectId) { "UPDATE PROJECT BRO SPINE / ԹԱՐՄԱՑՆԵԼ SPINE-Ը - usage: -ProjectId <id> -ProjectPath <abs> -Version v<ver> [-Execute -Yes]"; exit 2 }
 $verShown = if ($Version) { $Version } else { '<latest approved release>' }
 
 "UPDATE PROJECT BRO SPINE - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })

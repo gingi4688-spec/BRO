@@ -12,9 +12,10 @@
 #>
 param([string]$Lesson = '', [switch]$GevApproved)
 $ErrorActionPreference = 'Stop'
-if (-not $Lesson) { "bro-promote: -Lesson '<candidate rule>' required"; exit 2 }
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
+if (-not $Lesson) { "bro-promote: -Lesson '<candidate rule>' required / -Lesson պահանջվում է"; exit 2 }
 
-"PROMOTION GATE - candidate: `"$Lesson`""
+"PROMOTION GATE / ԱՌԱՋԽԱՂԱՑՄԱՆ ԴԱՐՊԱՍ - candidate: `"$Lesson`""
 # 1) approval layer
 if (-not $GevApproved) {
   "  [1] approval:  MISSING -> BLOCKED (unapproved; promotion requires explicit Gev approval)"
