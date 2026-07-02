@@ -20,6 +20,7 @@ param(
   [string]$Reason = ''
 )
 $ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 function Fail([string]$m, [int]$c) { [Console]::Error.WriteLine($m); exit $c }
 if (-not (Test-Path $ProjectPath)) { Fail "bro-push: path not found: $ProjectPath" 2 }
 if ($env:BRO_GEV_APPROVED -ne '1') { Fail "bro-push: REFUSED — push is Gev-gated; requires BRO_GEV_APPROVED=1 (Gev's token)." 3 }
@@ -66,5 +67,5 @@ finally {
   Pop-Location
 }
 
-if ($ok) { Write-Host "bro-push: PUSHED $Branch -> $Remote."; exit 0 }
-else { Write-Host "bro-push: PUSH FAILED — likely the project's pre-push quality gate is RED (tsc/vitest/pytest) or a remote error. Fix the gate, or re-run with -NoVerify -Reason '<why>' to publish anyway. Gev's WIP is restored."; exit 5 }
+if ($ok) { Write-Host "bro-push: PUSHED / ՀՐԱՊԱՐԱԿՎԱԾ $Branch -> $Remote."; exit 0 }
+else { Write-Host "bro-push: PUSH FAILED / PUSH-Ը ՁԱԽՈՂՎԵՑ — likely the project's pre-push quality gate is RED (tsc/vitest/pytest) or a remote error / հավանաբար pre-push gate-ը RED է կամ remote error. Fix the gate, or re-run with -NoVerify -Reason '<why>' / ուղղիր gate-ը կամ -NoVerify -Reason-ով վազացրու. Gev's WIP is restored / Gev-ի WIP-ը վերականգնված է."; exit 5 }

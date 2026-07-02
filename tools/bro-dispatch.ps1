@@ -18,7 +18,8 @@ param(
   [string]$Task = ''
 )
 $ErrorActionPreference = 'Stop'
-if (-not (Test-Path $ProjectPath)) { [Console]::Error.WriteLine("bro-dispatch: path not found: $ProjectPath"); exit 2 }
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
+if (-not (Test-Path $ProjectPath)) { [Console]::Error.WriteLine("bro-dispatch: path not found / ուղին չգտնվեց: $ProjectPath"); exit 2 }
 
 # BOUNDED profile — NOT bypass. Edits auto-accept; only these Bash patterns auto-run; push/rm/hard-reset denied.
 $allowed = @(
@@ -92,7 +93,7 @@ try {
     $stashed = ($LASTEXITCODE -eq 0)
     if ($stashed) { Write-Host "bro-dispatch: set aside pre-existing WIP (git stash) - will restore after." }
   }
-  Write-Host "bro-dispatch: BOUNDED Bro in $ProjectPath (edits auto; git add/commit/branch allowed; push structurally disabled; stash/rm denied)."
+  Write-Host "bro-dispatch: BOUNDED Bro in / ՍԱՀՄԱՆԱՓԱԿ Bro-ն $ProjectPath (edits auto; git add/commit/branch allowed; push structurally disabled; stash/rm denied / edit-ը auto, push-ը structural-ապես անջատված, stash/rm արգելված)."
   & claude @claudeArgs
 } finally {
   # 1) ALWAYS return to the WIP's home branch — the clean-tree case ALSO leaves us on the agent's branch, which
