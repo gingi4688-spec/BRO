@@ -16,6 +16,7 @@
 param([switch]$Log)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $problems = @(); $warn = @(); $codes = @()
 function Chk([bool]$c,[string]$ok,[string]$bad,[string]$code='',[switch]$W){
   if($c){"  [OK]   $ok"}
@@ -23,7 +24,7 @@ function Chk([bool]$c,[string]$ok,[string]$bad,[string]$code='',[switch]$W){
   else {"  [FAIL] $bad";$script:problems+=$bad; if($code){$script:codes+=$code}}
 }
 
-"bro-audit (read-only) - BRO_HOME: $((Get-Location).Path)"
+"bro-audit (read-only / միայն կարդալ) - BRO_HOME: $((Get-Location).Path)"
 ""
 "[A] Manifest integrity"
 $mf=$null; $mfOk=$false
@@ -120,7 +121,7 @@ if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$sta
 $codesUniq = ($codes | Select-Object -Unique) -join ', '
 "RESULT: $status  (problems=$($problems.Count), warnings=$($warn.Count))"
 if ($codesUniq) { "ISSUE CODES: $codesUniq" }
-"NOTE: read-only audit - flags only, never fixes/moves/deletes. No files changed."
+"NOTE / ՆՇՈՒՄ: read-only audit - flags only, never fixes/moves/deletes / միայն flag, երբեք չի fix/move/delete անում. No files changed."
 
 # --- Topist SEAL (commit-bound + version-bound + evidence-checked) ---
 $commit = $null; try { $commit = (& git rev-parse --short HEAD 2>$null); if ($commit) { $commit = "$commit".Trim() } } catch {}

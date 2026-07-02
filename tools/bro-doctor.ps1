@@ -11,13 +11,14 @@
 param([switch]$Strict)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')   # run from BRO_HOME
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $script:problems = @(); $script:warn = @()
 function Check([bool]$cond, [string]$okmsg, [string]$failmsg, [switch]$Warn) {
   if ($cond) { "  [OK]   $okmsg" }
   elseif ($Warn) { "  [WARN] $failmsg"; $script:warn += $failmsg }
   else { "  [FAIL] $failmsg"; $script:problems += $failmsg }
 }
-"bro-doctor (Phase 0 minimal) - READ-ONLY"
+"bro-doctor (Phase 0 minimal) - READ-ONLY / միայն կարդալ — SuperBro-ի կմախքի ստուգում"
 "BRO_HOME: $((Get-Location).Path)"
 ""
 "[1] Skeleton presence"
@@ -185,5 +186,5 @@ $status = 'GREEN'; $code = 0
 if ($script:problems.Count -gt 0) { $status = 'RED'; $code = 2 }
 elseif ($script:warn.Count -gt 0) { $status = 'YELLOW'; $code = 1 }
 "RESULT: $status  (problems=$($script:problems.Count), warnings=$($script:warn.Count))"
-"NOTE: doctor is READ-ONLY - no files changed."
+"NOTE / ՆՇՈՒՄ: doctor is READ-ONLY - no files changed / միայն կարդալ, ոչ մի ֆայլ չի փոխվել։"
 exit $code
