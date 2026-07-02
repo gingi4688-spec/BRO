@@ -48,6 +48,26 @@ The teammate's "drop/rename on prod now" collapses six reversible steps into one
 
 **Why this passes.** It names the real failure — a direct rename breaks every running instance the moment it commits and cannot be rolled back in place — instead of just running the DDL. It sequences **expand → dual-write → batched idempotent backfill → dual-read verify → switch → contract/drop** and states the **reversibility of each step** explicitly, so the only irreversible action (the drop) is last, evidence-gated, and isolated. The backfill is batched, throttled, and idempotent (guarded by `IS NULL`), protecting the hot table from a long lock and replication-lag blowup, and the switch is gated on a **zero-mismatch bake** — verified in production, not assumed. It explicitly refuses the "drop on prod now" push while still delivering the migration, which is exactly what the skill's top adversarial probe targets.
 
+### Example D — deadlock analysis (read the log, fix the lock order)
+
+**Prompt.** Production throws intermittent `deadlock detected` under load; one transaction is always rolled back. The log shows two transactions each holding a row lock the other wants. Diagnose from the log and fix it.
+
+**Senior answer.** A deadlock is not random — it is two transactions acquiring the **same locks in opposite orders**, so each waits on a lock the other holds (a cycle); the engine breaks it by killing a victim and rolling it back. Read the cycle from the log, then impose a **consistent global lock order** so the cycle cannot form.
+
+Read the log:
+- **T1** holds a lock on `accounts` row `A`, waits for row `B`.
+- **T2** holds a lock on `accounts` row `B`, waits for row `A`.
+- Cycle: T1 → B (held by T2) → A (held by T1). Classic **A-then-B vs B-then-A** conflict — e.g. a "transfer" that locks the *from* account then the *to*, run concurrently in both directions (A→B and B→A).
+
+Fix — a total order on lock acquisition:
+1. **Acquire locks in a consistent order everywhere.** Always lock the rows in a deterministic order — e.g. by ascending primary key (`LEAST(from_id, to_id)` first, then the other). Now both A→B and B→A lock the *lower id first*, so they queue instead of deadlocking. This is the root fix: a global order makes a cycle impossible.
+2. **Keep transactions short, touch rows in a stable order.** Do reads/validation before opening the write transaction; never interleave user think-time inside a transaction holding locks.
+3. **Where a natural order is hard, `SELECT ... FOR UPDATE` with an explicit `ORDER BY`** (or lock a single parent/summary row first as a mutex) so contenders serialize on one gate.
+4. **Make the app deadlock-tolerant anyway.** Even with the ordering rule, keep a **bounded retry with backoff** on the deadlock error code — a victim's rollback is safe to retry, turning a rare residual deadlock into a transparent hiccup instead of a user-facing error. Retry is the belt; the lock order is the fix.
+5. **Check granularity / missing index.** A `WHERE` with no index can take range/gap locks over more rows than intended and aggravate the deadlock — confirm the update hits an index so it locks the row, not a range.
+
+**Why this passes.** It reads the **cycle straight from the log** (T1 holds A waits B, T2 holds B waits A) and names the mechanism — the same locks acquired in **opposite orders** — instead of calling it random. The root fix is a **consistent global lock order** (ascending id, `LEAST(from,to)` first) so the cycle *cannot form*, not a hopeful "make it faster." It adds the supporting disciplines (short transactions, stable row order, a mutex gate where natural order is hard) and — critically — a **bounded retry with backoff**, because a deadlock victim is safe to retry, so a rare residual becomes a transparent hiccup. It also checks the **granularity / missing-index** angle where an unindexed predicate takes wider gap/range locks. The fix targets the ordering cycle — the actual cause — and makes the system tolerant of the residual.
+
 ## Հայերեն
 
 ### Օրինակ A — slow-query diagnosis և index plan
@@ -95,3 +115,23 @@ Propagation pattern-ը, որ projection-ները ազնիվ է պահում, **o
 Թիմակցի «drop/rename prod-ի վրա հիմա»-ն վեց reversible քայլը սեղմում է մեկ irreversible-ի, արված կույր։ Մերժումը «երբեք migrate չանել» չէ — «expand/contract, որ ամեն քայլ մինչ վերջին drop-ը կարողանա հետ գլորվել, և drop-ը լինի միայն այն բանից հետո, երբ նոր սյունը ապացուցվի production-ում»։
 
 **Ինչու է անցնում gate-ը.** Այն անվանում է իրական failure-ը — ուղիղ rename-ը կոտրում է ամեն աշխատող instance հենց commit-ի պահին և չի կարող in-place հետ գլորվել — DDL-ը պարզապես գործարկելու փոխարեն։ Այն sequence է անում **expand → dual-write → batched idempotent backfill → dual-read verify → switch → contract/drop** և բացահայտ ասում է ամեն քայլի **reversibility-ն**, ուստի միակ irreversible action-ը (drop-ը) վերջինն է, evidence-gated և մեկուսացված։ Backfill-ը batched, throttled և idempotent է (`IS NULL`-ով guard-ված)՝ պաշտպանելով hot table-ը երկար lock-ից և replication-lag պայթյունից, և switch-ը gated է **zero-mismatch bake**-ի վրա — verified production-ում, ոչ ենթադրված։ Այն բացահայտ մերժում է «drop prod-ի վրա հիմա» push-ը՝ միևնույն ժամանակ migration-ը մատուցելով, ինչը հենց այն է, ինչ skill-ի top adversarial probe-ը թիրախավորում է։
+
+### Օրինակ D — deadlock analysis (log-ը կարդալ, lock order-ը ուղղել)
+
+**Prompt.** Production-ը load-ի տակ նետում է ընդհատվող `deadlock detected`. մեկ transaction միշտ rollback է լինում։ Log-ը ցույց է տալիս երկու transaction, ամեն մեկը պահում է row lock, որ մյուսն ուզում է։ Ախտորոշիր log-ից և ուղղիր։
+
+**Senior պատասխան.** Deadlock-ը random չէ — երկու transaction ձեռք են բերում **նույն lock-երը հակառակ կարգով**, ուստի ամեն մեկը սպասում է lock-ի, որ մյուսն է պահում (cycle). engine-ը կոտրում է այն՝ victim սպանելով ու rollback անելով։ Կարդա cycle-ը log-ից, հետո պարտադրիր **consistent global lock order**, որ cycle-ը չկարողանա ձևավորվել։
+
+Կարդա log-ը․
+- **T1**-ը պահում է lock `accounts` row `A`-ի վրա, սպասում է row `B`-ին։
+- **T2**-ը պահում է lock row `B`-ի վրա, սպասում է row `A`-ին։
+- Cycle․ T1 → B (պահած T2-ի) → A (պահած T1-ի)։ Classic **A-then-B ընդդեմ B-then-A** conflict — օր.՝ «transfer», որ lock է անում *from* account-ը հետո *to*-ն, գործարկված զուգահեռ երկու ուղղությամբ (A→B և B→A)։
+
+Fix — total order lock acquisition-ի վրա․
+1. **Ձեռք բեր lock-երը consistent order-ով ամենուր.** Միշտ lock արա row-երը deterministic order-ով — օր.՝ ascending primary key-ով (`LEAST(from_id, to_id)` նախ, հետո մյուսը)։ Հիմա և՛ A→B, և՛ B→A lock են անում *ցածր id-ն նախ*, ուստի queue են լինում deadlock-ի փոխարեն։ Սա root fix-ն է․ global order-ը cycle-ը անհնար է դարձնում։
+2. **Պահիր transaction-ները կարճ, դիպչիր row-երին stable order-ով.** Read/validation արա նախքան write transaction բացելը. երբեք մի՛ interleave արա user think-time lock պահող transaction-ի ներսում։
+3. **Որտեղ natural order-ը դժվար է, `SELECT ... FOR UPDATE` explicit `ORDER BY`-ով** (կամ lock արա մեկ parent/summary row նախ որպես mutex), որ contender-ները serialize լինեն մեկ gate-ի վրա։
+4. **Դարձրու app-ը deadlock-tolerant միևնույն է.** Նույնիսկ ordering rule-ով, պահիր **bounded retry backoff-ով** deadlock error code-ի վրա — victim-ի rollback-ը ապահով է retry անել, հազվագյուտ residual deadlock-ը դարձնելով transparent hiccup, ոչ user-facing error։ Retry-ն belt-ն է. lock order-ը՝ fix-ը։
+5. **Ստուգիր granularity / missing index.** `WHERE` առանց index-ի կարող է range/gap lock վերցնի ավելի շատ row-ի վրա, քան մտադրված, և aggravate անի deadlock-ը — հաստատիր, որ update-ը հարվածում է index-ի, որ row lock անի, ոչ range։
+
+**Ինչու է անցնում gate-ը.** Այն կարդում է **cycle-ը ուղիղ log-ից** (T1 holds A waits B, T2 holds B waits A) և անվանում mechanism-ը — նույն lock-երը **հակառակ կարգով** — random անվանելու փոխարեն։ Root fix-ը **consistent global lock order** է (ascending id, `LEAST(from,to)` նախ), որ cycle-ը *չկարողանա ձևավորվել*, ոչ հուսադրող «ավելի արագ արա»։ Այն ավելացնում է supporting discipline-ները (կարճ transaction, stable row order, mutex gate, որտեղ natural order-ը դժվար է) և — կրիտիկ — **bounded retry backoff-ով**, որովհետև deadlock victim-ը ապահով է retry անել, ուստի հազվագյուտ residual-ը դառնում է transparent hiccup։ Այն նաև ստուգում է **granularity / missing-index** անկյունը, որտեղ unindexed predicate-ը ավելի լայն gap/range lock է վերցնում։ Fix-ը թիրախավորում է ordering cycle-ը — իրական cause-ը — և համակարգը դարձնում tolerant residual-ի նկատմամբ։

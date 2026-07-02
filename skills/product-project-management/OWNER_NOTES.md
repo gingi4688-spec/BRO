@@ -20,7 +20,7 @@ The default posture for all of the above: produce the artifact, the evidence, th
 - **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **delivery/critical-path example** (a dependency graph with a real critical path and a re-baseline after a late dependency), to make the delivery-control dimension as concrete as the PRD and prioritization examples.
 - **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **launch-readout example** (hypothesis → guardrail → result → kill/iterate/scale decision), so the learning loop is shown end to end, not only described.
 - Add a **stakeholder-alignment pattern** (re-anchoring a priority dispute to the shared outcome metric and predicted impact) as a seventh canonical move.
-- Add a **WSJF worked example** alongside the RICE one, for the delivery-queue/cost-of-delay case where WSJF is the right tool, so both prioritization methods have a concrete body.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **WSJF worked example** alongside the RICE one, for the delivery-queue/cost-of-delay case where WSJF is the right tool, so both prioritization methods have a concrete body.
 - Cross-link the boundaries explicitly: discovery research depth to user-research practice, spec handoff to `software-systems-architecture` and `ui-page-structure-design`, and the strategy boundary to `business-strategy-operations`, so routing is unambiguous in mixed requests.
 
 ## Հայերեն
@@ -43,5 +43,5 @@ The default posture for all of the above: produce the artifact, the evidence, th
 - **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **delivery/critical-path example** (dependency graph՝ իրական critical path-ով և re-baseline ուշ dependency-ից հետո), որ delivery-control չափանիշը նույնքան կոնկրետ լինի, որքան PRD-ի և prioritization-ի օրինակները։
 - **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **launch-readout example** (hypothesis → guardrail → result → kill/iterate/scale որոշում), որ learning loop-ը ցույց տրվի ծայրից ծայր, ոչ միայն նկարագրվի։
 - Ավելացրու **stakeholder-alignment pattern** (priority վեճը վերա-խարսխել ընդհանուր outcome metric-ին և կանխատեսված impact-ին) որպես յոթերորդ canonical move։
-- Ավելացրու **WSJF worked example** RICE-ի կողքին, delivery-queue/cost-of-delay դեպքի համար, որտեղ WSJF-ն ճիշտ գործիքն է, որ երկու prioritization մեթոդն էլ ունենան կոնկրետ մարմին։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **WSJF worked example** RICE-ի կողքին, delivery-queue/cost-of-delay դեպքի համար, որտեղ WSJF-ն ճիշտ գործիքն է, որ երկու prioritization մեթոդն էլ ունենան կոնկրետ մարմին։
 - Cross-link արա սահմանները բացահայտ․ discovery research depth-ը user-research practice-ին, spec handoff-ը `software-systems-architecture`-ին և `ui-page-structure-design`-ին, և strategy boundary-ն `business-strategy-operations`-ին, որ routing-ը միանշանակ լինի խառը request-ներում։

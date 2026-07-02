@@ -19,7 +19,7 @@ The default posture for all of the above: produce the plan, the evidence (EXPLAI
 ### Owned future-improvement items
 
 - **✓ DELIVERED (gazan 2026-07-02)** — Add a third worked example for an **online expand/contract migration** end to end (add column → dual-write/dual-read → batched backfill → switch reads → drop), since it is the correct answer whenever a destructive cutover is proposed on a live table.
-- Add a **deadlock-analysis worked example** that reads a real deadlock log, identifies the two colliding lock orders, and derives the consistent global order — to make the lock-ordering rule concrete.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **deadlock-analysis worked example** that reads a real deadlock log, identifies the two colliding lock orders, and derives the consistent global order — to make the lock-ordering rule concrete.
 - Add a copy-ready **multi-window backup/recovery drill checklist** (RPO/RTO, base backup, WAL archive, restore-to-scratch, PITR-to-target) so "tested restore" is a procedure, not a slogan.
 - Add a **sharding / partitioning decision worked example** (choosing a key, hot-partition avoidance, resharding cost) once the multi-store architecture example is in place, to cover horizontal scale.
 - Cross-link the pipeline overlap explicitly to `data-engineering-pipelines` for exactly-once and idempotency semantics that sit just beyond the storage contract owned here.
@@ -43,7 +43,7 @@ The default posture for all of the above: produce the plan, the evidence (EXPLAI
 ### Սեփական ապագա-բարելավման կետեր
 
 - **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երրորդ worked example **online expand/contract migration**-ի ծայրից ծայր (column ավելացրու → dual-write/dual-read → batched backfill → switch read-եր → drop), քանի որ դա ճիշտ պատասխանն է, երբ live table-ի վրա destructive cutover է առաջարկվում։
-- Ավելացրու **deadlock-analysis worked example**, որ կարդում է իրական deadlock log, հայտնաբերում երկու բախվող lock order-ը, և բխեցնում հետևողական global order-ը — lock-ordering կանոնը կոնկրետ դարձնելու։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **deadlock-analysis worked example**, որ կարդում է իրական deadlock log, հայտնաբերում երկու բախվող lock order-ը, և բխեցնում հետևողական global order-ը — lock-ordering կանոնը կոնկրետ դարձնելու։
 - Ավելացրու copy-ready **multi-window backup/recovery drill checklist** (RPO/RTO, base backup, WAL archive, restore-to-scratch, PITR-to-target), որ «tested restore»-ը procedure լինի, ոչ slogan։
 - Ավելացրու **sharding / partitioning decision worked example** (key ընտրել, hot-partition խուսափել, resharding cost), երբ multi-store architecture օրինակը տեղում է, horizontal scale-ը ծածկելու։
 - Cross-link արա pipeline-ի համընկնումը բացահայտ `data-engineering-pipelines`-ին exactly-once և idempotency semantics-ի համար, որ հենց այստեղ տիրվող storage contract-ից այն կողմ են։

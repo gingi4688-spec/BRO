@@ -80,6 +80,29 @@ Commit: "onboarding v1 to the 10% cohort in **5 weeks** — 21 critical-path day
 
 **Why this passes.** The date is **derived from the critical path** (A→C→D→E→F = 21 d), not asserted, and the answer proves B is off it with a computed 10-day slack — so it targets the right lever (C→D) to compress. It commits a date *with a named buffer tied to the two riskiest tasks* and a **re-baseline rule stated up front**, so a slip re-derives the date instead of triggering a defense. It works a concrete dependency slip (A +3) and notes A blocks *measurement* as well as build. The launch readout is a real learning loop — hypothesis, guardrail, result, and a decision **bound to a pre-set threshold** — which is exactly the Delivery-control and Learning dimensions the rubric scores and the earlier examples did not show end to end.
 
+### Example E — WSJF for a delivery queue
+
+**Prompt.** A platform team has a backlog of ready-to-build items and limited capacity, and must sequence them to minimize cost of delay. RICE is the wrong tool here (these are not uncertain product bets — they are a defined delivery queue). Do the WSJF.
+
+**Senior answer.** WSJF (Weighted Shortest Job First) is the right tool for a **delivery queue with cost-of-delay economics** (SAFe): sequence to maximize value delivered per unit of time by doing the highest **Cost of Delay ÷ Job Size** first. Unlike RICE (uncertain bets weighted by confidence), WSJF assumes the items are defined and asks "what is the economic penalty of *not* doing this now, per unit of effort."
+
+**Cost of Delay (CoD) = User/Business Value + Time Criticality + Risk-Reduction / Opportunity-Enablement.** Score each on a relative scale (Fibonacci 1–13 is common); Job Size is relative effort. WSJF = CoD ÷ Job Size, scored *relatively* across the set, not in absolute units.
+
+| Item | Value | Time-crit | Risk/Opp | CoD (sum) | Job Size | WSJF = CoD/Size |
+|---|---|---|---|---|---|---|
+| A: SSO (blocking 2 enterprise deals) | 8 | 13 | 5 | 26 | 5 | **5.2** |
+| B: Big analytics rebuild | 13 | 3 | 8 | 24 | 21 | **1.14** |
+| C: Compliance fix (audit deadline) | 5 | 13 | 13 | 31 | 3 | **10.3** |
+| D: Nice-to-have UI polish | 3 | 2 | 1 | 6 | 3 | **2.0** |
+
+Sequence by descending WSJF: **C (10.3) → A (5.2) → D (2.0) → B (1.14).**
+
+Read it: **C first** — not because its raw value is highest (it is low, 5) but because it is small (Size 3) and its Time-Criticality + Risk are maxed (a compliance deadline), so the cost of delaying it *per unit of effort* is huge. **B last** despite the highest raw *value* (13) — it is a 21-point job, so its cost of delay per unit of effort is the worst; a big, valuable-but-not-urgent item correctly waits. That inversion (high-value B goes last) is exactly the insight WSJF gives that a value-only ranking misses: **a small urgent item beats a big valuable one when capacity is the constraint.**
+
+Caveats: WSJF is a *relative* prioritizer for a defined queue — if items are still uncertain bets, use RICE (Example B); re-score when Time-Criticality changes (a passing deadline changes C). The numbers are relative team estimates to calibrate, not facts.
+
+**Why this passes.** It picks WSJF for its actual use case — a **defined delivery queue with cost-of-delay economics**, explicitly distinguished from RICE's uncertain-bet case — and computes it correctly: **CoD = Value + Time-Criticality + Risk/Opportunity, ÷ Job Size**, scored relatively. The table produces the **counter-intuitive-but-correct** result (small urgent compliance item first at WSJF 10.3; big high-*value* analytics rebuild last at 1.14) — exactly the economic insight WSJF exists to surface: shortest weighted job first beats value-only ranking under a capacity constraint. It flags the relative-scoring and re-score-on-deadline caveats and marks the numbers as team-calibrated estimates, closing the WSJF gap the earlier RICE example named but never worked.
+
 ## Հայերեն
 
 ### Օրինակ A — PRD (problem-first, instrumented, DoD)
@@ -159,3 +182,26 @@ Commit՝ «onboarding v1 10% cohort-ին **5 շաբաթում** — 21 critical-
 *Launch readout (learning gate, 10% cohort-ից 2 շաբաթ հետո)* — hypothesis → guardrail → result → decision։ Hypothesis՝ onboarding v1-ը բարձրացնում է 7-օրյա activation-ը ≥3 կետ (38% → 41%+)։ Guardrail՝ skip-cohort-ի time-to-first-action-ը չպետք է regress անի։ Result (պետք է **չափվի**, ոչ պնդվի)՝ activation 38% → 42% (+4 կետ, CI-ն բացառում է 0), guardrail հարթ։ Որոշում ըստ pre-set gate-ի՝ +4 կետ ≥ +2 կետ scale threshold → **scale 100%**. եթե լիներ < 0 → kill. միջև → iterate copy։ Որոշումը կապված էր threshold-ին *նախքան* թիվը գար, ուստի readout-ը որոշում է, ոչ rationalize անում։
 
 **Ինչու է անցնում gate-ը.** Date-ը **բխեցված է critical path-ից** (A→C→D→E→F = 21 օր), ոչ պնդված, և պատասխանը ապացուցում է, որ B-ն դրանից դուրս է՝ հաշված 10-օրյա slack-ով, ուստի թիրախավորում է ճիշտ lever-ը (C→D) սեղմելու։ Այն commit է անում date *երկու ամենառիսկային task-ին կապված buffer-ով* և **re-baseline կանոն նախապես ասված**, ուստի slip-ը վերա-բխեցնում է date-ը, ոչ թե պաշտպանություն հրահրում։ Այն worked է անում կոնկրետ dependency slip (A +3) և նշում, որ A-ն block է անում *չափումը* build-ի հետ մեկտեղ։ Launch readout-ը իրական learning loop է — hypothesis, guardrail, result և decision **կապված pre-set threshold-ին** — հենց Delivery-control ու Learning dimension-ները, որ rubric-ը գնահատում է, իսկ նախորդ example-ները ցույց չէին տալիս ծայրից ծայր։
+
+### Օրինակ E — WSJF delivery queue-ի համար
+
+**Prompt.** Platform team-ը ունի ready-to-build item-ների backlog և սահմանափակ capacity, և պիտի sequence անի դրանք՝ cost of delay-ը minimize անելու։ RICE-ը այստեղ սխալ գործիք է (սրանք uncertain product bet չեն — defined delivery queue են)։ Արա WSJF-ը։
+
+**Senior պատասխան.** WSJF (Weighted Shortest Job First) ճիշտ գործիքն է **cost-of-delay economics-ով delivery queue-ի** համար (SAFe)․ sequence արա՝ maximize անելով մեկ միավոր ժամանակում delivered value-ն, անելով ամենաբարձր **Cost of Delay ÷ Job Size**-ը նախ։ Ի տարբերություն RICE-ի (uncertain bet, confidence-ով weighted), WSJF-ը ենթադրում է item-ները defined են և հարցնում «ո՞րն է *չանելու* economic penalty-ն հիմա, մեկ միավոր effort-ի»։
+
+**Cost of Delay (CoD) = User/Business Value + Time Criticality + Risk-Reduction / Opportunity-Enablement.** Score արա ամեն մեկը relative scale-ով (Fibonacci 1–13 սովորական է). Job Size-ը relative effort է։ WSJF = CoD ÷ Job Size, scored *relatively* set-ի վրա, ոչ absolute միավորով։
+
+| Item | Value | Time-crit | Risk/Opp | CoD (sum) | Job Size | WSJF = CoD/Size |
+|---|---|---|---|---|---|---|
+| A: SSO (block է անում 2 enterprise deal) | 8 | 13 | 5 | 26 | 5 | **5.2** |
+| B: Մեծ analytics rebuild | 13 | 3 | 8 | 24 | 21 | **1.14** |
+| C: Compliance fix (audit deadline) | 5 | 13 | 13 | 31 | 3 | **10.3** |
+| D: Nice-to-have UI polish | 3 | 2 | 1 | 6 | 3 | **2.0** |
+
+Sequence ըստ նվազող WSJF-ի՝ **C (10.3) → A (5.2) → D (2.0) → B (1.14).**
+
+Կարդա․ **C նախ** — ոչ որովհետև իր raw value-ն ամենաբարձրն է (ցածր է, 5), այլ որովհետև փոքր է (Size 3) և իր Time-Criticality + Risk maxed են (compliance deadline), ուստի այն հետաձգելու cost-ը *մեկ միավոր effort-ի* հսկայական է։ **B վերջին** չնայած ամենաբարձր raw *value*-ին (13) — 21-point job է, ուստի իր cost of delay-ը մեկ միավոր effort-ի ամենավատն է. մեծ, արժեքավոր-բայց-ոչ-urgent item-ը ճիշտ սպասում է։ Այդ inversion-ը (high-value B-ն վերջին) հենց այն insight-ն է, որ WSJF-ը տալիս է, իսկ value-only ranking-ը բաց է թողնում․ **փոքր urgent item-ը հաղթում է մեծ արժեքավորին, երբ capacity-ն constraint-ն է։**
+
+Caveat-ներ․ WSJF-ը *relative* prioritizer է defined queue-ի. եթե item-ները դեռ uncertain bet են, օգտագործիր RICE (Օրինակ B). re-score արա, երբ Time-Criticality-ն փոխվում է (անցնող deadline-ը փոխում է C-ն)։ Թվերը relative team estimate են՝ calibrate անելու, ոչ փաստ։
+
+**Ինչու է անցնում gate-ը.** Այն ընտրում է WSJF-ը իր իրական use case-ի համար — **defined delivery queue cost-of-delay economics-ով**, բացահայտ տարբերված RICE-ի uncertain-bet դեպքից — և հաշվում ճիշտ․ **CoD = Value + Time-Criticality + Risk/Opportunity, ÷ Job Size**, scored relatively։ Table-ը արտադրում է **counter-intuitive-բայց-ճիշտ** result (փոքր urgent compliance item նախ WSJF 10.3-ով. մեծ high-*value* analytics rebuild վերջին 1.14-ով) — հենց economic insight-ը, որի համար WSJF-ը գոյություն ունի․ shortest weighted job first-ը հաղթում է value-only ranking-ին capacity constraint-ի տակ։ Այն flag է անում relative-scoring-ի ու re-score-on-deadline caveat-ները և թվերը նշում team-calibrated estimate, փակելով WSJF gap-ը, որ նախորդ RICE example-ը անվանեց, բայց երբեք worked չարեց։
