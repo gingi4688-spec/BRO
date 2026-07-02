@@ -17,7 +17,7 @@ The default posture for all of the above: produce the criteria, the evidence, th
 
 ### Owned future-improvement items
 
-- Add a **forensic-audit pattern** (chain-of-custody, evidence preservation, interview discipline, the fraud triangle as a risk lens) for when an audit shifts from assurance into investigation — coordinated with `legal-compliance-contracts`.
+- **✓ DELIVERED (2026-07-02)** — Add a **forensic-audit pattern** (chain-of-custody, evidence preservation, interview discipline, the fraud triangle as a risk lens) for when an audit shifts from assurance into investigation — coordinated with `legal-compliance-contracts`. → `patterns.md` #7 "Forensic pivot — when assurance becomes investigation".
 - Add a **continuous / automated audit pattern** (full-population testing where the data supports it, so sampling risk drops toward zero) as a distinct mode from periodic sampling.
 - **✓ DELIVERED (gazan 2026-07-02)** — Add a **third worked example for a code or data-quality audit**, to exercise more of the dispatch table beyond the two current domains (IT-controls + language).
 - **✓ DELIVERED (gazan 2026-07-02)** — Add an **audit-risk model note** (inherent × control × detection risk and how it drives sample size and effort allocation) to make risk-based planning more quantitative.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the criteria, the evidence, th
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու **forensic-audit pattern** (chain-of-custody, evidence preservation, interview-ի կարգապահություն, fraud triangle-ը որպես risk lens) այն դեպքերի համար, երբ audit-ը assurance-ից տեղափոխվում է investigation — համակարգված `legal-compliance-contracts`-ի հետ։
+- **✓ ԱՐՎԱԾ (2026-07-02)**՝ Ավելացրու **forensic-audit pattern** (chain-of-custody, evidence preservation, interview-ի կարգապահություն, fraud triangle-ը որպես risk lens) այն դեպքերի համար, երբ audit-ը assurance-ից տեղափոխվում է investigation — համակարգված `legal-compliance-contracts`-ի հետ։ → `patterns.md` #7 «Forensic pivot»։
 - Ավելացրու **continuous / automated audit pattern** (full-population testing, որտեղ data-ն թույլ է տալիս, որ sampling risk-ը զրոյի մոտ իջնի) որպես առանձին mode periodic sampling-ից։
 - **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **երրորդ worked example code կամ data-quality audit-ի համար**, որ dispatch table-ի ավելի շատ մասը exercise անի երկու ընթացիկ ոլորտից (IT-controls + language) այն կողմ։
 - **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **audit-risk model note** (inherent × control × detection risk և ինչպես է այն վարում sample size-ը և effort-ի allocation-ը), որ ըստ-ռիսկի պլանավորումն ավելի quantitative լինի։

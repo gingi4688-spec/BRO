@@ -46,6 +46,13 @@ These are canonical audit moves — the spine, domain-independent. Each works th
 - **Do not use when:** The finding was accepted as risk (management chose not to remediate) — then record the accepted residual risk and its owner, not a re-test.
 - **Failure repair:** If "fixed" is being closed without re-test, re-run the original test; if the same auditor both fixed and verified, route verification to an independent reviewer.
 
+### 7. Forensic pivot — when assurance becomes investigation
+
+- **Trigger:** During a routine assurance audit, evidence surfaces that suggests intent, not error — fraud, falsified records, theft, collusion, or a control deliberately defeated. The question shifts from "does the control work?" to "did someone knowingly beat it?"
+- **Mechanism:** Stop treating it as an ordinary finding. **Preserve evidence and chain of custody** — capture originals with timestamps and who-had-access; never alter, annotate, or "clean up" the source. **Do not tip off the subject** (an early "I noticed X" invites evidence destruction). Re-scope with the **fraud triangle** — pressure/incentive, opportunity, rationalization — to reason about who and how, then widen sampling toward the suspected pattern (targeted, not random). **Coordinate early with the human owner and `legal-compliance-contracts`**: privilege, mandatory-reporting duties, and interview discipline (interviews become evidence — plan them, don't wing them). The auditor gathers and preserves facts; the accusation and any legal conclusion belong to the owner and counsel, not the assistant.
+- **Do not use when:** An innocent explanation has not yet been ruled out — an error is not fraud. Test the honest-mistake hypothesis first; forcing a fraud frame onto a plain control weakness burns credibility and can defame.
+- **Failure repair:** If the source was already altered/annotated or the subject was tipped off, log the contamination honestly (it weakens admissibility), preserve whatever remains untouched, and escalate immediately — never quietly "fix" a forensic trail.
+
 ## Հայերեն
 
 Սրանք canonical audit move-եր են — ողնաշարը, ոլորտ-անկախ։ Ամեն մեկն աշխատում է նույն կերպ, անկախ նրանից subject-ը code է, finance, control, language, թե design. *criteria*-ն dispatch-վում է համապատասխան ոլորտի skill-ից։ Ընտրիր այն move-ը, որ առաջ է տանում audit-ը, ոչ թե ամենամանրակրկիտ երևացողը։
@@ -91,3 +98,10 @@ These are canonical audit moves — the spine, domain-independent. Each works th
 - **Մեխանիզմը․** Հետևիր ամեն finding-ի մինչև closure՝ owner-ով և ամսաթվով. երբ remediation է claim-վում, **re-audit արա** — վերագործարկիր test-ը, «fixed»-ը վստահությամբ մի՛ վերցրու։ Verify արա, որ corrective action-ը ուղղեց **class**-ը (root cause-ը), ոչ թե միայն գտնված մեկ instance-ը։ Պահիր independence-ը. remediate անողը verify անողը չէ։
 - **Երբ չօգտագործել․** Երբ finding-ը ընդունվել է որպես ռիսկ (management-ը ընտրեց չ-remediate անել) — ապա record արա ընդունված residual risk-ը և իր owner-ը, ոչ re-test։
 - **Ուղղում․** Եթե «fixed»-ը փակվում է առանց re-test-ի, վերագործարկիր սկզբնական test-ը. եթե նույն auditor-ը և՛ fix արեց, և՛ verify, ուղղորդիր verification-ը independent reviewer-ին։
+
+### 7. Forensic pivot — երբ assurance-ը դառնում է investigation
+
+- **Երբ է պետք․** Սովորական assurance audit-ի ընթացքում evidence է հայտնվում, որ մատնանշում է դիտավորություն, ոչ սխալ — fraud, կեղծված record, գողություն, collusion, կամ control, որ դիտմամբ պարտվել է։ Հարցը փոխվում է «control-ն աշխատու՞մ է»-ից «մեկը գիտակցաբա՞ր հաղթեց նրան»-ի։
+- **Մեխանիզմը․** Դադարիր վերաբերվել որպես սովորական finding։ **Պահպանի՛ր evidence-ը և chain of custody-ն** — վերցրու originals-ը timestamp-ով ու ով-մուտք-ուներ-ով. երբեք մի՛ փոխիր, annotate արա կամ «մաքրիր» source-ը։ **Մի՛ զգուշացրու subject-ին** (վաղ «նկատեցի X»-ը հրավիրում է evidence-ի ոչնչացում)։ Re-scope արա **fraud triangle**-ով — pressure/incentive, opportunity, rationalization — որ դատես ով-ի և ինչպես-ի մասին, հետո լայնացրու sampling-ը դեպի կասկածվող pattern-ը (թիրախավորված, ոչ random)։ **Վաղ համակարգիր մարդ-տիրոջ և `legal-compliance-contracts`-ի հետ**․ privilege, mandatory-reporting պարտականություններ, և interview-ի կարգապահություն (interview-ները evidence են դառնում — պլանավորիր, մի՛ wing արա)։ Auditor-ը հավաքում ու պահպանում է փաստերը. մեղադրանքն ու ցանկացած legal conclusion owner-ինն ու counsel-ինն են, ոչ assistant-ի։
+- **Երբ չօգտագործել․** Երբ innocent բացատրությունը դեռ չի բացառվել — սխալը fraud չէ։ Նախ թեստավորիր honest-mistake hypothesis-ը. plain control weakness-ի վրա fraud frame բռնի դնելը այրում է credibility-ն ու կարող է defame անել։
+- **Ուղղում․** Եթե source-ն արդեն փոխված/annotate-ված է կամ subject-ը զգուշացվել է, log արա contamination-ը ազնիվ (այն թուլացնում է admissibility-ն), պահպանի՛ր ինչ մնացել է անդիպչած, և escalate արա անմիջապես — երբեք լուռ մի՛ «ուղղիր» forensic trail-ը։
