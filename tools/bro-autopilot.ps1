@@ -85,6 +85,16 @@ if (Test-Path $broPlan) {
   $pending = @(Get-Content $broPlan | Where-Object { $_ -match '^\s*-\s*\[ \]' })
   $brief += "", "## Bro's own plan", "  pending items: $($pending.Count)"
   $pending | Select-Object -First 6 | ForEach-Object { $brief += "  $($_.Trim())" }
+  # SuperBro self-improves too: in Live mode dispatch Bro's OWN bounded agent on its own backlog (own branch,
+  # local commit, NEVER push). Self-check already passed above (RED would have halted). Gev reviews + token-pushes.
+  if ($Mode -eq 'Live' -and $pending.Count -gt 0) {
+    try {
+      Start-Process 'pwsh' -ArgumentList '-NoProfile','-File',$dispatchTool,'-ProjectPath',$broHome -WindowStyle Hidden -ErrorAction Stop
+      $brief += "  -> dispatched Bro's OWN bounded agent (self-improve; own branch; commit; NO push; Gev reviews)"
+    } catch { $brief += "  -> self-dispatch FAILED ($($_.Exception.Message))" }
+  } elseif ($pending.Count -gt 0) {
+    $brief += "  -> WOULD self-dispatch BOUNDED (Observe — launched nothing)"
+  }
 } else {
   $brief += "", "## Bro's own plan", "  (no AUTOPILOT-PLAN.md yet — nothing queued for Bro itself)"
 }

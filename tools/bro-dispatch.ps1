@@ -33,7 +33,7 @@ $denied = @('Bash(git push:*)','Bash(rm:*)','Bash(git reset --hard:*)','Bash(git
 if (-not $Task) {
   $Task = @'
 You are this project's Bro, dispatched to continue the work autonomously (bounded).
-1) Read your CLAUDE.md, brain (bro/memory), and your handoff / bro/AUTOPILOT-PLAN.md to see where the project stands and what is next.
+1) Read your CLAUDE.md, brain (bro/memory), your handoff, and your AUTOPILOT-PLAN.md (at the repo ROOT or bro/AUTOPILOT-PLAN.md) to see where things stand and what is next.
 2) Create/switch to a NEW branch "autopilot/continue" (never commit to main directly).
 3) Do the next bounded item(s) from the handoff/plan.
 4) Verify your changes (build/test/lint as appropriate).
