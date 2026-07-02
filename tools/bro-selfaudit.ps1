@@ -16,6 +16,8 @@
 param([switch]$Quick, [switch]$Log, [switch]$Notify)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+# L0/F1: emit UTF-8 so the bilingual (Armenian) output renders instead of '???' on legacy-codepage consoles.
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
 
 function Invoke-Check([string]$file, [string[]]$argv) {
   # Run a read-only check, return @{ exit; summary } — summary = its RESULT/BEAST RESULT line (ANSI-stripped).
@@ -33,8 +35,9 @@ $treeDirty = ($porcelain.Count -gt 0)
 
 Write-Host ""
 Write-Host "bro-selfaudit — Main Bro continuous integrity (READ-ONLY)"
+Write-Host "                Գլխավոր Bro-ի շարունակական ամբողջականություն (READ-ONLY)"
 Write-Host ("  BRO_HOME: {0}" -f (Get-Location).Path)
-Write-Host ("  scope:    {0}" -f $(if ($Quick) { 'doctor + audit (quick)' } else { 'doctor + audit + beast (full)' }))
+Write-Host ("  scope:    {0}" -f $(if ($Quick) { 'doctor + audit (quick / արագ)' } else { 'doctor + audit + beast (full / լրիվ)' }))
 Write-Host ("--------------------------------------------------------------")
 
 $doctor = Invoke-Check 'tools/bro-doctor.ps1' @()
@@ -50,7 +53,7 @@ if (-not $Quick) {
   if ($beast.exit -ne 0 -and $beast.failed) { Write-Host ("                {0}" -f $beast.failed) }
 }
 
-Write-Host ("  tree          {0}" -f $(if ($treeDirty) { "DIRTY ($($porcelain.Count) uncommitted)" } else { 'CLEAN' }))
+Write-Host ("  tree          {0}" -f $(if ($treeDirty) { "DIRTY / ԿԵՂՏՈՏ ($($porcelain.Count) uncommitted)" } else { 'CLEAN / ՄԱՔՈՒՐ' }))
 Write-Host ("--------------------------------------------------------------")
 
 # --- verdict policy ---
@@ -66,11 +69,12 @@ if ($beast -and $beast.exit -ne 0) {
   $beastReal = -not ($treeDirty -and $extra.Count -eq 0)
 }
 
-if ($doctorReal -or $auditReal -or $beastReal) { $verdict = 'RED';    $code = 2; $msg = 'real integrity failure. Investigate the failing check above (NOT a dirty-tree artifact).' }
-elseif ($treeDirty)                            { $verdict = 'YELLOW'; $code = 1; $msg = 'Bro is structurally healthy; uncommitted work in the tree (commit to reach GREEN).' }
-else                                           { $verdict = 'GREEN';  $code = 0; $msg = 'Main Bro proves its own integrity (clean tree, all checks pass).' }
+if ($doctorReal -or $auditReal -or $beastReal) { $verdict = 'RED';    $code = 2; $msgEn = 'real integrity failure. Investigate the failing check above (NOT a dirty-tree artifact).'; $msgHy = 'իրական ամբողջականության ձախողում։ Հետազոտիր վերևի ձախողվող check-ը (ՈՉ dirty-tree artifact)։' }
+elseif ($treeDirty)                            { $verdict = 'YELLOW'; $code = 1; $msgEn = 'Bro is structurally healthy; uncommitted work in the tree (commit to reach GREEN).'; $msgHy = 'Bro-ն կառուցվածքային առողջ է. tree-ում չկոմիտ արած աշխատանք կա (commit արա՝ GREEN-ի հասնելու համար)։' }
+else                                           { $verdict = 'GREEN';  $code = 0; $msgEn = 'Main Bro proves its own integrity (clean tree, all checks pass).'; $msgHy = 'Գլխավոր Bro-ն ապացուցում է իր ամբողջականությունը (մաքուր tree, բոլոր check-երն անցնում են)։' }
 
-Write-Host ("OVERALL: {0} — {1}" -f $verdict, $msg)
+Write-Host ("OVERALL: {0} — {1}" -f $verdict, $msgEn)
+Write-Host ("                 {0}" -f $msgHy)
 $stamp = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
 
 # -Log: append ONE timestamped verdict line to logs/selfaudit-heartbeat.log (gitignored via *.log, so it never
@@ -88,7 +92,7 @@ if ($Log) {
 # unattended daily 11:00 task). YELLOW = dirty tree = normal work-in-progress and does NOT alert. The reliable
 # channel is the session-open front door, which always surfaces the last daily verdict.
 if ($Notify -and $verdict -eq 'RED') {
-  $alert = "Bro self-audit RED @ ${stamp}: integrity failure. Open Bro and run RUN SELF-AUDIT."
+  $alert = "Bro self-audit RED @ ${stamp}: integrity failure / ամբողջականության ձախողում. Open Bro and run RUN SELF-AUDIT."
   try { & msg.exe * "/TIME:180" $alert 2>$null } catch {}
 }
 exit $code
