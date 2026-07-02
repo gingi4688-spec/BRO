@@ -16,6 +16,7 @@
 param([switch]$Verify, [switch]$Update)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $hookDir = 'tools/hooks'
 $pinFile = 'tools/hooks/hooks.sha256'
 
@@ -61,7 +62,7 @@ $drift = @(); $missing = @(); $unpinned = @()
 foreach ($k in $pin.Keys)  { if (-not $cur.Contains($k)) { $missing += $k } elseif ($cur[$k] -ne $pin[$k]) { $drift += $k } }
 foreach ($k in $cur.Keys)  { if (-not $pin.Contains($k)) { $unpinned += $k } }
 
-"bro-hookpin -Verify - $($cur.Count) live hook(s) vs $($pin.Count) pinned"
+"bro-hookpin -Verify / ստուգում - $($cur.Count) live hook(s) vs $($pin.Count) pinned"
 foreach ($k in $cur.Keys) {
   $mark = if ($pin.Contains($k) -and $cur[$k] -eq $pin[$k]) { 'OK      ' } elseif (-not $pin.Contains($k)) { 'UNPINNED' } else { 'DRIFT   ' }
   "  [$mark] $k"

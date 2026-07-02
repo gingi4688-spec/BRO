@@ -25,6 +25,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $master = 'tools/templates/standard-docs-pack'
 if (-not (Test-Path $master)) { "  ERROR: docs-pack master missing at $master (bring it in first)."; exit 4 }
 
@@ -64,7 +65,7 @@ $wanted = @(); $unmatched = @()
 foreach ($s in ($Sections -split ',')) { $d = Resolve-Section $s; if ($d) { $wanted += $d } else { $unmatched += $s.Trim() } }
 $wanted = @($wanted | Sort-Object Name -Unique)
 
-"DELIVER DOCS - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
+"DELIVER DOCS / ՀԱՆՁՆԵԼ ՓԱՍՏԱԹՂԹԵՐ - " + $(if ($Execute) { 'REAL mode / ԻՐԱԿԱՆ' } else { 'DRY-RUN (preview) / ՉՈՐ ԱՆՑՈՒՄ' })
 "  project: $ProjectId   ->   $docsDir"
 "  selected sections ($($wanted.Count)):"
 foreach ($d in $wanted) { "    + $($d.Name)  ($(@(Get-ChildItem $d.FullName -File -Filter *.md).Count) docs)" }

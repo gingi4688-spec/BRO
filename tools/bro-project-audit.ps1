@@ -15,9 +15,10 @@
 param([Parameter(Mandatory=$true)][string]$ProjectId, [string]$RegistryPath = '', [switch]$Log)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $regPath = if ($RegistryPath) { $RegistryPath } else { 'memory/_own/registry.json' }
 
-"bro-project-audit - READ-ONLY - project: $ProjectId"
+"bro-project-audit - READ-ONLY / միայն կարդալ - project: $ProjectId"
 "================================================================"
 
 # registry entry (refuse if unknown)
@@ -80,7 +81,7 @@ if (-not $commit -and $status -ne 'BLACK') { $status='BLACK'; $finalCode=4 }
 
 "================================================================"
 "AUDIT RESULT: $status  (hashes $hok/$htotal · doctor exit $docCode)"
-"NOTE: read-only evidence audit - flags only; sealed memory content never read."
+"NOTE / ՆՇՈՒՄ: read-only evidence audit - flags only; sealed memory content never read / միայն flag. կնքված memory-ի content-ը երբեք չի կարդացվում։"
 ""
 "SEAL (project-audit evidence) / SEAL (project-audit-ի evidence)"
 "  commit:        $(if($commit){$commit}else{'n/a (NO EVIDENCE)'})"
