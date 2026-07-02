@@ -82,6 +82,8 @@ function Invoke-ReadLive($entry, [bool]$interactive) {
       if ($interactive) { $sec = Read-Host '  section number (blank = full catalog)'; if ($sec) { & pwsh -NoProfile -File 'tools/bro-docs.ps1' -List -Section $sec } else { & pwsh -NoProfile -File 'tools/bro-docs.ps1' -List }; $script:ExitCode = $LASTEXITCODE }
       else { & pwsh -NoProfile -File 'tools/bro-docs.ps1' -List; $script:ExitCode = $LASTEXITCODE }
     }
+    'RUN SELF-AUDIT'    { & pwsh -NoProfile -File 'tools/bro-selfaudit.ps1';        $script:ExitCode = $LASTEXITCODE }
+    'LIST CROSS-GRANTS' { & pwsh -NoProfile -File 'tools/bro-cross-grant.ps1' -List; $script:ExitCode = $LASTEXITCODE }
     'EXIT'          { Write-Output 'Leaving palette. Bye.'; $script:ExitCode = 0 }
     default         { Write-Output ("PALETTE: '{0}' has no read-live backing wired." -f $entry.name); $script:ExitCode = 2 }
   }
@@ -133,6 +135,18 @@ function Invoke-DryRollout($entry, [bool]$interactive) {
     'DELIVER DOCS' {
       if ($interactive) { $projId = Read-Host '  project_id'; $secs = Read-Host '  sections (e.g. 00,01,08)'; & pwsh -NoProfile -File 'tools/bro-docs.ps1' -Deliver -ProjectId $projId -Sections $secs }
       else { Write-Output '  DELIVER DOCS (DRY) needs -ProjectId -Sections; use the interactive menu.' }
+    }
+    'GRANT CROSS-PROJECT ACCESS' {
+      Write-Output '  current grants (read-only):'
+      & pwsh -NoProfile -File 'tools/bro-cross-grant.ps1' -List
+      Write-Output '  To really grant (OUTSIDE the menu, Gev-gated) - the palette runs NOTHING mutating here:'
+      Write-Output '    BRO_GEV_APPROVED=1 tools/bro-cross-grant.ps1 -Grant -ProjectId <P> -Scope read -Task "<why>" -Hours <N>'
+    }
+    'REVOKE CROSS-PROJECT ACCESS' {
+      Write-Output '  current grants (read-only):'
+      & pwsh -NoProfile -File 'tools/bro-cross-grant.ps1' -List
+      Write-Output '  To really revoke (OUTSIDE the menu, Gev-gated) - the palette runs NOTHING mutating here:'
+      Write-Output '    BRO_GEV_APPROVED=1 tools/bro-cross-grant.ps1 -Revoke -ProjectId <P>'
     }
     default { Write-Output '  (no dry backing wired)' }
   }

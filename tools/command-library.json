@@ -214,6 +214,46 @@
       "preview_hy": "LIVE + GATED։ Պատճենում է ՄԻԱՅՆ նշված section-ները <project>\\docs\\-ում (select-don't-copy)։ Real = -Sections + -Execute -Yes BRO_GEV_APPROVED=1; existing-ը backup։ Palette-ը միայն DRY preview."
     },
     {
+      "name": "RUN SELF-AUDIT",
+      "purpose_en": "One read-only command = doctor + audit + beast -> consolidated GREEN/YELLOW/RED (dirty-tree-aware).",
+      "purpose_hy": "Մեկ read-only հրաման = doctor + audit + beast -> consolidated GREEN/YELLOW/RED (dirty-tree-aware).",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "LIVE", "backing": "tools/bro-selfaudit.ps1",
+      "files_affected": "runs read-only checks only (doctor + audit + beast); writes none",
+      "preview_en": "LIVE (read-only). Aggregates doctor + audit + beast into ONE verdict; uncommitted work = YELLOW, a real defect = RED. Changes nothing.",
+      "preview_hy": "LIVE (read-only)։ Համախմբում է doctor + audit + beast մեկ verdict-ի; չկոմիտ արածը = YELLOW, real defect = RED։ Ոչինչ չի փոխում."
+    },
+    {
+      "name": "LIST CROSS-GRANTS",
+      "purpose_en": "Show the Main Bro's L8-G cross-project grants (read-only; default = none / fully sealed).",
+      "purpose_hy": "Ցույց տալ Main Bro-ի L8-G cross-project grant-ները (read-only; default = ոչ մեկ / լրիվ կնքված).",
+      "category": "READ-ONLY", "criticality": "LOW", "requires_gev": false, "mode": "READ",
+      "availability": "LIVE", "backing": "tools/bro-cross-grant.ps1",
+      "files_affected": "reads memory/_own/cross-grants.json ; writes none",
+      "preview_en": "LIVE (read-only). Lists active/expired grants (bro-cross-grant.ps1 -List). Default-deny: no grant = the wall behaves exactly as before. Writes nothing.",
+      "preview_hy": "LIVE (read-only)։ Թվարկում է active/expired grant-երը (-List)։ Default-deny՝ grant չկա = պատը նույնն է։ Ոչինչ չի գրում."
+    },
+    {
+      "name": "GRANT CROSS-PROJECT ACCESS",
+      "purpose_en": "Open an explicit, scoped, time-expiring L8-G grant so the Main Bro may reach ONE registered project (Gev-gated).",
+      "purpose_hy": "Բացել explicit, scoped, ժամկետով L8-G grant, որ Main Bro-ն հասնի ՄԵԿ registered project-ի (Gev-gated).",
+      "category": "CRITICAL", "criticality": "CRITICAL", "requires_gev": true, "mode": "WRITE",
+      "availability": "ROLLOUT-GATED", "backing": "tools/bro-cross-grant.ps1",
+      "files_affected": "writes memory/_own/cross-grants.json (one grant) + appends the evidence log; touches NO project content",
+      "preview_en": "LIVE + GATED. Real grant needs BRO_GEV_APPROVED=1 + a REGISTERED project + a task reason; auto-expires; every use logged; Project Bros never cross. The palette previews current grants only (DRY, executes nothing).",
+      "preview_hy": "LIVE + GATED։ Real = BRO_GEV_APPROVED=1 + REGISTERED project + task; auto-expire; ամեն օգտագործում logged; Project Bro-ները երբեք չեն հատում։ Palette-ը միայն preview (DRY, ոչինչ չի կատարում)."
+    },
+    {
+      "name": "REVOKE CROSS-PROJECT ACCESS",
+      "purpose_en": "Close a Main Bro L8-G grant early and re-seal the project (Gev-gated).",
+      "purpose_hy": "Փակել Main Bro-ի L8-G grant-ը վաղ ու նորից կնքել project-ը (Gev-gated).",
+      "category": "CRITICAL", "criticality": "HIGH", "requires_gev": true, "mode": "WRITE",
+      "availability": "ROLLOUT-GATED", "backing": "tools/bro-cross-grant.ps1",
+      "files_affected": "writes memory/_own/cross-grants.json (drops the grant) + appends the evidence log",
+      "preview_en": "LIVE + GATED. Real revoke needs BRO_GEV_APPROVED=1; drops the project's grant so the Main Bro is re-sealed to it. The palette previews current grants only (DRY, executes nothing).",
+      "preview_hy": "LIVE + GATED։ Real = BRO_GEV_APPROVED=1; հանում է grant-ը, Main Bro-ն նորից կնքվում է։ Palette-ը միայն preview (DRY, ոչինչ չի կատարում)."
+    },
+    {
       "name": "EXIT",
       "purpose_en": "Leave the palette.",
       "purpose_hy": "Դուրս գալ palette-ից.",

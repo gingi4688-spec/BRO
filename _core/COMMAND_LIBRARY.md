@@ -51,9 +51,13 @@ availability(CLEAN-BUILD | PHASE-N | LIVE | ROLLOUT-GATED | RUNTIME | FUTURE) ·
 | **DELIVER DOCS** | CRITICAL | YES | WRITE | ROLLOUT-GATED | deliver a LEAN selection of doc sections into a project's docs/ (select-don't-copy) / docs deliver |
 | **PROMOTE SKILL** | CRITICAL | YES | WRITE | PHASE-4 | promote a lesson to spine (Promotion Gate) / promote |
 | **CROSS-PROJECT AUDIT** | CRITICAL | YES | READ | FUTURE | Gev-opened read-only cross-project review / cross-project |
+| **RUN SELF-AUDIT** | READ-ONLY | NO | READ | LIVE | one command = doctor + audit + beast → GREEN/YELLOW/RED (dirty-tree-aware) / self-audit aggregator |
+| **LIST CROSS-GRANTS** | READ-ONLY | NO | READ | LIVE | show the Main Bro's L8-G cross-project grants (default = none, fully sealed) / grant-ների ցուցակ |
+| **GRANT CROSS-PROJECT ACCESS** | CRITICAL | YES | WRITE | ROLLOUT-GATED | open a scoped, time-expiring L8-G grant for the Main Bro (Gev-gated; logged; Project Bros never cross) / cross-grant բացել |
+| **REVOKE CROSS-PROJECT ACCESS** | CRITICAL | YES | WRITE | ROLLOUT-GATED | close a Main-Bro L8-G grant early and re-seal the project (Gev-gated) / cross-grant փակել |
 | **EXIT** | READ-ONLY | NO | READ | CLEAN-BUILD | leave the palette / դուրս գալ |
 
-> **Live read-only set / live read-only հավաքածու:** `HELP · SHOW REGISTRY · SHOW HEALTH · RUN DOCTOR · RUN AUDIT · REVIEW QUARANTINE · RUN PROJECT AUDIT · VERIFY PROJECT BRO · LIST DOCS PACK · EXIT` run from the menu (read-only).
+> **Live read-only set / live read-only հավաքածու:** `HELP · SHOW REGISTRY · SHOW HEALTH · RUN DOCTOR · RUN AUDIT · RUN SELF-AUDIT · REVIEW QUARANTINE · RUN PROJECT AUDIT · VERIFY PROJECT BRO · LIST DOCS PACK · LIST CROSS-GRANTS · EXIT` run from the menu (read-only).
 > **WRITE/critical commands** show a **preview**; `ROLLOUT-GATED` ones run a **DRY** backing in the menu (execute nothing) — real execution requires `-Execute -Yes BRO_GEV_APPROVED=1` outside the menu; others are gated. **The palette NEVER bypasses a gate.** /
 > READ-live-ները run են; WRITE/critical-ները preview; `ROLLOUT-GATED`-ները menu-ում DRY (real = explicit Gev-flags); palette-ը ԵՐԲԵՔ gate չի bypass անում։
 
