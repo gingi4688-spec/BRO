@@ -8,10 +8,11 @@
 #>
 param([Parameter(Mandatory=$true)][string]$ReleaseDir, [Parameter(Mandatory=$true)][string]$TargetSpineDir)
 $ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $payload = Join-Path $ReleaseDir 'payload'
-if (-not (Test-Path $payload)) { "bro-spine-pull: payload missing in $ReleaseDir"; exit 3 }
+if (-not (Test-Path $payload)) { "bro-spine-pull: payload missing / payload բացակայում է in $ReleaseDir"; exit 3 }
 New-Item -ItemType Directory -Force -Path $TargetSpineDir | Out-Null
 Copy-Item (Join-Path $payload '*') -Destination $TargetSpineDir -Recurse -Force
-"bro-spine-pull: pulled payload -> $TargetSpineDir ; verifying against manifest..."
+"bro-spine-pull: pulled payload / payload քաշվեց -> $TargetSpineDir ; verifying against manifest / ստուգում manifest-ի դեմ..."
 & pwsh -NoProfile -File (Join-Path $PSScriptRoot 'bro-spine-verify.ps1') -ReleaseDir $ReleaseDir
 exit $LASTEXITCODE

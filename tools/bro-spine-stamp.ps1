@@ -7,12 +7,13 @@
 #>
 param([Parameter(Mandatory=$true)][string]$ManifestPath, [Parameter(Mandatory=$true)][string]$Version)
 $ErrorActionPreference = 'Stop'
-if (-not (Test-Path $ManifestPath)) { "bro-spine-stamp: manifest not found: $ManifestPath"; exit 2 }
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
+if (-not (Test-Path $ManifestPath)) { "bro-spine-stamp: manifest not found / manifest չգտնվեց: $ManifestPath"; exit 2 }
 try { $mf = Get-Content -Raw $ManifestPath | ConvertFrom-Json } catch { "bro-spine-stamp: invalid JSON: $ManifestPath"; exit 2 }
 $old = "$($mf.spine_version)"
 $mf | Add-Member -NotePropertyName spine_version -NotePropertyValue $Version -Force
 $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
 $mf | Add-Member -NotePropertyName last_spine_stamp -NotePropertyValue $ts -Force
 ($mf | ConvertTo-Json -Depth 8) | Set-Content $ManifestPath -Encoding utf8
-"bro-spine-stamp: $ManifestPath  spine_version $old -> $Version  (stamped $ts)"
+"bro-spine-stamp: $ManifestPath  spine_version $old -> $Version  (stamped / դրոշմված $ts)"
 exit 0

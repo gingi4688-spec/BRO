@@ -7,6 +7,7 @@
 #>
 param([Parameter(Mandatory=$true)][string]$ReleaseDir)
 $ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $mfPath = Join-Path $ReleaseDir 'release.manifest.json'
 if (-not (Test-Path $mfPath)) { "bro-spine-verify: release.manifest.json missing in $ReleaseDir"; exit 3 }
 $mf = Get-Content -Raw $mfPath | ConvertFrom-Json
@@ -24,7 +25,7 @@ $sha = [System.Security.Cryptography.SHA256]::Create()
 $rollup = ([BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($rollupSrc))) -replace '-','').ToLower()
 $rollupOk = ($rollup -eq "$($mf.rollup_sha256)")
 
-"bro-spine-verify - release $($mf.version) @ $ReleaseDir"
+"bro-spine-verify - release / թողարկում $($mf.version) @ $ReleaseDir"
 "  files matched: $okCount / $(@($mf.files).Count)"
 "  mismatches: $($mismatch.Count)   missing: $($missing.Count)   rollup match: $rollupOk"
 if ($mismatch.Count -gt 0) { "  MISMATCH: $($mismatch -join ', ')" }

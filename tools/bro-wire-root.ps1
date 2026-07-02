@@ -27,8 +27,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 
-if (-not $ProjectId) { "WIRE WALL TO ROOT - usage: bro-wire-root.ps1 -ProjectId <id> [-ProjectPath <abs>] [-Execute -Yes]"; exit 2 }
+if (-not $ProjectId) { "WIRE WALL TO ROOT / ՊԱՏԸ ROOT-ԻՆ - usage: bro-wire-root.ps1 -ProjectId <id> [-ProjectPath <abs>] [-Execute -Yes]"; exit 2 }
 
 $regFile = if (($env:BRO_TEST_MODE -eq '1') -and $RegistryPath) { $RegistryPath } else { 'memory/_own/registry.json' }
 $reg = $null; try { $reg = Get-Content -Raw $regFile | ConvertFrom-Json } catch { "  ERROR: cannot read registry $regFile : $($_.Exception.Message)"; exit 4 }
@@ -38,7 +39,7 @@ if ("$($entry.status)" -ne 'INSTALLED') { "  REFUSED: project '$ProjectId' statu
 if (-not $ProjectPath) { $ProjectPath = "$($entry.project_path)" }
 $broDir = Join-Path $ProjectPath 'bro'
 
-"WIRE WALL TO ROOT - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
+"WIRE WALL TO ROOT / ՊԱՏԸ ROOT-ԻՆ - " + $(if ($Execute) { 'REAL mode / ԻՐԱԿԱՆ' } else { 'DRY-RUN (preview) / ՉՈՐ ԱՆՑՈՒՄ' })
 "  project: $ProjectId   path: $ProjectPath"
 if (-not (Test-Path $ProjectPath -PathType Container)) { "  REFUSED: project root $ProjectPath does not exist. STOP."; exit 4 }
 if (-not (Test-Path $broDir))  { "  REFUSED: $broDir does not exist (install first). STOP."; exit 4 }
