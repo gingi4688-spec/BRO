@@ -108,6 +108,13 @@ if ($trackedArchives.Count -ne 0){ $isoFail += "tracked archive(s): $($trackedAr
 if ($smUnexpected.Count -ne 0) { $isoFail += "unexpected supermemory mirror(s): $(($smUnexpected | Select-Object -ExpandProperty Name) -join ', ')" }
 Chk ($isoFail.Count -eq 0) "ISOLATION: PASS - _own metadata/evidence only; supermemory sealed-only; registry metadata-only; no project-local self-evolution (L10)" "ISOLATION: FAIL - $($isoFail -join '; ')" 'CROSS_PROJECT_CONTAMINATION'
 ""
+"[G] Hook tamper-pin (SuperBro's OWN enforcement hooks unchanged, finding H)"
+# Detection, not prevention (D0): pins the 5-hook wall's SHA-256 and flags any unexpected change. A legit hook
+# edit must re-pin in the same commit (bro-hookpin.ps1 -Update); otherwise this drifts RED. Read-only here.
+& pwsh -NoProfile -File 'tools/bro-hookpin.ps1' -Verify *> $null
+$hookPinCode = $LASTEXITCODE
+Chk ($hookPinCode -eq 0) "SuperBro hooks match the tamper-pin (tools/hooks/hooks.sha256)" "hook tamper/drift or missing pin - run: pwsh tools/bro-hookpin.ps1 -Verify" 'HOOK_TAMPER'
+""
 $status='GREEN'; $code=0
 if ($problems.Count -gt 0){$status='RED';$code=2} elseif($warn.Count -gt 0){$status='YELLOW';$code=1}
 $codesUniq = ($codes | Select-Object -Unique) -join ', '

@@ -105,6 +105,10 @@ try {
 } catch {}
 Rec 'no Project Bro self-evolution (only template hooks)' ($selfEvo.Count -eq 0) "rogue-hooks=$($selfEvo.Count)"
 
+# 15b) hook tamper-pin: SuperBro's OWN 5-hook wall is unmodified vs the committed pin (finding H)
+& pwsh -NoProfile -File 'tools/bro-hookpin.ps1' -Verify *> $null
+Rec 'hook tamper-pin verify (SuperBro hooks unchanged)' ($LASTEXITCODE -eq 0) "bro-hookpin -Verify exit=$LASTEXITCODE"
+
 # 15) idempotency: read-only checks mutate no tracked file (run twice, compare working tree)
 $treeBefore = (@(git status --porcelain) -join "`n")
 & pwsh -NoProfile -File 'tools/bro-doctor.ps1' *> $null

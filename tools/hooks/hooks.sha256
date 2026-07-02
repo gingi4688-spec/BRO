@@ -1,0 +1,8 @@
+# hooks.sha256 - pinned SHA-256 of SuperBro's OWN enforcement hooks (tamper DETECTION, finding H).
+# Regenerate ONLY via: BRO_GEV_APPROVED=1 pwsh tools/bro-hookpin.ps1 -Update  (in the SAME commit as a legit hook edit).
+# A hook changed without re-pinning here = tamper DRIFT, flagged by bro-hookpin -Verify + bro-audit + beast.
+4cf4d5c2cfc95e9454bd64bab87fa288dcaa450eca8e6f7361a42c00c68dbbb3  critical-command-gate.ps1
+1de29d4adf939ccdefcacef720246ad6e308c6faebde6337dc325c71c5c47868  cross-memory-read-guard.ps1
+1f1b87bbbe43cd65307d47f5fe97e61ca4b41cb914362a817126ad739c59bf8c  forbidden-path-write-guard.ps1
+1858d402823a0841177891afaa77c2dbae1c286629795ec263cd98c58e551af4  log-append-only-guard.ps1
+de98f7750f40066ac60809f23250a871f35b346c086559b4e38b9a3bf0bc5eec  preflight-printer.ps1
