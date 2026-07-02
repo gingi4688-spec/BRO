@@ -217,6 +217,8 @@ Full folder and file index for STANDARD_PROJECT_DOCS_PACK.
 - `UPTIME_MONITORING.md` — **SHOULD** — Required for production uptime tracking
 
 ## 13_QA_TESTING_RELEASE
+- `APP_AUDIT_MASTER.md` — **MUST** — Bro's canonical evidence-first production-readiness audit standard (~57 de-duped dimensions, app-type profiles, bilingual)
+- `APP_AUDIT_REPORT_TEMPLATE.md` — **MUST** — The per-project fill-in audit report (proves state with evidence; pairs with APP_AUDIT_MASTER)
 - `TESTING_STRATEGY.md` — **MUST** — Required for build quality
 - `TEST_PLAN.md` — **MUST** — Required before release validation
 - `UNIT_TESTING.md` — **SHOULD** — Required when unit tests are expected

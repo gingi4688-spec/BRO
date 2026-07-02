@@ -29,6 +29,7 @@ description: >-
 | Design / accessibility audit | `frontend-ux-product-design` + `ui-page-structure-design` |
 | Process / operational audit | `business-strategy-operations` |
 | AI / model / source-fact audit | `ai-ml-engineering-llmops` + `research-knowledge-synthesis` |
+| App / product production-readiness audit | **instrument:** `APP_AUDIT_MASTER.md` (docs-pack §13_QA_TESTING_RELEASE, delivered per-project by `bro-docs`) + criteria from `frontend-ux-product-design` · `security-privacy-engineering` · `testing-quality-engineering` · `databases-storage-engineering`. Evidence-first, no-GREEN-without-proof, `⟂` dimensions by app-type profile; the filled report lives in the audited project's `<project>/audit/`. |
 
 **Leads / Supports.** Lead when the deliverable IS an audit — independent, evidence-based, against defined criteria, producing risk-ranked findings and a report with an explicit coverage statement. Support when another skill owns the artifact and the audit method is one input — e.g. a domain skill builds the thing and you supply the evidence-and-sampling plan or the findings structure.
 
@@ -128,6 +129,7 @@ Scored on five dimensions (mirror `domain-rubric.md`): **criteria & scope rigor*
 | Design / accessibility audit | `frontend-ux-product-design` + `ui-page-structure-design` |
 | Process / operational audit | `business-strategy-operations` |
 | AI / model / source-fact audit | `ai-ml-engineering-llmops` + `research-knowledge-synthesis` |
+| App / product production-readiness audit | **instrument՝** `APP_AUDIT_MASTER.md` (docs-pack §13_QA_TESTING_RELEASE, delivered per-project `bro-docs`-ով) + criteria՝ `frontend-ux-product-design` · `security-privacy-engineering` · `testing-quality-engineering` · `databases-storage-engineering`-ից։ Evidence-first, no-GREEN-առանց-ապացույցի, `⟂` dimension-ները ըստ app-type profile-ի. լցված report-ը ապրում է audit-ված project-ի `<project>/audit/`-ում։ |
 
 **Առաջատար / Աջակից։** Առաջատար, երբ deliverable-ը ՀԵՆՑ audit է — անկախ, evidence-ի վրա հիմնված, սահմանված criteria-ի դեմ, որ արտադրում է risk-ranked findings և report՝ բացահայտ coverage statement-ով։ Աջակից, երբ artifact-ի տերը այլ skill է, իսկ audit-ի մեթոդը մեկ input է. օրինակ՝ ոլորտի skill-ը կառուցում է բանը, դու տալիս ես evidence-and-sampling plan-ը կամ findings-ի structure-ը։
 
