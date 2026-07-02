@@ -46,17 +46,13 @@ For checking that an English and Armenian pair are two originals at equal depth.
 
 ### Template 4 — Homoglyph cheat-sheet (copy-ready)
 
-The reliable test is mechanical: **any character outside the Armenian block (U+0531–U+058F) sitting inside an Armenian word is a defect** — a codepoint scan catches it regardless of how identical it looks. The usual smuggled-in twins (from copy-paste across mixed sources):
+The reliable test is mechanical, not visual: **any character outside the Armenian block (U+0531–U+058F) inside an Armenian word is a defect** — a codepoint scan catches it however similar (or not) it looks. The one visually *strong* trap, from copy-paste across mixed sources, is the round letters:
 
-| Armenian (codepoint) | Latin look-alike | Cyrillic look-alike |
+| Armenian (codepoint) | Latin twin | Cyrillic twin |
 |---|---|---|
-| օ (U+0585) | o (U+006F) | о (U+043E) |
-| ա (U+0561) | a (U+0061) | а (U+0430) |
-| ն (U+0576) | n (U+006E) | н (U+043D) |
-| հ (U+0570) | h (U+0068) | — |
-| պ (U+057A) | p (U+0070) | р (U+0440) |
-| ս (U+057D) | c (U+0063) | с (U+0441) |
-| ո (U+0578) | (n-like) | — |
+| օ (U+0585) / Օ (U+0555) | o (U+006F) / O (U+004F) | о (U+043E) / О (U+041E) |
+
+Other Armenian letters (`ա ո ս ն հ պ կ` …) can be mis-typed from Latin/Cyrillic too, but the resemblance is **font-dependent and weak** — do not trust an eyeballed twin; trust the codepoint scan.
 
 Scan regex: a Latin/Cyrillic letter between two Armenian letters — `[Ա-և][a-zA-Zа-яА-Я][Ա-և]`. Do **not** flag `-ը`/`-ն` suffixes on English roots (`skill-ը`) — those are intentional; the defect is a non-Armenian letter *inside* an otherwise-Armenian word.
 
@@ -106,16 +102,12 @@ Scan regex: a Latin/Cyrillic letter between two Armenian letters — `[Ա-և][a-
 
 ### Template 4 — Homoglyph cheat-sheet (copy-ready)
 
-Հուսալի test-ը մեխանիկական է․ **հայկական բլոկից (U+0531–U+058F) դուրս ցանկացած նիշ հայերեն բառի ներսում defect է** — codepoint scan-ը բռնում է այն, անկախ նրանից, թե որքան նույնական է երևում։ Սովորաբար մաքսանենգ մտցվող twin-երը (խառը աղբյուրներից copy-paste)․
+Հուսալի test-ը մեխանիկական է, ոչ տեսողական․ **հայկական բլոկից (U+0531–U+058F) դուրս ցանկացած նիշ հայերեն բառի ներսում defect է** — codepoint scan-ը բռնում է այն, որքան էլ նման (կամ ոչ) երևա։ Միակ տեսողապես *ուժեղ* թակարդը, խառը աղբյուրներից copy-paste-ի ժամանակ, կլոր տառերն են․
 
-| Հայերեն (codepoint) | Latin look-alike | Cyrillic look-alike |
+| Հայերեն (codepoint) | Latin twin | Cyrillic twin |
 |---|---|---|
-| օ (U+0585) | o (U+006F) | о (U+043E) |
-| ա (U+0561) | a (U+0061) | а (U+0430) |
-| ն (U+0576) | n (U+006E) | н (U+043D) |
-| հ (U+0570) | h (U+0068) | — |
-| պ (U+057A) | p (U+0070) | р (U+0440) |
-| ս (U+057D) | c (U+0063) | с (U+0441) |
-| ո (U+0578) | (n-ի պես) | — |
+| օ (U+0585) / Օ (U+0555) | o (U+006F) / O (U+004F) | о (U+043E) / О (U+041E) |
+
+Մյուս հայերեն տառերը (`ա ո ս ն հ պ կ` …) նույնպես կարող են Latin/Cyrillic-ից սխալ մուտքագրվել, բայց նմանությունը **font-dependent և թույլ** է — մի՛ վստահիր աչքով twin-ին. վստահիր codepoint scan-ին։
 
 Scan regex՝ Latin/Cyrillic տառ երկու հայկական տառի միջև — `[Ա-և][a-zA-Zа-яА-Я][Ա-և]`։ **Մի՛** flag արա `-ը`/`-ն` վերջածանցները անգլերեն արմատների վրա (`skill-ը`) — դրանք միտումնավոր են. defect-ը ոչ-հայկական տառն է այլապես-հայերեն բառի *ներսում*։
