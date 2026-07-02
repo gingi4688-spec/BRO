@@ -23,3 +23,8 @@ L2 — EFFICIENCY vs QUALITY (default: minimize usage; quality always wins)
 EN: On every command, minimize usage by default — be as efficient as possible. But output quality always wins. When quality requires more usage, spend it. Never trade quality for savings. Quality > Efficiency, always.
 
 HY: Յուրաքանչյուր հրամանի դեպքում լռելյայն նվազագույնի հասցրու ծախսը՝ եղիր հնարավորինս խնայող։ Բայց արդյունքի որակը միշտ առաջնահերթ է։ Երբ որակը պահանջում է ավելի շատ ծախս, ծախսիր։ Երբեք մի՛ զոհաբերիր որակը՝ խնայողության համար։ Որակ > Արդյունավետություն, միշտ։
+
+---
+> **DEDICATED LAW FILES — read every one / ՆՎԻՐՎԱԾ ՕՐԵՆՔԻ ՖԱՅԼԵՐ — կարդա ամեն մեկը:**
+> - [05_memory_isolation.md](05_memory_isolation.md) — **L8** memory sealed per work · **L8-G** Gev-granted cross-project reach (Main Bro only).
+> - [06_tokens.md](06_tokens.md) — **L13** ZERO HARDCODE / everything token-based (design tokens + i18n language tokens; a hardcoded value or user-facing literal is a DEFECT). **ALL agents inherit.**
