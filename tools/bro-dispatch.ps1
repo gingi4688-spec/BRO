@@ -52,6 +52,29 @@ $claudeArgs = @('-p', $Task, '--permission-mode', 'acceptEdits', '--allowedTools
 # Runs claude in THIS process (foreground). For parallel/detached use, the CALLER wraps this in Start-Process
 # (e.g. the autopilot: Start-Process pwsh -File tools/bro-dispatch.ps1 -ProjectPath <p> -WindowStyle Hidden).
 Push-Location $ProjectPath
+
+# SELF-HEAL: a prior dispatch KILLED mid-run (e.g. a tool-timeout) never runs its finally, leaving (a) the push URL
+# disabled and (b) Gev's WIP stashed. Detect + heal BEFORE we capture/disable anything below — otherwise this run
+# would capture the sentinel as the "original" push URL and faithfully restore the poison. Nothing is ever lost:
+# the leftover stash is popped only when the tree is clean (no conflict risk), else flagged as recoverable.
+try {
+  $curPush = (& git config --get remote.origin.pushurl 2>$null)
+  if ("$curPush" -eq 'DISABLED-BY-BRO-DISPATCH-NO-PUSH') {
+    & git config --unset-all remote.origin.pushurl 2>&1 | Out-Null
+    Write-Host "bro-dispatch: SELF-HEAL - cleared a leftover disabled push URL from a killed prior run."
+  }
+  $topStash = (& git stash list 2>$null | Select-Object -First 1)
+  if ("$topStash" -match 'bro-dispatch: pre-dispatch WIP \(auto\)') {
+    if (@(& git status --porcelain 2>$null).Count -eq 0) {
+      & git stash pop --index 2>&1 | Out-Null
+      if ($LASTEXITCODE -eq 0) { Write-Host "bro-dispatch: SELF-HEAL - restored Gev's WIP left stashed by a killed prior run." }
+      else { & git stash pop 2>&1 | Out-Null; Write-Host "bro-dispatch: SELF-HEAL - restored leftover WIP (content; index reapply skipped)." }
+    } else {
+      Write-Host "bro-dispatch: SELF-HEAL - a prior run's WIP is recoverable in 'git stash' (not auto-popped: tree is dirty). Recover: git stash pop."
+    }
+  }
+} catch {}
+
 $origBranch  = (& git rev-parse --abbrev-ref HEAD 2>$null)
 $stashed     = $false
 $hadPushUrl  = $false; $origPushUrl = ''

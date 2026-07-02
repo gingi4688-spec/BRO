@@ -26,6 +26,15 @@ if ($env:BRO_GEV_APPROVED -ne '1') { Fail "bro-push: REFUSED — push is Gev-gat
 if ($NoVerify -and -not $Reason)   { Fail "bro-push: REFUSED — -NoVerify requires -Reason (recorded justification for skipping the pre-push gate)." 2 }
 
 Push-Location $ProjectPath
+# SELF-HEAL: if a prior bro-push was KILLED mid-run, Gev's WIP may be left in a "bro-push: pre-push WIP (auto)"
+# stash. Restore it now (when the tree is clean, no conflict risk) BEFORE we stash again, so it is never buried/lost.
+try {
+  $topStash = (& git stash list 2>$null | Select-Object -First 1)
+  if (("$topStash" -match 'bro-push: pre-push WIP \(auto\)') -and (@(& git status --porcelain 2>$null).Count -eq 0)) {
+    & git stash pop --index 2>&1 | Out-Null
+    if ($LASTEXITCODE -eq 0) { Write-Host "bro-push: SELF-HEAL - restored Gev's WIP left stashed by a killed prior run." }
+  }
+} catch {}
 $stashed = $false
 try {
   if (-not $Branch) { $Branch = (& git rev-parse --abbrev-ref HEAD 2>$null) }
