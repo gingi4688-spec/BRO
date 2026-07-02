@@ -108,6 +108,30 @@ try {
   Set-Content -Path (Join-Path $ProjectPath 'CLAUDE.md') -Value $tpl -Encoding utf8
   "  wrote CLAUDE.md (L8 constitution: identity + sealed-memory + wall + comms)"
 
+  # 4b) AUTOPILOT-PLAN seed - born autopilot-ready with the SAME logic as every bro: the daily autopilot dispatches
+  #     this project's Bro BOUNDED (own branch autopilot/continue, local commit, NEVER push; Gev's WIP auto-set-aside
+  #     + restored; the only thing reserved for Gev is push). New INSTALLED projects are auto-picked-up; this file
+  #     just makes it plan-ready. (The dispatch logic itself lives in the shared spine: bro-dispatch + bro-autopilot.)
+  $broSub = Join-Path $ProjectPath 'bro'
+  if (Test-Path $broSub) {
+    $plan = @(
+      "# AUTOPILOT-PLAN - $ProjectId",
+      "",
+      "> The daily autopilot dispatches this project's Bro (BOUNDED) to do the next unchecked '- [ ]' task here:",
+      "> own branch autopilot/continue, local commit, NEVER push. Idempotent (a '- [x]' task never re-runs).",
+      "> Gev's pre-existing WIP is auto-set-aside + restored around each run; the ONLY thing reserved for Gev is push.",
+      "> Keep tasks small, bounded, verifiable.",
+      "",
+      "## PENDING",
+      "<!-- - [ ] the next bounded thing to build/fix -->",
+      "",
+      "## DONE",
+      "<!-- completed tasks move here with their commit sha -->"
+    )
+    Set-Content -Path (Join-Path $broSub 'AUTOPILOT-PLAN.md') -Value $plan -Encoding utf8
+    "  wrote bro/AUTOPILOT-PLAN.md (autopilot-ready: bounded, auto-stash, own branch, push-only-on-Gev)"
+  }
+
   # 5) docs/ intake seed - the docs-pack selection pointer (the project Bro fills it during intake)
   $docsDir = Join-Path $ProjectPath 'docs'
   if (-not (Test-Path $docsDir)) { New-Item -ItemType Directory -Force $docsDir | Out-Null }
