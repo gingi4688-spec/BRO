@@ -58,7 +58,7 @@ Deverbalize is what separates translation that reads native from word-substituti
 ### Failure-repair playbook
 
 1. **Armenian reads as an English calque** → deverbalize: restate the meaning, drop the English skeleton, and rebuild around the actor and a concrete verb in Armenian word order.
-2. **Wrong definite article (`-ը`/`-ն`)** → apply the rule by the next word: `-ն` before a vowel or before `է`, `-ը` before a consonant or at sentence/phrase end; fix `գիրքը առա` → `գիրքն առա` and `գիրքն կարդացի` → `գիրքը կարդացի`.
+2. **Wrong definite article (`-ը`/`-ն`)** → first **confirm the variety** (default: **reformed Eastern Armenian**; Western/classical orthography differs on the article and on auxiliary placement, so never "correct" a Western text into an Eastern error). Then apply the rule by the next word: `-ն` before a vowel or before `է`, `-ը` before a consonant or at sentence/phrase end; fix `գիրքը առա` → `գիրքն առա` and `գիրքն կարդացի` → `գիրքը կարդացի`.
 3. **`․`/`։` confused** → restore each to its function: `․` introduces an enumeration/explanation, `։` ends a sentence; map a stray English `:` to `․`, and stop "correcting" a valid `․`.
 4. **Quotation systems crossed** → put `«»` back into the Armenian prose and English quotes back into the English prose.
 5. **Homoglyph in an Armenian word** → run the script check, replace the Latin/Cyrillic codepoint with the Armenian letter, and re-paste from a clean source rather than re-typing over the contamination.
@@ -136,7 +136,7 @@ Equal load means the Armenian and English are two originals of the same depth, n
 ### Վերականգնման խաղագիրք
 
 1. **Հայերենը կարդացվում է որպես անգլերեն կալկա** → ապաբառայնացրու․ վերաշարադրիր իմաստը, թող անգլերեն կմախքը, և վերակառուցիր գործող անձի ու կոնկրետ բայի շուրջ հայերեն շարադասությամբ։
-2. **Սխալ որոշյալ հոդ (`-ը`/`-ն`)** → կիրառիր կանոնը հաջորդ բառով․ `-ն`՝ ձայնավորից առաջ կամ `է`-ից առաջ, `-ը`՝ բաղաձայնից առաջ կամ նախադասության/բառակապակցության վերջում. ուղղիր `գիրքը առա` → `գիրքն առա` և `գիրքն կարդացի` → `գիրքը կարդացի`։
+2. **Սխալ որոշյալ հոդ (`-ը`/`-ն`)** → նախ **հաստատիր variety-ն** (default՝ **reformed Eastern / աշխարհաբար արևելահայերեն**. Western/classical ուղղագրությունը տարբերվում է հոդով և օժանդակի դիրքով, ուստի երբեք մի՛ «ուղղիր» Western տեքստը Eastern սխալի)։ Հետո կիրառիր կանոնը հաջորդ բառով․ `-ն`՝ ձայնավորից առաջ կամ `է`-ից առաջ, `-ը`՝ բաղաձայնից առաջ կամ նախադասության/բառակապակցության վերջում. ուղղիր `գիրքը առա` → `գիրքն առա` և `գիրքն կարդացի` → `գիրքը կարդացի`։
 3. **`․`/`։` շփոթված** → վերադարձրու յուրաքանչյուրն իր գործառույթին․ `․`-ը ներմուծում է թվարկում/բացատրություն, `։`-ն ավարտում է նախադասությունը. թափառող անգլերեն `:`-ը քարտեզագրիր `․`-ին, և դադարեցրու վավեր `․`-ի «ուղղումը»։
 4. **Չակերտի համակարգերը խաչաձևված** → վերադարձրու `«»`-ը հայերեն արձակ և անգլերեն չակերտը՝ անգլերեն արձակ։
 5. **Homoglyph հայերեն բառում** → գործարկիր գրի ստուգում, փոխարինիր լատինական/կիրիլիկ codepoint-ը հայերեն տառով, և վերապատճենիր մաքուր աղբյուրից, ոչ թե վերատպիր աղտոտվածի վրա։

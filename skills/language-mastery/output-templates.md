@@ -44,6 +44,22 @@ For checking that an English and Armenian pair are two originals at equal depth.
 - **Verdict:** PASS (equal load) | FAIL (which side is thin, and the exact missing items)
 - **Exemption note:** the only allowed inequality is the YAML `description` routing field.
 
+### Template 4 — Homoglyph cheat-sheet (copy-ready)
+
+The reliable test is mechanical: **any character outside the Armenian block (U+0531–U+058F) sitting inside an Armenian word is a defect** — a codepoint scan catches it regardless of how identical it looks. The usual smuggled-in twins (from copy-paste across mixed sources):
+
+| Armenian (codepoint) | Latin look-alike | Cyrillic look-alike |
+|---|---|---|
+| օ (U+0585) | o (U+006F) | о (U+043E) |
+| ա (U+0561) | a (U+0061) | а (U+0430) |
+| ն (U+0576) | n (U+006E) | н (U+043D) |
+| հ (U+0570) | h (U+0068) | — |
+| պ (U+057A) | p (U+0070) | р (U+0440) |
+| ս (U+057D) | c (U+0063) | с (U+0441) |
+| ո (U+0578) | (n-like) | — |
+
+Scan regex: a Latin/Cyrillic letter between two Armenian letters — `[Ա-և][a-zA-Zа-яА-Я][Ա-և]`. Do **not** flag `-ը`/`-ն` suffixes on English roots (`skill-ը`) — those are intentional; the defect is a non-Armenian letter *inside* an otherwise-Armenian word.
+
 ## Հայերեն
 
 Երեք domain-ձև deliverable։ Լրացրու իրական field-երը. պահիր իմաստը, պարտավորությունները և թվերը անձեռնմխելի. վերջնականացնելուց առաջ գործարկիր լեզվաբանի-ոսպնյակ ստուգումները։ Սրանք լեզվական artifact-ներ են — formula կամ matrix լրացնելու բան չկա։
@@ -87,3 +103,19 @@ For checking that an English and Armenian pair are two originals at equal depth.
 - **Գիր & կետադրություն․** հայերեն կեսը — `-ը`/`-ն`, `․`/`։`, `«»`, homoglyph բոլորը մաքո՞ւր
 - **Վճիռ․** PASS (հավասար բեռ) | FAIL (որ կողմն է բարակ և ճշգրիտ պակասող կետերը)
 - **Բացառության նշում․** միակ թույլատրելի անհավասարությունը YAML `description` routing field-ն է։
+
+### Template 4 — Homoglyph cheat-sheet (copy-ready)
+
+Հուսալի test-ը մեխանիկական է․ **հայկական բլոկից (U+0531–U+058F) դուրս ցանկացած նիշ հայերեն բառի ներսում defect է** — codepoint scan-ը բռնում է այն, անկախ նրանից, թե որքան նույնական է երևում։ Սովորաբար մաքսանենգ մտցվող twin-երը (խառը աղբյուրներից copy-paste)․
+
+| Հայերեն (codepoint) | Latin look-alike | Cyrillic look-alike |
+|---|---|---|
+| օ (U+0585) | o (U+006F) | о (U+043E) |
+| ա (U+0561) | a (U+0061) | а (U+0430) |
+| ն (U+0576) | n (U+006E) | н (U+043D) |
+| հ (U+0570) | h (U+0068) | — |
+| պ (U+057A) | p (U+0070) | р (U+0440) |
+| ս (U+057D) | c (U+0063) | с (U+0441) |
+| ո (U+0578) | (n-ի պես) | — |
+
+Scan regex՝ Latin/Cyrillic տառ երկու հայկական տառի միջև — `[Ա-և][a-zA-Zа-яА-Я][Ա-և]`։ **Մի՛** flag արա `-ը`/`-ն` վերջածանցները անգլերեն արմատների վրա (`skill-ը`) — դրանք միտումնավոր են. defect-ը ոչ-հայկական տառն է այլապես-հայերեն բառի *ներսում*։

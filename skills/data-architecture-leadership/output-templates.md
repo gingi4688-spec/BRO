@@ -24,7 +24,16 @@ Three domain-shaped deliverables. Fill the real fields; state the grain in one s
 - **SLA:** freshness / availability / quality guarantee
 - **Compatibility policy:** backward | forward | full — what changes are allowed without a version bump
 - **Registry rule:** which registry/check enforces the allowed change set (Avro/Protobuf, CI check)
-- **Change classification example:** nullable-add = backward-compatible; rename/type-narrow/drop = **breaking** → version bump
+- **Change classification — schema-evolution decision table:**
+
+| Change | Compatibility | Procedure |
+|---|---|---|
+| Add optional/nullable field, or a field with a default | Backward-compatible | ship additively; old readers ignore it — no version bump |
+| Make a required field optional | Backward-compatible | safe for readers; verify writers |
+| Add an enum value | Backward for readers / **forward-breaking** for old writers | gate on consumer tolerance |
+| **Rename** a field | **Breaking** | expand/contract — add new, dual-write, migrate, drop old — version bump |
+| **Narrow / change a type** | **Breaking** | new field + backfill + dual-read; never in-place — version bump |
+| **Drop** a field | **Breaking** | deprecate → confirm no consumers on the wire → remove — version bump |
 - **Breaking-change procedure:** versioned table/topic · consumer inventory + owners · migration window · rollback
 - **Deprecation policy:** notice period, sunset date
 - **Acceptance:** every breaking change has a version, a consumer inventory, a migration window, and a rollback; unknown consumers freeze the change
@@ -64,7 +73,16 @@ Three domain-shaped deliverables. Fill the real fields; state the grain in one s
 - **SLA․** freshness / availability / quality երաշխիք
 - **Compatibility policy․** backward | forward | full — ինչ change-եր են թույլատրված առանց version bump-ի
 - **Registry rule․** որ registry/check է enforce անում թույլատրված change set-ը (Avro/Protobuf, CI check)
-- **Change classification օրինակ․** nullable-add = backward-compatible. rename/type-narrow/drop = **breaking** → version bump
+- **Change classification — schema-evolution decision table:**
+
+| Change | Compatibility | Ընթացակարգ |
+|---|---|---|
+| Add optional/nullable field, կամ field default-ով | Backward-compatible | ship արա additively. հին reader-ները ignore են անում — ոչ version bump |
+| Required field-ը optional դարձնել | Backward-compatible | reader-ների համար ապահով. verify արա writer-ները |
+| Enum value ավելացնել | Backward reader-ների / **forward-breaking** հին writer-ների համար | gate արա consumer tolerance-ի վրա |
+| Field **rename** | **Breaking** | expand/contract — add new, dual-write, migrate, drop old — version bump |
+| Type **narrow / change** | **Breaking** | new field + backfill + dual-read. երբեք in-place — version bump |
+| Field **drop** | **Breaking** | deprecate → հաստատիր՝ wire-ի վրա consumer չկա → remove — version bump |
 - **Breaking-change ընթացակարգ․** versioned table/topic · consumer inventory + owner-ներ · migration window · rollback
 - **Deprecation policy․** notice period, sunset date
 - **Acceptance․** ամեն breaking change-ն ունի version, consumer inventory, migration window և rollback. անհայտ consumer-ները freeze են անում change-ը

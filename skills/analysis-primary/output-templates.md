@@ -43,6 +43,16 @@ Three reasoning artifacts shaped by the four-lens spine. Fill the real fields; e
 - **Recommendation:** the choice, contingent on the flip condition holding
 - **Dispatch & verify live:** the lead skill that executes + the real artifact/metric that confirms it worked (not "function-tested")
 
+### Template 4 — Base-rate library (the outside view)
+
+Ground the inside-view story in a reference class before trusting a causal narrative.
+
+| Question | Reference class (comparable population) | Base rate | Source + date | Adjust for this case (and why) |
+|---|---|---|---|---|
+
+- **Rule:** start from the base rate, then adjust for case-specific evidence — never the reverse. A confident "this time is different" must earn the deviation.
+- **Watch:** survivorship (the failures are not in your sample), small-N reference classes, and a base rate quietly asserted from memory — mark it verify-before-use or fetch it.
+
 ## Հայերեն
 
 Երեք դատողության artifact՝ ձևավորված չորս-ոսպնյակ ողնաշարով։ Լրացրու իրական field-երը. ամեն թիվ հետ է գնում formula-ի կամ observed input-ի։ Մի՛ հորինիր volatile fact։ Ամեն template ավարտվում է dispatch տողով և verify-in-the-running-system քայլով, որովհետև framing-ը hand-off-ի setup-ն է, ոչ finish line-ը։
@@ -85,3 +95,13 @@ Three reasoning artifacts shaped by the four-lens spine. Fill the real fields; e
 - **Flip condition.** թիվը/base rate-ը/evidence-ը, որ կփոխեր call-ը (վերագործարկիր EV-ն այդ արժեքով)
 - **Recommendation.** ընտրությունը՝ կախված flip condition-ի պահելուց
 - **Dispatch & verify live.** lead skill-ը, որ կատարում է + իրական artifact/metric-ը, որ հաստատում է, որ աշխատեց (ոչ «function-tested»)
+
+### Template 4 — Base-rate library (outside view-ը)
+
+Խարսխի՛ր inside-view-ի պատմությունը reference class-ում՝ նախքան causal narrative-ին վստահելը։
+
+| Հարց | Reference class (համեմատելի population) | Base rate | Source + date | Ճշգրտում այս case-ի համար (և ինչու) |
+|---|---|---|---|---|
+
+- **Կանոն․** սկսի՛ր base rate-ից, հետո ճշգրտիր case-specific evidence-ով — երբեք հակառակը։ Վստահ «այս անգամ ուրիշ է»-ն պիտի վաստակի շեղումը։
+- **Ուշադրություն․** survivorship (failure-ները քո sample-ում չեն), small-N reference class-եր, և base rate՝ լուռ պնդված հիշողությունից — նշիր verify-before-use կամ fetch արա։

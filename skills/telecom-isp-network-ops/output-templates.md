@@ -43,6 +43,22 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
 - **Credits / obligations:** state the breach; route any credit figure or regulatory obligation to the contract/source — do not invent it
 - **Acceptance:** downtime measured · availability computed with exclusions · prevention control shipped · no invented credit/statute
 
+### Template 4 — PON optical loss sheet (per element)
+
+- **PON / OLT port · ONU id · class budget:** GPON B+ = 28 dB / C+ = 32 dB · XGS-PON N1 = 29 / N2 = 31 (verify vs the deployed optic)
+
+| Element | Loss (dB) | Running total (dB) |
+|---|---|---|
+| Fiber attenuation (distance × ~0.3–0.35 dB/km @1310 nm) | | |
+| Splitter insertion (1:32 ≈ 17–18 / 1:64 ≈ 20–21) | | |
+| Connectors (× ~0.3–0.75 each) | | |
+| Splices (× ~0.1–0.3 each) | | |
+| **Total loss** | | |
+| Class budget − total = **margin** | | |
+
+- **Measured vs computed:** OLT-reported Rx power vs the budgeted figure — a gap means a real-world fault (dirty connector, bend, degraded splice), not just the design number
+- **Acceptance:** running total under the class budget with margin · split ratio standard for the class (flag 1:128 on B+) · measured Rx matches computed within tolerance · every figure measured or from the optic spec, never invented
+
 ## Հայերեն
 
 Երեք domain-ձև deliverable։ Լրացրու իրական field-երը. ամեն թիվ պահիր հետագծելի չափման (route-count, Rx, availability), ոչ գուշակության։ Մի՛ հորինիր price, SLA credit կամ standards թիվ։
@@ -85,3 +101,19 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
 - **Prevention (control-ներ)․** change/check/ավտոմատացում, որ կանգնեցնում է failure-ի դասը (օր.՝ post-maintenance Rx check MOP-ում)
 - **Credit / obligation․** նշիր breach-ը. ցանկացած credit թիվ կամ regulatory obligation ուղղորդիր contract/source-ին — մի՛ հորինիր
 - **Acceptance․** downtime չափված · availability հաշված exclusion-ներով · prevention control ship-ված · ոչ հորինված credit/statute
+
+### Template 4 — PON optical loss sheet (per element)
+
+- **PON / OLT port · ONU id · class budget․** GPON B+ = 28 dB / C+ = 32 dB · XGS-PON N1 = 29 / N2 = 31 (ստուգիր deployed optic-ի դեմ)
+
+| Element | Loss (dB) | Running total (dB) |
+|---|---|---|
+| Fiber attenuation (distance × ~0.3–0.35 dB/km @1310 nm) | | |
+| Splitter insertion (1:32 ≈ 17–18 / 1:64 ≈ 20–21) | | |
+| Connector-ներ (× ~0.3–0.75 ամեն մեկը) | | |
+| Splice-ներ (× ~0.1–0.3 ամեն մեկը) | | |
+| **Total loss** | | |
+| Class budget − total = **margin** | | |
+
+- **Measured ընդդեմ computed․** OLT-reported Rx power ընդդեմ budgeted թվի — gap-ը իրական fault է (կեղտոտ connector, bend, degraded splice), ոչ միայն design թիվը
+- **Acceptance․** running total-ը class budget-ից ներքև margin-ով · split ratio-ն standard է class-ի համար (flag 1:128 B+-ի վրա) · measured Rx-ը match է computed-ին tolerance-ի ներսում · ամեն թիվ measured է կամ optic-ի spec-ից, երբեք հորինված

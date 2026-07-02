@@ -34,7 +34,14 @@ Three domain-shaped deliverables. Fill the real fields; keep every market number
 
 - **Strategy this serves:** the choice the cadence must keep alive
 - **Operating-model choice:** centralized / federated / embedded — and the decision-frequency/local-context/risk/scale rationale
-- **Decision rights:** who decides what (and who is consulted/informed)
+- **Decision rights — RACI matrix (exactly one A per decision):**
+
+| Decision | R (does the work) | A (accountable — 1 only) | C (consulted) | I (informed) |
+|---|---|---|---|---|
+| e.g. Pricing change | Pricing lead | VP Product | Finance, Sales | Support, Marketing |
+| e.g. Roadmap priority | PM | Head of Product | Eng, Design | Exec |
+
+Rule: **one Accountable per row** (two A's = the deadlock); Consulted have input, not a veto; keep the Consulted list short.
 - **OKRs:** objective (qualitative) → ~3–5 key results (measurable outcomes, not activities)
 - **Goodhart guard:** each incentive metric paired with a guardrail + counter-metric
 - **Cadence bodies:** for each (weekly / monthly / quarterly) — decision owner · the decision it exists to make · inputs · escalation path
@@ -76,7 +83,14 @@ Three domain-shaped deliverables. Fill the real fields; keep every market number
 
 - **Ռազմավարությունը, որ սա ծառայում է․** ընտրությունը, որ cadence-ը պետք է կենդանի պահի
 - **Operating-model ընտրությունը․** centralized / federated / embedded — և decision-frequency/local-context/risk/scale հիմնավորումը
-- **Decision rights․** ով ինչ է որոշում (և ով է consulted/informed)
+- **Decision rights — RACI matrix (ուղիղ մեկ A ամեն որոշման):**
+
+| Որոշում | R (անում է) | A (accountable — միայն 1) | C (consulted) | I (informed) |
+|---|---|---|---|---|
+| օր.՝ Pricing change | Pricing lead | VP Product | Finance, Sales | Support, Marketing |
+| օր.՝ Roadmap priority | PM | Head of Product | Eng, Design | Exec |
+
+Կանոն․ **ամեն տողում մեկ Accountable** (երկու A = deadlock). Consulted-ը input ունի, ոչ veto. պահիր Consulted ցուցակը կարճ։
 - **OKR-ներ․** objective (որակական) → ~3–5 key result (չափելի outcome, ոչ գործողություն)
 - **Goodhart guard․** ամեն incentive metric զուգված guardrail + counter-metric-ի հետ
 - **Cadence body-ներ․** ամեն մեկի համար (շաբաթական / ամսական / եռամսյա) — decision owner · որոշումը, որի համար գոյություն ունի · input-ներ · escalation path

@@ -43,6 +43,21 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
 - **Decision cadence:** when gates are reviewed and cohorts read
 - **Acceptance:** horizons not dated promises · every bet has a hypothesis + gate · dependencies/critical path named before any date
 
+### Template 4 — Delivery plan & critical path
+
+- **Task network:**
+
+| # | Task | Owner | Depends on | Est (days) | Slack |
+|---|---|---|---|---|---|
+| A | | | — | | |
+| B | | | A | | |
+
+- **Critical path:** the longest dependency chain (sets the floor date); everything off it has slack = its late-start − early-start
+- **Committed date = critical-path length + an explicit buffer** (place the buffer on the riskiest/newest tasks; state the %)
+- **Re-baseline rule (stated up front):** if a critical-path task slips past the buffer, the date moves and is re-derived at the gate review — not defended
+- **Risk register:** risk · likelihood × impact · owner · mitigation/trigger
+- **Acceptance:** date derived from the critical path (not asserted) · buffer named · re-baseline rule stated · top risks owned
+
 ## Հայերեն
 
 Երեք domain-ձև deliverable։ Լրացրու իրական field-երը. ամեն թիվ պահիր հետագծելի իր formula-ին կամ evidence-ին, և label արա assumption-ները։ Մի՛ հորինիր customer data կամ market figure։
@@ -85,3 +100,18 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
 - **Critical-path / dependencies․** ինչ պետք է առաջինը land անի (օր.՝ instrumentation՝ մինչև ցանկացած չափելի bet)
 - **Decision cadence․** երբ են gate-երը review-վում և cohort-ները կարդացվում
 - **Acceptance․** horizon-ներ, ոչ dated promise · ամեն bet ունի hypothesis + gate · dependency-ները/critical path-ը անվանված ցանկացած date-ից առաջ
+
+### Template 4 — Delivery plan & critical path
+
+- **Task network․**
+
+| # | Task | Owner | Կախված է | Est (օր) | Slack |
+|---|---|---|---|---|---|
+| A | | | — | | |
+| B | | | A | | |
+
+- **Critical path․** ամենաերկար dependency շղթան (սահմանում է floor date-ը). դրանից դուրս ամեն ինչ ունի slack = late-start − early-start
+- **Committed date = critical-path length + բացահայտ buffer** (buffer-ը դիր ամենառիսկային/նոր task-երի վրա. նշիր %-ը)
+- **Re-baseline կանոն (նախապես ասված)․** եթե critical-path task-ը slip է անում buffer-ից անդին, date-ը շարժվում է և վերա-բխեցվում gate review-ին — ոչ պաշտպանվում
+- **Risk register․** risk · likelihood × impact · owner · mitigation/trigger
+- **Acceptance․** date-ը բխեցված critical path-ից (ոչ պնդված) · buffer անվանված · re-baseline կանոն ասված · top risk-երը owned
