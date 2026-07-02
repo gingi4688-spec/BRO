@@ -63,17 +63,19 @@ if ($wouldFix.Count) { $wouldFix | ForEach-Object { $brief += "  - $_" } } else 
 $reg = Get-Content -Raw 'memory/_own/registry.json' | ConvertFrom-Json
 $targets = @($reg.projects | Where-Object { "$($_.status)" -eq 'INSTALLED' })
 $brief += "", "## dispatch — INSTALLED projects: $($targets.Count)"
-$task = "Read your bro/AUTOPILOT-PLAN.md. Do ONLY the next single unchecked '- [ ]' task, then mark it '- [x]' and commit locally with a clear message. DO NOT push. If nothing is unchecked, make no changes."
+# Live dispatch goes through tools/bro-dispatch.ps1 = the BOUNDED profile (acceptEdits + git allowlist, push/rm
+# denied AND hook-blocked). Each project's own Bro works on a branch, commits locally, never pushes.
+$dispatchTool = Join-Path $broHome 'tools\bro-dispatch.ps1'
 foreach ($p in $targets) {
   $pjid = "$($p.project_id)"; $pp = ("$($p.project_path)") -replace '/', '\'
   if (-not (Test-Path $pp)) { $brief += "  - ${pjid}: SKIP (path missing: $pp)"; continue }
   if ($Mode -eq 'Live') {
     try {
       if ($Windows) { Start-Process 'code' -ArgumentList "-n `"$pp`"" -ErrorAction Stop; $brief += "  - ${pjid}: opened VS Code window (watch mode)" }
-      else { Start-Process 'pwsh' -ArgumentList "-NoProfile","-Command","Set-Location `"$pp`"; claude -p `"$task`" --permission-mode acceptEdits" -WindowStyle Hidden -ErrorAction Stop; $brief += "  - ${pjid}: dispatched headless (own boundary; commit, no push)" }
+      else { Start-Process 'pwsh' -ArgumentList '-NoProfile','-File',$dispatchTool,'-ProjectPath',$pp -WindowStyle Hidden -ErrorAction Stop; $brief += "  - ${pjid}: dispatched headless BOUNDED (own branch; commit; no push)" }
     } catch { $brief += "  - ${pjid}: dispatch FAILED ($($_.Exception.Message))" }
   } else {
-    $brief += "  - ${pjid} [$pp]: WOULD dispatch (Observe — launched nothing)"
+    $brief += "  - ${pjid} [$pp]: WOULD dispatch BOUNDED (Observe — launched nothing)"
   }
 }
 
