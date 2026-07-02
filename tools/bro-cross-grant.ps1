@@ -23,6 +23,7 @@ param(
   [switch]$Yes
 )
 $ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $broHome    = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $grantsPath = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_CROSS_GRANTS_PATH) { $env:BRO_CROSS_GRANTS_PATH } else { Join-Path $broHome 'memory\_own\cross-grants.json' }
 $regPath    = if (($env:BRO_TEST_MODE -eq '1') -and $env:BRO_REGISTRY_PATH)     { $env:BRO_REGISTRY_PATH }     else { Join-Path $broHome 'memory\_own\registry.json' }
@@ -86,7 +87,7 @@ if ($Revoke) {
   $g.grants = $kept
   Save-Grants $g
   Log-Grant 'CROSS_GRANT_REVOKED' "project=$targetId"
-  Write-Host "  REVOKED cross-grant for $targetId. Main Bro is re-sealed to it."
+  Write-Host "  REVOKED / ՉԵՂԱՐԿՎԱԾ cross-grant for $targetId. Main Bro is re-sealed to it / Main Bro-ն կրկին կնքված է դրան։"
   exit 0
 }
 
@@ -104,7 +105,7 @@ $new = [pscustomobject]@{
 $g.grants = @($kept) + $new
 Save-Grants $g
 Log-Grant 'CROSS_GRANT_CREATED' "project=$targetId scope=$Scope expires=$expires task=$Task"
-Write-Host "  GRANTED: Main Bro may $Scope project '$targetId' until $expires."
+Write-Host "  GRANTED / ՏՐՎԱԾ: Main Bro may $Scope project '$targetId' until $expires."
 Write-Host "  scope=$Scope  task: $Task"
 Write-Host "  (logged; auto-expires; revoke early with: bro-cross-grant.ps1 -Revoke -ProjectId $targetId)"
 exit 0

@@ -12,11 +12,12 @@
 param([string]$ProjectId = 'EP')
 $ErrorActionPreference = 'Continue'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $rows = @()
 function Rec($name,$ok,$ev){ $script:rows += [pscustomobject]@{ name=$name; ok=[bool]$ok; ev=$ev } }
 function ScriptOk($name,$file,$argv){ & pwsh -NoProfile -File $file @argv *> $null; Rec $name ($LASTEXITCODE -eq 0) "exit=$LASTEXITCODE" }
 
-"bro-beast-check - factory regression matrix"
+"bro-beast-check - factory regression matrix / գործարանի regression matrix"
 "================================================================"
 
 # 1) git state

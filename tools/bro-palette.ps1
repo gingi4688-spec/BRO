@@ -21,6 +21,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $script:ExitCode = 0
 
 $libPath = 'tools/command-library.json'
@@ -48,8 +49,8 @@ function Show-Banner {
   $mf = $null; try { $mf = Get-Content -Raw 'bro.manifest.json' | ConvertFrom-Json } catch {}
   $ver = if ($mf) { $mf.spine_version } else { '?' }
   Write-Output ''
-  Write-Output ("SuperBro ready - BRO_HOME: {0} - spine {1} - cross-project: OFF" -f (Get-Location).Path, $ver)
-  Write-Output 'Choose a command (type the name or number):'
+  Write-Output ("SuperBro ready / պատրաստ - BRO_HOME: {0} - spine {1} - cross-project: OFF" -f (Get-Location).Path, $ver)
+  Write-Output 'Choose a command / ընտրիր հրաման (type the name or number / անունը կամ համարը):'
   Write-Output ''
   Write-Output '  READ-live (runs read-only)'
   $i = 0
@@ -58,7 +59,7 @@ function Show-Banner {
   $i = 0
   foreach ($c in $commands) { $i++; if (-not (Test-ReadLive $c)) { Write-Output ("   [{0,2}] {1}   ({2})" -f $i, $c.name, $c.availability) } }
   Write-Output ''
-  Write-Output '  Type a command name, [?] HELP, or EXIT.'
+  Write-Output '  Type a command name / գրիր հրամանի անունը, [?] HELP, or EXIT.'
 }
 
 function Invoke-ReadLive($entry, [bool]$interactive) {
