@@ -40,12 +40,19 @@ if ($lib) {
   Chk ($writeNoGev.Count -eq 0) "every WRITE command requires Gev (no gate bypass)" "WRITE missing requires_gev: $(@($writeNoGev | ForEach-Object { $_.name }) -join ', ')"
 } else { Chk $false "command-library.json parsed" "command-library.json unreadable" }
 
-"[4] Latest release hash integrity"
+# Structure only — CI is line-ending-agnostic (git may normalize CRLF->LF on checkout, so byte-hashes are not
+# portable across environments). The byte-hash tamper check stays LOCAL (bro-spine-verify / beast, same machine).
+"[4] Latest release well-formed (manifest valid + all payload files present)"
 $rels = @(Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue | Where-Object { Test-Path (Join-Path $_.FullName 'release.manifest.json') } | Sort-Object Name)
 if ($rels.Count) {
   $latest = $rels[-1].Name
-  & pwsh -NoProfile -File 'tools/bro-spine-verify.ps1' -ReleaseDir "spine/RELEASES/$latest" *> $null
-  Chk ($LASTEXITCODE -eq 0) "release $latest hash-verified" "release $latest verify FAILED (exit $LASTEXITCODE)"
+  $relMf = $null; try { $relMf = Get-Content -Raw "spine/RELEASES/$latest/release.manifest.json" | ConvertFrom-Json } catch {}
+  Chk ($null -ne $relMf) "release $latest manifest valid JSON" "release $latest manifest invalid/unreadable"
+  if ($relMf) {
+    $payload = "spine/RELEASES/$latest/payload"
+    $missing = @($relMf.files | Where-Object { -not (Test-Path "$payload/$($_.path)") })
+    Chk ($missing.Count -eq 0) "release ${latest}: all $(@($relMf.files).Count) payload files present" "release $latest missing payload files: $($missing.Count)"
+  }
 } else { Chk $false "at least one well-formed release present" "no releases found" }
 
 "[5] No duplicate skill scripts + L10 present"
