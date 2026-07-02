@@ -2,7 +2,7 @@
   "bro_id": "superbro-DESKTOP-3SNK3IJ",
   "role": "SuperBro",
   "project_id": "_super",
-  "spine_version": "v1.0.0",
+  "spine_version": "v1.1.0",
   "skills_manifest_version": "v7_6",
   "skills_manifest_hash": "sha256:308ab3efee44d27cd73fe8d336f259c9032c986e9993861249efe22cdd10d9b3",
   "agents_manifest_hash": "sha256:315b8d2d69c47b645043e29820c1cd7b848a4858803652c3c03a3879873a7574",

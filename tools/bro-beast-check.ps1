@@ -32,9 +32,9 @@ ScriptOk 'registry-check'    'tools/bro-registry-check.ps1' @()
 ScriptOk "project doctor $ProjectId" 'tools/bro-project-doctor.ps1' @('-ProjectId',$ProjectId)
 ScriptOk "project audit $ProjectId"  'tools/bro-project-audit.ps1' @('-ProjectId',$ProjectId)
 
-# 8) release verify
-& pwsh -NoProfile -File 'tools/bro-spine-verify.ps1' -ReleaseDir 'spine/RELEASES/v1.0.0' *> $null
-Rec 'release v1.0.0 verify' ($LASTEXITCODE -eq 0) "exit=$LASTEXITCODE"
+# 8) release verify (current released spine)
+& pwsh -NoProfile -File 'tools/bro-spine-verify.ps1' -ReleaseDir 'spine/RELEASES/v1.1.0' *> $null
+Rec 'release v1.1.0 verify' ($LASTEXITCODE -eq 0) "exit=$LASTEXITCODE"
 
 # 9-10) guard regression + isolation (live, via cmd stdin redirect)
 $tmp = Join-Path $env:TEMP ('beast-' + (New-Guid).ToString('N').Substring(0,8))
