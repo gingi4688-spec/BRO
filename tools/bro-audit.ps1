@@ -63,6 +63,14 @@ Chk ($regCount -ge 0) "registry.json valid ($regCount registered project(s), met
 $regContentBad = @()
 if ($regCount -gt 0) { $regContentBad = @($reg.projects | Where-Object { (("$($_.project_path)") -replace '/','\').ToLower() -match '\\bro\\memory(\\|$)' }) }
 Chk ($regContentBad.Count -eq 0) "no registry path inside another project's memory (B4)" "B4-violating registry paths: $($regContentBad.Count)" 'CROSS_PROJECT_CONTAMINATION'
+# No tracked archive ANYWHERE in the repo (B4/L8): a zip/tar is opaque to the content scans above, so a
+# project-content backup can hide inside one, outside _own/supermemory. The 2026-07-02 self-audit caught a
+# gaahex-memory backup zip in _cleanup_backups/ that those scans missed. SuperBro holds ZERO project content,
+# and the clean spine ships plain files (never archives) -> a tracked archive is a hard flag. Whitelist here
+# only if a legitimate tracked archive is ever genuinely needed.
+$trackedArchives = @()
+try { $trackedArchives = @(& git ls-files 2>$null | Where-Object { $_ -match '\.(zip|7z|rar|tar|tgz|gz|bz2)$' }) } catch {}
+Chk ($trackedArchives.Count -eq 0) "no tracked archive in repo (no opaque project-content container, B4/L8)" "tracked archive(s) - possible project content in SuperBro: $($trackedArchives -join ', ')" 'CROSS_PROJECT_CONTAMINATION'
 ""
 "[D] Drift / boundary (read-only)"
 foreach ($d in @('_core','skills','self','roster')) { Chk (Test-Path $d -PathType Container) "live spine present: $d/" "spine drift: missing $d/" 'SPINE_STALE' }
@@ -96,6 +104,7 @@ $isoFail = @()
 if ($stray.Count -ne 0)        { $isoFail += "_own stray file(s): $($stray -join ', ')" }
 if ($strayDirs.Count -ne 0)    { $isoFail += "_own stray dir(s): $($strayDirs -join ', ')" }
 if ($regContentBad.Count -ne 0){ $isoFail += "registry B4 path(s): $($regContentBad.Count)" }
+if ($trackedArchives.Count -ne 0){ $isoFail += "tracked archive(s): $($trackedArchives -join ', ')" }
 if ($smUnexpected.Count -ne 0) { $isoFail += "unexpected supermemory mirror(s): $(($smUnexpected | Select-Object -ExpandProperty Name) -join ', ')" }
 Chk ($isoFail.Count -eq 0) "ISOLATION: PASS - _own metadata/evidence only; supermemory sealed-only; registry metadata-only; no project-local self-evolution (L10)" "ISOLATION: FAIL - $($isoFail -join '; ')" 'CROSS_PROJECT_CONTAMINATION'
 ""
