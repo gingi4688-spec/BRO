@@ -13,7 +13,7 @@
   Exit:   0 GREEN · 1 YELLOW (healthy, tree dirty) · 2 RED (real integrity failure).
 #>
 [CmdletBinding()]
-param([switch]$Quick, [switch]$Log)
+param([switch]$Quick, [switch]$Log, [switch]$Notify)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
 
@@ -71,16 +71,24 @@ elseif ($treeDirty)                            { $verdict = 'YELLOW'; $code = 1;
 else                                           { $verdict = 'GREEN';  $code = 0; $msg = 'Main Bro proves its own integrity (clean tree, all checks pass).' }
 
 Write-Host ("OVERALL: {0} — {1}" -f $verdict, $msg)
+$stamp = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
 
 # -Log: append ONE timestamped verdict line to logs/selfaudit-heartbeat.log (gitignored via *.log, so it never
 # dirties the tree). Used by the scheduled daily heartbeat (tools/bro-schedule.ps1). Best-effort; never fails the run.
 if ($Log) {
   try {
-    $stamp = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
     $sha   = (git rev-parse --short HEAD 2>$null)
     $bpart = if ($beast) { "beast=$($beast.exit)" } else { 'beast=skip' }
     $line  = "$stamp  $verdict  doctor=$($doctor.exit) audit=$($audit.exit) $bpart tree=$(if ($treeDirty) { 'DIRTY' } else { 'CLEAN' }) commit=$sha"
     Add-Content -Path (Join-Path (Get-Location) 'logs\selfaudit-heartbeat.log') -Value $line -Encoding utf8
   } catch {}
+}
+
+# -Notify: on a REAL integrity failure (RED) only, proactively alert Gev at the OS level (best-effort; for the
+# unattended daily 11:00 task). YELLOW = dirty tree = normal work-in-progress and does NOT alert. The reliable
+# channel is the session-open front door, which always surfaces the last daily verdict.
+if ($Notify -and $verdict -eq 'RED') {
+  $alert = "Bro self-audit RED @ ${stamp}: integrity failure. Open Bro and run RUN SELF-AUDIT."
+  try { & msg.exe * "/TIME:180" $alert 2>$null } catch {}
 }
 exit $code

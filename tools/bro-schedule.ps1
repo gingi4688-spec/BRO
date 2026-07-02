@@ -65,14 +65,14 @@ if (-not $pwsh) { $pwsh = (Get-Command powershell -ErrorAction SilentlyContinue)
 if (-not $pwsh) { Fail "scheduler error: no pwsh/powershell on PATH to run the task." 5 }
 $script = Join-Path $broHome 'tools\bro-selfaudit.ps1'
 try {
-  $action  = New-ScheduledTaskAction -Execute $pwsh -Argument ("-NoProfile -File `"$script`" -Log") -WorkingDirectory $broHome
+  $action  = New-ScheduledTaskAction -Execute $pwsh -Argument ("-NoProfile -File `"$script`" -Log -Notify") -WorkingDirectory $broHome
   $trigger = New-ScheduledTaskTrigger -Daily -At $Time
   $set     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
   $prin    = New-ScheduledTaskPrincipal -UserId ("{0}\{1}" -f $env:USERDOMAIN, $env:USERNAME) -LogonType Interactive -RunLevel Limited
   Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $set -Principal $prin `
     -Description "Bro Main-Bro daily self-audit heartbeat (doctor + audit + beast); verdict -> logs/selfaudit-heartbeat.log" -Force | Out-Null
   Write-Host ("  REGISTERED daily scheduled task 'BroSelfAudit' at {0} (current user, runs when logged on)." -f $Time)
-  Write-Host ("  action:  {0} -NoProfile -File `"{1}`" -Log" -f $pwsh, $script)
+  Write-Host ("  action:  {0} -NoProfile -File `"{1}`" -Log -Notify" -f $pwsh, $script)
   Write-Host  "  log:     logs/selfaudit-heartbeat.log (gitignored — never dirties the tree)"
   Write-Host  "  manage:  bro-schedule.ps1 -Status   |   -Remove (BRO_GEV_APPROVED=1)"
   exit 0

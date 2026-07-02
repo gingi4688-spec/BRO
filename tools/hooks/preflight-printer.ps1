@@ -31,6 +31,21 @@ try {
     }
   } catch {}
 
+  # --- last DAILY self-audit (the unattended 11:00 heartbeat): surface its verdict; flag RED or stale loudly ---
+  try {
+    $hb = Join-Path $broHome 'logs\selfaudit-heartbeat.log'
+    if (Test-Path $hb) {
+      $last = @(Get-Content $hb | Where-Object { $_ -match '\S' })[-1]
+      if ($last) {
+        $dv  = if ($last -match '\s(GREEN|YELLOW|RED)\s') { $matches[1] } else { '?' }
+        $dts = ($last -split '\s+')[0]
+        $stale = $false; try { $stale = ((Get-Date) - [datetimeoffset]::Parse($dts).LocalDateTime).TotalHours -gt 26 } catch {}
+        $flag = if ($dv -eq 'RED') { '  <== ATTENTION: RED' } elseif ($stale) { '  <== STALE (>26h): check the 11:00 task' } else { '' }
+        Write-Output ("  last daily:     {0}   [{1}]{2}" -f $dv, $dts, $flag)
+      }
+    }
+  } catch {}
+
   # --- front door: the guided palette is the daily entry - no command memorizing (agenda #2) ---
   try {
     $lib = Get-Content -Raw (Join-Path $broHome 'tools\command-library.json') | ConvertFrom-Json
