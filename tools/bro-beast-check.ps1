@@ -55,6 +55,7 @@ function GX($hook,$payload,$extraEnv){
 $WG='tools/hooks/forbidden-path-write-guard.ps1'; $RG='tools/hooks/cross-memory-read-guard.ps1'; $CG='tools/hooks/critical-command-gate.ps1'; $LG='tools/hooks/log-append-only-guard.ps1'
 $pWriteEPmem = PL @{tool_name='Write';tool_input=@{file_path='C:\Users\Admin\Desktop\EP\memory\x.md';content='x'}} 'wepmem.json'
 $pWriteEPbro = PL @{tool_name='Write';tool_input=@{file_path='C:\Users\Admin\Desktop\EP\bro\x.md';content='x'}} 'wepbro.json'
+$pWriteEPbrain = PL @{tool_name='Write';tool_input=@{file_path='C:\Users\Admin\Desktop\EP\bro\memory\poison.md';content='x'}} 'wepbrain.json'
 $pWriteDBbro = PL @{tool_name='Write';tool_input=@{file_path='C:\Users\Admin\Desktop\DB\bro\x.md';content='x'}} 'wdbbro.json'
 $pWriteOk = PL @{tool_name='Write';tool_input=@{file_path='C:\Users\Admin\Desktop\Bro\tools\x.ps1';content='x'}} 'wok.json'
 $pLogEdit = PL @{tool_name='Edit';tool_input=@{file_path='C:\Users\Admin\Desktop\Bro\memory\_own\audit-log.md'}} 'le.json'
@@ -64,6 +65,7 @@ $pReadEP  = PL @{tool_name='Read';tool_input=@{file_path='C:\Users\Admin\Desktop
 
 Rec 'guard: INSTALLED project memory write BLOCK' ((GX $WG $pWriteEPmem) -eq 2) 'EP\memory (never writable)'
 Rec 'guard: INSTALLED project \bro\ write ALLOW'  ((GX $WG $pWriteEPbro) -eq 0) 'EP\bro (registry exception, narrow)'
+Rec 'guard: sealed brain write BLOCK'             ((GX $WG $pWriteEPbrain) -eq 2) 'EP\bro\memory (L8 contamination — write-sealed, not just read-sealed)'
 Rec 'guard: RETIRED project \bro\ write BLOCK'    ((GX $WG $pWriteDBbro) -eq 2) 'DB\bro re-sealed on retirement (status=RETIRED)'
 Rec 'guard: in-home write ALLOW'        ((GX $WG $pWriteOk) -eq 0) 'tools write'
 Rec 'guard: evidence-log edit BLOCK'    ((GX $LG $pLogEdit) -eq 2) 'audit-log edit'

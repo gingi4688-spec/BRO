@@ -60,9 +60,13 @@ try {
   elseif ($absL.StartsWith($secretL)) { $forbidden = $true; $why = 'write into secrets/verifier vault' }
   elseif (-not $absL.StartsWith($homePrefix)) {
     if ($whitelisted) { exit 0 }                                  # R-1 harness whitelist
-    if (Test-RegisteredBro $absL $broHome) { exit 0 }             # Gate-2 registered <project>\bro\ exception
+    # Gate-2 allows a registered project's <project>\bro\ subtree — but NEVER <project>\bro\memory\ (the sealed
+    # brain). Writing another project's memory is L8 CROSS_PROJECT_CONTAMINATION and stays forbidden even under the
+    # bro-exception (reads are already blocked by cross-memory-read-guard; this closes the symmetric WRITE hole).
+    if (($absL -notmatch '\\bro\\memory\\') -and (Test-RegisteredBro $absL $broHome)) { exit 0 }
     $forbidden = $true
-    if ($absL -match '\\(ep|db|gaa|gaahex|ip)\\') { $why = 'write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)' }
+    if ($absL -match '\\bro\\memory\\')          { $why = 'write into a project sealed brain (<project>\bro\memory) — L8 CROSS_PROJECT_CONTAMINATION, forbidden even under the bro-exception' }
+    elseif ($absL -match '\\(ep|db|gaa|gaahex|ip)\\') { $why = 'write into a project path outside its registered \bro\ (cross-project / non-bro, B4/L8)' }
     else { $why = 'write outside BRO_HOME (clean-build zero-touch)' }
   }
 
