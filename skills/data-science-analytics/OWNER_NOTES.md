@@ -18,7 +18,7 @@ The default posture for all of the above: produce the analysis, the uncertainty,
 ### Owned future-improvement items
 
 - Add a **Bayesian A/B template** (posterior on the lift, probability the treatment beats control by ≥ the decision threshold, expected loss) as an alternative readout to the frequentist one, since stakeholders often want a "probability it's better" framed correctly.
-- Add a worked **MVT example with an estimated interaction term and its CI**, end-to-end, to make the interaction-power requirement concrete beyond the manual's mechanism.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **MVT example with an estimated interaction term and its CI**, end-to-end, to make the interaction-power requirement concrete beyond the manual's mechanism.
 - Add a **fairness/disparate-impact mini-rubric** for classifier work (subgroup precision/recall, calibration by group, the regulated-decision gate) so the people-impact case is checkable, not just flagged.
 - Add a **sample-ratio-mismatch (SRM) check** to the experiment-readout template — a chi-square on arm allocation that catches a broken randomization before any effect is trusted.
 - Cross-link the pipeline/instrumentation handoff explicitly to `data-engineering-pipelines` for the cases where a metric autopsy finds the fix is an ETL/event-schema change owned there.
@@ -41,7 +41,7 @@ The default posture for all of the above: produce the analysis, the uncertainty,
 ### Սեփական ապագա-բարելավման կետեր
 
 - Ավելացրու **Bayesian A/B template** (lift-ի posterior, treatment-ի control-ից ≥ decision threshold-ով լավ լինելու հավանականություն, expected loss)՝ որպես frequentist-ին այլընտրանքային readout, քանի որ stakeholder-ները հաճախ ուզում են «լավ լինելու հավանականություն»՝ ճիշտ ձևակերպված։
-- Ավելացրու worked **MVT օրինակ՝ գնահատված interaction term-ով և նրա CI-ով**, ծայրից ծայր, որ interaction-power պահանջը կոնկրետ լինի manual-ի mechanism-ից այն կողմ։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **MVT օրինակ՝ գնահատված interaction term-ով և նրա CI-ով**, ծայրից ծայր, որ interaction-power պահանջը կոնկրետ լինի manual-ի mechanism-ից այն կողմ։
 - Ավելացրու **fairness/disparate-impact mini-rubric** classifier-ի աշխատանքի համար (subgroup precision/recall, calibration ըստ group-ի, regulated-decision gate), որ people-impact case-ը ստուգելի լինի, ոչ միայն flag արված։
 - Ավելացրու **sample-ratio-mismatch (SRM) check** experiment-readout template-ին — chi-square arm allocation-ի վրա, որ կոտրված randomization-ը բռնի, նախքան որևէ effect-ի վստահելը։
 - Cross-link արա pipeline/instrumentation handoff-ը բացահայտ `data-engineering-pipelines`-ին այն դեպքերի համար, երբ metric autopsy-ն գտնում է, որ fix-ը այնտեղ տիրվող ETL/event-schema փոփոխություն է։

@@ -19,9 +19,9 @@ The default posture for all of the above: produce the native draft, preserve mea
 
 - Add an **Eastern vs Western Armenian** reference note (orthography reform, auxiliary placement, lexical splits) so variety is an explicit, owner-confirmed parameter rather than a silent default.
 - Add a **transliteration sub-guide** for names and loanwords (when to transliterate vs keep, established Armenian forms) to make the fixed-token rule concrete for proper nouns.
-- Add a third worked example covering **HY→EN** in the other direction (native English from Armenian source), since the current two are stiff-HY→native-HY and EN→HY.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a third worked example covering **HY→EN** in the other direction (native English from Armenian source), since the current two are stiff-HY→native-HY and EN→HY.
 - Add a short **classical-orthography vs reformed-orthography** note for literary/diaspora work, kept separate from the modern default.
-- Build a **homoglyph cheat-sheet** mapping each at-risk Armenian letter to its Latin/Cyrillic twins and Unicode codepoints, so the audit is copy-ready rather than described.
+- **✓ DELIVERED (gazan 2026-07-02)** — Build a **homoglyph cheat-sheet** mapping each at-risk Armenian letter to its Latin/Cyrillic twins and Unicode codepoints, so the audit is copy-ready rather than described.
 
 ## Հայերեն
 
@@ -42,6 +42,6 @@ The default posture for all of the above: produce the native draft, preserve mea
 
 - Ավելացրու **արևելահայերեն ընդդեմ արևմտահայերենի** տեղեկագիր (ուղղագրական բարեփոխում, օժանդակ բայի դիրք, բառապաշարային տարբերություններ), որ տարբերակը լինի բացահայտ, տիրոջ-հաստատած պարամետր, ոչ լուռ լռելյայն։
 - Ավելացրու **տառադարձման ենթա-ուղեցույց** անունների և փոխառությունների համար (երբ տառադարձել ընդդեմ պահելու, հաստատված հայերեն ձևեր), որ ֆիքսված-token կանոնը կոնկրետ լինի հատուկ անունների համար։
-- Ավելացրու երրորդ worked example, որ ծածկում է **HY→EN** հակառակ ուղղությունը (բնական անգլերեն հայերեն աղբյուրից), քանի որ ընթացիկ երկուսը փայտացած-HY→բնական-HY և EN→HY են։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երրորդ worked example, որ ծածկում է **HY→EN** հակառակ ուղղությունը (բնական անգլերեն հայերեն աղբյուրից), քանի որ ընթացիկ երկուսը փայտացած-HY→բնական-HY և EN→HY են։
 - Ավելացրու կարճ **գրաբար-ուղղագրություն ընդդեմ բարեփոխված-ուղղագրության** տեղեկագիր գրական/սփյուռքյան աշխատանքի համար՝ առանձին պահված ժամանակակից լռելյայնից։
-- Կառուցիր **homoglyph cheat-sheet**, որ ամեն ռիսկային հայերեն տառ քարտեզագրի իր լատինական/կիրիլիկ զույգերին և Unicode codepoint-ներին, որ audit-ը copy-ready լինի, ոչ նկարագրված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Կառուցիր **homoglyph cheat-sheet**, որ ամեն ռիսկային հայերեն տառ քարտեզագրի իր լատինական/կիրիլիկ զույգերին և Unicode codepoint-ներին, որ audit-ը copy-ready լինի, ոչ նկարագրված։

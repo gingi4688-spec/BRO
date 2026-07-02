@@ -17,7 +17,7 @@ The default posture for all of the above: produce the spec, the contracts, the g
 
 ### Owned future-improvement items
 
-- Add a worked **prompt/tool audit** example end-to-end (an existing agent reviewed against the five dimensions, with the specific revisions), to make the audit response mode concrete.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **prompt/tool audit** example end-to-end (an existing agent reviewed against the five dimensions, with the specific revisions), to make the audit response mode concrete.
 - Add a **multi-agent consolidation recipe** showing exactly how the orchestrator resolves a conflict between two specialists by evidence (which source/run wins and why), so "synthesize, don't concatenate" is copy-ready.
 - Keep a **live substrate snapshot for Bro's own runtime** in the repo (a dated `reference/substrate.md` filled from `output-templates.md` Template 4), so roster builds read current model facts from one verified place instead of re-checking each time. (The snapshot *pattern* now exists — `patterns.md` #7 + Template 4; this item is the live, filled instance.)
 - Add a **roster-agent build checklist** (the five layers as a literal pre-ship gate) so a new agent cannot be shipped half-wired.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the spec, the contracts, the g
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked **prompt/tool audit** օրինակ ծայրից ծայր (եղած agent՝ review-ված հինգ չափանիշի դեմ, կոնկրետ revision-ներով), որ audit response mode-ը կոնկրետ լինի։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **prompt/tool audit** օրինակ ծայրից ծայր (եղած agent՝ review-ված հինգ չափանիշի դեմ, կոնկրետ revision-ներով), որ audit response mode-ը կոնկրետ լինի։
 - Ավելացրու **multi-agent consolidation recipe**, որ ցույց տա հստակ, թե ոնց է orchestrator-ը երկու specialist-ի conflict-ը լուծում evidence-ով (որ source/run-ն է հաղթում և ինչու), որ «synthesize, ոչ concatenate»-ը copy-ready լինի։
 - Պահիր **live substrate snapshot Bro-ի սեփական runtime-ի համար** repo-ում (dated `reference/substrate.md`՝ լրացված `output-templates.md` Template 4-ով), որ roster build-երը ընթացիկ model-փաստերը կարդան մեկ ստուգված տեղից, ոչ թե ամեն անգամ վերստուգեն։ (Snapshot-ի *pattern*-ն արդեն կա՝ `patterns.md` #7 + Template 4. այս կետը live, լրացված instance-ն է։)
 - Ավելացրու **roster-agent build checklist** (հինգ շերտը որպես բառացի pre-ship gate), որ նոր agent-ը չկարողանա ship-վել կիսա-wire-ված։

@@ -17,7 +17,7 @@ The default posture for all of the above: produce the model, the assumptions, th
 
 ### Owned future-improvement items
 
-- Add a worked **cohort-retention / survival-curve LTV** example (month-by-month CM × retention, discounted) so the "not `1/churn`" rule is concrete end-to-end, not only stated.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **cohort-retention / survival-curve LTV** example (month-by-month CM × retention, discounted) so the "not `1/churn`" rule is concrete end-to-end, not only stated.
 - Add a **burn / runway scenario template** (gross vs net burn, collections timing, the spend-ramp vs cash-balance crossover) to make the cash-vs-accrual gate copy-ready.
 - Add a **SaaS metric reconciliation** note (MRR/ARR ↔ recognized revenue ↔ cash collected ↔ deferred revenue) so the three timings are tied in one place.
 - Add a **second valuation method comparison** (precedent transactions, and where rule-of-40 / growth-adjusted multiples apply) beyond the multiples + DCF pair already worked.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the model, the assumptions, th
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked **cohort-retention / survival-curve LTV** օրինակ (month-by-month CM × retention, discounted), որ «ոչ `1/churn`» կանոնը կոնկրետ լինի ծայրից ծայր, ոչ միայն նշված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **cohort-retention / survival-curve LTV** օրինակ (month-by-month CM × retention, discounted), որ «ոչ `1/churn`» կանոնը կոնկրետ լինի ծայրից ծայր, ոչ միայն նշված։
 - Ավելացրու **burn / runway scenario template** (gross ընդդեմ net burn, collections timing, spend-ramp ընդդեմ cash-balance crossover), որ cash-ընդդեմ-accrual gate-ը copy-ready լինի։
 - Ավելացրու **SaaS metric reconciliation** note (MRR/ARR ↔ recognized revenue ↔ cash collected ↔ deferred revenue), որ երեք timing-ները կապված լինեն մեկ տեղում։
 - Ավելացրու **երկրորդ valuation method-ի համեմատություն** (precedent transactions, և որտեղ են կիրառվում rule-of-40 / growth-adjusted multiple-ները)՝ արդեն worked multiples + DCF զույգից այն կողմ։

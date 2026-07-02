@@ -17,7 +17,7 @@ The default posture for all of the above: produce the analysis, the assumptions,
 
 ### Owned future-improvement items
 
-- Add a fourth worked example for a **market-failure diagnosis with intervention design** (e.g. adverse selection in an insurance/lending product → screening + pooling), to make the failure→fix mapping concrete end-to-end alongside the pricing/mechanism/incentive examples.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a fourth worked example for a **market-failure diagnosis with intervention design** (e.g. adverse selection in an insurance/lending product → screening + pooling), to make the failure→fix mapping concrete end-to-end alongside the pricing/mechanism/incentive examples.
 - Add a **matching-market pattern** (two-sided matching, stability, the deferred-acceptance idea) for allocation problems where price is not the clearing mechanism (labor, school/residency-style matching).
 - Add a copy-ready **macro stress-test worksheet** with the three shock scenarios (demand/rate/FX), the elasticity slot, and the break-point/trigger fields, so the stress-test is a fill-in artifact rather than described.
 - Add a short **behavioral-bias catalog** mapping each bias (loss aversion, anchoring, default effect, plus present bias and social proof) to where it changes a demand or pricing prediction, so the correction is systematic rather than ad hoc.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the analysis, the assumptions,
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու չորրորդ worked example **market-failure diagnosis-ի՝ intervention design-ով** (օր.՝ adverse selection insurance/lending product-ում → screening + pooling), որ failure→fix map-ը կոնկրետ լինի ծայրից ծայր՝ pricing/mechanism/incentive օրինակների կողքին։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու չորրորդ worked example **market-failure diagnosis-ի՝ intervention design-ով** (օր.՝ adverse selection insurance/lending product-ում → screening + pooling), որ failure→fix map-ը կոնկրետ լինի ծայրից ծայր՝ pricing/mechanism/incentive օրինակների կողքին։
 - Ավելացրու **matching-market pattern** (two-sided matching, stability, deferred-acceptance գաղափարը) allocation խնդիրների համար, որտեղ price-ը clearing mechanism չէ (labor, school/residency-style matching)։
 - Ավելացրու copy-ready **macro stress-test worksheet** երեք shock scenario-ով (demand/rate/FX), elasticity slot-ով և break-point/trigger field-երով, որ stress-test-ը fill-in artifact լինի, ոչ նկարագրված։
 - Ավելացրու կարճ **behavioral-bias catalog**, որ ամեն bias-ը (loss aversion, anchoring, default effect, plus present bias, social proof) map անի այնտեղ, որտեղ այն փոխում է demand կամ pricing կանխատեսում, որ ուղղումը systematic լինի, ոչ ad hoc։

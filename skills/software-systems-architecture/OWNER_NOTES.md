@@ -18,7 +18,7 @@ The default posture for all of the above: produce the design, the invariant, the
 ### Owned future-improvement items
 
 - Add a third worked example for **expand/contract schema migration** (additive change → dual-write → backfill → switch read → contract), since it is the reversible path whenever a single atomic cutover is unsafe.
-- Add a **CQRS / event-sourcing decision worked example** that shows the invariant test (does this read/write divergence or audit/replay need actually justify the complexity?) end to end, so the right-sizing rule is concrete, not just stated.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **CQRS / event-sourcing decision worked example** that shows the invariant test (does this read/write divergence or audit/replay need actually justify the complexity?) end to end, so the right-sizing rule is concrete, not just stated.
 - Add a **process-manager recovery recipe** for choreographed workflows (timeout sweeper, stuck-workflow detection, compensation trigger) so the choreography end-state-owner requirement is copy-ready.
 - Cross-link the security boundary explicitly to `cybersecurity-operations-soc` for the threat model and control catalogue, beyond the placement/least-privilege/blast-radius design owned here.
 - Add a **vector-clock vs single-sequence worked micro-example** to make the "when do you actually need concurrency detection" call concrete.
@@ -41,7 +41,7 @@ The default posture for all of the above: produce the design, the invariant, the
 ### Սեփական ապագա-բարելավման կետեր
 
 - Ավելացրու երրորդ worked example **expand/contract schema migration**-ի համար (additive change → dual-write → backfill → switch read → contract), քանի որ դա հետշրջելի path-ն է, երբ մեկ atomic cutover-ը unsafe է։
-- Ավելացրու **CQRS / event-sourcing որոշման worked example**, որ ցույց տա invariant-ի test-ը (արդյո՞ք այս read/write շեղումը կամ audit/replay կարիքը իսկապես արդարացնում է complexity-ն) ծայրից ծայր, որ right-sizing կանոնը կոնկրետ լինի, ոչ միայն ասված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **CQRS / event-sourcing որոշման worked example**, որ ցույց տա invariant-ի test-ը (արդյո՞ք այս read/write շեղումը կամ audit/replay կարիքը իսկապես արդարացնում է complexity-ն) ծայրից ծայր, որ right-sizing կանոնը կոնկրետ լինի, ոչ միայն ասված։
 - Ավելացրու **process-manager recovery recipe** choreographed workflow-ների համար (timeout sweeper, խրված-workflow-ի հայտնաբերում, compensation trigger), որ choreography-ի end-state-owner պահանջը copy-ready լինի։
 - Cross-link արա security boundary-ն բացահայտ `cybersecurity-operations-soc`-ին threat model-ի և control catalogue-ի համար, այստեղ տիրվող placement/least-privilege/blast-radius design-ից այն կողմ։
 - Ավելացրու **vector-clock ընդդեմ single-sequence worked micro-example**, որ «երբ ես իսկապես concurrency detection-ի կարիք ունես» որոշումը կոնկրետ լինի։

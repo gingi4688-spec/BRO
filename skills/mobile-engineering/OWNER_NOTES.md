@@ -17,7 +17,7 @@ The default posture for all of the above: produce the plan, the evidence (on-dev
 
 ### Owned future-improvement items
 
-- Add a fourth worked example for a **breaking-API migration with an expand/contract server contract** plus a client force-upgrade gate, since it is the recurring high-stakes mobile compatibility case.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a fourth worked example for a **breaking-API migration with an expand/contract server contract** plus a client force-upgrade gate, since it is the recurring high-stakes mobile compatibility case.
 - Add a **device-tier matrix template** (representative low/mid/high tiers + oldest-supported OS) so the "verify on real hardware" gate is concrete and copy-ready.
 - Add a **multi-burn / guardrail recipe for staged rollout** with explicit crash-free and ANR halt thresholds per step, so the release plan is copy-ready rather than described.
 - Add a worked **secure-storage + pinning + biometric** example end to end (keystore accessibility class, SPKI + backup pin, key-gated biometric with fallback) to make the security section concrete.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the plan, the evidence (on-dev
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու չորրորդ worked example **breaking-API migration**-ի համար՝ expand/contract server contract-ով plus client force-upgrade gate-ով, քանի որ դա կրկնվող high-stakes բջջային compatibility դեպքն է։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու չորրորդ worked example **breaking-API migration**-ի համար՝ expand/contract server contract-ով plus client force-upgrade gate-ով, քանի որ դա կրկնվող high-stakes բջջային compatibility դեպքն է։
 - Ավելացրու **device-tier matrix template** (representative low/mid/high tier + ամենահին-supported OS), որ «verify on real hardware» gate-ը կոնկրետ և copy-ready լինի։
 - Ավելացրու **multi-burn / guardrail recipe** staged rollout-ի համար՝ բացահայտ crash-free և ANR halt threshold-ներով ամեն step-ին, որ release plan-ը copy-ready լինի, ոչ նկարագրված։
 - Ավելացրու worked **secure-storage + pinning + biometric** օրինակ ծայրից ծայր (keystore accessibility class, SPKI + backup pin, key-gated biometric fallback-ով), որ security բաժինը կոնկրետ լինի։

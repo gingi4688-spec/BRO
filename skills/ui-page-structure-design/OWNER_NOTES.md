@@ -17,7 +17,7 @@ The default posture for all of the above: produce the structure, the states, the
 
 ### Owned future-improvement items
 
-- Add a second worked example for a **role-gated admin/settings surface** (admin vs member vs read-only views from one entity), since the current worked example is a single-role dashboard and role-scoping is a top reviewer probe.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a second worked example for a **role-gated admin/settings surface** (admin vs member vs read-only views from one entity), since the current worked example is a single-role dashboard and role-scoping is a top reviewer probe.
 - Add a **consent / opt-in pattern** to `patterns.md` (affirmative, unbundled, purpose-visible) as the ethical counter-pattern to the dark-pattern refusals, so the skill teaches the right structure and not only the refusal.
 - Add a **state-matrix completeness checklist** (loading, empty, error, success, permission, validation, partial, degraded, offline) as a copy-ready artifact, so state coverage is mechanical rather than remembered.
 - Add an **accessibility intent vs conformance** worked snippet showing the exact safe phrasing to use when no audit has happened, to make the WCAG-claim gate concrete.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the structure, the states, the
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու երկրորդ worked example **role-gated admin/settings surface**-ի համար (admin vs member vs read-only view-եր մեկ entity-ից), քանի որ ընթացիկ worked example-ը single-role dashboard է, իսկ role-scoping-ը գլխավոր reviewer probe է։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երկրորդ worked example **role-gated admin/settings surface**-ի համար (admin vs member vs read-only view-եր մեկ entity-ից), քանի որ ընթացիկ worked example-ը single-role dashboard է, իսկ role-scoping-ը գլխավոր reviewer probe է։
 - Ավելացրու **consent / opt-in pattern** `patterns.md`-ին (հաստատող, unbundled, purpose-visible) որպես dark-pattern մերժումների էթիկական հակա-pattern, որ skill-ը սովորեցնի ճիշտ կառուցվածքը, ոչ միայն մերժումը։
 - Ավելացրու **state-matrix-ի ամբողջականության checklist** (loading, empty, error, success, permission, validation, partial, degraded, offline) որպես copy-ready artifact, որ state coverage-ը մեխանիկական լինի, ոչ հիշվող։
 - Ավելացրու **accessibility intent vs conformance** worked հատված, որ ցույց տա ճշգրիտ անվտանգ ձևակերպումը, երբ audit չի եղել, որ WCAG-claim gate-ը կոնկրետ լինի։

@@ -19,7 +19,7 @@ The default posture for all of the above: produce the plan, the evidence, the ru
 
 - Add a **curriculum-mapping worked example** (multi-week course with objectives mapped to assessments and a coverage/gap matrix), to make whole-program alignment concrete beyond a single lesson.
 - Add an **interleaving + spacing recipe** with concrete interval/mix patterns, so practice scheduling is copy-ready rather than described.
-- Add a **mentoring-conversation transcript example** (coaching questions vs handed-over answers) so the coach-don't-solve rule has a concrete model.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **mentoring-conversation transcript example** (coaching questions vs handed-over answers) so the coach-don't-solve rule has a concrete model.
 - Add a **transfer-of-training failure catalogue** (why classroom skill fails to show up on the job — no manager reinforcement, no real-task practice, no spaced follow-up) with the repair for each.
 - Cross-link explicitly to `people-org-leadership` for the mentoring→performance-management boundary and to `communication-writing-negotiation` for feedback delivery phrasing.
 
@@ -42,6 +42,6 @@ The default posture for all of the above: produce the plan, the evidence, the ru
 
 - Ավելացրու **curriculum-mapping worked example** (բազմա-շաբաթյա course՝ objective-ները map-ված assessment-ներին և coverage/gap matrix), որ ողջ-ծրագրի alignment-ը կոնկրետ լինի մեկ lesson-ից այն կողմ։
 - Ավելացրու **interleaving + spacing recipe** կոնկրետ interval/mix pattern-ներով, որ practice scheduling-ը copy-ready լինի, ոչ նկարագրված։
-- Ավելացրու **mentoring-conversation transcript example** (coaching հարցեր ընդդեմ հանձնված պատասխանների), որ coach-don't-solve կանոնը կոնկրետ model ունենա։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **mentoring-conversation transcript example** (coaching հարցեր ընդդեմ հանձնված պատասխանների), որ coach-don't-solve կանոնը կոնկրետ model ունենա։
 - Ավելացրու **transfer-of-training failure catalogue** (ինչու classroom skill-ը չի երևում աշխատանքում — manager reinforcement չկա, real-task practice չկա, spaced follow-up չկա)՝ ամեն մեկի ուղղումով։
 - Cross-link արա բացահայտ `people-org-leadership`-ին՝ mentoring→performance-management սահմանի համար, և `communication-writing-negotiation`-ին՝ feedback-ի ձևակերպման համար։

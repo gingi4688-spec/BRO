@@ -17,8 +17,8 @@ The default posture for all of the above: produce the design, the evidence, the 
 
 ### Owned future-improvement items
 
-- Add a third worked example for an **MDM rulebook end-to-end** (match thresholds, the full per-attribute survivorship table, and a stewardship escalation flow), so the survivorship requirement is concrete from first principles.
-- Add a **schema-evolution decision table** mapping each change type (add nullable, add required, rename, type-narrow, drop) to its compatibility class and required procedure, so contract review is copy-ready rather than described.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a third worked example for an **MDM rulebook end-to-end** (match thresholds, the full per-attribute survivorship table, and a stewardship escalation flow), so the survivorship requirement is concrete from first principles.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **schema-evolution decision table** mapping each change type (add nullable, add required, rename, type-narrow, drop) to its compatibility class and required procedure, so contract review is copy-ready rather than described.
 - Add a **governance decision-log template** (decision, owner, standard, exception process) to make the leadership-tradeoff dimension a fillable artifact.
 - Add a **grain-and-conformance checklist** for fact/dimension design (one-sentence grain, conformed dimension list, SCD type per attribute) to close the #1 warehouse bug at design time.
 - Cross-link the pipeline/orchestration overlap explicitly to `data-engineering-pipelines` (who builds the medallion transforms) and the org/role overlap to `operating-data-roles`, so the support-vs-lead boundary is unambiguous.
@@ -40,8 +40,8 @@ The default posture for all of the above: produce the design, the evidence, the 
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու երրորդ worked example **MDM rulebook-ի ծայրից ծայր** (match threshold-ներ, լրիվ per-attribute survivorship table և stewardship escalation flow), որ survivorship-ի պահանջը կոնկրետ լինի առաջին սկզբունքներից։
-- Ավելացրու **schema-evolution decision table**, որ ամեն change type (add nullable, add required, rename, type-narrow, drop) քարտեզագրի իր compatibility class-ին ու required ընթացակարգին, որ contract review-ն copy-ready լինի, ոչ նկարագրված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երրորդ worked example **MDM rulebook-ի ծայրից ծայր** (match threshold-ներ, լրիվ per-attribute survivorship table և stewardship escalation flow), որ survivorship-ի պահանջը կոնկրետ լինի առաջին սկզբունքներից։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **schema-evolution decision table**, որ ամեն change type (add nullable, add required, rename, type-narrow, drop) քարտեզագրի իր compatibility class-ին ու required ընթացակարգին, որ contract review-ն copy-ready լինի, ոչ նկարագրված։
 - Ավելացրու **governance decision-log template** (decision, owner, standard, exception process), որ leadership-tradeoff չափանիշը դառնա լրացվող artifact։
 - Ավելացրու **grain-and-conformance checklist** fact/dimension design-ի համար (մեկ-նախադասությամբ grain, conformed dimension-ների ցուցակ, SCD type ամեն attribute-ի), որ warehouse-ի #1 bug-ը փակվի design-ի պահին։
 - Cross-link արա pipeline/orchestration համընկնումը բացահայտ `data-engineering-pipelines`-ին (ով է կառուցում medallion transform-ները) և org/role համընկնումը `operating-data-roles`-ին, որ support-vs-lead սահմանը միանշանակ լինի։

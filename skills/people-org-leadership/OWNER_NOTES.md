@@ -17,7 +17,7 @@ Default posture for all of the above: **produce the evidence, the manager script
 
 ### Owned future-improvement items
 
-- Add a worked **compensation-band + leveling** example (rubric → ranges as a proposal → pay-equity check flagged to HR), to make the comp conflict-rule concrete end-to-end.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **compensation-band + leveling** example (rubric → ranges as a proposal → pay-equity check flagged to HR), to make the comp conflict-rule concrete end-to-end.
 - Add a worked **conflict-resolution / mediation** example (interests vs positions, shared constraint, observable next behavior, the escalate-to-HR line).
 - Add a **change/reorg sequencing** worked example (why → what changes → who decides → what stays → support) with the decision-rights diff attached.
 - Add a short, clearly-labeled **jurisdiction-awareness note** that points to `legal-compliance-contracts` for employment-law specifics rather than restating any statute here.
@@ -40,7 +40,7 @@ Default posture for all of the above: **produce the evidence, the manager script
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked **compensation-band + leveling** օրինակ (rubric → range-ներ որպես proposal → pay-equity check flag արված HR-ին), որ comp-ի կոնֆլիկտի կանոնը կոնկրետ լինի ծայրից ծայր։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **compensation-band + leveling** օրինակ (rubric → range-ներ որպես proposal → pay-equity check flag արված HR-ին), որ comp-ի կոնֆլիկտի կանոնը կոնկրետ լինի ծայրից ծայր։
 - Ավելացրու worked **conflict-resolution / mediation** օրինակ (interest-ներ ընդդեմ position-ների, ընդհանուր constraint, observable next behavior, escalate-to-HR գիծը)։
 - Ավելացրու **change/reorg sequencing** worked օրինակ (ինչու → ինչ է փոխվում → ով է որոշում → ինչ է մնում → support)՝ decision-rights-ի diff-ը կցված։
 - Ավելացրու կարճ, հստակ-նշված **jurisdiction-awareness note**, որ ուղղորդում է `legal-compliance-contracts`-ին employment-law-ի մանրամասների համար, ոչ թե այստեղ statute վերաշարադրում։

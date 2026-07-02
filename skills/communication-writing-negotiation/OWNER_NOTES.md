@@ -18,7 +18,7 @@ The default posture for all of the above: produce the draft, the structure, and 
 
 ### Owned future-improvement items
 
-- Add a **crisis-communication worked example** (incident status-page + customer notification) showing the honest-but-calm register, with the legal/comms gate inline, since high-stakes external comms is the highest-risk artifact this skill touches.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **crisis-communication worked example** (incident status-page + customer notification) showing the honest-but-calm register, with the legal/comms gate inline, since high-stakes external comms is the highest-risk artifact this skill touches.
 - Add a **cross-cultural / power-distance pattern** for negotiation and feedback, since directness, anchoring norms, and the acceptability of the three-conversations split vary by culture and seniority gap.
 - Add a **multi-party negotiation pattern** (coalitions, sequencing, the chair's agenda power), since the current number sheet and logrolling moves assume a two-party deal.
 - Add a **written-vs-spoken delivery note** to the difficult-conversation template, since the same observation→impact→request content needs different pacing and hedging live versus on the page.
@@ -42,7 +42,7 @@ The default posture for all of the above: produce the draft, the structure, and 
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու **crisis-communication worked example** (incident status-page + customer notification)՝ ցույց տալով ազնիվ-բայց-հանգիստ register-ը, legal/comms gate-ը inline, քանի որ high-stakes արտաքին comms-ը այս skill-ի դիպչած ամենաբարձր-ռիսկ artifact-ն է։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **crisis-communication worked example** (incident status-page + customer notification)՝ ցույց տալով ազնիվ-բայց-հանգիստ register-ը, legal/comms gate-ը inline, քանի որ high-stakes արտաքին comms-ը այս skill-ի դիպչած ամենաբարձր-ռիսկ artifact-ն է։
 - Ավելացրու **cross-cultural / power-distance pattern** negotiation-ի և feedback-ի համար, քանի որ ուղղակիությունը, anchoring-ի նորմերը և երեք-խոսակցության բաժանման ընդունելիությունը տարբերվում են ըստ մշակույթի և seniority gap-ի։
 - Ավելացրու **multi-party negotiation pattern** (coalition, sequencing, chair-ի agenda power), քանի որ ընթացիկ number sheet-ը և logrolling move-երը ենթադրում են երկկողմ deal։
 - Ավելացրու **written-vs-spoken delivery note** դժվար-խոսակցության template-ին, քանի որ նույն observation→impact→request բովանդակությունը պահանջում է տարբեր pacing և hedging՝ live ընդդեմ էջի վրա։

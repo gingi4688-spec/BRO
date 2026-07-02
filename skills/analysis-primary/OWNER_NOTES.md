@@ -16,9 +16,9 @@ The default posture: produce the frame, the decomposition, the interrogated evid
 
 ### Owned future-improvement items
 
-- Add a fourth worked example for a **pure framing/reframe** case (a malformed question fixed before any tool is applied), to make the Frame lens concrete on its own, separate from issue-tree/Bayes/Fermi.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a fourth worked example for a **pure framing/reframe** case (a malformed question fixed before any tool is applied), to make the Frame lens concrete on its own, separate from issue-tree/Bayes/Fermi.
 - Add a **premortem template** (assume the decision failed; list the most likely causes) as a first-class Interrogate tool alongside the steelman and the falsifier.
-- Add a **reference-class / base-rate library pattern** so the "inside-view story with no base rate" failure has a concrete repair workflow, not just a warning.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **reference-class / base-rate library pattern** so the "inside-view story with no base rate" failure has a concrete repair workflow, not just a warning.
 - Add a worked **multi-skill dispatch trace** (lens frames → routes to two specialists → reconciles their outputs → verifies live) to make the support-role spine visible end to end.
 - Make the **observation/inference/judgment labels** a reusable inline notation in the templates, so the separation is enforced by format, not only by discipline.
 
@@ -38,8 +38,8 @@ The default posture: produce the frame, the decomposition, the interrogated evid
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու չորրորդ worked example **զուտ framing/reframe** case-ի համար (malformed հարց՝ ուղղված նախքան որևէ գործիք կիրառելը), որ Frame ոսպնյակը կոնկրետ լինի ինքնուրույն, issue-tree/Bayes/Fermi-ից առանձին։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու չորրորդ worked example **զուտ framing/reframe** case-ի համար (malformed հարց՝ ուղղված նախքան որևէ գործիք կիրառելը), որ Frame ոսպնյակը կոնկրետ լինի ինքնուրույն, issue-tree/Bayes/Fermi-ից առանձին։
 - Ավելացրու **premortem template** (ենթադրիր որոշումը ձախողվեց. թվարկիր ամենահավանական պատճառները) որպես first-class Interrogate գործիք՝ steelman-ի և falsifier-ի կողքին։
-- Ավելացրու **reference-class / base-rate library pattern**, որ «inside-view story՝ առանց base rate-ի» ձախողումն ունենա կոնկրետ repair workflow, ոչ միայն զգուշացում։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **reference-class / base-rate library pattern**, որ «inside-view story՝ առանց base rate-ի» ձախողումն ունենա կոնկրետ repair workflow, ոչ միայն զգուշացում։
 - Ավելացրու worked **multi-skill dispatch trace** (ոսպնյակը շրջանակում է → ուղղորդում երկու specialist-ի → reconcile անում նրանց output-ները → ստուգում live), որ support-role ողնաշարը տեսանելի լինի ծայրից ծայր։
 - Դարձրու **observation/inference/judgment label-ները** template-ներում reusable inline notation, որ բաժանումը կիրառվի format-ով, ոչ միայն կարգապահությամբ։

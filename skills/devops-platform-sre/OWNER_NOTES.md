@@ -19,8 +19,8 @@ The default posture for all of the above: produce the plan, the evidence, and th
 
 - Add a fourth worked example for **expand/contract schema migration** (dual-write/dual-read, backfill, contract), since it is the correct answer whenever a canary does not apply.
 - Add a **toil-budget pattern** (measuring and capping operational toil as a first-class metric alongside the error budget).
-- Add a **multi-window, multi-burn-rate alert recipe** with the specific window/burn pairings, so the alert policy is copy-ready rather than described.
-- Add a **cost-attribution worked example** (cost per tenant / per request) to make the FinOps unit-metric requirement concrete end-to-end.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **multi-window, multi-burn-rate alert recipe** with the specific window/burn pairings, so the alert policy is copy-ready rather than described.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **cost-attribution worked example** (cost per tenant / per request) to make the FinOps unit-metric requirement concrete end-to-end.
 - Cross-link the security overlap explicitly to `cybersecurity-operations-soc` for supply-chain/build-provenance, beyond the OIDC secret-hygiene gate owned here.
 
 ## Հայերեն
@@ -42,6 +42,6 @@ The default posture for all of the above: produce the plan, the evidence, and th
 
 - Ավելացրու չորրորդ worked example **expand/contract schema migration**-ի համար (dual-write/dual-read, backfill, contract), քանի որ դա ճիշտ պատասխանն է, երբ canary-ն չի կիրառվում։
 - Ավելացրու **toil-budget pattern** (operational toil-ի չափում և սահմանափակում որպես first-class metric՝ error budget-ի կողքին)։
-- Ավելացրու **multi-window, multi-burn-rate alert recipe** կոնկրետ window/burn զույգերով, որ alert policy-ն copy-ready լինի, ոչ նկարագրված։
-- Ավելացրու **cost-attribution worked example** (cost per tenant / per request), որ FinOps-ի unit-metric պահանջը կոնկրետ լինի ծայրից ծայր։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **multi-window, multi-burn-rate alert recipe** կոնկրետ window/burn զույգերով, որ alert policy-ն copy-ready լինի, ոչ նկարագրված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **cost-attribution worked example** (cost per tenant / per request), որ FinOps-ի unit-metric պահանջը կոնկրետ լինի ծայրից ծայր։
 - Cross-link արա security-ի համընկնումը բացահայտ `cybersecurity-operations-soc`-ին՝ supply-chain/build-provenance-ի համար, այստեղ տիրվող OIDC secret-hygiene gate-ից այն կողմ։

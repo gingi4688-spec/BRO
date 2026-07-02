@@ -19,9 +19,9 @@ The default posture for all of the above: produce the plan, the evidence, and th
 ### Owned future-improvement items
 
 - Add a worked example for a **wholesale/open-access L2TP fault** (LAC→LNS), since access-vs-retail auth ownership is a recurring source of mis-triage.
-- Add an **XGS-PON / 10G-PON budget worked example** alongside the GPON B+ one, so the optical-budget mechanism covers the higher-speed access estate.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add an **XGS-PON / 10G-PON budget worked example** alongside the GPON B+ one, so the optical-budget mechanism covers the higher-speed access estate.
 - Add a **multi-window capacity/peering decision recipe** (95th-percentile + loss-under-load + cost-per-Mbps with the transit-vs-peering-vs-IXP decision), so the capacity rule is copy-ready rather than described.
-- Add a **CoA/Disconnect message-flow micro-example** (attributes and the live policy change), to make the BNG mid-session rule concrete end-to-end.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **CoA/Disconnect message-flow micro-example** (attributes and the live policy change), to make the BNG mid-session rule concrete end-to-end.
 - Cross-link the security overlap explicitly to `cybersecurity-operations-soc` for DDoS scrubbing and route-origin/RPKI enforcement, beyond the device/route hygiene owned here.
 
 ## Հայերեն
@@ -43,7 +43,7 @@ The default posture for all of the above: produce the plan, the evidence, and th
 ### Սեփական ապագա-բարելավման կետեր
 
 - Ավելացրու worked example **wholesale/open-access L2TP fault**-ի համար (LAC→LNS), քանի որ access-ընդդեմ-retail auth ownership-ը mis-triage-ի կրկնվող աղբյուր է։
-- Ավելացրու **XGS-PON / 10G-PON budget worked example** GPON B+-ի կողքին, որ optical-budget mechanism-ը ծածկի ավելի բարձր-արագ access estate-ը։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **XGS-PON / 10G-PON budget worked example** GPON B+-ի կողքին, որ optical-budget mechanism-ը ծածկի ավելի բարձր-արագ access estate-ը։
 - Ավելացրու **multi-window capacity/peering decision recipe** (95-րդ percentile + load-ի տակ loss + cost-per-Mbps՝ transit-ընդդեմ-peering-ընդդեմ-IXP որոշմամբ), որ capacity կանոնը copy-ready լինի, ոչ նկարագրված։
-- Ավելացրու **CoA/Disconnect message-flow micro-example** (attribute-ները և live policy change-ը), որ BNG mid-session կանոնը կոնկրետ լինի ծայրից ծայր։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **CoA/Disconnect message-flow micro-example** (attribute-ները և live policy change-ը), որ BNG mid-session կանոնը կոնկրետ լինի ծայրից ծայր։
 - Cross-link արա security-ի համընկնումը բացահայտ `cybersecurity-operations-soc`-ին՝ DDoS scrubbing-ի և route-origin/RPKI enforcement-ի համար, այստեղ տիրվող device/route hygiene-ից այն կողմ։

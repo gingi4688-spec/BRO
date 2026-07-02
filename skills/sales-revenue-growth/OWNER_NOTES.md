@@ -17,8 +17,8 @@ The default posture for all of the above: produce the analysis, the artifact, an
 
 ### Owned future-improvement items
 
-- Add a worked **NRR / cohort-expansion model** (starting ARR, expansion, contraction, churn → NRR by cohort) so the revenue-quality requirement is concrete end-to-end, matching the depth of the funnel and pricing examples.
-- Add a **CAC-payback worked example** that shows the clean hand-off to `finance-unit-economics` (this skill supplies ACV, gross-margin %, and the sales-cycle inputs; finance computes payback), so the routing boundary is demonstrated, not just described.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **NRR / cohort-expansion model** (starting ARR, expansion, contraction, churn → NRR by cohort) so the revenue-quality requirement is concrete end-to-end, matching the depth of the funnel and pricing examples.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **CAC-payback worked example** that shows the clean hand-off to `finance-unit-economics` (this skill supplies ACV, gross-margin %, and the sales-cycle inputs; finance computes payback), so the routing boundary is demonstrated, not just described.
 - Add a **PLG-versus-sales-led motion decision pattern** with the ACV / self-serve-fit thresholds that pick the motion, since motion-model mismatch is one of the named failure modes.
 - Add a **win/loss analysis template** (why deals were won or lost, mapped back to the ICP and MEDDICC gaps) to close the loop between deal reviews and ICP refinement.
 - Cross-link the demand-gen and positioning overlap explicitly to `marketing-brand`, beyond the conflict rule stated in `SKILL.md`, with a worked ICP → campaign-target hand-off.
@@ -40,8 +40,8 @@ The default posture for all of the above: produce the analysis, the artifact, an
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked **NRR / cohort-expansion model** (starting ARR, expansion, contraction, churn → NRR ըստ cohort-ի), որ revenue-quality պահանջը կոնկրետ լինի ծայրից ծայր՝ funnel-ի և pricing-ի օրինակների խորությամբ։
-- Ավելացրու **CAC-payback worked example**, որ ցույց է տալիս մաքուր hand-off-ը `finance-unit-economics`-ին (այս skill-ը տալիս է ACV, gross-margin %, և sales-cycle input-ները. finance-ը հաշվում payback-ը), որ routing boundary-ն ցուցադրվի, ոչ միայն նկարագրվի։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **NRR / cohort-expansion model** (starting ARR, expansion, contraction, churn → NRR ըստ cohort-ի), որ revenue-quality պահանջը կոնկրետ լինի ծայրից ծայր՝ funnel-ի և pricing-ի օրինակների խորությամբ։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **CAC-payback worked example**, որ ցույց է տալիս մաքուր hand-off-ը `finance-unit-economics`-ին (այս skill-ը տալիս է ACV, gross-margin %, և sales-cycle input-ները. finance-ը հաշվում payback-ը), որ routing boundary-ն ցուցադրվի, ոչ միայն նկարագրվի։
 - Ավելացրու **PLG-ընդդեմ-sales-led motion decision pattern** ACV / self-serve-fit threshold-ներով, որ ընտրում են motion-ը, քանի որ motion-model mismatch-ը named failure mode-ներից մեկն է։
 - Ավելացրու **win/loss analysis template** (ինչու deal-երը won կամ lost եղան, քարտեզված ICP-ին և MEDDICC gap-երին), որ փակվի loop-ը deal review-ների և ICP-ի refinement-ի միջև։
 - Cross-link արա demand-gen-ի և positioning-ի համընկնումը բացահայտ `marketing-brand`-ին՝ `SKILL.md`-ի կոնֆլիկտի կանոնից այն կողմ, worked ICP → campaign-target hand-off-ով։

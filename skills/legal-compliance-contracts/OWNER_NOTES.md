@@ -18,7 +18,7 @@ The default posture for all of the above: produce the issue map, the risk alloca
 
 ### Owned future-improvement items
 
-- Add a worked **employment-agreement review** example end-to-end (all four levers — IP, non-compete, severance, at-will/for-cause — with the jurisdiction-variable routing shown), to match the contract and GDPR worked examples.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **employment-agreement review** example end-to-end (all four levers — IP, non-compete, severance, at-will/for-cause — with the jurisdiction-variable routing shown), to match the contract and GDPR worked examples.
 - Add a worked **M&A diligence-to-deal-mechanics** example showing a found risk allocated through a rep, an indemnity (cap/basket/survival), and an escrow, so the "allocate, don't just find" rule is concrete.
 - Add an **OSS-license decision tree** (permissive → weak → strong/network copyleft, with the distribution/network trigger) as a copy-ready artifact alongside the patterns entry.
 - Build a **per-regime privacy obligation matrix** (GDPR / CCPA-CPRA / LGPD columns × consent/opt-out, DPA, transfer, breach, rights rows) as a reusable template, with every threshold and transfer mechanism marked verify-before-use.
@@ -42,7 +42,7 @@ The default posture for all of the above: produce the issue map, the risk alloca
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու աշխատած **employment-agreement review** օրինակ ծայրից ծայր (չորս lever-ն էլ — IP, non-compete, severance, at-will/for-cause — jurisdiction-փոփոխական routing-ը ցույց տրված), որ համապատասխանի contract և GDPR worked example-ներին։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու աշխատած **employment-agreement review** օրինակ ծայրից ծայր (չորս lever-ն էլ — IP, non-compete, severance, at-will/for-cause — jurisdiction-փոփոխական routing-ը ցույց տրված), որ համապատասխանի contract և GDPR worked example-ներին։
 - Ավելացրու աշխատած **M&A diligence-to-deal-mechanics** օրինակ, որ ցույց է տալիս գտնված risk-ը allocate-ված rep-ով, indemnity-ով (cap/basket/survival) և escrow-ով, որ «allocate, ոչ միայն find» կանոնը կոնկրետ լինի։
 - Ավելացրու **OSS-license decision tree** (permissive → weak → strong/network copyleft, distribution/network trigger-ով) որպես copy-ready artifact՝ patterns-ի entry-ի կողքին։
 - Կառուցիր **per-regime privacy obligation matrix** (GDPR / CCPA-CPRA / LGPD սյունակներ × consent/opt-out, DPA, transfer, breach, rights տողեր) որպես reusable template, ամեն threshold-ը և transfer mechanism-ը նշված verify-before-use։

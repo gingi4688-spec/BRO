@@ -18,9 +18,9 @@ The default posture for all of the above: produce the diagnosis, the options, th
 
 ### Owned future-improvement items
 
-- Add a worked **Wardley-mapping example** end-to-end (component value chain → evolution axis → build-vs-buy/invest-ahead decision), since framework selection names it but no worked instance exists yet.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **Wardley-mapping example** end-to-end (component value chain → evolution axis → build-vs-buy/invest-ahead decision), since framework selection names it but no worked instance exists yet.
 - Add a worked **disruption-theory diagnosis** (reading an incumbent's blind spot and an entrant's low-end/new-market wedge) to make the framework-selection rule concrete in both directions.
-- Add a **decision-rights / RACI-style template** for the operating model, so the "decision rights" line in cadence design becomes copy-ready rather than described.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **decision-rights / RACI-style template** for the operating model, so the "decision rights" line in cadence design becomes copy-ready rather than described.
 - Add a **scenario-planning / pre-mortem pattern** for high-uncertainty bets, alongside the existing kill-threshold discipline.
 - Cross-link the pricing/unit-economics boundary explicitly to `finance-unit-economics` and the delivery boundary to `product-project-management`, so the support-vs-lead handoff is unambiguous in every artifact.
 
@@ -42,8 +42,8 @@ The default posture for all of the above: produce the diagnosis, the options, th
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked **Wardley-mapping օրինակ** ծայրից ծայր (component value chain → evolution առանցք → build-vs-buy/invest-ahead որոշում), քանի որ framework selection-ը անվանում է այն, բայց worked instance դեռ չկա։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **Wardley-mapping օրինակ** ծայրից ծայր (component value chain → evolution առանցք → build-vs-buy/invest-ahead որոշում), քանի որ framework selection-ը անվանում է այն, բայց worked instance դեռ չկա։
 - Ավելացրու worked **disruption-theory diagnosis** (incumbent-ի կույր կետը և entrant-ի low-end/new-market wedge-ը կարդալը), որ framework-selection կանոնը կոնկրետ լինի երկու ուղղությամբ։
-- Ավելացրու **decision-rights / RACI-ձև template** operating model-ի համար, որ cadence design-ի «decision rights» տողը copy-ready լինի, ոչ նկարագրված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **decision-rights / RACI-ձև template** operating model-ի համար, որ cadence design-ի «decision rights» տողը copy-ready լինի, ոչ նկարագրված։
 - Ավելացրու **scenario-planning / pre-mortem pattern** high-uncertainty bet-երի համար՝ եղած kill-threshold կարգապահության կողքին։
 - Cross-link արա pricing/unit-economics սահմանը բացահայտ `finance-unit-economics`-ին և delivery սահմանը `product-project-management`-ին, որ support-vs-lead handoff-ը միանշանակ լինի ամեն artifact-ում։

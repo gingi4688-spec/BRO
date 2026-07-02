@@ -20,7 +20,7 @@ The default posture for all of the above: produce the sourced synthesis, the exp
 - Add a worked **systematic-review-style protocol** example (PRISMA-style flow: records identified → screened → excluded with reasons → included), so the literature-review procedure is copy-ready, not only described.
 - Add a **GRADE-style evidence-grading appendix** to make the confidence ladder (high/moderate/low) map onto a recognized framework for study-quality downgrades (risk of bias, inconsistency, indirectness, imprecision).
 - Add a **citation-provenance checklist** that distinguishes "seen in provided text," "seen via tool output," and "stable well-known knowledge," to make the fabrication/misattribution detection step auditable per claim.
-- Add a **conflicting-meta-analyses** worked example (two reviews reach opposite conclusions), since reconciling syntheses of syntheses is a distinct, harder move than reconciling primary sources.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **conflicting-meta-analyses** worked example (two reviews reach opposite conclusions), since reconciling syntheses of syntheses is a distinct, harder move than reconciling primary sources.
 - Cross-link the statistics boundary explicitly to `data-science-analytics` for effect-size computation and uncertainty modeling, beyond the source-appraisal owned here.
 
 ## Հայերեն
@@ -43,5 +43,5 @@ The default posture for all of the above: produce the sourced synthesis, the exp
 - Ավելացրու worked **systematic-review-ոճ protocol** օրինակ (PRISMA-ոճ flow․ records identified → screened → excluded with reasons → included), որ literature-review ընթացակարգը copy-ready լինի, ոչ միայն նկարագրված։
 - Ավելացրու **GRADE-ոճ evidence-grading appendix**, որ confidence ladder-ը (high/moderate/low) քարտեզի ճանաչված framework-ի վրա՝ study-quality downgrade-ների համար (risk of bias, inconsistency, indirectness, imprecision)։
 - Ավելացրու **citation-provenance checklist**, որ տարբերակի «տեսած տրամադրված տեքստում», «տեսած tool output-ով» և «կայուն հայտնի գիտելիք», որ fabrication/misattribution detection step-ը auditable լինի ամեն claim-ի համար։
-- Ավելացրու **conflicting-meta-analyses** worked example (երկու review հակառակ conclusion-ի են հասնում), քանի որ synthesis-ների synthesis-ը հաշտեցնելը տարբեր, ավելի դժվար move է, քան primary source-երը հաշտեցնելը։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **conflicting-meta-analyses** worked example (երկու review հակառակ conclusion-ի են հասնում), քանի որ synthesis-ների synthesis-ը հաշտեցնելը տարբեր, ավելի դժվար move է, քան primary source-երը հաշտեցնելը։
 - Cross-link արա statistics-ի սահմանը բացահայտ `data-science-analytics`-ին՝ effect-size հաշվարկի և uncertainty modeling-ի համար, այստեղ տիրվող source-appraisal-ից այն կողմ։

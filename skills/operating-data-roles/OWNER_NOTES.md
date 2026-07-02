@@ -17,7 +17,7 @@ The default posture for all of the above: produce the routing tree, the RACI, th
 
 ### Owned future-improvement items
 
-- Add a third worked example for a **RAPID decision** (contested platform/definition) end-to-end, so the RACI-vs-RAPID rule has a concrete decision-rights walkthrough, not only an execution one.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a third worked example for a **RAPID decision** (contested platform/definition) end-to-end, so the RACI-vs-RAPID rule has a concrete decision-rights walkthrough, not only an execution one.
 - Add an **operating-model maturity ladder** (no contracts → first contracts → named stewards → self-serve platform → mesh) so the data-mesh maturity gate becomes a positionable scale rather than a yes/no.
 - Add a **handoff-contract acceptance checklist** the consumer can run mechanically (grain stated, idempotency key present, freshness test, sample rows), making "accept only on a passing real run" copy-ready.
 - Add a small **role-boundary reference card** (descriptive/semantic/causal/pipeline/serving/standard → role) to make the lens-selection cascade fast to apply in review.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the routing tree, the RACI, th
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու երրորդ worked example **RAPID որոշման** համար (վիճարկվող platform/definition) ծայրից ծայր, որ RACI-vs-RAPID կանոնը ունենա կոնկրետ decision-rights walkthrough, ոչ միայն execution-ի։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երրորդ worked example **RAPID որոշման** համար (վիճարկվող platform/definition) ծայրից ծայր, որ RACI-vs-RAPID կանոնը ունենա կոնկրետ decision-rights walkthrough, ոչ միայն execution-ի։
 - Ավելացրու **operating-model maturity ladder** (ոչ contract → առաջին contract-ներ → անվանված steward-ներ → self-serve platform → mesh), որ data-mesh maturity gate-ը դառնա դիրքավորելի scale, ոչ yes/no։
 - Ավելացրու **handoff-contract acceptance checklist**, որ consumer-ը կարող է մեխանիկորեն գործարկել (grain նշված, idempotency key կա, freshness test, sample rows), դարձնելով «ընդունիր միայն անցնող իրական run-ի վրա» copy-ready։
 - Ավելացրու փոքր **role-boundary reference card** (descriptive/semantic/causal/pipeline/serving/standard → role), որ lens-selection cascade-ը արագ կիրառելի լինի review-ում։
