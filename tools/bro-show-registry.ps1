@@ -6,19 +6,20 @@
 #>
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')   # run from BRO_HOME
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 $path = 'memory/_own/registry.json'
-if (-not (Test-Path $path)) { "SHOW REGISTRY: registry.json MISSING ($path)"; exit 2 }
-try { $reg = Get-Content -Raw $path | ConvertFrom-Json } catch { "SHOW REGISTRY: registry.json INVALID JSON"; exit 2 }
-"SHOW REGISTRY (read-only) — BRO_HOME: $((Get-Location).Path)"
-"  schema_version: $($reg.schema_version)"
+if (-not (Test-Path $path)) { "SHOW REGISTRY: registry.json MISSING / ԲԱՑԱԿԱՅՈՒՄ Է ($path)"; exit 2 }
+try { $reg = Get-Content -Raw $path | ConvertFrom-Json } catch { "SHOW REGISTRY: registry.json INVALID JSON / ԱՆՎԱՎԵՐ JSON"; exit 2 }
+"SHOW REGISTRY (read-only / միայն կարդալ) — BRO_HOME: $((Get-Location).Path)"
+"  schema_version / սխեմայի տարբերակ: $($reg.schema_version)"
 $projects = @($reg.projects)
-"  registered projects: $($projects.Count)"
+"  registered projects / գրանցված պրոյեկտներ: $($projects.Count)"
 if ($projects.Count -eq 0) {
-  "  (none — clean build; projects are added later via REGISTER PROJECT, Gev-gated)"
+  "  (none / չկա — clean build; projects are added later via REGISTER PROJECT, Gev-gated / պրոյեկտները ավելացվում են հետո՝ REGISTER PROJECT-ով)"
 } else {
   foreach ($p in $projects) {
     "   - $($p.project_id) | path=$($p.project_path) | scope=$($p.memory_scope) | status=$($p.status)"
   }
 }
-"NOTE: read-only — no files changed."
+"NOTE / ՆՇՈՒՄ: read-only — no files changed / միայն կարդալ, ոչ մի ֆայլ չի փոխվել։"
 exit 0

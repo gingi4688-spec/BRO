@@ -9,6 +9,7 @@
 #>
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
 
 $ts = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
 $phase = '?'; try { $phase = (Get-Content -Raw 'bro.manifest.json' | ConvertFrom-Json).phase } catch {}
@@ -59,5 +60,5 @@ $lines = @(
   "``````"
 )
 [System.IO.File]::WriteAllText((Join-Path (Get-Location).Path 'memory/_own/health-dashboard.md'), ($lines -join "`r`n") + "`r`n")
-"bro-health: snapshot written (last_run $ts, phase $phase). doctor exit=$docCode."
+"bro-health: snapshot written / snapshot գրվեց (last_run $ts, phase $phase). doctor exit=$docCode."
 exit 0
