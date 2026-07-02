@@ -5,7 +5,7 @@
       The project's pre-push quality gate (tsc/vitest/pytest) still runs and still protects — a real gate failure is
       reported, NOT silently bypassed. -NoVerify skips the gate ONLY with an explicit recorded reason (Gev's call).
       Requires BRO_GEV_APPROVED=1 (Gev's token), mirrored by the critical-command-gate.
-  HY: Բոլոր բռոների ՄԵԿ push-ուղին։ Auto-stash անում է Gev-ի WIP-ը (որ pre-push gate-ը dirty-tree-ի վրա չblock անի),
+  HY: Բոլոր բռոների ՄԵԿ push-ուղին։ Auto-stash անում է Gev-ի WIP-ը (որ pre-push gate-ը dirty-tree-ի վրա push-ը block չանի),
       push անում branch-ը, հետո byte-identical restore։ Project-ի quality gate-ը (tsc/vitest/pytest) դեռ վազում ա ու
       դեռ պաշտպանում — իրական gate-fail-ը REPORT ա, ոչ լուռ bypass։ -NoVerify = gate-ը շրջանցել ՄԻԱՅՆ գրառված
       պատճառով (Gev-ի call)։ Պահանջում է BRO_GEV_APPROVED=1։

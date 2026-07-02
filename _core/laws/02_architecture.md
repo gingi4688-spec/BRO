@@ -23,7 +23,7 @@ EN: A project that already has a brain (existing memory) ADOPTS it into its own 
 
 HY: Project, որ արդեն ուղեղ ունի, ADOPT է անում այն իր Project Bro-ի sealed memory (`X/bro/memory`, scope `X_only`, hash-verified, project-root memory դատարկվում) — Project Bro-ն ԵՐԲԵՔ 0-ից չի սկսվում, երբ օգտագործելի ուղեղ կա. ուղեղ չունեցողը սկսում է FRESH։ Ուղեղն ապրում է ՄԻԱՅՆ իր project-ի bro-ում ու ԵՐԲԵՔ չի մտնում SuperBro կամ ուրիշ project (B4/B6/B7/L8)։ Adopt-ը project-internal է (root → `X/bro/memory`), Gev-gated, hash-verified. երբեք չի blend անում, երբեք SuperBro mirror-ը authoritative չի համարում, երբեք ուղեղ չի պատճենում SuperBro։
 
-Enforcement / Կիրառում — EN: If a project with an existing brain would be installed FRESH (losing its memory), STOP — adopt the brain (Gev-gated, hash-verified, root vacated only after the destination verifies); never copy a brain to SuperBro or another project; never blend. · HY: Եթե ուղեղ ունեցող project-ը FRESH install-վեր (ուղեղը կորցնելով), ԿԱՆԳՆԻՐ — adopt արա (Gev-gated, hash-verified, root-ը դատարկիր ՄԻԱՅՆ destination-ի verify-ից հետո); երբեք ուղեղ չպատճենես SuperBro/ուրիշ project, երբեք չblend անես։
+Enforcement / Կիրառում — EN: If a project with an existing brain would be installed FRESH (losing its memory), STOP — adopt the brain (Gev-gated, hash-verified, root vacated only after the destination verifies); never copy a brain to SuperBro or another project; never blend. · HY: Եթե ուղեղ ունեցող project-ը FRESH install-վեր (ուղեղը կորցնելով), ԿԱՆԳՆԻՐ — adopt արա (Gev-gated, hash-verified, root-ը դատարկիր ՄԻԱՅՆ destination-ի verify-ից հետո); երբեք ուղեղ չպատճենես SuperBro/ուրիշ project, երբեք blend չանես։
 
 L14: <pending>   <!-- reserved architecture-law slot; L13 is taken by 06_tokens.md (ZERO HARDCODE) -->
 

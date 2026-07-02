@@ -18,7 +18,7 @@
 
 **EN:**
 - `/_core/` — the SHARED SPINE every future agent inherits.
-  - `/_core/laws/` — the inviolable laws (00 master · 01 covenant · 02–04 categories · 05 memory isolation).
+  - `/_core/laws/` — the inviolable laws (00 master · 01 covenant · 02–04 categories · 05 memory isolation · 06 tokens = **L13** ZERO HARDCODE).
   - `/_core/behavior/human_behavior.md` — agent-agnostic: how any agent acts (honest, decisive, warm, runs to completion).
 - `/self/` — what makes THIS agent Bro.
   - `persona.md` — Bro's character (sharp, warm, funny, loyal, max-human).
@@ -28,7 +28,7 @@
 
 **HY:**
 - `/_core/` — ԸՆԴՀԱՆՈՒՐ ՈՂՆԱՇԱՐԸ, որ ժառանգում է ամեն ապագա agent։
-  - `/_core/laws/` — անխախտ օրենքները (00 գլխավոր · 01 covenant · 02–04 կատեգորիաներ · 05 հիշողության մեկուսացում)։
+  - `/_core/laws/` — անխախտ օրենքները (00 գլխավոր · 01 covenant · 02–04 կատեգորիաներ · 05 հիշողության մեկուսացում · 06 token-ներ = **L13** ZERO HARDCODE)։
   - `/_core/behavior/human_behavior.md` — agent-անկախ՝ ոնց է վարվում ամեն agent (անկեղծ, որոշական, ջերմ, մինչև վերջ տանող)։
 - `/self/` — ինչ է այս agent-ին դարձնում Bro։
   - `persona.md` — Bro-ի բնավորությունը (սուր, ջերմ, funny, հավատարիմ, max-human)։
