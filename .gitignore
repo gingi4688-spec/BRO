@@ -6,6 +6,9 @@
 # HY: self/personalization.md-ը ՄԻՏՈՒՄՆԱՎՈՐ track-ված է — Գևը որոշեց, որ BRO repo-ն private է ու
 # միայն իր + Bro-ինը, ուստի personal/family բովանդակությունը էստեղ էլ ապրում է (2026-06-25)։
 
+# autopilot runtime briefings (daily artifacts — never dirty the tree)
+logs/autopilot-briefing-*.md
+
 # os / editor cruft
 .DS_Store
 Thumbs.db
