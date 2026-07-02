@@ -133,6 +133,23 @@ try {
     "  wrote bro/AUTOPILOT-PLAN.md (autopilot-ready: bounded, auto-stash, own branch, push-only-on-Gev)"
   }
 
+  # 4c) pre-push QUALITY GATE (gate #1, born with the project): deliver the generic gate + its wire-installer, and
+  #     auto-wire the git hook if the project is already a repo; otherwise it wires on `git init` (bro/wire-pre-push.ps1).
+  #     Born a no-op until the project has lint/typecheck/test (or ruff/pytest), then it auto-guards every push
+  #     (bro-push -NoVerify -Reason skips it, Gev's call). The gate is the SuperBro-governed template, delivered here.
+  if (Test-Path $broSub) {
+    foreach ($g in @('pre-push-gate.ps1','wire-pre-push.ps1')) {
+      $gs = "tools/templates/project-bro/$g"
+      if (Test-Path $gs) { Copy-Item $gs (Join-Path $broSub $g) -Force }
+    }
+    if (Test-Path (Join-Path $ProjectPath '.git')) {
+      & pwsh -NoProfile -File (Join-Path $broSub 'wire-pre-push.ps1') | Out-Host
+      "  wrote bro/pre-push-gate.ps1 + wired .git/hooks/pre-push (quality gate #1 active on push)"
+    } else {
+      "  wrote bro/pre-push-gate.ps1 + bro/wire-pre-push.ps1 (quality gate #1 delivered; after 'git init' run: pwsh bro/wire-pre-push.ps1)"
+    }
+  }
+
   # 5) docs/ intake seed - the docs-pack selection pointer (the project Bro fills it during intake)
   $docsDir = Join-Path $ProjectPath 'docs'
   if (-not (Test-Path $docsDir)) { New-Item -ItemType Directory -Force $docsDir | Out-Null }
@@ -177,6 +194,7 @@ try {
   "    - wall-to-root:  open $ProjectPath as a project root -> the 5-hook wall auto-activates"
   "    - constitution:  $ProjectPath\CLAUDE.md  (L8)"
   "    - intake:        $ProjectPath\docs\PROJECT_DOCS_SELECTION.md"
+  "    - quality gate:  $broDir\pre-push-gate.ps1  (gate #1; runs on push once a lint/typecheck/test suite exists; wire after git init: pwsh bro\wire-pre-push.ps1)"
   "  NEXT: open a NEW window from $ProjectPath - the project Bro greets as $Name's Bro and runs intake."
   exit 0
 } catch { "  ERROR during scaffold: $($_.Exception.Message)  (use -Rollback to clean a partial bro/)"; exit 6 }
