@@ -48,7 +48,7 @@ try {
   $pushRe = '(?im)\bgit\b[^\n;|&]*?\s(?<!-)push\b'
   $isPush = ($scrub -match $pushRe) -or ($wrapperBodies -match $pushRe) -or ($cmd -match '(?i)\bgit\b\s+["'']?push\b')
   # 2) actual execution of a critical script (via -File, or at a command position) - NOT a mere path argument
-  $crit = 'bro-(release|promote|register|install|update-spine|new-project|wire-root|cross-grant|schedule)\.ps1'
+  $crit = 'bro-(release|promote|register|install|update-spine|new-project|wire-root|cross-grant|schedule|push)\.ps1'
   $execViaFile = $scrub -match ("(?i)-File\b[^\n;|&]*\b" + $crit)
   $execAtStart = $scrub -match ("(?im)(^|[;&|]|&&|\|\|)\s*&?\s*(\.?[\\/])?(tools[\\/])?" + $crit)
   $isCriticalScript = $execViaFile -or $execAtStart
