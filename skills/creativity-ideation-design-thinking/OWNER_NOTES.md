@@ -17,7 +17,7 @@ Default posture: generate freely *within* the boundary, name any constraint the 
 
 ### Owned future-improvement items
 
-- Add a worked **TRIZ physical-contradiction** example (same parameter must be high and low → separation in time/space/condition), to complement the technical-contradiction case in `worked-example.md` B.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **TRIZ physical-contradiction** example (same parameter must be high and low → separation in time/space/condition), to complement the technical-contradiction case in `worked-example.md` B.
 - Add a **morphological-analysis / forced-connection** pattern for combinatorial idea spaces (parameters × options grid), as a sixth divergence mechanism alongside SCAMPER/analogy/TRIZ.
 - Add an **async-ideation facilitation recipe** (brainwriting 6-3-5 timing, shared-doc protocol, pooling-then-discussing sequence) so the conditions-for-creativity guidance is copy-ready, not only described.
 - Add a **prototype-fidelity decision aid** (fake-door vs Wizard-of-Oz vs concierge vs landing test) mapped to which assumption type each one cheapest-tests.
@@ -40,7 +40,7 @@ Default posture: generate freely *within* the boundary, name any constraint the 
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked **TRIZ physical-contradiction** օրինակ (նույն պարամետրը պետք է լինի և՛ բարձր, և՛ ցածր → separation ժամանակում/տարածքում/պայմանով)՝ `worked-example.md` B-ի technical-contradiction case-ը լրացնելու համար։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **TRIZ physical-contradiction** օրինակ (նույն պարամետրը պետք է լինի և՛ բարձր, և՛ ցածր → separation ժամանակում/տարածքում/պայմանով)՝ `worked-example.md` B-ի technical-contradiction case-ը լրացնելու համար։
 - Ավելացրու **morphological-analysis / forced-connection** pattern combinatorial idea space-ների համար (parameters × options grid)՝ որպես վեցերորդ divergence mechanism SCAMPER/analogy/TRIZ-ի կողքին։
 - Ավելացրու **async-ideation facilitation recipe** (brainwriting 6-3-5 timing, shared-doc protocol, pooling-then-discussing հաջորդականություն), որ conditions-for-creativity-ի ուղեցույցը copy-ready լինի, ոչ միայն նկարագրված։
 - Ավելացրու **prototype-fidelity decision aid** (fake-door ընդդեմ Wizard-of-Oz ընդդեմ concierge ընդդեմ landing test)՝ քարտեզված, թե որ assumption type-ն ամեն մեկը ամենաէժան է test անում։

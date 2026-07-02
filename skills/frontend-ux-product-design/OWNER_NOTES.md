@@ -17,7 +17,7 @@ The default posture for all of the above: produce the design, the evidence, the 
 
 ### Owned future-improvement items
 
-- Add a third worked example for a **multi-step form / wizard** (inline forgiving validation, preserve-input-on-error, progress and Goal-Gradient), since forms are the highest-friction surface and deserve their own end-to-end example.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a third worked example for a **multi-step form / wizard** (inline forgiving validation, preserve-input-on-error, progress and Goal-Gradient), since forms are the highest-friction surface and deserve their own end-to-end example.
 - Add a **microcopy-and-localization pattern** that treats text as an interaction and accessibility surface (what a screen reader announces) and plans for text expansion, coordinating with `communication-writing-negotiation` and `language-mastery`.
 - Add a **container-query / fluid-scaling responsive recipe** (component-level responsiveness with `clamp` and container queries) so responsive behavior inside the structure is copy-ready, while page-level responsive priority stays with `ui-page-structure-design`.
 - Add a **design-token governance worked example** (lint rule + CI contrast check + visual-regression) to make "conformance is enforceable, not aspirational" concrete end-to-end.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the design, the evidence, the 
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու երրորդ worked example **multi-step form / wizard**-ի համար (inline ներողամիտ validation, preserve-input-on-error, progress ու Goal-Gradient), քանի որ form-ը ամենաբարձր-friction surface-ն է և արժանի է իր ծայրից-ծայր օրինակին։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երրորդ worked example **multi-step form / wizard**-ի համար (inline ներողամիտ validation, preserve-input-on-error, progress ու Goal-Gradient), քանի որ form-ը ամենաբարձր-friction surface-ն է և արժանի է իր ծայրից-ծայր օրինակին։
 - Ավելացրու **microcopy-և-localization pattern**, որ text-ը համարում է interaction և accessibility surface (ինչ է screen reader-ը հայտարարում) և պլանավորում text expansion-ը՝ համակարգելով `communication-writing-negotiation`-ի ու `language-mastery`-ի հետ։
 - Ավելացրու **container-query / fluid-scaling responsive recipe** (component-level responsiveness՝ `clamp`-ով ու container query-ով), որ structure-ի *ներսի* responsive վարքը copy-ready լինի, մինչ էջի մակարդակի responsive priority-ն մնում է `ui-page-structure-design`-ի մոտ։
 - Ավելացրու **design-token governance worked example** (lint rule + CI contrast check + visual-regression), որ «conformance-ը enforceable է, ոչ aspirational»-ը կոնկրետ լինի ծայրից ծայր։

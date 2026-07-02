@@ -32,6 +32,22 @@
 
 **Why this passes.** It correctly *chose the tool to the obstacle*: the blocker is a stated tradeoff, so it reaches for TRIZ (contradiction → inventive principles) and explicitly refuses the "medium cooler" average — which is the exact failure of treating a contradiction as something to split. The inventive principles are applied as concrete design moves (segment the insulation, phase-change pack, pre-heat at depot, reorder routes), not as slogans, and each keeps *both* desired properties instead of trading one for the other. The session also fixes the *conditions*, not just the technique: a silent brainwriting round before discussion to beat anchoring, and Six Hats to put the skeptic's critique into a defined Black slot so divergence survives. Convergence is on impact/effort, the riskiest assumption is named and sent to a 20-route prototype with a learning metric, an owner, and a kill/continue rule that has a concrete fallback (add pre-heat). Nothing is invented — the only quantities are the design's own targets and thresholds.
 
+### Example C — TRIZ physical contradiction (separation)
+
+**Prompt.** A signup form must be **long** (to capture the data that personalizes onboarding and lifts activation) and **short** (because every extra field drops completion). The team keeps averaging toward a "medium" form. Break it.
+
+**Senior answer.** This is a **physical contradiction** — the *same* parameter (form length / number of fields) must be both high and low at once. Unlike a technical contradiction (two *different* parameters trade off, which you attack with inventive principles), a physical contradiction is resolved by **separation**: satisfy the two opposite demands in different **time, space, condition, or scale**, so the parameter is high *where/when* you need it high and low *where/when* you need it low. Refuse the "medium form" — it is the average that fails both sides.
+
+The four separations, applied:
+- **In time — short *now*, long *later*.** Ask only what is needed to start (email + one field) at signup; collect the rest by **progressive profiling** across later sessions, at moments the user already sees value. Short at the high-drop-off moment, long across the lifecycle.
+- **In space / by part — split it.** A **short required core** + an **optional "personalize" branch** the motivated user can expand. Length is low on the critical path, high in the opt-in branch.
+- **In condition — make it adaptive.** Short for a simple/SMB signup; longer for an enterprise one where the data is worth the friction. Length varies by the condition that decides whether the data pays off.
+- **In scale (whole vs part) — one question per screen.** The *individual step* is short (low perceived length) while the *whole* still collects a lot; the wizard makes a long form feel short.
+
+Pick by the real constraint: if drop-off is at signup, separation-in-time (progressive profiling) is the highest-leverage move; if the data's value is segment-dependent, separation-in-condition.
+
+**Why this passes.** It names the obstacle as a **physical contradiction** (the same parameter must be high *and* low) and distinguishes it from a technical one, so it reaches for the **separation principles** rather than an inventive-principle swap or the "medium form" average that fails both. It works all four separations as concrete moves (time → progressive profiling; part → required core + optional branch; condition → adaptive by segment; scale → one-question-per-screen), each **keeping the form short where length hurts and long where it pays**, and routes the choice to the real constraint (drop-off location vs data value). Nothing invented — the moves are structural, not numeric claims.
+
 ## Հայերեն
 
 ### Օրինակ A — Onboarding idea sprint (frame → SCAMPER → converge → prototype)
@@ -63,3 +79,19 @@
 **Converge։** Park արա pure-bigger-cooler գաղափարը (այն ուղղակի միջինացնում է contradiction-ը)։ Impact/effort triage․ **phase-change pack**-ը high-impact/low-effort է (chassis-ի փոփոխություն չկա) և գնում է առաջինը. **route-hot-orders-first**-ը low-effort է և stack է անում դրա հետ։ Pack-ի make-or-break assumption-ը (impact × uncertainty)․ depot-charged phase-change pack-ը պահու՞մ է temperature-ը route-ի ողջ տևողության համար։ **Prototype․** instrument արա 20 route pre-charged pack-ով, learning metric = route-ի վերջի temp ≥ target՝ range-ն անփոփոխ, owner = hardware lead, kill/continue = եթե temperature fail է անում median-ից երկար route-երում, ավելացրու pre-heat-ը (#10) մինչ approach-ը լքելը։
 
 **Ինչու է անցնում gate-ը.** Այն ճիշտ *ընտրեց գործիքը խոչընդոտին*․ blocker-ը նշված tradeoff է, ուստի վերցնում է TRIZ (contradiction → inventive principle) և բացահայտ մերժում «միջին cooler»-ի միջինը — ինչը հենց contradiction-ը կիսելու բանի պես վերաբերվելու ձախողումն է։ Inventive principle-ները կիրառվում են որպես կոնկրետ design move (segment արա insulation-ը, phase-change pack, depot-ում pre-heat, route-երը վերադասավորիր), ոչ կարգախոս, և ամեն մեկը պահում է *երկու* ցանկալի հատկությունն էլ՝ մեկը մյուսի դիմաց փոխանակելու փոխարեն։ Session-ը նաև ուղղում է *պայմանները*, ոչ միայն technique-ը․ լուռ brainwriting round մինչ քննարկումը՝ anchoring-ը հաղթելու համար, և Six Hats՝ skeptic-ի critique-ը որոշակի Black slot-ի մեջ դնելու, որ divergence-ը գոյատևի։ Convergence-ն impact/effort-ի վրա է, ամենառիսկային assumption-ն անվանված է և ուղարկված 20-route prototype-ի՝ learning metric-ով, owner-ով և kill/continue rule-ով, որ ունի կոնկրետ fallback (ավելացրու pre-heat)։ Ոչինչ չի հորինվում — միակ քանակները design-ի սեփական target-ներն ու threshold-ներն են։
+
+### Օրինակ C — TRIZ physical contradiction (separation)
+
+**Prompt.** Signup form-ը պետք է լինի **երկար** (personalize անելու և activation բարձրացնելու data հավաքելու) ԵՎ **կարճ** (որովհետև ամեն ավել դաշտ իջեցնում է completion-ը)։ Թիմը շարունակ միջինացնում է դեպի «միջին» form։ Կոտրիր այն։
+
+**Senior պատասխան.** Սա **physical contradiction** է — *նույն* parameter-ը (form-ի երկարությունը / դաշտերի քանակը) պետք է լինի և՛ high, և՛ low միաժամանակ։ Ի տարբերություն technical contradiction-ի (երկու *տարբեր* parameter trade-off են անում, ինչին հարձակվում ես inventive principle-ներով), physical contradiction-ը լուծվում է **separation**-ով․ բավարարիր երկու հակառակ պահանջը տարբեր **time, space, condition, կամ scale**-ում, որ parameter-ը high լինի *որտեղ/երբ* պետք է high, և low՝ *որտեղ/երբ* պետք է low։ Մերժի՛ր «միջին form»-ը — այն միջինն է, որ երկու կողմն էլ fail է անում։
+
+Չորս separation-ը, կիրառված․
+- **Time-ում — կարճ *հիմա*, երկար *հետո*։** Հարցրու միայն այն, ինչ պետք է սկսելու (email + մեկ դաշտ) signup-ին. մնացածը հավաքիր **progressive profiling**-ով հետագա session-ներում, այն պահերին, երբ user-ն արդեն value է տեսնում։ Կարճ՝ high-drop-off պահին, երկար՝ ողջ lifecycle-ում։
+- **Space-ում / by part — բաժանիր։** **Կարճ required core** + **optional «personalize» branch**, որ motivated user-ը կարող է ընդլայնել։ Երկարությունը low է critical path-ում, high՝ opt-in branch-ում։
+- **Condition-ում — դարձրու adaptive։** Կարճ՝ simple/SMB signup-ի. երկար՝ enterprise-ի, որտեղ data-ն արժե friction-ը։ Երկարությունը փոխվում է ըստ condition-ի, որ որոշում է՝ data-ն արժե՞ քրտինքը։
+- **Scale-ում (whole vs part) — մեկ հարց մեկ էկրանին։** *Առանձին step-ը* կարճ է (ցածր ընկալվող երկարություն), մինչ *ամբողջը* դեռ շատ է հավաքում. wizard-ը երկար form-ը կարճ է զգացնում։
+
+Ընտրիր ըստ իրական constraint-ի․ եթե drop-off-ը signup-ին է, separation-in-time-ը (progressive profiling) ամենաբարձր-leverage move-ն է. եթե data-ի value-ն segment-dependent է, separation-in-condition-ը։
+
+**Ինչու է անցնում gate-ը.** Այն անվանում է խոչընդոտը որպես **physical contradiction** (նույն parameter-ը պետք է high *և* low) և տարբերում technical-ից, ուստի վերցնում է **separation principle**-ները՝ inventive-principle swap-ի կամ «միջին form»-ի միջինի փոխարեն, որ երկուսն էլ fail է անում։ Այն worked է անում չորս separation-ն էլ որպես կոնկրետ move (time → progressive profiling. part → required core + optional branch. condition → adaptive by segment. scale → one-question-per-screen), ամեն մեկը **form-ը կարճ պահելով, որտեղ երկարությունը վնասում է, և երկար՝ որտեղ արժե**, և routing է անում ընտրությունը դեպի իրական constraint (drop-off location vs data value)։ Ոչինչ հորինված չէ — move-երը structural են, ոչ numeric claim։

@@ -17,7 +17,7 @@ The default posture for all of the above: produce the design, the evidence, the 
 
 ### Owned future-improvement items
 
-- Add a worked example for **streaming joins and out-of-order enrichment** (joining two event streams with independent watermarks and late-data handling), since join semantics are a common senior failure point not yet covered by a full example.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked example for **streaming joins and out-of-order enrichment** (joining two event streams with independent watermarks and late-data handling), since join semantics are a common senior failure point not yet covered by a full example.
 - Add a **data-contract template** (producer/consumer SLA, schema, semantics, and breaking-change policy) to make the schema-evolution coordination with `data-architecture-leadership` concrete and copy-ready.
 - Add a **lineage/observability section** to the manual (column-level lineage, freshness/volume anomaly detection) so the freshness contract is monitored, not just declared.
 - Add an **exactly-once recipe** with the concrete sink patterns (idempotent upsert, transactional outbox, dedupe table with TTL) so the at-least-once-plus-idempotent-sink rule is copy-ready rather than described.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the design, the evidence, the 
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked example **streaming join-ի և out-of-order enrichment-ի** համար (երկու event stream-ի join՝ անկախ watermark-ներով և late-data մշակմամբ), քանի որ join semantics-ը հաճախակի senior failure point է, որ դեռ լրիվ օրինակով ծածկված չէ։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked example **streaming join-ի և out-of-order enrichment-ի** համար (երկու event stream-ի join՝ անկախ watermark-ներով և late-data մշակմամբ), քանի որ join semantics-ը հաճախակի senior failure point է, որ դեռ լրիվ օրինակով ծածկված չէ։
 - Ավելացրու **data-contract template** (producer/consumer SLA, schema, semantics և breaking-change policy), որ `data-architecture-leadership`-ի հետ schema-evolution-ի համակարգումը կոնկրետ և copy-ready լինի։
 - Ավելացրու **lineage/observability բաժին** manual-ին (column-level lineage, freshness/volume anomaly detection), որ freshness contract-ը monitor-վի, ոչ միայն հայտարարվի։
 - Ավելացրու **exactly-once recipe** կոնկրետ sink pattern-ներով (idempotent upsert, transactional outbox, dedupe table՝ TTL-ով), որ at-least-once-plus-idempotent-sink կանոնը copy-ready լինի, ոչ նկարագրված։

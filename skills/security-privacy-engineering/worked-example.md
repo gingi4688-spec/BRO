@@ -40,6 +40,23 @@
 
 **Why this passes.** It refuses to treat a valid login as authorization and names the exact failure mode by class — IDOR (object-level), broken function-level authz, unsafe token lifecycle, and the wrong OAuth grant — instead of a vague "tighten security." Every fix is enforced **server-side at the data layer or the endpoint**, and client-side hiding is explicitly rejected as a non-control. Each item ends with a **live verification** (wrong-actor 403, non-admin denied, revoked-token rejected, wrong-audience rejected), holding the "verify in the running system, not in the doc" line, and it adds the matching detection so the abuse path is observable. It invents no CVE or vendor claim and keeps the dual-use boundary — it reviews and hardens the defender's own API, it does not write the attack.
 
+### Example C — supply-chain control plan
+
+**Prompt.** After a dependency-confusion scare, leadership asks: "how do we know our build isn't shipping a compromised dependency?" Design the supply-chain control plan.
+
+**Senior answer.** You cannot defend what you cannot inventory, and you cannot trust what you cannot verify — so the plan is **inventory → scan → pin → verify provenance → fail the build → isolate**, each a concrete gate, not a policy sentence.
+
+1. **SBOM — inventory everything.** Generate a **Software Bill of Materials** (CycloneDX/SPDX) of direct *and transitive* dependencies at build time, per artifact. You cannot assess a dependency you do not know is there; transitive deps are where the risk hides.
+2. **SCA gate — scan, fail the build.** Run **Software Composition Analysis** in CI against known-vulnerable and yanked versions; **fail the build on an unreviewed critical/high** (not a warning that scrolls by). A finding is either remediated (bump) or gets an explicit, time-boxed, owner-signed exception — never a silent pass.
+3. **Pin + lockfile — no floating versions.** Pin exact versions with a committed lockfile and hashes; a floating `^` range lets a different artifact enter without a code change. Hashes make the resolved tree reproducible and tamper-evident.
+4. **Verify provenance / signatures.** Verify package signatures / provenance attestations (e.g. Sigstore / SLSA provenance) so a swapped package (typosquat, **dependency-confusion**, compromised maintainer/registry) is rejected. For the dependency-confusion class specifically: **scope internal packages** to a private-registry namespace and configure the resolver so an internal name can *never* be silently satisfied by a public package of the same name — the exact hole the scare hit.
+5. **Isolate the build + restrict publish.** Build hermetically (no arbitrary egress pulling unpinned things at build time), restrict who/what can publish, and **verify the artifact you ship is the artifact you built** (built digest == deployed digest).
+6. **Detection + response.** Alert on a new critical in an already-shipped dependency (the SBOM answers "are we affected by CVE-X?" in minutes) with a rollback/patch path.
+
+Assumption to label: specific tools and any version/CVE are **verify-before-use** against current tooling; the *control structure* (SBOM → SCA-gate → pin → provenance → fail-closed → isolate) is the transferable answer.
+
+**Why this passes.** It answers "how do we know" with a **verifiable control chain**, not a policy: **SBOM** (direct + transitive inventory), an **SCA gate that fails the build** on an unreviewed critical (not a warning), **pinning + lockfile + hashes** (no floating version slips in), and **provenance/signature verification** so a swapped package is rejected — and it targets the specific **dependency-confusion** class by namespacing internal packages so an internal name cannot be satisfied by a public one. It closes the loop with a **hermetic build + publish restriction + built-vs-shipped digest check** and a **detection path** (SBOM answers "are we affected?" fast). Tools/CVEs are marked verify-before-use; the transferable deliverable is the fail-closed control structure — exactly what a copy-ready supply-chain plan is.
+
 ## Հայերեն
 
 ### Օրինակ A — Threat model (STRIDE) multi-tenant billing feature-ի համար
@@ -79,3 +96,20 @@
 **Net.** AuthN-ը նորմալ էր. **authZ-ն էր gap-ը** — object-level և function-level check-երը բացակայում էին, token lifecycle-ն unsafe էր, և flow-ը սխալ grant էր։ Ամեն fix server-side է և ամեն մեկն ունի live verification (սխալ actor-ը ստանում է 403), ուստի «documented as enabled»-ը done չի ընդունվում։ Detection ավելացնելու․ alert report id-ների դեմ 403 burst-ի (IDOR probing) և admin-endpoint authz denial-ի վրա։
 
 **Ինչու է անցնում gate-ը.** Այն հրաժարվում է վավեր login-ը authorization համարելուց և անվանում է ստույգ failure mode-ը ըստ class-ի — IDOR (object-level), broken function-level authz, unsafe token lifecycle և սխալ OAuth grant — ոչ թե անորոշ «ամրացրու security-ն»։ Ամեն fix enforce-ված է **server-side data layer-ում կամ endpoint-ի վրա**, և client-side թաքցնելը բացահայտ մերժված է որպես non-control։ Ամեն item-ը ավարտվում է **live verification**-ով (սխալ-actor 403, non-admin deny, revoked-token reject, wrong-audience reject)՝ պահելով «verify running system-ում, ոչ doc-ում» գիծը, և ավելացնում է համապատասխան detection-ը, որ abuse path-ը observable լինի։ Այն ոչ մի CVE կամ vendor claim չի հորինում և պահում է dual-use սահմանը — այն review և harden է անում defender-ի սեփական API-ն, ոչ թե գրում հարձակումը։
+
+### Օրինակ C — supply-chain control plan
+
+**Prompt.** Dependency-confusion վախից հետո leadership-ը հարցնում է․ «ինչպե՞ս ենք իմանում, որ մեր build-ը compromised dependency չի ship անում»։ Նախագծիր supply-chain control plan-ը։
+
+**Senior պատասխան.** Չես կարող պաշտպանել այն, ինչ չես inventory անում, և չես կարող վստահել այն, ինչ չես կարող verify անել — ուստի plan-ը՝ **inventory → scan → pin → verify provenance → fail the build → isolate**, ամեն մեկը կոնկրետ gate, ոչ policy նախադասություն։
+
+1. **SBOM — inventory արա ամեն ինչ.** Generate արա **Software Bill of Materials** (CycloneDX/SPDX) direct *և transitive* dependency-ների, build-time-ին, ամեն artifact-ի։ Չես կարող գնահատել dependency, որ չգիտես կա. transitive dep-երն են, որտեղ ռիսկը թաքնվում է։
+2. **SCA gate — scan արա, fail արա build-ը.** Գործարկիր **Software Composition Analysis** CI-ում known-vulnerable ու yanked version-ների դեմ. **fail արա build-ը unreviewed critical/high-ի վրա** (ոչ warning, որ scroll է անում)։ Finding-ը կա՛մ remediate է լինում (bump), կա՛մ ստանում է explicit, time-boxed, owner-signed exception — երբեք silent pass։
+3. **Pin + lockfile — ոչ floating version.** Pin արա ճշգրիտ version-ները committed lockfile-ով ու hash-երով. floating `^` range-ը թույլ է տալիս, որ ուրիշ artifact մտնի առանց code փոփոխության։ Hash-երը resolved tree-ն reproducible ու tamper-evident են դարձնում։
+4. **Verify արա provenance / signature.** Verify արա package signature / provenance attestation (օր.՝ Sigstore / SLSA provenance), որ swap արված package-ը (typosquat, **dependency-confusion**, compromised maintainer/registry) reject-վի։ Dependency-confusion class-ի համար հատուկ․ **scope արա internal package-ները** private-registry namespace-ի և configure արա resolver-ը, որ internal name-ը *երբեք* լուռ չբավարարվի նույն անունով public package-ով — հենց այն ծակը, որ վախը կպավ։
+5. **Isolate արա build-ը + restrict արա publish-ը.** Build արա hermetically (ոչ arbitrary egress, որ build-time-ին unpinned բան է քաշում), restrict արա ով/ինչ կարող է publish անել, և **verify արա, որ ship արածդ artifact-ը build արածդ artifact-ն է** (built digest == deployed digest)։
+6. **Detection + response.** Alert արա արդեն-ship-ված dependency-ում նոր critical-ի վրա (SBOM-ը րոպեներում պատասխանում է «ազդված ե՞նք CVE-X-ից»)՝ rollback/patch path-ով։
+
+Label-ելու assumption․ կոնկրետ tool-երն ու ցանկացած version/CVE **verify-before-use** են ընթացիկ tooling-ի դեմ. *control structure*-ը (SBOM → SCA-gate → pin → provenance → fail-closed → isolate) transferable պատասխանն է։
+
+**Ինչու է անցնում gate-ը.** Այն «ինչպե՞ս ենք իմանում»-ին պատասխանում է **verifiable control chain**-ով, ոչ policy-ով․ **SBOM** (direct + transitive inventory), **SCA gate, որ fail է անում build-ը** unreviewed critical-ի վրա (ոչ warning), **pinning + lockfile + hash** (ոչ floating version չի սողոսկում), և **provenance/signature verification**, որ swap արված package reject-վի — և թիրախավորում է կոնկրետ **dependency-confusion** class-ը internal package-ները namespace-ելով, որ internal name-ը public-ով չբավարարվի։ Այն փակում է loop-ը **hermetic build + publish restriction + built-vs-shipped digest check**-ով և **detection path**-ով (SBOM-ը արագ պատասխանում «ազդված ե՞նք»)։ Tool/CVE-ները նշված verify-before-use. transferable deliverable-ը fail-closed control structure-ն է — հենց այն, ինչ copy-ready supply-chain plan-ն է։

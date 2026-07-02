@@ -18,7 +18,7 @@ The default posture for all of the above: produce the threat model, the control 
 
 ### Owned future-improvement items
 
-- Add a **worked supply-chain control plan** (SBOM generation, SCA gate config, pinning + provenance verification, and the build-fail policy) so the supply-chain requirement is copy-ready, not just described.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a **worked supply-chain control plan** (SBOM generation, SCA gate config, pinning + provenance verification, and the build-fail policy) so the supply-chain requirement is copy-ready, not just described.
 - Add a **worked cloud-hardening review** (IAM least-privilege diff, bucket block-public verification, and the paired detections) as a third worked example alongside the threat model and auth review.
 - Add a **detection-design recipe**: the canonical security events to log, the SIEM correlation rules for the named abuse paths, and the alert→owner mapping, so "pair every control with a detection" is concrete end-to-end.
 - Add a **PII classification + retention matrix** template (field → sensitivity tier → retention → deletion mechanism) to make data minimization mechanical.
@@ -42,7 +42,7 @@ The default posture for all of the above: produce the threat model, the control 
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու **worked supply-chain control plan** (SBOM generation, SCA gate config, pinning + provenance verification և build-fail policy), որ supply-chain-ի պահանջը copy-ready լինի, ոչ միայն նկարագրված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու **worked supply-chain control plan** (SBOM generation, SCA gate config, pinning + provenance verification և build-fail policy), որ supply-chain-ի պահանջը copy-ready լինի, ոչ միայն նկարագրված։
 - Ավելացրու **worked cloud-hardening review** (IAM least-privilege diff, bucket block-public verification և զուգված detection-ները) որպես երրորդ worked example՝ threat model-ի և auth review-ի կողքին։
 - Ավելացրու **detection-design recipe**․ canonical security event-ները log անելու, SIEM correlation rule-ները անվանված abuse path-երի համար և alert→owner mapping-ը, որ «ամեն control զուգիր detection-ի հետ»-ը կոնկրետ լինի ծայրից ծայր։
 - Ավելացրու **PII classification + retention matrix** template (field → sensitivity tier → retention → deletion mechanism), որ data minimization-ը մեխանիկ լինի։

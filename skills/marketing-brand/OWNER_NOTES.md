@@ -17,7 +17,7 @@ The default posture for all of the above: produce the marketing analysis, the va
 
 ### Owned future-improvement items
 
-- Add a third worked example for a **brand-architecture decision** (a real overlap × trust-transfer call with migration-risk reasoning), since architecture is in scope but only modeled in patterns.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a third worked example for a **brand-architecture decision** (a real overlap × trust-transfer call with migration-risk reasoning), since architecture is in scope but only modeled in patterns.
 - Add a **copy-ready email-sequence template** (welcome / nurture / win-back) with entry triggers, goals, and exits, so the lifecycle guidance is buildable end-to-end rather than described.
 - Add an **answer-engine optimization checklist** (structured data, citable claims, direct-answer formatting) as the AI-search surface keeps shifting — date it and mark it verify-before-use.
 - Add a **LTV:CAC / payback worked calculation** with a cohort table, to make the channel-economics decision concrete from formula to scale call.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the marketing analysis, the va
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու երրորդ worked example **brand-architecture որոշման** համար (իրական overlap × trust-transfer call՝ migration-risk reasoning-ով), քանի որ architecture-ը scope-ում է, բայց model արված է միայն patterns-ում։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երրորդ worked example **brand-architecture որոշման** համար (իրական overlap × trust-transfer call՝ migration-risk reasoning-ով), քանի որ architecture-ը scope-ում է, բայց model արված է միայն patterns-ում։
 - Ավելացրու **copy-ready email-sequence template** (welcome / nurture / win-back)՝ entry trigger-ով, goal-ով և exit-ով, որ lifecycle guidance-ը կառուցելի լինի ծայրից ծայր, ոչ նկարագրված։
 - Ավելացրու **answer-engine optimization checklist** (structured data, citable claim, direct-answer formatting), քանի որ AI-search մակերեսը շարունակ շարժվում է — date արա և նշիր verify-before-use։
 - Ավելացրու **LTV:CAC / payback worked calculation**՝ cohort table-ով, որ channel-economics որոշումը կոնկրետ լինի formula-ից մինչև scale call։

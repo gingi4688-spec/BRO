@@ -18,7 +18,7 @@ The default posture for all of the above: produce the diagnosis, the evidence, t
 
 ### Owned future-improvement items
 
-- Add a worked **detection-engineering lifecycle** example end to end (hypothesis → rule → silent bake → FP measurement → promotion → decommission), so the silent-first discipline is copy-ready, not only described.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a worked **detection-engineering lifecycle** example end to end (hypothesis → rule → silent bake → FP measurement → promotion → decommission), so the silent-first discipline is copy-ready, not only described.
 - Add a **threat-hunting** worked example (hypothesis-driven hunt over collected telemetry, with the ATT&CK coverage delta it produces) to complement the reactive triage examples.
 - Add a **purple-team feedback loop** note: how an authorized offensive engagement's findings convert into detections and a coverage map, with the boundary to `offensive-security-pentesting` made explicit.
 - Add a **log-source / collection maturity map** template (per source: collected? parsed? retained how long? which techniques it covers) so collection blind spots become a standing artifact, not an incident-time surprise.
@@ -42,7 +42,7 @@ The default posture for all of the above: produce the diagnosis, the evidence, t
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու worked **detection-engineering lifecycle** օրինակ ծայրից ծայր (hypothesis → rule → silent bake → FP measurement → promotion → decommission), որ silent-first discipline-ը copy-ready լինի, ոչ միայն նկարագրված։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու worked **detection-engineering lifecycle** օրինակ ծայրից ծայր (hypothesis → rule → silent bake → FP measurement → promotion → decommission), որ silent-first discipline-ը copy-ready լինի, ոչ միայն նկարագրված։
 - Ավելացրու **threat-hunting** worked example (hypothesis-driven hunt հավաքված telemetry-ի վրա, և այն ATT&CK coverage delta-ով, որ արտադրում է)՝ reactive triage օրինակները լրացնելու համար։
 - Ավելացրու **purple-team feedback loop** note․ ինչպես authorized offensive engagement-ի finding-ները վերածվում են detection-ների և coverage map-ի, `offensive-security-pentesting`-ի հետ սահմանը բացահայտ։
 - Ավելացրու **log-source / collection maturity map** template (ամեն source-ի համար․ հավաքվա՞ծ է, parse-վա՞ծ է, որքա՞ն է retain-ված, որ technique-ներն է ծածկում), որ collection blind spot-երը դառնան standing artifact, ոչ incident-time անակնկալ։

@@ -17,7 +17,7 @@ The default posture for all of the above: produce the test plan, the guard, and 
 
 ### Owned future-improvement items
 
-- Add a third worked example for a **consumer-driven contract end-to-end** (consumer pins → provider verification fails on a rename → coordinated version bump), so the contract mechanism is concrete from break to fix.
+- **✓ DELIVERED (gazan 2026-07-02)** — Add a third worked example for a **consumer-driven contract end-to-end** (consumer pins → provider verification fails on a rename → coordinated version bump), so the contract mechanism is concrete from break to fix.
 - Add a **mutation-testing recipe** that names where to scope it (critical modules), how to read surviving mutants, and how to set a mutation-score target — so the discipline is copy-ready, not described.
 - Add a **release-confidence report worked instance** filled end to end (layers, mutation score, contract results, open flakes, blocking criteria, residual risk) as a reference deliverable.
 - Add a **fuzzing pattern** (corpus, seed, crash triage) for untrusted-input boundaries, beyond the property-test invariant covered here.
@@ -40,7 +40,7 @@ The default posture for all of the above: produce the test plan, the guard, and 
 
 ### Սեփական ապագա-բարելավման կետեր
 
-- Ավելացրու երրորդ worked example **consumer-driven contract end-to-end**-ի համար (consumer pin → provider verification fail rename-ի վրա → համակարգված version bump), որ contract mechanism-ը կոնկրետ լինի break-ից fix։
+- **✓ ԱՐՎԱԾ (gazan 2026-07-02)**՝ Ավելացրու երրորդ worked example **consumer-driven contract end-to-end**-ի համար (consumer pin → provider verification fail rename-ի վրա → համակարգված version bump), որ contract mechanism-ը կոնկրետ լինի break-ից fix։
 - Ավելացրու **mutation-testing recipe**, որ անվանում է, թե որտեղ scope անել (critical module-ներ), ոնց կարդալ գոյատևող mutant-ները, և ոնց սահմանել mutation-score target — որ discipline-ը copy-ready լինի, ոչ նկարագրված։
 - Ավելացրու **release-confidence report-ի worked instance**՝ լրացված ծայրից ծայր (layer-ներ, mutation score, contract result-ներ, open flake-եր, block-ի criteria, residual risk) որպես reference deliverable։
 - Ավելացրու **fuzzing pattern** (corpus, seed, crash triage) անվստահելի-input boundary-ների համար, այստեղ ծածկված property-test invariant-ից այն կողմ։
