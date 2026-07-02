@@ -1,0 +1,20 @@
+# Bro CI — server-side repo-only integrity check on every push / PR to main.
+# EN: runs tools/bro-ci-check.ps1 (no machine-local state) so GitHub enforces spine + law + release integrity
+#     independently of any local run. HY: server-side belt-and-suspenders — GitHub-ը ինքն ա ստուգում integrity-ն.
+name: bro-ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  integrity:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Bro repo-only integrity check
+        shell: pwsh
+        run: pwsh -NoProfile -File tools/bro-ci-check.ps1

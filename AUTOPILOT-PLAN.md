@@ -6,8 +6,7 @@
 > project's `bro/AUTOPILOT-PLAN.md`; each project Bro works ONLY its own file, inside its own sealed boundary (L8).
 
 ## PENDING
-- [ ] CI: add a CI-safe check subset (doctor/audit that skips machine-local `bro.home.json`) + a GitHub Actions workflow that runs it on every push
 - [ ] Skills Phase B: next secondary OWNER_NOTES worked-example — one skill, surgical, EN+HY, verify each (diminishing-value backlog; opportunistic)
 
 ## DONE
-<!-- completed tasks move here with their commit sha -->
+- [x] CI: CI-safe repo-only check (`tools/bro-ci-check.ps1`) + `.github/workflows/ci.yml` on every push/PR — GREEN
