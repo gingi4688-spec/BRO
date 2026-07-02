@@ -254,6 +254,16 @@
       "preview_hy": "LIVE + GATED։ Real = BRO_GEV_APPROVED=1; հանում է grant-ը, Main Bro-ն նորից կնքվում է։ Palette-ը միայն preview (DRY, ոչինչ չի կատարում)."
     },
     {
+      "name": "SCHEDULE SELF-AUDIT",
+      "purpose_en": "Register/remove the daily self-audit heartbeat (Windows Scheduled Task, default 11:00; Gev-gated).",
+      "purpose_hy": "Register/remove ամենօրյա self-audit heartbeat-ը (Windows Scheduled Task, default 11:00; Gev-gated).",
+      "category": "CRITICAL", "criticality": "HIGH", "requires_gev": true, "mode": "WRITE",
+      "availability": "ROLLOUT-GATED", "backing": "tools/bro-schedule.ps1",
+      "files_affected": "creates/removes the 'BroSelfAudit' Windows Scheduled Task (machine task store); logs to logs/selfaudit-heartbeat.log; touches NO repo tracked files",
+      "preview_en": "LIVE + GATED. Real register/remove needs BRO_GEV_APPROVED=1; runs the full self-audit daily and logs the verdict (log is gitignored, never dirties the tree). The palette previews the current schedule only (DRY, executes nothing).",
+      "preview_hy": "LIVE + GATED։ Real register/remove = BRO_GEV_APPROVED=1; ամեն օր վազում է full self-audit ու log անում verdict-ը (log-ը gitignored)։ Palette-ը միայն preview (DRY, ոչինչ չի կատարում)."
+    },
+    {
       "name": "EXIT",
       "purpose_en": "Leave the palette.",
       "purpose_hy": "Դուրս գալ palette-ից.",

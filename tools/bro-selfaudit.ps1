@@ -13,7 +13,7 @@
   Exit:   0 GREEN · 1 YELLOW (healthy, tree dirty) · 2 RED (real integrity failure).
 #>
 [CmdletBinding()]
-param([switch]$Quick)
+param([switch]$Quick, [switch]$Log)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
 
@@ -66,13 +66,21 @@ if ($beast -and $beast.exit -ne 0) {
   $beastReal = -not ($treeDirty -and $extra.Count -eq 0)
 }
 
-if ($doctorReal -or $auditReal -or $beastReal) {
-  Write-Host "OVERALL: RED — real integrity failure. Investigate the failing check above (NOT a dirty-tree artifact)."
-  exit 2
-} elseif ($treeDirty) {
-  Write-Host "OVERALL: YELLOW — Bro is structurally healthy; uncommitted work in the tree (commit to reach GREEN)."
-  exit 1
-} else {
-  Write-Host "OVERALL: GREEN — Main Bro proves its own integrity (clean tree, all checks pass)."
-  exit 0
+if ($doctorReal -or $auditReal -or $beastReal) { $verdict = 'RED';    $code = 2; $msg = 'real integrity failure. Investigate the failing check above (NOT a dirty-tree artifact).' }
+elseif ($treeDirty)                            { $verdict = 'YELLOW'; $code = 1; $msg = 'Bro is structurally healthy; uncommitted work in the tree (commit to reach GREEN).' }
+else                                           { $verdict = 'GREEN';  $code = 0; $msg = 'Main Bro proves its own integrity (clean tree, all checks pass).' }
+
+Write-Host ("OVERALL: {0} — {1}" -f $verdict, $msg)
+
+# -Log: append ONE timestamped verdict line to logs/selfaudit-heartbeat.log (gitignored via *.log, so it never
+# dirties the tree). Used by the scheduled daily heartbeat (tools/bro-schedule.ps1). Best-effort; never fails the run.
+if ($Log) {
+  try {
+    $stamp = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
+    $sha   = (git rev-parse --short HEAD 2>$null)
+    $bpart = if ($beast) { "beast=$($beast.exit)" } else { 'beast=skip' }
+    $line  = "$stamp  $verdict  doctor=$($doctor.exit) audit=$($audit.exit) $bpart tree=$(if ($treeDirty) { 'DIRTY' } else { 'CLEAN' }) commit=$sha"
+    Add-Content -Path (Join-Path (Get-Location) 'logs\selfaudit-heartbeat.log') -Value $line -Encoding utf8
+  } catch {}
 }
+exit $code

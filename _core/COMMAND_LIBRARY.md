@@ -55,6 +55,7 @@ availability(CLEAN-BUILD | PHASE-N | LIVE | ROLLOUT-GATED | RUNTIME | FUTURE) ·
 | **LIST CROSS-GRANTS** | READ-ONLY | NO | READ | LIVE | show the Main Bro's L8-G cross-project grants (default = none, fully sealed) / grant-ների ցուցակ |
 | **GRANT CROSS-PROJECT ACCESS** | CRITICAL | YES | WRITE | ROLLOUT-GATED | open a scoped, time-expiring L8-G grant for the Main Bro (Gev-gated; logged; Project Bros never cross) / cross-grant բացել |
 | **REVOKE CROSS-PROJECT ACCESS** | CRITICAL | YES | WRITE | ROLLOUT-GATED | close a Main-Bro L8-G grant early and re-seal the project (Gev-gated) / cross-grant փակել |
+| **SCHEDULE SELF-AUDIT** | CRITICAL | YES | WRITE | ROLLOUT-GATED | register/remove the daily self-audit heartbeat (Windows Scheduled Task, default 11:00; logs to logs/selfaudit-heartbeat.log) / self-audit-ի ամենօրյա schedule |
 | **EXIT** | READ-ONLY | NO | READ | CLEAN-BUILD | leave the palette / դուրս գալ |
 
 > **Live read-only set / live read-only հավաքածու:** `HELP · SHOW REGISTRY · SHOW HEALTH · RUN DOCTOR · RUN AUDIT · RUN SELF-AUDIT · REVIEW QUARANTINE · RUN PROJECT AUDIT · VERIFY PROJECT BRO · LIST DOCS PACK · LIST CROSS-GRANTS · EXIT` run from the menu (read-only).

@@ -148,6 +148,13 @@ function Invoke-DryRollout($entry, [bool]$interactive) {
       Write-Output '  To really revoke (OUTSIDE the menu, Gev-gated) - the palette runs NOTHING mutating here:'
       Write-Output '    BRO_GEV_APPROVED=1 tools/bro-cross-grant.ps1 -Revoke -ProjectId <P>'
     }
+    'SCHEDULE SELF-AUDIT' {
+      Write-Output '  current schedule (read-only):'
+      & pwsh -NoProfile -File 'tools/bro-schedule.ps1' -Status
+      Write-Output '  To register/change/remove (OUTSIDE the menu, Gev-gated) - the palette runs NOTHING mutating here:'
+      Write-Output '    BRO_GEV_APPROVED=1 tools/bro-schedule.ps1 -Register -Time 11:00'
+      Write-Output '    BRO_GEV_APPROVED=1 tools/bro-schedule.ps1 -Remove'
+    }
     default { Write-Output '  (no dry backing wired)' }
   }
   $script:ExitCode = 0
