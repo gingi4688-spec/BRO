@@ -28,6 +28,27 @@ Reported claim: *"Descriptive: A rose +$18, B rose +$10. Causal (DiD, conditiona
 
 **Why this passes.** It refuses the naive single-region before/after and shows the **DiD arithmetic explicitly** (`(118−100) − (110−100) = +$8`), so the 2× over-credit is visible, not asserted. It states the **identification assumption (parallel trends)** and makes it a *check on pre-launch trends*, not a hope. It adds the two confounds this design is most vulnerable to — a **mix shift (Simpson's-paradox)** and **selection** of the treated region — and says how each would bias the estimate. Crucially, it separates the **descriptive** facts (+$18, +$10) from the **causal** estimate (+$8) and labels the causal number as conditional, and it **does not invent a confidence interval** from the four numbers given — it names the missing input instead. That is the honest causal answer: a defensible point estimate, its assumption made checkable, and its uncertainty flagged rather than fabricated.
 
+### Example C — multivariate test (2×2 factorial) and the interaction term
+
+**Prompt.** A team ran a 2×2 test — new **headline** (on/off) × new **CTA button** (on/off) — on conversion, and wants to "ship both, since both looked positive." Read the result and check whether the two effects are independent.
+
+**Senior answer.** A 2×2 factorial gives four cells; the reason to run it (rather than two separate A/Bs) is to estimate the **interaction** — whether headline + CTA together do more or less than the sum of their parts. Read the main effects *and* the interaction, or you are assuming they add.
+
+Cell conversion rates (n = 10,000 per cell):
+
+| | CTA off | CTA on |
+|---|---|---|
+| Headline off | 4.0% | 5.0% |
+| Headline on | 5.2% | 5.6% |
+
+- **Main effect of Headline** (averaged over CTA) = (5.4 − 4.5) = **+0.9 pts**.
+- **Main effect of CTA** (averaged over Headline) = (5.3 − 4.6) = **+0.7 pts**.
+- **Interaction** = (both-on − headline-only) − (CTA-only − baseline) = (5.6 − 5.2) − (5.0 − 4.0) = 0.4 − 1.0 = **−0.6 pts** → **sub-additive**: CTA adds +1.0 pt on the old headline but only +0.4 pt on the new one. So "ship both and expect +1.6 independent gains" is wrong; the both-on cell is +1.6 over *baseline* (5.6% vs 4.0%), not two bankable-separately effects that sum.
+
+**The power caveat (the trap).** An interaction is a *difference of differences*, so its variance is roughly the sum of the four cells' variances and its standard error is larger than a main effect's — detecting an interaction of a given size needs **~4× the sample** a main effect of that size needs. Here SE(interaction) ≈ `sqrt(4 × p(1−p)/n)` with p ≈ 0.05, n = 10,000 ≈ **0.44 pts**, so the −0.6 pt interaction has a 95% CI ≈ **−0.6 ± 0.85 = [−1.45, +0.25]** — it **includes zero**. So the *direction* (sub-additive) is a real warning, but the study is **underpowered to confirm the interaction**: report it as "suggestive of sub-additivity, not significant — the design was powered for main effects, not the interaction." Decision: ship the larger, robust main effect (Headline), do **not** bank the CTA gain as fully additive on top, and if the interaction matters commercially, run a follow-up powered for it.
+
+**Why this passes.** It uses the factorial for its actual purpose — estimating the **interaction, computed explicitly** (`(5.6−5.2) − (5.0−4.0) = −0.6`), not assuming the effects add — and reads the sub-additivity correctly (the both-on cell is +1.6 over baseline, not +1.6 of independent gains). Critically it carries the **interaction-power caveat**: the interaction's SE is larger (a difference of differences needs ~4× the n), it computes the CI ([−1.45, +0.25]) which **includes zero**, and it refuses to over-claim ("suggestive, underpowered, powered for main effects"). The decision follows the evidence (ship the robust main effect, don't bank the gain as additive, power a follow-up) — exactly the interaction-and-power discipline the rubric tests and the earlier examples never showed with numbers.
+
 ## Հայերեն
 
 ### Օրինակ A — experiment readout (A/B՝ peeking-ով և multiplicity-ով)
@@ -55,3 +76,24 @@ Reported claim: *"Descriptive: A rose +$18, B rose +$10. Causal (DiD, conditiona
 Ներկայացված claim․ *«Descriptive․ A-ն բարձրացավ +$18, B-ն՝ +$10։ Causal (DiD, պայմանով՝ parallel pre-trend և կայուն mix)․ loyalty program-ը revenue per user-ը բարձրացրեց մոտ +$8 — հաստատվելու pre-trend և segment ստուգումների դեմ»։* +$8-ի uncertainty band-ը գալիս է երկու region-ի change-երի variance-ից. տրված միայն չորս point թվով interval-ը այստեղ հաշվելի չէ — flag արա այն որպես անհրաժեշտ input, ոչ թե հորինիր։
 
 **Ինչու է անցնում gate-ը.** Այն մերժում է naive single-region before/after-ը և ցույց է տալիս **DiD arithmetic-ը բացահայտ** (`(118−100) − (110−100) = +$8`), ուստի 2× over-credit-ը տեսանելի է, ոչ պնդված։ Այն նշում է **identification assumption-ը (parallel trends)** և դարձնում է այն *pre-launch trend-ի ստուգում*, ոչ հույս։ Այն ավելացնում է երկու confound, որոնց դեմ այս design-ն ամենախոցելին է — **mix shift (Simpson-ի paradox)** և treated region-ի **selection** — և ասում, թե ամեն մեկը ինչպես կ-bias աներ estimate-ը։ Կարևորը՝ այն բաժանում է **descriptive** փաստերը (+$18, +$10) **causal** estimate-ից (+$8) և label է անում causal թիվը որպես conditional, և **չի հորինում confidence interval** տրված չորս թվից — փոխարենը անվանում է բացակայող input-ը։ Դա ազնիվ causal պատասխանն է․ պաշտպանելի point estimate, իր assumption-ը ստուգելի դարձված, և uncertainty-ն flag արված, ոչ ֆաբրիկացված։
+
+### Օրինակ C — multivariate test (2×2 factorial) և interaction term-ը
+
+**Prompt.** Թիմը գործարկեց 2×2 test — նոր **headline** (on/off) × նոր **CTA button** (on/off) — conversion-ի վրա, և ուզում է «ship արել երկուսն էլ, քանի որ երկուսն էլ դրական երևացին»։ Կարդա արդյունքը և ստուգիր՝ երկու effect-ը independent են։
+
+**Senior պատասխան.** 2×2 factorial-ը տալիս է չորս cell. այն գործարկելու պատճառը (երկու առանձին A/B-ի փոխարեն) **interaction**-ը estimate անելն է — արդյոք headline + CTA միասին անում են ավելի կամ պակաս, քան իրենց մասերի գումարը։ Կարդա main effect-ները *և* interaction-ը, այլապես ենթադրում ես, որ դրանք գումարվում են։
+
+Cell-ի conversion rate-եր (n = 10,000 ամեն cell)․
+
+| | CTA off | CTA on |
+|---|---|---|
+| Headline off | 4.0% | 5.0% |
+| Headline on | 5.2% | 5.6% |
+
+- **Headline-ի main effect** (CTA-ով միջինացված) = (5.4 − 4.5) = **+0.9 կետ**։
+- **CTA-ի main effect** (Headline-ով միջինացված) = (5.3 − 4.6) = **+0.7 կետ**։
+- **Interaction** = (both-on − headline-only) − (CTA-only − baseline) = (5.6 − 5.2) − (5.0 − 4.0) = 0.4 − 1.0 = **−0.6 կետ** → **sub-additive**․ CTA-ն ավելացնում է +1.0 կետ հին headline-ի վրա, բայց միայն +0.4 կետ նոր-ի վրա։ Ուստի «ship երկուսն էլ և սպասիր +1.6 independent gain» սխալ է. both-on cell-ը +1.6 է *baseline*-ից վեր (5.6% ընդդեմ 4.0%), ոչ երկու առանձին-bank-վող effect, որ գումարվում են։
+
+**Power caveat-ը (թակարդը).** Interaction-ը *difference of differences* է, ուստի իր variance-ը մոտավորապես չորս cell-ի variance-ների գումարն է, և իր standard error-ը ավելի մեծ է, քան main effect-ինը — տրված չափի interaction հայտնաբերելը պահանջում է **~4× այն sample**-ը, որ նույն չափի main effect-ը պահանջում է։ Այստեղ SE(interaction) ≈ `sqrt(4 × p(1−p)/n)` p ≈ 0.05, n = 10,000-ով ≈ **0.44 կետ**, ուստի −0.6 կետ interaction-ը ունի 95% CI ≈ **−0.6 ± 0.85 = [−1.45, +0.25]** — այն **ներառում է զրո**։ Ուստի *ուղղությունը* (sub-additive) իրական զգուշացում է, բայց study-ն **underpowered է interaction-ը հաստատելու**․ report արա որպես «suggestive of sub-additivity, ոչ significant — design-ը powered էր main effect-ների, ոչ interaction-ի համար»։ Որոշում․ ship արա ավելի մեծ, robust main effect-ը (Headline), **մի՛** bank արա CTA gain-ը որպես լրիվ additive վերևից, և եթե interaction-ը commercially կարևոր է, գործարկիր follow-up՝ դրա համար powered։
+
+**Ինչու է անցնում gate-ը.** Այն օգտագործում է factorial-ը իր իրական նպատակով — **interaction-ը estimate անել, հաշված բացահայտ** (`(5.6−5.2) − (5.0−4.0) = −0.6`), ոչ ենթադրել, որ effect-ները գումարվում են — և ճիշտ է կարդում sub-additivity-ն (both-on cell-ը +1.6 է baseline-ից, ոչ +1.6 independent gain)։ Կարևորը՝ այն կրում է **interaction-power caveat**-ը․ interaction-ի SE-ն ավելի մեծ է (difference of differences-ը պահանջում է ~4× n), հաշվում է CI-ն ([−1.45, +0.25]), որ **ներառում է զրո**, և հրաժարվում է over-claim-ից («suggestive, underpowered, powered for main effects»)։ Որոշումը հետևում է evidence-ին (ship robust main effect-ը, մի՛ bank արա gain-ը որպես additive, power արա follow-up) — հենց interaction-and-power discipline-ը, որ rubric-ը test է անում, իսկ նախորդ example-ները երբեք չէին ցույց տալիս թվերով։

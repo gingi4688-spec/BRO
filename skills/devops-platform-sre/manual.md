@@ -56,6 +56,16 @@ When asked to cut cost or right-size: (1) attribute every cost line to an owner,
 
 Alert on what the user feels (symptoms) and on how fast you are spending the error budget (burn rate), not on every underlying cause. Cause-based alerts (a single CPU spike, one disk filling, one node restarting) fire on conditions that are often not user-impacting, drown on-call in noise, and still miss failure modes nobody predicted. A multi-window burn-rate policy — a fast page for a sharp burn and a slower ticket for a slow leak — catches both the cliff and the drip while staying quiet during healthy operation. Keep cause signals on dashboards for diagnosis, not as pages.
 
+**Multi-window burn-rate recipe (30-day SLO, copy-ready).** Each tier fires only when a long window *and* a shorter confirmation window are both burning above the threshold — the short window stops a recovered blip from paging, the long window stops flapping:
+
+| Budget consumed | Long window | Short (confirm) window | Burn rate | Action |
+|---|---|---|---|---|
+| 2% | 1 hour | 5 min | 14.4× | **Page** — fast burn (the cliff) |
+| 5% | 6 hours | 30 min | 6× | **Page** — medium burn |
+| 10% | 3 days | 6 hours | 1× | **Ticket** — slow leak |
+
+Burn rate = `budget-fraction-consumed ÷ (window ÷ SLO-period)`; e.g. 2% in 1h over a 720h month = `0.02 ÷ (1 ÷ 720)` = 14.4×. Scale the windows to the SLO period, not to wall-clock habit. Three well-separated tiers beat a dozen thresholds that all page.
+
 ### Publish / gate discipline: verify live, not green CI
 
 Green CI proves that the tests which exist passed. It does not prove the change behaves correctly in the running system, because no test suite covers every path, config, or live dependency. Before calling a change done, observe it in the real system: hit the actual endpoint, read the actual metric, watch the SLI for the canary window. Treating green CI as "verified" is how a change that passed every test still breaks a path no test covered.
@@ -115,6 +125,16 @@ Green CI proves that the tests which exist passed. It does not prove the change 
 ### Alerting․ cause-based ընդդեմ symptom/burn-rate
 
 Alert արա այն, ինչ user-ը զգում է (symptom) և այն, թե որքան արագ ես ծախսում error budget-ը (burn rate), ոչ ամեն հիմքում ընկած cause-ի։ Cause-based alert-երը (առանձին CPU spike, մեկ disk լցվող, մեկ node restart) կրակում են պայմանների վրա, որ հաճախ user-impacting չեն, խեղդում են on-call-ը աղմուկով և միևնույն է բաց են թողնում չկանխատեսված ձախողումները։ Multi-window burn-rate policy-ն՝ fast page սուր burn-ի համար և դանդաղ ticket դանդաղ արտահոսքի համար, բռնում է և՛ կտրուկ անկումը, և՛ կաթիլը՝ առողջ աշխատանքի ժամանակ լռելով։ Cause signal-ները պահիր dashboard-ում՝ diagnosis-ի համար, ոչ որպես page։
+
+**Multi-window burn-rate recipe (30-օրյա SLO, copy-ready).** Ամեն tier կրակում է միայն, երբ երկար window-ը *և* ավելի կարճ confirmation window-ը երկուսն էլ burn են threshold-ից վեր — կարճ window-ը կանխում է վերականգնված blip-ի page-ը, երկար window-ը՝ flapping-ը․
+
+| Ծախսված budget | Երկար window | Կարճ (confirm) window | Burn rate | Action |
+|---|---|---|---|---|
+| 2% | 1 ժամ | 5 min | 14.4× | **Page** — fast burn (կտրուկ անկում) |
+| 5% | 6 ժամ | 30 min | 6× | **Page** — medium burn |
+| 10% | 3 օր | 6 ժամ | 1× | **Ticket** — դանդաղ արտահոսք |
+
+Burn rate = `ծախսված-budget-fraction ÷ (window ÷ SLO-period)`. օր.՝ 2% 1 ժամում 720-ժամյա ամսում = `0.02 ÷ (1 ÷ 720)` = 14.4×։ Window-ները scale արա SLO period-ին, ոչ wall-clock սովորությանը։ Երեք լավ-առանձնացված tier գերազանցում է տասնյակ threshold-ի, որ բոլորն էլ page են անում։
 
 ### Publish / gate discipline․ ստուգիր live, ոչ green CI
 

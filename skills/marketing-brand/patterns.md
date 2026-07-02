@@ -14,7 +14,7 @@ These are canonical marketing and brand moves. Each is a mechanism for one of th
 ### 2. Channel payback sheet (funnel to contribution)
 
 - **Trigger:** A campaign is judged by clicks/impressions, or a channel is proposed with no economics.
-- **Mechanism:** Compute the funnel `impressions × CTR × landing conv × sales conv × ACV × gross margin`, subtract fully-loaded acquisition cost (media + creative + sales labor), then CAC, **CAC:LTV**, and **payback by cohort**. Include capacity and sales-cycle delay. Decide scale on CAC:LTV and payback, not CTR.
+- **Mechanism:** Compute the funnel `impressions × CTR × landing conv × sales conv × ACV × gross margin`, subtract fully-loaded acquisition cost (media + creative + sales labor), then CAC, **LTV:CAC**, and **payback by cohort**. Include capacity and sales-cycle delay. Decide scale on LTV:CAC and payback, not CTR.
 - **Do not use when:** The objective is genuinely unaided brand awareness with no near-term conversion path — then measure brand lift, not funnel payback, and say so.
 - **Failure repair:** If CAC excludes creative or sales labor, or LTV is missing, label it incomplete and recompute before any scale decision.
 
@@ -60,7 +60,7 @@ These are canonical marketing and brand moves. Each is a mechanism for one of th
 ### 2. Channel payback sheet (funnel մինչև contribution)
 
 - **Երբ է պետք․** Campaign-ը դատվում է click/impression-ով, կամ channel է առաջարկվում առանց economics-ի։
-- **Մեխանիզմը․** Հաշվիր funnel-ը `impressions × CTR × landing conv × sales conv × ACV × gross margin`, հանիր fully-loaded acquisition cost-ը (media + creative + sales labor), հետո CAC, **CAC:LTV** և **payback ըստ cohort-ի**։ Ներառիր capacity և sales-cycle delay։ Scale-ը որոշիր CAC:LTV-ով և payback-ով, ոչ CTR-ով։
+- **Մեխանիզմը․** Հաշվիր funnel-ը `impressions × CTR × landing conv × sales conv × ACV × gross margin`, հանիր fully-loaded acquisition cost-ը (media + creative + sales labor), հետո CAC, **LTV:CAC** և **payback ըստ cohort-ի**։ Ներառիր capacity և sales-cycle delay։ Scale-ը որոշիր LTV:CAC-ով և payback-ով, ոչ CTR-ով։
 - **Երբ չօգտագործել․** Երբ objective-ը իսկապես unaided brand awareness է՝ առանց մոտակա conversion ճանապարհի — ապա չափիր brand lift, ոչ funnel payback, և ասա դա։
 - **Ուղղում․** Եթե CAC-ը creative կամ sales labor չի ներառում, կամ LTV-ն բացակա է, նշիր incomplete և վերահաշվիր ցանկացած scale որոշումից առաջ։
 

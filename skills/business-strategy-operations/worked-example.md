@@ -40,6 +40,25 @@
 
 **Why this passes.** It diagnoses the real failure — indicators that never become decisions, and OKRs that measure activity not outcomes — instead of just "run better meetings." It rewrites the key results as measurable outcomes and caps them, so the OKRs prioritize rather than enumerate. It Goodhart-proofs the headline metric with a named guardrail and counter-metric, closing the gaming path. The cadence is three bodies each with a *named decision owner and a decision it exists to make*, the status-only meeting is deleted, and every bet carries a checkpoint and a kill condition — so the calendar guarantees that when a leading indicator crosses a threshold, a named owner decides continue/change/kill on a known date. That is the test of a cadence that keeps a strategy alive, and this design meets it.
 
+### Example C — Wardley mapping (situational awareness → build/buy/partner)
+
+**Prompt.** A B2B SaaS founder asks: "should we build our own auth, our own data pipeline, and our own ML feature store, or buy them — and where should our engineers actually focus?" Give the map and the calls.
+
+**Senior answer.** This is a **positioning-on-evolution** question, and a Wardley map answers it: place the components of the value chain on two axes — **visibility to the user** (top = user-facing need, bottom = supporting) and **evolution** (left → right: *genesis → custom-built → product/rental → commodity/utility*). Build vs buy is decided by *where each component sits on the evolution axis*, not by engineering enthusiasm.
+
+Map (anchored on the user need "get a decision from their data"):
+
+- **Insights UI** (visible, product stage) — close to the differentiator; **build**, this is where craft shows.
+- **ML models / feature logic** (the differentiator, custom → product) — **build**; this is the reason customers pay, so owning it is the whole point.
+- **Feature store** (supporting, product stage — mature managed options exist) — **buy/rent** a managed product; building it is undifferentiated heavy lifting that will lag the market.
+- **Data pipeline / orchestration** (supporting, product/commodity) — **buy** a managed service; it is a solved product, and a hand-rolled one is pure maintenance cost.
+- **Auth / identity** (supporting, commodity/utility) — **buy** an identity provider; a home-built version is *strictly worse and a security liability* — custom-building a commodity is the classic anti-pattern.
+- **Compute / storage** (supporting, utility) — **rent** (cloud); nobody builds a data centre for this.
+
+The **strategic play falls out of the map**: concentrate engineers on the two components on the left/differentiating side (models + insights UI), buy everything that has evolved to product or commodity, and watch the *movement* — components evolve rightward over time, so a thing worth building today (an ML capability) becomes a commodity to buy tomorrow, and clinging to a home-built version past that point is how you bleed. Assumption to label: the evolution position of "feature store" is a market judgment (managed options are now mature) — verify it against the current landscape before committing, do not assert it as timeless.
+
+**Why this passes.** It reframes build-vs-buy as **position on the evolution axis**, not preference — so the calls are reasoned from where each component actually sits (build the genesis/custom differentiators, buy the product/commodity supporting pieces), and it names the signature anti-pattern (custom-building a commodity like auth, which is worse *and* a security liability). It anchors the map on the real user need and reads the **strategic play off the structure** (concentrate on the left-side differentiators), and it flags **movement** — components evolve rightward, so today's build is tomorrow's buy — which is the whole point of a Wardley map over a static SWOT. It labels the one volatile judgment (a component's evolution stage) as verify-before-use rather than asserting it.
+
 ## Հայերեն
 
 ### Օրինակ A — ռազմավարության ախտորոշում (Rumelt kernel + framework-ի ընտրություն + sizing + moat)
@@ -79,3 +98,22 @@
 **Stop/continue threshold-ներ։** Ամեն bet ստանում է leading indicator, checkpoint ամսաթիվ և նախապես committed kill condition (օր.՝ «եթե onboarding activation-ը չի շարժվել ամսական review-ին, դադարեցնում ենք revamp-ը և վերագնահատում»), որ zombie bet-երը ազատեն իրենց budget-ը live-երի համար։
 
 **Ինչու է անցնում gate-ը.** Այն ախտորոշում է իրական ձախողումը — indicator-ներ, որ երբեք որոշում չեն դառնում, և OKR-ներ, որ activity են չափում, ոչ outcome — փոխանակ պարզապես «ավելի լավ meeting-ներ վարելու»։ Այն key result-ները վերագրում է որպես չափելի outcome և cap է անում, ուստի OKR-ները առաջնահերթում են, ոչ թվարկում։ Այն Goodhart-proof է անում headline metric-ը անվանված guardrail-ով և counter-metric-ով՝ փակելով gaming path-ը։ Cadence-ը երեք body է՝ ամեն մեկը *անվանված decision owner-ով և որոշմամբ, որի համար գոյություն ունի*, status-only meeting-ը ջնջված է, և ամեն bet կրում է checkpoint և kill condition — ուստի օրացույցը երաշխավորում է, որ երբ leading indicator-ը հատի threshold-ը, անվանված owner-ը continue/change/kill է որոշում հայտնի ամսաթվին։ Դա cadence-ի test-ն է, որ ռազմավարությունը կենդանի է պահում, և այս դիզայնը բավարարում է այն։
+
+### Օրինակ C — Wardley mapping (situational awareness → build/buy/partner)
+
+**Prompt.** B2B SaaS founder-ը հարցնում է․ «պիտի կառուցե՞նք մեր սեփական auth-ը, մեր data pipeline-ը և մեր ML feature store-ը, թե՞ գնենք — և որտե՞ղ պիտի engineer-ներս իրականում կենտրոնանան»։ Տուր map-ը և որոշումները։
+
+**Senior պատասխան.** Սա **positioning-on-evolution** հարց է, և Wardley map-ը պատասխանում է․ դիր value chain-ի component-ները երկու առանցքի վրա — **visibility to the user** (վերև = user-facing need, ներքև = supporting) և **evolution** (ձախ → աջ․ *genesis → custom-built → product/rental → commodity/utility*)։ Build vs buy-ը որոշվում է նրանով, թե *ուր է ամեն component-ը evolution առանցքի վրա*, ոչ engineering ոգևորությամբ։
+
+Map (խարսխված user need «իրենց data-ից որոշում ստանալ»-ի վրա)․
+
+- **Insights UI** (visible, product stage) — մոտ է differentiator-ին. **build**, այստեղ է craft-ը երևում։
+- **ML models / feature logic** (differentiator-ը, custom → product) — **build**. սա է պատճառը, որ customer-ները վճարում են, ուստի դրան տիրելը ամբողջ իմաստն է։
+- **Feature store** (supporting, product stage — հասուն managed option-ներ կան) — **buy/rent** managed product. այն կառուցելը undifferentiated ծանր բեռ է, որ շուկայից հետ կմնա։
+- **Data pipeline / orchestration** (supporting, product/commodity) — **buy** managed service. այն լուծված product է, և ձեռքով սարքածը զուտ maintenance cost է։
+- **Auth / identity** (supporting, commodity/utility) — **buy** identity provider. տնական տարբերակը *խստորեն ավելի վատ է և security liability* — commodity-ն custom-building անելը classic anti-pattern-ն է։
+- **Compute / storage** (supporting, utility) — **rent** (cloud). ոչ ոք data centre չի կառուցում սրա համար։
+
+**Strategic play-ը դուրս է գալիս map-ից**․ կենտրոնացրու engineer-ներին ձախ/differentiating կողմի երկու component-ի վրա (models + insights UI), գնիր ամեն ինչ, որ evolve է եղել product կամ commodity, և հետևիր *movement*-ին — component-ները ժամանակի հետ evolve են աջ, ուստի այսօր build-ի արժանի բանը (ML capability) վաղը commodity է՝ գնելու, և տնական տարբերակին կառչելը այդ կետից անց՝ ինչպես ես արյուն կորցնում։ Label-ելու assumption՝ «feature store»-ի evolution դիրքը market judgment է (managed option-ները հիմա հասուն են) — verify արա ընթացիկ landscape-ի դեմ նախքան commit անելը, մի՛ պնդիր որպես հավերժական։
+
+**Ինչու է անցնում gate-ը.** Այն reframe է անում build-vs-buy-ը որպես **դիրք evolution առանցքի վրա**, ոչ նախապատվություն — ուստի որոշումները հիմնավորված են նրանով, թե ուր է ամեն component-ը իրականում նստած (build արա genesis/custom differentiator-ները, buy արա product/commodity supporting կտորները), և անվանում է signature anti-pattern-ը (auth-ի պես commodity-ն custom-building, որ ավելի վատ է *և* security liability)։ Այն խարսխում է map-ը իրական user need-ի վրա և կարդում **strategic play-ը structure-ից** (կենտրոնանալ ձախ-կողմի differentiator-ների վրա), և flag է անում **movement**-ը — component-ները evolve են աջ, ուստի այսօրվա build-ը վաղվա buy-ն է — ինչը հենց Wardley map-ի իմաստն է static SWOT-ի փոխարեն։ Այն label է անում մեկ volatile judgment-ը (component-ի evolution stage) որպես verify-before-use՝ պնդելու փոխարեն։

@@ -47,6 +47,36 @@ Then the honest reframe to leadership: a passed quiz means "the team can recogni
 
 **Why this passes.** It diagnoses the exact failure (a recognition measure standing in for a behavioral objective) instead of just adding more questions, and it **realigns objective ↔ task ↔ criteria ↔ evidence** so the test measures what was actually taught. It replaces the multiple-choice quiz with a **transfer task on unseen code** (including a case the quiz never covered) and adds **spaced** follow-up, hitting recall and transfer rather than recognition. It writes **explicit criteria** (parameterization not escaping, no false positives, explain-why) so two reviewers would score it the same, and it refuses the overclaim — correcting "the team is now secure" to what a passed assessment actually evidences, and routing the security-posture judgment to the owning domain rather than inventing it here.
 
+### Example D — mentoring: coach vs solve (side-by-side)
+
+**Prompt.** A mid-level engineer, Maya, comes to you (her mentor): "The deploy keeps failing and I don't know why. Can you just tell me what to do?" Show the coach-vs-solve difference.
+
+**Senior answer.** The rule (decision rule 9): mentoring builds the mentee's *own* capability; solving builds dependence. Solve only when the building is on fire (production down, no time) — otherwise coach, because the goal is that Maya can debug the *next* failure without you. The tell that you are solving: you are doing the thinking and she is taking dictation.
+
+**The "solve" version (avoid when there is time):**
+> Maya: "The deploy keeps failing — can you just tell me what to do?"
+> Mentor (solving): "Yeah, it's the migration — your `ADD COLUMN` isn't nullable and the table's huge, so it locks. Make it nullable, backfill in a second migration, set a `statement_timeout`. Here, I'll paste the commands."
+
+Maya ships it, learns nothing transferable, and is back next week for the next failure.
+
+**The "coach" version (default):**
+> Maya: "…can you just tell me what to do?"
+> Mentor: "I can — but let's make it so you crack the next one yourself. What does *failing* look like exactly — where in the pipeline, and what's the error?"
+> Maya: "The migration step. It times out."
+> Mentor: "Times out — what would you expect to be slow about *this* migration specifically?"
+> Maya: "…it's a big table. And I'm adding a column."
+> Mentor: "Good. What's different about adding a column to a big table under load vs a small one?"
+> Maya: "The lock? Maybe it holds a lock too long…"
+> Mentor: "That's the thread. How would you *confirm* that's what's happening before changing anything?"
+> Maya: "Check the DB locks / the migration logs during the run."
+> Mentor: "Do that. If it is the lock, what have you read about making a column-add non-blocking?"
+> Maya: "…nullable first, backfill separately?"
+> Mentor: "Test it and tell me what you see. I'm here if it's not that."
+
+Maya diagnoses it herself and keeps the mental model. **Fade the scaffold:** the first failure you ask the questions; by the third, she asks them herself — that transfer *is* the goal. When to flip to solve: production is actively down and every minute costs — then give her the fix *and* circle back afterward to walk the reasoning, so the emergency doesn't erase the learning.
+
+**Why this passes.** It states the **coach-vs-solve rule and its exception** (solve only when the building is on fire; otherwise coach so the mentee can crack the *next* one alone) and then *shows both* side by side, so the difference is concrete, not abstract. The solve version names the exact anti-pattern — the mentor does the thinking, Maya takes dictation and returns next week — while the coach transcript uses **questions that hand Maya the diagnostic path** (what does failing look like → what's slow → what's different under load → how would you confirm → what have you read) instead of the answer, and insists she **verify before changing** anything. It closes on **scaffold-fade** (by the third failure she asks the questions herself), which is the transfer that is the real objective, and it keeps the escape hatch (flip to solve in a true emergency, then teach the reasoning after) so the rule is not dogma.
+
 ## Հայերեն
 
 ### Օրինակ A — Onboarding / ramp plan
@@ -93,3 +123,33 @@ Label-ված assumption․ սա ենթադրում է, որ gap-ը իսկապե�
 Հետո ազնիվ reframe leadership-ին․ անցած quiz-ը նշանակում է «թիմը կարող է այսօր ճանաչել canonical example-ը», ոչ «թիմը secure է»։ Security-ն demonstrated է behavior-ով նոր code-ի վրա ժամանակի ընթացքում, և threat model-ի համար տիրվում է security skill-ի կողմից. այս assessment-ը ապացուցում է միայն *learning-ը*, ոչ համակարգի security posture-ը։
 
 **Ինչու է անցնում gate-ը.** Այն ախտորոշում է ճշգրիտ ձախողումը (recognition measure, որ կանգնում է behavioral objective-ի փոխարեն), ոչ թե պարզապես ավելի շատ հարց ավելացնում, և **realign է անում objective ↔ task ↔ criteria ↔ evidence**, ուստի test-ը չափում է այն, ինչ իրականում սովորեցվեց։ Այն փոխարինում է multiple-choice quiz-ը **transfer task-ով չտեսնված code-ի վրա** (ներառյալ case, որ quiz-ը երբեք չծածկեց) և ավելացնում **spaced** follow-up, հարվածելով recall-ին և transfer-ին, ոչ recognition-ին։ Այն գրում է **բացահայտ criteria** (parameterization ոչ escaping, ոչ false positive, explain-why), ուստի երկու reviewer նույն կերպ score կանեն, և մերժում է overclaim-ը — «թիմն այժմ secure է»-ն ուղղելով այն, ինչ անցած assessment-ն իրականում evidence է, և security-posture-ի judgment-ը ուղղորդելով տիրող ոլորտին, ոչ թե այստեղ հորինելով։
+
+### Օրինակ D — mentoring․ coach ընդդեմ solve (side-by-side)
+
+**Prompt.** Mid-level engineer Maya-ն գալիս է քեզ մոտ (իր mentor-ին)․ «Deploy-ը շարունակ fail է անում, ու չգիտեմ ինչու։ Կարո՞ղ ես պարզապես ասել՝ ինչ անեմ»։ Ցույց տուր coach-ընդդեմ-solve տարբերությունը։
+
+**Senior պատասխան.** Կանոնը (decision rule 9)․ mentoring-ը կառուցում է mentee-ի *սեփական* capability-ն. solving-ը կառուցում է կախվածություն։ Solve արա միայն, երբ շենքը վառվում է (production down, ժամանակ չկա) — այլապես coach արա, որովհետև նպատակը այն է, որ Maya-ն կարողանա *հաջորդ* failure-ը debug անել առանց քեզ։ Նշանը, որ solve ես անում․ դու ես մտածում, նա dictation է վերցնում։
+
+**«Solve» տարբերակը (խուսափիր, երբ ժամանակ կա)․**
+> Maya: «Deploy-ը շարունակ fail է անում — կարո՞ղ ես պարզապես ասել՝ ինչ անեմ»։
+> Mentor (solving): «Հա, migration-ն է — քո `ADD COLUMN`-ը nullable չէ, table-ը հսկա է, ուստի lock է անում։ Դարձրու nullable, backfill արա երկրորդ migration-ում, դիր `statement_timeout`։ Ահա, command-ները paste անեմ»։
+
+Maya-ն ship է անում, ոչինչ transferable չի սովորում, ու հաջորդ շաբաթ վերադառնում է հաջորդ failure-ի համար։
+
+**«Coach» տարբերակը (default)․**
+> Maya: «…կարո՞ղ ես պարզապես ասել՝ ինչ անեմ»։
+> Mentor: «Կարող եմ — բայց արա այնպես, որ հաջորդը ինքդ կոտրես։ Ինչ տեսք ունի *failing*-ը ճշգրիտ — pipeline-ի որ տեղում, և ինչ error»։
+> Maya: «Migration step-ը։ Timeout է անում»։
+> Mentor: «Timeout — ի՞նչ կսպասեիր, որ դանդաղ լինի հենց *այս* migration-ում»։
+> Maya: «…մեծ table է։ Ու սյուն եմ ավելացնում»։
+> Mentor: «Լավ։ Ի՞նչն է տարբեր՝ load-ի տակ մեծ table-ին սյուն ավելացնելը փոքրի համեմատ»։
+> Maya: «Lock-ը՞։ Գուցե lock-ը շատ երկար է պահում…»։
+> Mentor: «Դա թելն է։ Ինչպե՞ս կ-*confirm* անես, որ դա է կատարվում, նախքան որևէ բան փոխելը»։
+> Maya: «Ստուգեմ DB lock-երը / migration log-երը run-ի ընթացքում»։
+> Mentor: «Արա։ Եթե lock-ն է, ի՞նչ ես կարդացել column-add-ը non-blocking դարձնելու մասին»։
+> Maya: «…նախ nullable, backfill առանձի՞ն»։
+> Mentor: «Test արա և ասա՝ ինչ ես տեսնում։ Ես այստեղ եմ, եթե դա չէ»։
+
+Maya-ն ինքն է diagnose անում ու պահում mental model-ը։ **Fade արա scaffold-ը․** առաջին failure-ին դու ես հարցերը տալիս. երրորդին՝ ինքն է տալիս — այդ transfer-ը *հենց* նպատակն է։ Երբ flip անել solve-ի․ production-ը ակտիվ down է, ամեն րոպեն արժե — այդ ժամանակ տուր fix-ը *և* հետո վերադարձիր՝ reasoning-ը քայլելու, որ emergency-ն learning-ը չջնջի։
+
+**Ինչու է անցնում gate-ը.** Այն ասում է **coach-ընդդեմ-solve կանոնն ու իր exception-ը** (solve միայն, երբ շենքը վառվում է. այլապես coach, որ mentee-ն կարողանա *հաջորդը* մենակ կոտրել), հետո *ցույց է տալիս երկուսն էլ* կողք-կողքի, ուստի տարբերությունը կոնկրետ է, ոչ վերացական։ Solve տարբերակը անվանում է ճշգրիտ anti-pattern-ը — mentor-ը մտածում է, Maya-ն dictation է վերցնում ու վերադառնում հաջորդ շաբաթ — մինչ coach transcript-ը օգտագործում է **հարցեր, որ Maya-ին հանձնում են diagnostic path-ը** (ինչ տեսք ունի failing-ը → ինչն է դանդաղ → ինչն է տարբեր load-ի տակ → ինչպես կ-confirm անես → ինչ ես կարդացել) պատասխանի փոխարեն, և պնդում, որ նա **verify անի, նախքան փոխելը**։ Այն փակվում է **scaffold-fade-ով** (երրորդ failure-ին ինքն է հարցերը տալիս), որ իրական objective-ը transfer-ն է, և պահում escape hatch-ը (flip արա solve-ի իրական emergency-ում, հետո սովորեցրու reasoning-ը), որ կանոնը dogma չլինի։

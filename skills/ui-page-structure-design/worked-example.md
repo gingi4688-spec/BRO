@@ -98,6 +98,42 @@ Use one `h1` for the dashboard title and ordered `h2` sections matching the visu
 - Assignment success and failure states are designed with undo or recovery.
 - Keyboard-only users can review, assign, and undo a follow-up without losing focus.
 
+### Example B — role-gated views (server-enforced)
+
+**Prompt.** A team "Settings → Billing & Members" page is seen by three roles from the same organization entity: **Owner/Admin** (manage billing, invite/remove members, change roles), **Member** (view members, edit own profile, no billing), **Billing-viewer** (see invoices, no member management). Design the page so each role gets the right view — safely.
+
+**Answer.**
+
+*The one rule that governs everything:* **role gating is an authorization decision enforced on the server, per request and per object — not a CSS/visibility trick.** The client renders what the server's role-scoped response contains; it never receives restricted data and hides it. "Hide the button" is not access control — a hidden button's endpoint is still callable, and DOM-hidden data is still in the payload.
+
+*Per-role page shape (same route `/settings/billing`, three server-scoped responses):*
+
+| Section | Owner/Admin | Member | Billing-viewer |
+|---|---|---|---|
+| Billing summary (plan, next charge) | full + **edit** | not returned | read-only |
+| Invoices list / download | yes + manage | not returned | yes (download only) |
+| Payment method | view + **edit** | not returned | not returned |
+| Members list | full + **role/remove** | names/roles only | not returned |
+| Invite member | yes | not returned | not returned |
+| Own profile | edit | edit | edit |
+| Danger zone (close account) | yes (confirm + typed name) | not returned | not returned |
+
+*Design decisions:*
+- The **server returns a capabilities object** for the current actor (`{canEditBilling, canManageMembers, canDownloadInvoice, …}`); the UI renders sections and actions from it. Restricted sections are **absent from the response**, not greyed out.
+- Every mutating control maps to an endpoint that **re-checks the same permission server-side** on the specific object (this org, this member) — an admin of org A cannot manage org B by swapping an id.
+- **Empty-because-restricted ≠ empty-because-no-data.** A Member does not see a greyed "Billing (no access)" that advertises what they lack; the section simply is not there. A Billing-viewer with zero invoices sees a true empty state ("No invoices yet") — a different thing.
+- **Role change is itself gated and audited:** only an Owner can change roles; the last Owner cannot demote themselves (prevents lockout); the action is logged with actor + target + before/after.
+
+*Mandatory states (per the states law):* loading (skeleton per section the role can see), empty (true no-data, distinct from no-access), error, permission-denied on a **direct URL to a restricted deep link** (a Member opening `/settings/billing/invoices/123` gets a server **403** → a clean "You don't have access; ask an Owner" screen, never a blank or a client redirect that already shipped the data), success/undo on role changes, stale (member list changed under you → refresh cue).
+
+*Handoff / acceptance:*
+- Verified in the running app **as each role** (not one admin session with CSS toggles): log in as Member, confirm billing data is **absent from the network response**, not merely hidden.
+- Direct-link probe: each restricted deep link returns a server 403 for the wrong role.
+- Last-Owner demotion is blocked with a clear reason.
+- No role can trigger a mutating endpoint the UI hid — verified by calling it directly with that role's token → 403.
+
+**Why this passes.** It treats role gating as **server-side authorization per object**, so restricted data never reaches the client — closing the IDOR/BOLA and function-level-authz failure this skill's red-team gate targets ("hide the button" / CSS-hidden data). It separates empty-because-restricted from empty-because-no-data, handles the direct-deep-link case with a real 403 (not a client redirect that already leaked), gates and audits role changes, prevents the last-Owner lockout, and — critically — its acceptance criteria verify **as each role in the running app against the network response**, not by eyeballing one admin session. That is the line between designed access control and decorative hiding.
+
 ## Հայերեն
 
 ### Prompt
@@ -195,3 +231,39 @@ Mobile․ ցույց տալ freshness-ը, հետո card-based urgent queue։ Յ�
 - Mobile-ը օգտագործում է card-եր և disclosure, ոչ squeezed table-ներ։
 - Assignment success և failure վիճակները նախագծված են undo-ով կամ recovery-ով։
 - Keyboard-only օգտագործողները կարող են review անել, assign անել և undo անել follow-up-ը առանց focus կորցնելու։
+
+### Օրինակ B — role-gated view-եր (server-enforced)
+
+**Prompt.** Team-ի «Settings → Billing & Members» էջը տեսնում են երեք role նույն organization entity-ից՝ **Owner/Admin** (կառավարել billing, invite/remove member, փոխել role), **Member** (տեսնել member-ներին, խմբագրել սեփական profile, ոչ billing), **Billing-viewer** (տեսնել invoice-ները, ոչ member management)։ Նախագծիր էջը, որ ամեն role ստանա ճիշտ view-ն՝ անվտանգ։
+
+**Պատասխան.**
+
+*Ամեն ինչ կառավարող միակ կանոնը․* **role gating-ը authorization որոշում է, enforce-ված server-ի վրա՝ ամեն request-ի և ամեն object-ի համար — ոչ CSS/visibility հնարք։** Client-ը render է անում այն, ինչ server-ի role-scoped response-ը պարունակում է. այն երբեք restricted data չի ստանում ու թաքցնում։ «Թաքցրու button-ը» access control չէ — թաքցված button-ի endpoint-ը դեռ callable է, և DOM-hidden data-ն դեռ payload-ի մեջ է։
+
+*Per-role էջի ձև (նույն route `/settings/billing`, երեք server-scoped response)․*
+
+| Բաժին | Owner/Admin | Member | Billing-viewer |
+|---|---|---|---|
+| Billing summary (plan, next charge) | full + **edit** | not returned | read-only |
+| Invoices list / download | yes + manage | not returned | yes (download only) |
+| Payment method | view + **edit** | not returned | not returned |
+| Members list | full + **role/remove** | միայն name/role | not returned |
+| Invite member | yes | not returned | not returned |
+| Սեփական profile | edit | edit | edit |
+| Danger zone (close account) | yes (confirm + typed name) | not returned | not returned |
+
+*Դիզայնի որոշումներ․*
+- **Server-ը վերադարձնում է capabilities object** ընթացիկ actor-ի համար (`{canEditBilling, canManageMembers, canDownloadInvoice, …}`). UI-ն դրանից է render անում բաժիններն ու action-ները։ Restricted բաժինները **բացակայում են response-ից**, ոչ թե greyed out են։
+- Ամեն mutating control map-վում է endpoint-ի, որ **նույն permission-ը վերստուգում է server-side**՝ կոնկրետ object-ի վրա (այս org, այս member) — org A-ի admin-ը չի կարող org B-ն կառավարել id փոխելով։
+- **Empty-because-restricted ≠ empty-because-no-data.** Member-ը չի տեսնում greyed «Billing (no access)», որ գովազդում է իր չունեցածը. բաժինը պարզապես չկա։ Zero invoice-ով Billing-viewer-ը տեսնում է իրական empty state («No invoices yet») — ուրիշ բան։
+- **Role փոփոխությունն ինքը gated ու audited է․** միայն Owner-ը կարող է role փոխել. վերջին Owner-ը չի կարող իրեն demote անել (կանխում է lockout). action-ը log-վում է actor + target + before/after-ով։
+
+*Պարտադիր վիճակներ (states law-ով)․* loading (skeleton ամեն բաժնի, որ role-ը տեսնում է), empty (իրական no-data, տարբեր no-access-ից), error, permission-denied **restricted deep link-ի ուղիղ URL-ի** դեպքում (Member-ը, որ բացում է `/settings/billing/invoices/123`, ստանում է server **403** → մաքուր «You don't have access. ask an Owner» էկրան, երբեք blank կամ client redirect, որ արդեն data-ն ship արեց), success/undo role փոփոխություններին, stale (member list-ը փոխվեց քո տակ → refresh cue)։
+
+*Handoff / acceptance․*
+- Verify արված running app-ում **որպես ամեն role** (ոչ մեկ admin session CSS toggle-ով)․ մտիր որպես Member, հաստատիր, որ billing data-ն **բացակայում է network response-ից**, ոչ պարզապես hidden է։
+- Direct-link probe․ ամեն restricted deep link վերադարձնում է server 403 սխալ role-ի համար։
+- Last-Owner demotion-ը block-ված է հստակ պատճառով։
+- Ոչ մի role չի կարող գործարկել mutating endpoint, որ UI-ն թաքցրեց — verify-ված այն ուղիղ կանչելով այդ role-ի token-ով → 403։
+
+**Ինչու է անցնում gate-ը.** Այն role gating-ը վերաբերվում է որպես **server-side authorization ամեն object-ի համար**, ուստի restricted data-ն երբեք չի հասնում client — փակելով IDOR/BOLA-ն և function-level-authz failure-ը, որ այս skill-ի red-team gate-ը թիրախավորում է («թաքցրու button-ը» / CSS-hidden data)։ Այն առանձնացնում է empty-because-restricted-ը empty-because-no-data-ից, մշակում է direct-deep-link դեպքը իրական 403-ով (ոչ client redirect, որ արդեն leak արեց), gate ու audit է անում role փոփոխությունները, կանխում է last-Owner lockout-ը, և — կրիտիկ — իր acceptance criteria-ն verify է անում **որպես ամեն role running app-ում, network response-ի դեմ**, ոչ մեկ admin session աչքով։ Դա գիծն է designed access control-ի ու decorative hiding-ի միջև։

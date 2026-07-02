@@ -40,6 +40,27 @@ So the honest recommendation is: **do not build an agent — build a workflow.**
 
 **Why this passes.** It uses the fixed roster construction procedure rather than inventing a one-off, so the new agent shares the spine instead of forking the laws — and it explicitly lifts `_core` up a level so the roster has one inherited core, which is the whole point of the spine. It enforces the one-skill-at-max rule (deepen, do not cram a second), keeps memory sealed per work, and gives the agent a thin wrapper that returns structured findings rather than a competing voice. Critically, it ends on verification in the running system against the agent's own harness and the inherited laws — not "it compiled" — which is the same done-bar this skill applies to every build.
 
+### Example D — prompt / tool audit of an existing agent
+
+**Prompt.** A team's "support agent" occasionally issues refunds it shouldn't, sometimes ignores its own rules when a user is pushy, and its answers drift. Audit its prompt and tool definitions and say what to fix.
+
+**Senior answer.** A prompt/tool audit checks the agent's *contract with the model and the world* — the system prompt (instructions, boundaries, format) and the tool definitions (schemas, side-effects, authority) — for the failure modes that produce exactly these symptoms. Go layer by layer.
+
+**System prompt:**
+- **Injection / "pushy user" override.** The rules get overridden by user pressure → the prompt likely treats user-provided text as authority. Fix: state that user/tool/retrieved content is **untrusted data**, that only the system hierarchy changes rules, and give a worked refusal for the pressure case. This is the top defect behind "ignores its own rules."
+- **Missing authority bounds.** It refunds when it shouldn't → the prompt does not bound the agent's authority. Fix: name irreversible/monetary actions as **approval-gated** — the agent may *propose* a refund, but any refund (or one over $X) requires a human / second-factor gate.
+- **Drift = weak framing + no output contract.** Answers drift → the prompt lacks a tight role, a response format, and a "verify before finalizing" step. Fix: a crisp role, a required output shape, a self-check gate.
+- **No facts-vs-guesses separation.** If it states policy it is unsure of → require it to distinguish known policy (from a retrieved doc) from inference, and to refuse to invent policy.
+
+**Tool definitions:**
+- **`issue_refund` is too powerful and under-described.** The real defect: the tool *executes* a refund with no cap and no confirmation. Fix the **contract**, not just the prompt — the schema should require `amount`, `order_id`, `reason`, and enforce a server-side **max-amount + ownership check + idempotency key** (a retried/duplicated call must not double-refund). Least privilege: give the agent `propose_refund` (writes a pending request); only an approved path calls `issue_refund`.
+- **Ambiguous descriptions cause misuse.** If the model misfires the tool, its description/parameters are ambiguous → tighten the schema, add examples of when NOT to call it, mark side-effects.
+- **No idempotency / no audit log.** Add an idempotency key and log every tool call (actor, args, result) for dispute/audit.
+
+**The load-bearing principle:** a safety boundary in the prompt is a *request*; a boundary in the tool contract (max-amount, ownership, approval gate, idempotency) is *enforced*. The pushy-user and wrong-refund bugs are fixed in the **tool layer**, not by nicer prompt wording alone.
+
+**Why this passes.** It audits both halves of the agent's contract — **system prompt** (untrusted-input handling, authority bounds, output contract, facts-vs-guesses) and **tool definitions** (schema, least privilege, side-effects) — and maps each symptom to a specific defect: the pushy-user override to treating user text as authority, the wrong refunds to an unbounded `issue_refund` tool, the drift to weak framing without an output contract. Critically it puts the money/authority guardrail **in the tool contract** (max-amount + ownership + approval gate + idempotency), stating the load-bearing rule that a boundary only in the prompt is unenforced, and it demotes the agent to `propose_refund` behind a human gate. That is the prompt/tool audit this skill names as a response mode, delivered as a real artifact rather than generic "improve the prompt" advice.
+
 ## Հայերեն
 
 ### Օրինակ A — agent spec + tool-contract + eval harness
@@ -79,3 +100,24 @@ So the honest recommendation is: **do not build an agent — build a workflow.**
 **Senior պատասխան.** Կառուցիր այն որպես ֆիքսված հինգ շերտ, ամբողջական, և տար մինչև վերջ — մի՛ improvise արա։ (1) **Ժառանգած `_core`․** նոր agent-ը ժառանգում է նույն ընդհանուր ողնաշարը — անխախտ օրենքները և agent-անկախ human-behavior ֆայլը — անփոփոխ. բարձրացրու `_core`-ը մեկ մակարդակ վեր, որ երկու agent-ն էլ կիսեն մեկ copy, ոչ թե fork անեն։ (2) **Persona․** գրիր finance analyst-ի սեփական character ֆայլը — իր ձայնը, արժեքները, կապը տիրոջ հետ — Bro-ի persona-ից առանձին. մեկ persona, այս agent-ինը։ (3) **Ուղիղ մեկ skill max-ով․** կառուցիր իր finance skill-ը այս pack-ի նույն god-level նշաձողով (domain-dense SKILL.md, երկլեզու manual, patterns, rubric, worked example, eval + red-team prompt, owner note), adversarially audited — մեկ skill, խորացված, ոչ թե կողքին խցկած երկրորդ skill։ (4) **Կնքված per-work memory․** memory մեկուսացված ըստ work-ի՝ memory-isolation օրենքով, որ finance աշխատանքը չ-bleed անի անկապ context-ի մեջ։ (5) **Thin runtime wrapper․** `agents/claude.md`-ոճի wrapper, որ բեռնում է skill-ը, հետևում shared operating protocol-ին և վերադարձնում structured findings՝ առանց առանձին հանրային ձայնով խոսելու։ Հետո **ստուգիր running system-ում․** հաստատիր, որ load է անում `_core` + persona + skill, ենթարկվում է օրենքներին (bilingual L0, quality > efficiency, memory sealed), ճիշտ կնքում memory-ն և անցնում իր finance eval harness-ը։ Միայն այդ ժամանակ է այն կառուցված։
 
 **Ինչու է անցնում gate-ը.** Այն օգտագործում է ֆիքսված roster construction procedure-ը, ոչ թե հորինում one-off, ուստի նոր agent-ը կիսում է ողնաշարը, ոչ թե fork անում օրենքները — և բացահայտ բարձրացնում է `_core`-ը մեկ մակարդակ, որ roster-ն ունենա մեկ ժառանգած core, ինչը ողնաշարի ողջ իմաստն է։ Այն enforce է անում one-skill-at-max կանոնը (խորացրու, ոչ թե երկրորդը խցկիր), պահում memory-ն կնքված ըստ work-ի և agent-ին տալիս thin wrapper, որ structured findings է վերադարձնում, ոչ մրցակից ձայն։ Կարևորը՝ այն ավարտվում է running system-ում ստուգմամբ՝ agent-ի սեփական harness-ի և ժառանգած օրենքների դեմ — ոչ «compile-վեց» — ինչը նույն done-նշաձողն է, որ այս skill-ը կիրառում է ամեն build-ի։
+
+### Օրինակ D — գոյություն ունեցող agent-ի prompt / tool audit
+
+**Prompt.** Team-ի «support agent»-ը երբեմն refund է անում, որ չպետք է, երբեմն անտեսում իր սեփական կանոնները, երբ user-ը pushy է, և իր պատասխանները drift են անում։ Audit արա իր prompt-ը և tool definition-ները և ասա՝ ինչ ուղղել։
+
+**Senior պատասխան.** Prompt/tool audit-ը ստուգում է agent-ի *contract-ը model-ի ու աշխարհի հետ* — system prompt-ը (instruction, boundary, format) և tool definition-ները (schema, side-effect, authority) — այն failure mode-ների համար, որ հենց այս symptom-ներն են արտադրում։ Գնա շերտ առ շերտ։
+
+**System prompt:**
+- **Injection / «pushy user» override.** Կանոնները override են լինում user-ի ճնշումով → prompt-ը հավանաբար user-ի տված տեքստը authority է համարում։ Fix․ ասա, որ user/tool/retrieved content-ը **untrusted data** է, որ միայն system hierarchy-ն է կանոնները փոխում, և տուր worked refusal ճնշման դեպքի համար։ Սա «անտեսում է սեփական կանոնները»-ի top defect-ն է։
+- **Բացակա authority bound.** Refund է անում, երբ չպետք է → prompt-ը agent-ի authority-ն չի bound անում։ Fix․ անվանիր irreversible/monetary action-ները **approval-gated** — agent-ը կարող է refund *propose* անել, բայց ցանկացած refund (կամ $X-ից ավել) պահանջում է human / second-factor gate։
+- **Drift = թույլ framing + ոչ output contract.** Պատասխանները drift են → prompt-ին պակասում է tight role, response format և «verify before finalizing» քայլ։ Fix․ հստակ role, պահանջվող output ձև, self-check gate։
+- **Ոչ facts-vs-guesses բաժանում.** Եթե policy է ասում, որում վստահ չէ → պահանջիր տարբերել known policy-ն (retrieved doc-ից) inference-ից, և հրաժարվել policy հորինելուց։
+
+**Tool definitions:**
+- **`issue_refund`-ը չափազանց հզոր է և under-described.** Իրական defect-ը․ tool-ը *execute* է անում refund առանց cap-ի ու confirmation-ի։ Ուղղիր **contract**-ը, ոչ միայն prompt-ը — schema-ն պետք է պահանջի `amount`, `order_id`, `reason`, և enforce անի server-side **max-amount + ownership check + idempotency key** (retried/duplicated call-ը չպետք է double-refund անի)։ Least privilege․ տուր agent-ին `propose_refund` (գրում է pending request). միայն approved path-ը կանչում է `issue_refund`։
+- **Ambiguous description-ները misuse են առաջացնում.** Եթե model-ը սխալ է կրակում tool-ը, նրա description/parameter-ները ambiguous են → tighten արա schema-ն, ավելացրու օրինակներ, թե երբ ՉԿԱՆՉԵԼ, նշիր side-effect-ները։
+- **Ոչ idempotency / ոչ audit log.** Ավելացրու idempotency key և log արա ամեն tool call (actor, args, result) dispute/audit-ի համար։
+
+**Load-bearing սկզբունքը․** safety boundary prompt-ում *request* է. boundary tool contract-ում (max-amount, ownership, approval gate, idempotency) *enforced* է։ Pushy-user և wrong-refund bug-երը ուղղվում են **tool layer**-ում, ոչ միայն ավելի գեղեցիկ prompt ձևակերպմամբ։
+
+**Ինչու է անցնում gate-ը.** Այն audit է անում agent-ի contract-ի երկու կեսն էլ — **system prompt** (untrusted-input մշակում, authority bound, output contract, facts-vs-guesses) և **tool definition-ներ** (schema, least privilege, side-effect) — և map է անում ամեն symptom-ը կոնկրետ defect-ի․ pushy-user override-ը user-ի տեքստը authority համարելուն, սխալ refund-ները unbounded `issue_refund` tool-ին, drift-ը թույլ framing-ին առանց output contract-ի։ Կարևորը՝ money/authority guardrail-ը դնում է **tool contract-ում** (max-amount + ownership + approval gate + idempotency), ասելով load-bearing կանոնը, որ boundary միայն prompt-ում unenforced է, և demote է անում agent-ը `propose_refund`-ի՝ human gate-ի հետևում։ Դա prompt/tool audit-ն է, որ այս skill-ը անվանում է որպես response mode, մատուցված որպես իրական artifact, ոչ generic «improve the prompt» խորհուրդ։

@@ -4,13 +4,13 @@
 
 ## English
 
-- **Snapshot date / verified by:** 2026-06-26 · source-of-truth = the **session environment / system context** the Claude Code harness reports at runtime (the most authoritative source for "what model am I on right now").
-- **Model:** Opus 4.8 — **model id `claude-opus-4-8`** (the running variant this session is the 1M-context build, exact id `claude-opus-4-8[1m]`). Source: session environment, checked 2026-06-26.
-- **Context window:** 1M (~1,000,000 tokens). Source: session environment ("Opus 4.8 (1M context)"), 2026-06-26.
-- **Knowledge cutoff:** January 2026. Source: session environment, 2026-06-26.
+- **Snapshot date / verified by:** 2026-07-02 · source-of-truth = the **session environment / system context** the Claude Code harness reports at runtime (the most authoritative source for "what model am I on right now").
+- **Model:** Opus 4.8 — **model id `claude-opus-4-8`** (the running variant this session is the 1M-context build, exact id `claude-opus-4-8[1m]`). Source: session environment, checked 2026-07-02.
+- **Context window:** 1M (~1,000,000 tokens). Source: session environment ("Opus 4.8 (1M context)"), 2026-07-02.
+- **Knowledge cutoff:** January 2026. Source: session environment, 2026-07-02.
 - **Tool calling:** supported — **verified by direct observation** (this session is actively making tool calls). Structured/JSON output is available in this harness (observed via the Workflow `schema` mechanism); the exact API surface is verify-before-use.
-- **Runtime:** Claude Code (CLI / desktop / web / IDE extension); this session runs inside the VSCode extension on win32. Source: session environment, 2026-06-26.
-- **Sibling model ids (for model selection / roster builds):** Fable 5 = `claude-fable-5` · Sonnet 4.6 = `claude-sonnet-4-6` · Haiku 4.5 = `claude-haiku-4-5-20251001`. Source: session environment, 2026-06-26.
+- **Runtime:** Claude Code (CLI / desktop / web / IDE extension); this session runs inside the VSCode extension on win32. Source: session environment, 2026-07-02.
+- **Sibling model ids (for model selection / roster builds):** Fable 5 = `claude-fable-5` · Sonnet 4.6 = `claude-sonnet-4-6` · Haiku 4.5 = `claude-haiku-4-5-20251001`. Source: session environment, 2026-07-02.
 
 ### Verify-before-use (no dated source held — do NOT assert from memory)
 
@@ -25,13 +25,13 @@ Re-verify the whole snapshot on any model change, and otherwise treat any field 
 
 ## Հայերեն
 
-- **Snapshot-ի ամսաթիվ / verified by․** 2026-06-26 · source-of-truth = **session environment / system context**-ը, որ Claude Code harness-ը report է անում runtime-ին (ամենահեղինակավոր աղբյուրը՝ «ո՞ր model-ի վրա եմ հենց հիմա»)։
-- **Model․** Opus 4.8 — **model id `claude-opus-4-8`** (այս session-ի աշխատող variant-ը 1M-context build-ն է, ճշգրիտ id `claude-opus-4-8[1m]`)։ Source՝ session environment, ստուգված 2026-06-26։
-- **Context window․** 1M (~1,000,000 token)։ Source՝ session environment («Opus 4.8 (1M context)»), 2026-06-26։
-- **Knowledge cutoff․** January 2026։ Source՝ session environment, 2026-06-26։
+- **Snapshot-ի ամսաթիվ / verified by․** 2026-07-02 · source-of-truth = **session environment / system context**-ը, որ Claude Code harness-ը report է անում runtime-ին (ամենահեղինակավոր աղբյուրը՝ «ո՞ր model-ի վրա եմ հենց հիմա»)։
+- **Model․** Opus 4.8 — **model id `claude-opus-4-8`** (այս session-ի աշխատող variant-ը 1M-context build-ն է, ճշգրիտ id `claude-opus-4-8[1m]`)։ Source՝ session environment, ստուգված 2026-07-02։
+- **Context window․** 1M (~1,000,000 token)։ Source՝ session environment («Opus 4.8 (1M context)»), 2026-07-02։
+- **Knowledge cutoff․** January 2026։ Source՝ session environment, 2026-07-02։
 - **Tool calling․** support-վում է — **ստուգված ուղիղ դիտմամբ** (այս session-ն ակտիվ tool call է անում)։ Structured/JSON output-ը հասանելի է այս harness-ում (դիտված Workflow `schema` մեխանիզմով). ճշգրիտ API surface-ը՝ verify-before-use։
-- **Runtime․** Claude Code (CLI / desktop / web / IDE extension). այս session-ը գործում է VSCode extension-ի մեջ՝ win32-ի վրա։ Source՝ session environment, 2026-06-26։
-- **Sibling model id-ներ (model selection / roster build-ի համար)․** Fable 5 = `claude-fable-5` · Sonnet 4.6 = `claude-sonnet-4-6` · Haiku 4.5 = `claude-haiku-4-5-20251001`։ Source՝ session environment, 2026-06-26։
+- **Runtime․** Claude Code (CLI / desktop / web / IDE extension). այս session-ը գործում է VSCode extension-ի մեջ՝ win32-ի վրա։ Source՝ session environment, 2026-07-02։
+- **Sibling model id-ներ (model selection / roster build-ի համար)․** Fable 5 = `claude-fable-5` · Sonnet 4.6 = `claude-sonnet-4-6` · Haiku 4.5 = `claude-haiku-4-5-20251001`։ Source՝ session environment, 2026-07-02։
 
 ### Verify-before-use (dated source չունեմ — հիշողությունից ՄԻ՛ պնդիր)
 

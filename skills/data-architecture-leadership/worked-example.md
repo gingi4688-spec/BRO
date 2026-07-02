@@ -46,6 +46,31 @@ Place them and name the **one** next stage:
 
 **Why this passes.** It correctly reads the prompt as a capability/coaching question and answers with a crawl/walk/run sequence instead of the most advanced pattern — and it explicitly names skipping stages as the failure, refusing to hand a five-person team a mesh. It diagnoses the team's actual position (pre-crawl: no governed source, no grain) from the evidence given, then prescribes the *single* actionable next stage (one governed warehouse, defined grain, one owner per metric) rather than the end-state. It ties the mesh refusal to the concrete missing prerequisites (product owners, contracts, SLAs, stewards), so the "no" is reasoned, not dismissive, and it gives an earn-path to run. The grain-first and one-owner-per-metric moves are the same disciplines the operating lens enforces, applied as the crawl foundation.
 
+### Example C — MDM golden-record survivorship rulebook
+
+**Prompt.** Customer data lives in three systems — CRM (sales-entered), Billing (finance-authoritative), and the Support tool (agent-entered). The same customer appears in all three with conflicting name, address, email, and status. Design the MDM rulebook that produces one golden record.
+
+**Senior answer.** A golden record is not "pick the newest row" — it is a **per-attribute survivorship policy** plus a **matching rule** plus a **stewardship path** for what the rules cannot decide.
+
+**1. Matching (which records are the same entity?)** Deterministic match on a strong key first (tax id / verified email); fall back to probabilistic match on name + address + phone with a score. Two thresholds: **auto-merge ≥ 0.90**, **auto-distinct < 0.75**, and the **0.75–0.90 gray zone → a steward review queue** — never auto-merge a maybe, because a wrong merge fuses two real customers and is painful to unpick. Tradeoff stated: a high auto-merge bar means more manual review but fewer false merges; for customer/billing identity, false merges are the worse error.
+
+**2. Survivorship (per attribute, which source wins?)** — the golden value is chosen attribute-by-attribute, because no single system is authoritative for everything:
+
+| Attribute | Winning source (rule) | Tiebreak / notes |
+|---|---|---|
+| Legal name | Billing (finance-verified) | if Billing null → CRM; then most-recently-updated non-null |
+| Billing address | Billing | authoritative by definition; never overwrite from CRM |
+| Email (contact) | most-recently-**verified** across sources | verified beats unverified regardless of recency; then recency |
+| Phone | Support (most recent agent-confirmed) | then CRM; drop unformattable |
+| Account status | Billing (active/suspended source of truth) | CRM "status" is a sales stage, not account status — do not merge the two concepts |
+| Created date | **earliest** across all sources | identity is as old as its first appearance |
+
+The precedence is **source-priority → recency → validity**: a verified-but-older email beats an unverified-newer one. Every golden attribute stores its **lineage** (which source + timestamp) so the record is auditable and the merge reversible.
+
+**3. Stewardship (what the rules cannot decide).** Gray-zone matches, and any attribute conflict where the priority sources disagree *and* both are verified, go to a **named data steward**, not a coin flip. The steward decides; where the decision generalizes, it is folded back as a rule refinement. Ownership is explicit — a named steward owns customer MDM, survivorship rules are **versioned**, and a merge is **reversible** (keep source rows + lineage, never hard-delete on merge).
+
+**Why this passes.** It refuses "newest row wins" and defines survivorship **per attribute** with an explicit source-priority → recency → validity precedence, so Billing owns billing address and status while a verified email can win on recency — matching how authority actually splits across systems. It sets **matching thresholds with a gray-zone steward queue** instead of auto-merging maybes (naming false-merge as the worse, hard-to-unpick error), keeps **lineage per attribute** so the golden record is auditable and the merge reversible, and routes the undecidable to a **named steward** with versioned rules rather than a silent default. It even catches the semantic trap (CRM sales-stage "status" ≠ Billing account status), which is exactly where naive MDM corrupts the golden record.
+
 ## Հայերեն
 
 ### Օրինակ A — platform decision matrix + architecture recommendation
@@ -91,3 +116,28 @@ Decision matrix (binding constraint ամեն consumer-ի համար)․
 **Recommendation․** հիմա անտեսիր mesh-ը. հաջորդ եռամսյակը ծախսիր crawl-ի հասնելու վրա (մեկ warehouse, սահմանված grain, մեկ owner ամեն metric-ի)։ Mesh-ը երկու stage հեռու է և վաստակվում է maturity-ով, ոչ ընդունվում կարդալով։
 
 **Ինչու է անցնում gate-ը.** Այն ճիշտ է կարդում prompt-ը որպես capability/coaching հարց և պատասխանում crawl/walk/run հերթականությամբ՝ ամենաառաջադեմ pattern-ի փոխարեն — և բացահայտ անվանում է stage բաց թողնելը որպես failure՝ հրաժարվելով հնգանոց թիմին mesh տալուց։ Այն diagnose է անում թիմի իրական դիրքը (pre-crawl․ ոչ governed source, ոչ grain) տրված ապացույցից, հետո նշանակում *մեկ* actionable հաջորդ stage (մեկ governed warehouse, սահմանված grain, մեկ owner ամեն metric-ի)՝ end-state-ի փոխարեն։ Այն mesh-ի մերժումը կապում է կոնկրետ բացակայող նախապայմաններին (product owner, contract, SLA, steward), ուստի «ոչ»-ը հիմնավորված է, ոչ թեթևամիտ, և տալիս է earn-path դեպի run։ Grain-first-ը և one-owner-per-metric move-ները նույն կարգապահություններն են, որ operating ոսպնյակը enforce է անում՝ կիրառված որպես crawl-ի հիմք։
+
+### Օրինակ C — MDM golden-record survivorship rulebook
+
+**Prompt.** Customer data-ն ապրում է երեք համակարգում — CRM (sales-entered), Billing (finance-authoritative) և Support tool (agent-entered)։ Նույն customer-ը հայտնվում է երեքում էլ՝ հակասող name, address, email և status-ով։ Նախագծիր MDM rulebook-ը, որ արտադրում է մեկ golden record։
+
+**Senior պատասխան.** Golden record-ը «վերցրու ամենանոր row-ը» չէ — այն **per-attribute survivorship policy** է plus **matching rule** plus **stewardship path** այն բանի համար, ինչ կանոնները չեն կարող որոշել։
+
+**1. Matching (որ record-ներն են նույն entity-ն?)** Deterministic match նախ strong key-ով (tax id / verified email). fall back probabilistic match-ի name + address + phone-ով՝ score-ով։ Երկու threshold՝ **auto-merge ≥ 0.90**, **auto-distinct < 0.75**, և **0.75–0.90 gray zone → steward review queue** — երբեք auto-merge մի՛ արա «գուցե»-ն, որովհետև սխալ merge-ը միաձուլում է երկու իրական customer և ցավոտ է քանդել։ Tradeoff-ը ասված․ բարձր auto-merge շեմը նշանակում է ավելի շատ manual review, բայց ավելի քիչ false merge. customer/billing identity-ի համար false merge-ը ավելի վատ error-ն է։
+
+**2. Survivorship (per attribute, որ source-ն է հաղթում?)** — golden value-ն ընտրվում է attribute-առ-attribute, որովհետև ոչ մի համակարգ authoritative չէ ամեն ինչի համար․
+
+| Attribute | Հաղթող source (կանոն) | Tiebreak / նշում |
+|---|---|---|
+| Legal name | Billing (finance-verified) | եթե Billing null → CRM. հետո ամենավերջին-update-ված non-null |
+| Billing address | Billing | authoritative ըստ սահմանման. երբեք մի՛ overwrite արա CRM-ից |
+| Email (contact) | ամենավերջին-**verified** source-ների միջև | verified-ը հաղթում է unverified-ին անկախ recency-ից. հետո recency |
+| Phone | Support (ամենավերջին agent-confirmed) | հետո CRM. drop արա unformattable-ը |
+| Account status | Billing (active/suspended source of truth) | CRM «status»-ը sales stage է, ոչ account status — մի՛ միաձուլիր երկու concept-ը |
+| Created date | **ամենավաղը** բոլոր source-ների միջև | identity-ն այնքան հին է, որքան իր առաջին հայտնվելը |
+
+Precedence-ը **source-priority → recency → validity** է․ verified-բայց-հին email-ը հաղթում է unverified-նոր-ին։ Ամեն golden attribute պահում է իր **lineage**-ը (որ source + timestamp), որ record-ը auditable լինի և merge-ը reversible։
+
+**3. Stewardship (ինչ կանոնները չեն կարող որոշել).** Gray-zone match-երը, և ցանկացած attribute conflict, որտեղ priority source-երը համաձայն չեն *և* երկուսն էլ verified են, գնում են **անվանված data steward**-ի, ոչ մետաղադրամի նետում։ Steward-ը որոշում է. որտեղ որոշումը generalize է անում, այն ծալվում է հետ որպես կանոնի ճշգրտում։ Ownership-ը բացահայտ է — անվանված steward-ը տիրում է customer MDM-ին, survivorship rule-ները **versioned** են, և merge-ը **reversible** է (պահիր source row-երը + lineage, երբեք hard-delete merge-ի ժամանակ)։
+
+**Ինչու է անցնում gate-ը.** Այն մերժում է «ամենանոր row-ը հաղթում է»-ն և սահմանում survivorship **per attribute**՝ բացահայտ source-priority → recency → validity precedence-ով, ուստի Billing-ը տիրում է billing address-ին ու status-ին, մինչ verified email-ը կարող է հաղթել recency-ով — համապատասխանելով, թե ինչպես է authority-ն իրականում բաժանվում համակարգերի միջև։ Այն սահմանում է **matching threshold-ներ gray-zone steward queue-ով**՝ «գուցե»-ները auto-merge անելու փոխարեն (false-merge-ը անվանելով ավելի վատ, դժվար-քանդվող error), պահում է **lineage per attribute**, որ golden record-ը auditable լինի և merge-ը reversible, և undecidable-ը ուղղորդում է **անվանված steward**-ի versioned կանոններով՝ լուռ default-ի փոխարեն։ Այն նույնիսկ բռնում է semantic trap-ը (CRM sales-stage «status» ≠ Billing account status), որը հենց այնտեղ է, որտեղ naive MDM-ը corrupt է անում golden record-ը։

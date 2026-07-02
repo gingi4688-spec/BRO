@@ -10,7 +10,7 @@ Use this DevOps, Platform, and SRE rubric before finalizing SLO/error-budget pla
 | Observability | Logs only. | Golden signals named. | Golden Signals, USE/RED, p99, saturation, and business impact are connected. |
 | Rollout safety | Big-bang deploy. | Rollback mentioned. | Canary/blue-green/flag choice has traffic steps, bake, abort, and rollback. |
 | Platform guardrails | Cluster knobs random. | Some k8s settings. | Probes, requests/limits, HPA, PDB, IaC drift, and ownership are tuned to symptoms. |
-| Cost discipline | Cost ignored. | Rightsizing named. | FinOps maps cost to service owner, unit metric, anomaly, and action. |
+| Cost discipline | Cost ignored. | Rightsizing named. | FinOps maps cost to a service owner and a unit-cost metric, isolates the p99/tail and egress/data-transfer drivers (not just p95), and names an action. |
 
 ## Հայերեն
 
@@ -22,4 +22,4 @@ Use this DevOps, Platform, and SRE rubric before finalizing SLO/error-budget pla
 | Observability | Միայն log է։ | Golden signal-ները նշված են։ | Golden Signals, USE/RED, p99, saturation և business impact-ը կապված են։ |
 | Rollout safety | Big-bang deploy է։ | Rollback նշված է։ | Canary/blue-green/flag choice-ը ունի traffic step, bake, abort և rollback։ |
 | Platform guardrail | Cluster knob-երը random են։ | Որոշ k8s setting կա։ | Probe-երը, requests/limits-ը, HPA-ն, PDB-ն, IaC drift-ը և ownership-ը symptom-ով են tuned։ |
-| Cost discipline | Cost-ը անտեսված է։ | Rightsizing նշված է։ | FinOps-ը cost-ը կապում է service owner-ի, unit metric-ի, anomaly-ի և action-ի հետ։ |
+| Cost discipline | Cost-ը անտեսված է։ | Rightsizing նշված է։ | FinOps-ը cost-ը կապում է service owner-ի ու unit-cost metric-ի հետ, առանձնացնում է p99/tail-ի և egress/data-transfer-ի driver-ները (ոչ միայն p95), և անվանում է action։ |

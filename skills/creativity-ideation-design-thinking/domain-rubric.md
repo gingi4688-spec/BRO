@@ -2,11 +2,11 @@
 
 ## English
 
-Use this Creativity, Ideation, and Design Thinking rubric before finalizing idea sprint, SCAMPER transform, assumption grid, convergence matrix. A score of 5 requires the mechanism, evidence, and a checkable domain artifact.
+Use this Creativity, Ideation, and Design Thinking rubric before finalizing an idea sprint, a SCAMPER/TRIZ sheet, an assumption grid, or a concept-selection matrix. A score of 5 requires the mechanism, evidence, and a checkable domain artifact.
 
 | Dimension | 1 — weak | 3 — usable | 5 — senior |
 |---|---|---|---|
-| Divergence quality | More of the same. | Several variants. | Multiple real mechanisms are explored (SCAMPER, analogy, TRIZ, constraint-removal), separated in time from judgment. |
+| Divergence quality | More of the same. | Several variants. | Multiple real mechanisms explored (SCAMPER Eliminate/Reverse, analogical transfer, TRIZ contradiction, constraint-removal) under a no-evaluation rule, producing ≥2 non-additive ideas — separated in time from judgment. |
 | Problem frame | User/job vague. | Frame exists. | User, job, constraint, and success signal shape the ideation. |
 | Convergence math | Favorite idea wins. | Impact/effort used. | Weighted DFV or impact×uncertainty drives prototype choice. |
 | Prototype fit | Prototype is too big. | Some test. | Cheapest prototype isolates the riskiest assumption. |
@@ -14,11 +14,11 @@ Use this Creativity, Ideation, and Design Thinking rubric before finalizing idea
 
 ## Հայերեն
 
-Այս Creativity, Ideation, and Design Thinking rubric-ը կիրառիր idea sprint, SCAMPER transform, assumption grid, convergence matrix artifact-ը վերջնականացնելուց առաջ։ 5 միավորի համար պետք է mechanism, evidence և domain-ին հատուկ ստուգելի artifact։
+Այս Creativity, Ideation, and Design Thinking rubric-ը կիրառիր idea sprint-ը, SCAMPER/TRIZ sheet-ը, assumption grid-ը կամ concept-selection matrix-ը վերջնականացնելուց առաջ։ 5 միավորի համար պետք է mechanism, evidence և domain-ին հատուկ ստուգելի artifact։
 
 | Չափանիշ | 1 — թույլ | 3 — կիրառելի | 5 — senior |
 |---|---|---|---|
-| Divergence-ի որակ | Նույնի ավելին է։ | Մի քանի variant կա։ | Բազմաթիվ իրական mechanism է փորձվում (SCAMPER, analogy, TRIZ, constraint-removal)՝ ժամանակով բաժանված judgment-ից։ |
+| Divergence-ի որակ | Նույնի ավելին է։ | Մի քանի variant կա։ | Բազմաթիվ իրական mechanism է փորձվում (SCAMPER Eliminate/Reverse, analogical transfer, TRIZ contradiction, constraint-removal)՝ no-evaluation rule-ի տակ, արտադրելով ≥2 non-additive idea՝ ժամանակով բաժանված judgment-ից։ |
 | Problem frame | User/job-ը vague է։ | Frame կա։ | User-ը, job-ը, constraint-ը և success signal-ը ձևավորում են ideation-ը։ |
 | Convergence-ի հաշվարկ | Սիրված idea-ն է հաղթում։ | Impact/effort կա։ | Weighted DFV կամ impact×uncertainty-ն որոշում է prototype-ի ընտրությունը։ |
 | Prototype fit | Prototype-ը չափազանց մեծ է։ | Որոշ test կա։ | Ամենաէժան prototype-ը isolate է անում ամենառիսկային assumption-ը։ |

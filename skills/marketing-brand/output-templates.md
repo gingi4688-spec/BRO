@@ -23,10 +23,10 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
   - TOFU / informational — content + answer-engine/SEO (demand creation + capture)
   - MOFU / commercial — comparison/guide/webinar + email nurture (trigger → goal → exit)
   - BOFU / transactional — case study / ROI tool / demo + re-engagement & win-back sequences
-- **Channel economics (per channel/cohort):** `impressions × CTR × landing × sales conv × ACV × margin` → CAC → **CAC:LTV** → **payback months**; conversion rates labeled as assumptions to replace with real data
+- **Channel economics (per channel/cohort):** `impressions × CTR × landing × sales conv × ACV × margin` → CAC → **LTV:CAC** → **payback months**; conversion rates labeled as assumptions to replace with real data
 - **Email/lifecycle:** segmentation basis · sequences (entry trigger, goal, exit) · deliverability (SPF/DKIM/DMARC, list hygiene)
 - **PLG instrumentation (if applicable):** the activation event ("aha") · expansion loop / PQL handoff
-- **Learning loop:** per channel — kill/scale threshold on CAC:LTV & payback · owner · next test
+- **Learning loop:** per channel — kill/scale threshold on LTV:CAC & payback · owner · next test
 - **Acceptance:** matrix not a channel list · CAC paired with LTV & payback · motion matches the deal · no invented benchmark
 
 ### Template 3 — Measurement & attribution design
@@ -35,7 +35,7 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
 - **Model class chosen & why:** single-touch (directional) | multi-touch (in-channel) | MMM (cross-channel allocation) | incrementality (causal truth)
 - **Blind spot of the chosen model:** what it cannot see (e.g. last-touch over-credits demand-harvesting; MTA degrades under privacy loss; MMM weak on new channels)
 - **Incrementality validation:** the holdout/geo test that confirms causal lift before a scale decision
-- **Metrics that matter:** qualified pipeline · CAC:LTV · payback · incremental revenue — not impressions/likes/MQL-count
+- **Metrics that matter:** qualified pipeline · LTV:CAC · payback · incremental revenue — not impressions/likes/MQL-count
 - **Triangulation:** how MTA/MMM (direction) and incrementality (truth) are combined
 - **Acceptance:** model class + blind spot named · scale claims gated on incrementality · a learning loop with owner and threshold
 
@@ -62,10 +62,10 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
   - TOFU / informational — content + answer-engine/SEO (demand creation + capture)
   - MOFU / commercial — comparison/guide/webinar + email nurture (trigger → goal → exit)
   - BOFU / transactional — case study / ROI tool / demo + re-engagement և win-back sequence
-- **Channel economics (per channel/cohort)․** `impressions × CTR × landing × sales conv × ACV × margin` → CAC → **CAC:LTV** → **payback ամիսներ**. conversion rate-ները նշված որպես assumption, որ պետք է փոխարինվեն իրական data-ով
+- **Channel economics (per channel/cohort)․** `impressions × CTR × landing × sales conv × ACV × margin` → CAC → **LTV:CAC** → **payback ամիսներ**. conversion rate-ները նշված որպես assumption, որ պետք է փոխարինվեն իրական data-ով
 - **Email/lifecycle․** segmentation-ի հիմքը · sequence-ներ (entry trigger, goal, exit) · deliverability (SPF/DKIM/DMARC, list hygiene)
 - **PLG instrumentation (եթե կիրառելի է)․** activation event-ը («aha») · expansion loop / PQL handoff
-- **Learning loop․** per channel — kill/scale threshold CAC:LTV-ի և payback-ի վրա · owner · next test
+- **Learning loop․** per channel — kill/scale threshold LTV:CAC-ի և payback-ի վրա · owner · next test
 - **Acceptance․** matrix է, ոչ channel ցուցակ · CAC-ը զուգված LTV-ի և payback-ի հետ · motion-ը սազում է deal-ին · ոչ մի հորինված benchmark
 
 ### Template 3 — Measurement & attribution design
@@ -74,6 +74,6 @@ Three domain-shaped deliverables. Fill the real fields; keep every number tracea
 - **Ընտրված model-ի դասը և ինչու․** single-touch (directional) | multi-touch (in-channel) | MMM (cross-channel allocation) | incrementality (causal ճշմարտություն)
 - **Ընտրված model-ի կույր կետը․** ինչ չի կարող տեսնել (օր.՝ last-touch-ը գերագնահատում է demand-harvesting-ը. MTA-ն վատանում privacy-ի կորստի տակ. MMM-ը թույլ է նոր channel-ի վրա)
 - **Incrementality validation․** holdout/geo test-ը, որ հաստատում է causal lift-ը scale որոշումից առաջ
-- **Կարևոր metric-ները․** qualified pipeline · CAC:LTV · payback · incremental revenue — ոչ impression/like/MQL-count
+- **Կարևոր metric-ները․** qualified pipeline · LTV:CAC · payback · incremental revenue — ոչ impression/like/MQL-count
 - **Triangulation․** ոնց են MTA/MMM-ը (ուղղություն) և incrementality-ն (ճշմարտություն) համակցվում
 - **Acceptance․** model-ի դաս + կույր կետ անվանված · scale claim-ները gated incrementality-ով · learning loop՝ owner-ով և threshold-ով

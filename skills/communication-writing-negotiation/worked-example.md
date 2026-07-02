@@ -53,6 +53,28 @@
 
 **Why this passes.** It is built on observation → impact → request, with zero feedback sandwich — the opening names Sam's strength as the *reason* for the conversation, not as padding to soften a blow, so the real message is never buried. The observation is specific and behavioral (three late-Friday no-review merges, with dates), not a character judgment ("you're reckless"), so it targets a changeable behavior rather than Sam's identity as a fast, talented engineer — which is exactly the identity stake that would otherwise trigger defensiveness. The impact is concrete and names a real cost borne by a real person (the on-call's Saturday), which makes the request land as fair rather than nitpicky. It explicitly surfaces the speaker's own possible misread and invites correction, which keeps it a two-way conversation (the "what happened" conversation done honestly) instead of a verdict. And it ends on a clear, doable request plus an open question, not a reprimand — so Sam leaves with a next action, not a wound.
 
+### Example D — crisis communication (incident notification)
+
+**Prompt.** A production incident exposed some customers' data for ~3 hours. Leadership wants a status-page update now and a customer email. Draft them.
+
+**Senior answer.** Crisis comms is the highest-stakes writing this skill touches, so the first move is the **gate: a data-exposure notification carries legal and regulatory consequences (breach-notification timelines, admissions of liability), so the substance is drafted *with* legal/comms, not shipped unilaterally.** What communication owns is structure and tone; what it must not do is invent facts, admit legal conclusions, or promise what is not confirmed.
+
+Under pressure: **say what you know, say what you're doing, say when you'll update next** — and never speculate on cause or scope before it is confirmed (a wrong "only X were affected" that later grows is worse than "we are still determining scope"). Lead with the user's question ("am I affected, what do I do"), not the company's narrative.
+
+*Status page (first update):*
+> **Investigating — [service] incident.** We are investigating an issue affecting [service] that began at [time, timezone]. Some account data may have been accessible to unauthorized parties for a limited window. We have [contained it / taken the affected system offline] and are investigating scope and cause. Next update by [specific time]. — [time posted]
+
+*Customer email (once scope is confirmed enough to notify, coordinated with legal):*
+> **Subject:** Important security notice about your [product] account
+> **What happened:** On [date], for approximately [window], [specific confirmed data types] may have been exposed due to [factual, non-speculative cause]. We detected it at [time] and [what you did].
+> **What we've done:** [containment] · [fix] · [independent review if applicable].
+> **What you should do:** [concrete steps — reset password, watch for X] — and what you do *not* need to do.
+> **What's next:** [remediation] and how to reach us [support channel]. We're sorry — [accountability without a legal admission].
+
+Every bracket is a **fact to be confirmed**, not filled from assumption. Tone: plain, accountable, non-defensive — no minimizing ("just a minor issue"), no legalese wall, no blame.
+
+**Why this passes.** It opens with the **legal/comms gate** — data-exposure notifications carry breach-timeline and liability consequences, so it drafts *with* legal and refuses to ship unilaterally or invent scope/cause — which is the safety boundary this artifact demands. It applies the crisis discipline (say what you know / what you're doing / when you'll update; lead with the user's question; never speculate on unconfirmed scope), delivers a usable status post and customer email as **structures with every fact bracketed as to-be-confirmed** rather than fabricated details, and calibrates tone to accountable-without-a-legal-admission. It tells the customer both what to do and what they need *not* do — the mark of a notification written for the reader, not the company's liability posture alone.
+
 ## Հայերեն
 
 ### Օրինակ A — Before/after email (BLUF rewrite)
@@ -105,3 +127,25 @@
 > **Request.** Երկու բան։ Մեծ change-երը merge-ից առաջ review են ստանում, նույնիսկ եթե արագ։ Եվ այդ չափի ամեն ինչ վայրէջք է անում երկուշաբթի–հինգշաբթի, կամ feature flag-ի հետևում, եթե իսկապես չի կարող սպասել։ Սա աշխատո՞ւմ է, թե կա constraint, որ ես չեմ տեսնում։
 
 **Ինչու է անցնում gate-ը.** Կառուցված է observation → impact → request-ի վրա՝ զրո feedback sandwich-ով — բացումը Sam-ի ուժը անվանում է որպես խոսակցության *պատճառ*, ոչ թե հարված մեղմացնելու padding, ուստի իրական message-ը երբեք չի թաղվում։ Observation-ը կոնկրետ է և behavioral (երեք ուշ-ուրբաթ առանց-review merge՝ ամսաթվերով), ոչ բնավորության դատ («անզգույշ ես»), ուստի թիրախավորում է փոփոխելի վարք, ոչ Sam-ի identity-ն որպես արագ, տաղանդավոր engineer — որ հենց այն identity stake-ն է, որ այլապես defensiveness կառաջացներ։ Impact-ը կոնկրետ է և անվանում է իրական cost, որ կրում է իրական մարդ (on-call-ի շաբաթ օրը), ինչը request-ը դարձնում է արդար, ոչ մանրախնդիր։ Այն բացահայտ դուրս է բերում speaker-ի սեփական հնարավոր սխալ-ընթերցումը և հրավիրում ուղղում, ինչը պահում է երկկողմանի խոսակցություն («ինչ եղավ» խոսակցությունն ազնիվ արված)՝ verdict-ի փոխարեն։ Եվ ավարտվում է հստակ, անելի request-ով plus բաց հարցով, ոչ նկատողությամբ — ուստի Sam-ը հեռանում է հաջորդ action-ով, ոչ վերքով։
+
+### Օրինակ D — crisis communication (incident notification)
+
+**Prompt.** Production incident-ը ~3 ժամ բացահայտեց որոշ customer-ների data։ Leadership-ը ուզում է status-page update հիմա և customer email։ Draft արա դրանք։
+
+**Senior պատասխան.** Crisis comms-ը այս skill-ի ամենաբարձր-stakes գրելն է, ուստի առաջին move-ը **gate-ն է․ data-exposure notification-ը կրում է legal ու regulatory հետևանքներ (breach-notification timeline-ներ, liability-ի ընդունումներ), ուստի բովանդակությունը draft-վում է legal/comms-ի *հետ*, ոչ միակողմանի ship-վում։** Communication-ը տիրում է structure-ին և tone-ին. այն, ինչ չպետք է անի՝ fact հորինել, legal conclusion ընդունել, կամ խոստանալ չհաստատվածը։
+
+Ճնշման տակ․ **ասա, ինչ գիտես, ասա, ինչ ես անում, ասա, երբ կ-update անես հաջորդ անգամ** — և երբեք մի՛ ենթադրիր cause կամ scope, նախքան հաստատվի (սխալ «միայն X-ն ազդվեց», որ հետո մեծանում է, ավելի վատ է, քան «դեռ որոշում ենք scope-ը»)։ Առաջնորդիր user-ի հարցով («ազդվա՞ծ եմ, ի՞նչ անեմ»), ոչ ընկերության narrative-ով։
+
+*Status page (առաջին update)․*
+> **Investigating — [service] incident.** Հետաքննում ենք [service]-ը ազդող issue, որ սկսվեց [time, timezone]-ին։ Որոշ account data կարող էր հասանելի եղած լինել չարտոնված կողմերին սահմանափակ window-ում։ Մենք [contained արեցինք / ազդված համակարգը offline տարանք] և հետաքննում ենք scope-ն ու cause-ը։ Հաջորդ update-ը [specific time]-ին։ — [time posted]
+
+*Customer email (երբ scope-ը բավական հաստատված է notify անելու, legal-ի հետ coordinated)․*
+> **Subject:** Կարևոր security ծանուցում ձեր [product] account-ի մասին
+> **Ինչ եղավ․** [date]-ին, մոտավորապես [window], [specific confirmed data types] կարող էր բացահայտված լինել [factual, non-speculative cause]-ի պատճառով։ Մենք հայտնաբերեցինք [time]-ին և [ինչ արեցիք]։
+> **Ինչ ենք արել․** [containment] · [fix] · [independent review, եթե կիրառելի է]։
+> **Ինչ պիտի անեք․** [կոնկրետ քայլեր — reset password, հետևիր X-ին] — և ինչ *պետք չէ* անեք։
+> **Ինչ է հաջորդը․** [remediation] և ինչպես մեզ հասնել [support channel]։ Ներողություն ենք խնդրում — [accountability առանց legal admission-ի]։
+
+Ամեն bracket **հաստատվելիք fact** է, ոչ ենթադրությունից լցված։ Tone՝ պարզ, accountable, ոչ-defensive — ոչ minimizing («just a minor issue»), ոչ legalese պատ, ոչ blame։
+
+**Ինչու է անցնում gate-ը.** Այն սկսում է **legal/comms gate-ով** — data-exposure notification-ները կրում են breach-timeline ու liability հետևանք, ուստի draft-վում է legal-ի *հետ* և հրաժարվում միակողմանի ship անելուց կամ scope/cause հորինելուց — որ այս artifact-ի պահանջած safety boundary-ն է։ Այն կիրառում է crisis discipline-ը (ասա, ինչ գիտես / ինչ ես անում / երբ կ-update անես. առաջնորդիր user-ի հարցով. երբեք մի՛ ենթադրիր չհաստատված scope), մատուցում է կիրառելի status post և customer email որպես **structure, ամեն fact bracketed որպես to-be-confirmed**՝ ֆաբրիկացված detail-ի փոխարեն, և tone-ը կարգաբերում accountable-առանց-legal-admission-ի։ Այն customer-ին ասում է և՛ ինչ անել, և՛ ինչ *պետք չէ* անել — notification-ի նշանը, որ գրված է ընթերցողի, ոչ միայն ընկերության liability posture-ի համար։

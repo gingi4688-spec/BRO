@@ -61,6 +61,23 @@ The likely verdict: with a strong demo and champion but no confirmed economic bu
 
 **Why this passes.** It separates the buyer's enthusiasm from the deal's forecastability and scores the named MEDDICC fields on evidence rather than rep confidence. It isolates the two binding gaps — no economic buyer and no decision process — and refuses to call the deal commit until they close, downgrading to best-case with a concrete next step (the economic-buyer introduction) instead of a number. It names single-threading as the live risk and prescribes multi-threading, and it ends with a re-score gate after the missing evidence is gathered, so the forecast is earned, not asserted.
 
+### Example E — revenue quality (NRR / cohort) and the finance handoff
+
+**Prompt.** Leadership celebrates "40% new-logo growth this year." The board asks about revenue quality. Show how you would read it, and where the line to finance sits.
+
+**Senior answer.** New-logo growth hides the leak; **revenue quality lives in the existing base**, read by cohort and summarized as Net Revenue Retention (NRR). Walk a cohort's starting ARR forward one year:
+
+- Starting ARR (cohort): **$1,000,000**
+- Expansion (upsell / seats / usage): **+$220,000**
+- Contraction (downgrades): **−$60,000**
+- Gross churn (lost logos): **−$150,000**
+
+**NRR** = (1,000,000 + 220,000 − 60,000 − 150,000) / 1,000,000 = 1,010,000 / 1,000,000 = **101%**. **GRR (gross retention)** = (1,000,000 − 60,000 − 150,000) / 1,000,000 = **79%**. Read: NRR just over 100% means the base barely expands *net*, but the 79% GRR exposes real churn masked by strong expansion from a few accounts. So "40% growth" is carried by new logos plus a handful of expanders while ~1 in 5 revenue-dollars leaks — a leaky bucket that gets more expensive to fill as you scale. Move: segment NRR by cohort and by ICP segment (which expands, which churns), fix the churning segment (usually a motion/ICP mismatch), and treat expansion as a designed motion, not luck.
+
+**Where the line to finance sits.** Sales-revenue owns the *motion and the retention/expansion levers* (which segment, which play, which QBR triggers expansion). The **unit-economics verdict — CAC payback and LTV:CAC — belongs to `finance-unit-economics`.** Hand off the inputs, do not compute the financial verdict: give finance the loaded CAC, the gross-margin-based contribution, and the cohort retention curve; finance returns CAC payback (`CAC ÷ monthly gross-margin contribution`) and LTV:CAC. The reason for the seam: LTV must be built on *contribution margin* and a real retention curve (not `1/churn` on revenue), and that modeling is finance's to own — sales asserting an LTV number is exactly the over-reach the two skills separate.
+
+**Why this passes.** It refuses to read growth off new logos and computes **NRR and GRR from a cohort walk with the arithmetic shown** (101% / 79%), then reads the gap correctly — expansion masking a 21% gross leak — instead of celebrating the headline. It prescribes segmenting retention by cohort/ICP and fixing the churning segment as a motion problem. And it draws the **finance seam cleanly**: sales owns the retention/expansion motion and hands the loaded CAC + contribution + retention curve to `finance-unit-economics` for the CAC-payback and LTV:CAC verdict, explicitly refusing to assert an LTV itself — which is the exact routing boundary the skill is scored on.
+
 ## Հայերեն
 
 ### Օրինակ A — ICP-ի սահմանում
@@ -121,3 +138,20 @@ Binding stage-ը qualification-ն է (MQL→SQL), ոչ lead volume-ը․ այն�
 Հավանական վճիռը․ ուժեղ demo-ով և champion-ով, բայց առանց հաստատված economic buyer-ի և քարտեզված decision process-ի, սա **commit չէ** — առավելագույնը best-case է, և հաջորդ քայլը ոչ թե ավելի բարձր forecast է, այլ champion-ին ստիպելը ներկայացնել economic buyer-ին և procurement path-ը քարտեզելը։ Single-threading մեկ ոգևորված champion-ի վրա այստեղ failure mode-ն է․ եթե champion-ը հեռանա կամ influence կորցնի, deal-ը գոլորշիանում է, ուստի կառուցիր երկրորդ հարաբերություն։ Հաջորդ verification step․ վերա-score արա MEDDICC-ը economic-buyer-ի հանդիպումից և գրավոր decision timeline-ից հետո. միայն այդ ժամանակ դիտարկիր commit։
 
 **Ինչու է անցնում gate-ը.** Այն բաժանում է գնորդի ոգևորությունը deal-ի forecastability-ից և score է անում անվանված MEDDICC field-երը evidence-ով, ոչ rep confidence-ով։ Այն առանձնացնում է երկու binding gap-ը — ոչ economic buyer, ոչ decision process — և հրաժարվում deal-ը commit կոչելուց, մինչև դրանք փակվեն, downgrade անելով best-case-ի՝ կոնկրետ հաջորդ քայլով (economic-buyer-ի ներկայացում), ոչ թվով։ Այն single-threading-ը անվանում է որպես կենդանի ռիսկ և նշանակում multi-threading, և ավարտվում re-score gate-ով՝ բացակայող evidence-ը հավաքելուց հետո, ուստի forecast-ը վաստակված է, ոչ պնդված։
+
+### Օրինակ E — revenue quality (NRR / cohort) և finance handoff-ը
+
+**Prompt.** Leadership-ը տոնում է «40% new-logo growth այս տարի»։ Board-ը հարցնում է revenue quality-ի մասին։ Ցույց տուր, թե ինչպես կկարդաս այն, և որտեղ է գիծը finance-ի հետ։
+
+**Senior պատասխան.** New-logo growth-ը թաքցնում է արտահոսքը. **revenue quality-ն ապրում է եղած base-ում**, կարդացվում է cohort-ով և ամփոփվում որպես Net Revenue Retention (NRR)։ Քայլիր cohort-ի starting ARR-ը մեկ տարի առաջ․
+
+- Starting ARR (cohort)․ **$1,000,000**
+- Expansion (upsell / seats / usage)․ **+$220,000**
+- Contraction (downgrade)․ **−$60,000**
+- Gross churn (կորցրած logo)․ **−$150,000**
+
+**NRR** = (1,000,000 + 220,000 − 60,000 − 150,000) / 1,000,000 = 1,010,000 / 1,000,000 = **101%**։ **GRR (gross retention)** = (1,000,000 − 60,000 − 150,000) / 1,000,000 = **79%**։ Կարդում․ NRR-ը հազիվ 100%-ից վեր նշանակում է, որ base-ը հազիվ է *net* expand անում, բայց 79% GRR-ը բացահայտում է իրական churn, որ քողարկված է մի քանի account-ի ուժեղ expansion-ով։ Ուստի «40% growth»-ը տանում են new logo-ները plus մի բուռ expander, մինչ ~5-ից 1 revenue-դոլարը արտահոսում է — leaky bucket, որ ավելի թանկ է լցնել scale-ի հետ։ Move․ segment արա NRR-ը cohort-ով և ICP segment-ով (որն է expand անում, որը՝ churn), ուղղիր churn-ող segment-ը (սովորաբար motion/ICP mismatch), և expansion-ը վերաբերվիր որպես designed motion, ոչ բախտ։
+
+**Որտեղ է գիծը finance-ի հետ.** Sales-revenue-ն տիրում է *motion-ին և retention/expansion lever-ներին* (որ segment, որ play, որ QBR-ն է expansion trigger անում)։ **Unit-economics-ի վճիռը — CAC payback և LTV:CAC — պատկանում է `finance-unit-economics`-ին։** Հանձնիր input-ները, մի՛ հաշվիր financial վճիռը․ տուր finance-ին loaded CAC-ը, gross-margin-based contribution-ը և cohort retention curve-ը. finance-ը վերադարձնում է CAC payback (`CAC ÷ monthly gross-margin contribution`) և LTV:CAC։ Seam-ի պատճառը․ LTV-ն պետք է կառուցվի *contribution margin*-ի և իրական retention curve-ի վրա (ոչ `1/churn` revenue-ի վրա), և այդ modeling-ը finance-ինն է — sales-ի կողմից LTV թիվ պնդելը հենց այն over-reach-ն է, որ երկու skill-ը բաժանում են։
+
+**Ինչու է անցնում gate-ը.** Այն հրաժարվում է growth-ը new logo-ից կարդալուց և հաշվում է **NRR ու GRR cohort walk-ից՝ arithmetic-ը ցույց տրված** (101% / 79%), հետո ճիշտ է կարդում gap-ը — expansion, որ քողարկում է 21% gross արտահոսք — headline-ը տոնելու փոխարեն։ Այն նշանակում է retention-ը segment անել cohort/ICP-ով և churn-ող segment-ը ուղղել որպես motion խնդիր։ Եվ այն մաքուր է գծում **finance seam-ը**․ sales-ը տիրում է retention/expansion motion-ին և հանձնում loaded CAC + contribution + retention curve-ը `finance-unit-economics`-ին CAC-payback-ի ու LTV:CAC-ի վճռի համար՝ բացահայտ հրաժարվելով ինքը LTV պնդելուց — ինչը հենց routing boundary-ն է, որով skill-ը գնահատվում է։

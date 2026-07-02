@@ -33,7 +33,8 @@ def disposable_db(database_url):
         f"refusing destructive fixture: {name!r} is not an allowlisted "
         f"test database {sorted(ALLOWED_TEST_DBS)}"
     )
-    assert "prod" not in name and "staging" not in name
+    # No "prod"/"staging" denylist here on purpose: the allowlist above already
+    # fails closed; a denylist of "prod-like" names is the anti-pattern rule (1) warns against.
     yield name
     truncate_all_tables(name)  # safe: target proven disposable above
 ```
@@ -64,8 +65,10 @@ def test_terminal_states_never_revert(seq):
         order.apply(e)
         if order.status in TERMINAL:
             before = order.status
-            order.apply(st.sampled_from(["pay","ship"]).example())
-            assert order.status == before  # terminal is absorbing
+            for follow_up in ("pay", "ship", "refund", "cancel"):
+                order.apply(follow_up)
+                assert order.status == before  # terminal is absorbing for any event
+            break
 ```
 
 A consumer-driven contract snippet for the same boundary — the checkout consumer pins what it depends on, and the provider is verified against it before deploy:
@@ -147,7 +150,8 @@ def disposable_db(database_url):
         f"refusing destructive fixture: {name!r} is not an allowlisted "
         f"test database {sorted(ALLOWED_TEST_DBS)}"
     )
-    assert "prod" not in name and "staging" not in name
+    # «prod»/«staging» denylist այստեղ միտումնավոր չկա․ վերևի allowlist-ն արդեն
+    # fail-closed է անում. «prod-like» անունների denylist-ը հենց այն anti-pattern-ն է, որից զգուշացնում է կանոն (1)-ը։
     yield name
     truncate_all_tables(name)  # ապահով՝ target-ը վերևում ապացուցված disposable է
 ```
@@ -178,8 +182,10 @@ def test_terminal_states_never_revert(seq):
         order.apply(e)
         if order.status in TERMINAL:
             before = order.status
-            order.apply(st.sampled_from(["pay","ship"]).example())
-            assert order.status == before  # terminal-ը absorbing է
+            for follow_up in ("pay", "ship", "refund", "cancel"):
+                order.apply(follow_up)
+                assert order.status == before  # terminal-ը absorbing է ցանկացած event-ի դեպքում
+            break
 ```
 
 Նույն boundary-ի consumer-driven contract snippet-ը — checkout consumer-ը pin է անում, ինչից կախված է, և provider-ը verify է արվում դրա դեմ deploy-ից առաջ․

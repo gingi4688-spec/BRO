@@ -76,7 +76,7 @@
 | [product-project-management](product-project-management/SKILL.md) | discovery · PRD · prioritization (RICE/WSJF) · roadmaps · delivery · DoD = verified-in-running |
 | [business-strategy-operations](business-strategy-operations/SKILL.md) | Rumelt kernel · moats · business models · op-eff ≠ strategy + Goodhart · process · org design · SOPs |
 | [sales-revenue-growth](sales-revenue-growth/SKILL.md) | funnels · motion-mismatch/single-threading · NRR · ICP · pricing · growth loops |
-| [marketing-brand](marketing-brand/SKILL.md) | demand-gen · ABM/PLG/MMM · Dunford positioning · CAC:LTV · brand |
+| [marketing-brand](marketing-brand/SKILL.md) | demand-gen · ABM/PLG/MMM · Dunford positioning · LTV:CAC · brand |
 | [finance-unit-economics](finance-unit-economics/SKILL.md) | P&L · cash · LTV/CAC · DCF/cap-table · 3-statement modeling · pricing math |
 | [economics-market-design](economics-market-design/SKILL.md) | behavioral econ · macro/yield-curve · market-structure · mechanism/auction design (VCG) |
 

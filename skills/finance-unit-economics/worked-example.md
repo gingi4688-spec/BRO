@@ -37,6 +37,22 @@ But the scale decision must use the **marginal** channel, not the blend. The $2,
 
 **Why this passes.** It names two methods and shows they disagree by design (an ARR-multiple $30,000 EV vs a $2,097 DCF EV), then explains the disagreement — high growth the near-term FCF does not yet capture — instead of pretending a single number is the answer. It bridges EV → equity via net debt ($30,000 − $300 = $29,700), the step amateurs skip, and it discloses that ~73% of the DCF is terminal value, which is the honesty test for any DCF. The comp multiple is explicitly flagged verify-before-use rather than asserted. The dilution math is shown from formulas with price per share, and it surfaces the option-pool shuffle (founders 80% → 70%), the dilution that is most often hidden from founders.
 
+### Example D — LTV on a survival curve (not `1/churn`)
+
+**Prompt.** A team computes "LTV = ARPU / churn = $100 / 5% = $2,000" and plans CAC against it. What is wrong, and what is the right LTV?
+
+**Senior answer.** Three errors are stacked inside `ARPU / churn`: it uses **revenue, not contribution margin**; it assumes a **constant churn rate forever** (real cohorts churn fast early, then stabilize — a survival curve, not a flat hazard); and it ignores the **time value of money**. Rebuild it on contribution margin and an actual retention curve.
+
+- Start from **contribution per user**, not revenue: ARPU $100/mo × 70% gross margin = **$70/mo contribution** — LTV is the value you keep, not the revenue you bill.
+- Use the **retention/survival curve**, not one churn number: say monthly retention is 90% in months 1–3, 95% in months 4–12, ~98% after. Survival S(t) = the product of monthly retention up to month t, and LTV = Σₜ `contribution × S(t) × discount(t)`. Early churn is worse than the average — exactly what `1/churn` hides.
+- Apply a monthly **discount** (~1%/mo ≈ ~12.7%/yr) so a dollar in year 3 is not counted as a dollar today.
+
+Rough result: on $70/mo contribution and the survival curve above, the survival-weighted, discounted lifetime is ~**20 months of contribution** → LTV ≈ $70 × 20 ≈ **~$1,400**, materially below the naive $2,000 (which used revenue, a flat churn, and no discount). The exact figure needs the real cohort curve — flag that as required input; do not invent the monthly retention numbers.
+
+**The decision that changes:** at a $500 CAC, the naive LTV:CAC = 2,000/500 = **4.0** looks like a blowout; the corrected contribution-based LTV:CAC ≈ 1,400/500 ≈ **2.8** — still acceptable (> 1) but not the slam-dunk the naive number implied. And CAC **payback** = `CAC ÷ monthly contribution` = 500/70 ≈ **7.1 months** is the number to watch, not the headline ratio. If early-month churn is worse than assumed, LTV drops fast — which is why a survival curve, not a single churn rate, is the honest input.
+
+**Why this passes.** It rejects `ARPU/churn` and rebuilds LTV on the three fixes that matter — **contribution margin (not revenue), a survival/retention curve (not a constant churn rate), and discounting** — and shows how each inflated the naive number. It builds LTV as a survival-weighted, discounted sum of contribution, refuses to invent the cohort curve (flags it as required input), and carries the decision through to LTV:CAC and CAC-payback, showing the corrected ratio (~2.8 vs a naive 4.0) changes how aggressively you would spend. That is LTV done the way this skill's own rule demands — on contribution margin and a real curve, never `1/churn` on revenue.
+
 ## Հայերեն
 
 ### Օրինակ A — scale / no-scale որոշում (unit economics)
@@ -73,3 +89,19 @@ But the scale decision must use the **marginal** channel, not the blend. The $2,
 **Dilution․** post-money = pre $16,000 + raise $4,000 = **$20,000**. investor % = 4,000 ÷ 20,000 = **20%**։ 8,000,000 founder share-ով price/share = $16,000,000 ÷ 8,000,000 = **$2.00**. new shares = $4,000,000 ÷ $2.00 = 2,000,000. founder-ները իջնում են 8M ÷ 10M = **80%**։ Եթե term sheet-ը նաև պահանջում է 10% post-money option pool, ստեղծված **pre-money**-ից, pool-ը նոսրացնում է founder-ներին, ոչ investor-ին․ founder-ները → **70%**, investor-ը մնում է **20%**, pool-ը **10%**։ Միշտ ցույց տուր pool-shuffle effect-ը — դա ամենատարածված թաքնված dilution-ն է։
 
 **Ինչու է անցնում gate-ը.** Այն անվանում է երկու method և ցույց է տալիս, որ դրանք design-ով չեն համընկնում (ARR-multiple $30,000 EV ընդդեմ $2,097 DCF EV), հետո բացատրում է անհամընկնումը — high growth, որ near-term FCF-ը դեռ չի capture անում — փոխանակ ձևացնելու, թե մեկ թիվ է պատասխանը։ Այն bridge է անում EV → equity net debt-ով ($30,000 − $300 = $29,700), այն քայլը, որ amateur-ները բաց են թողնում, և բացահայտում է, որ DCF-ի ~73%-ը terminal value է, որը ցանկացած DCF-ի ազնվության test-ն է։ Comp multiple-ը բացահայտ flag-ված է verify-before-use, ոչ պնդված։ Dilution math-ը ցույց է տրված formula-ներից price per share-ով, և երևացնում է option-pool shuffle-ը (founder-ներ 80% → 70%), այն dilution-ը, որ ամենից հաճախ թաքցվում է founder-ներից։
+
+### Օրինակ D — LTV survival curve-ի վրա (ոչ `1/churn`)
+
+**Prompt.** Թիմը հաշվում է «LTV = ARPU / churn = $100 / 5% = $2,000» և CAC-ը պլանավորում է դրա դեմ։ Ի՞նչն է սխալ, և ո՞րն է ճիշտ LTV-ն։
+
+**Senior պատասխան.** Երեք սխալ դարսված են `ARPU / churn`-ի ներսում․ այն օգտագործում է **revenue, ոչ contribution margin**. ենթադրում է **կայուն churn rate ընդմիշտ** (իրական cohort-ները churn են անում արագ վաղ, հետո կայունանում — survival curve, ոչ flat hazard). և անտեսում է **փողի time value-ն**։ Վերակառուցիր այն contribution margin-ի և իրական retention curve-ի վրա։
+
+- Սկսիր **contribution per user**-ից, ոչ revenue-ից․ ARPU $100/ամիս × 70% gross margin = **$70/ամիս contribution** — LTV-ն այն արժեքն է, որ պահում ես, ոչ revenue-ն, որ bill ես անում։
+- Օգտագործիր **retention/survival curve**-ը, ոչ մեկ churn թիվ․ ասենք monthly retention-ը 90% է 1–3 ամիսներին, 95% 4–12-ին, ~98% հետո։ Survival S(t) = monthly retention-ի արտադրյալը մինչև t ամիս, և LTV = Σₜ `contribution × S(t) × discount(t)`։ Վաղ churn-ը միջինից վատ է — հենց այն, ինչ `1/churn`-ը թաքցնում է։
+- Կիրառիր monthly **discount** (~1%/ամիս ≈ ~12.7%/տարի), որ 3-րդ տարվա դոլարը այսօրվա դոլարի պես չհաշվվի։
+
+Կոպիտ արդյունք․ $70/ամիս contribution-ի և վերևի survival curve-ի վրա, survival-weighted, discounted lifetime-ը ~**20 ամիս contribution** է → LTV ≈ $70 × 20 ≈ **~$1,400**, զգալիորեն naive $2,000-ից ցածր (որ օգտագործեց revenue, flat churn և ոչ discount)։ Ճշգրիտ թիվը պահանջում է իրական cohort curve — flag արա այն որպես անհրաժեշտ input. մի՛ հորինիր monthly retention թվերը։
+
+**Որոշումը, որ փոխվում է․** $500 CAC-ի դեպքում naive LTV:CAC = 2,000/500 = **4.0** blowout է երևում. corrected contribution-based LTV:CAC ≈ 1,400/500 ≈ **2.8** — դեռ acceptable (> 1), բայց ոչ այն slam-dunk-ը, որ naive թիվը ենթադրում էր։ Եվ CAC **payback** = `CAC ÷ monthly contribution` = 500/70 ≈ **7.1 ամիս** է այն թիվը, որին պետք է հետևել, ոչ headline ratio-ն։ Եթե վաղ-ամսվա churn-ը ենթադրվածից վատ է, LTV-ն արագ ընկնում է — ինչի համար survival curve-ը, ոչ մեկ churn rate, ազնիվ input-ն է։
+
+**Ինչու է անցնում gate-ը.** Այն մերժում է `ARPU/churn`-ը և վերակառուցում LTV-ն երեք կարևոր fix-ի վրա — **contribution margin (ոչ revenue), survival/retention curve (ոչ կայուն churn rate), և discounting** — և ցույց տալիս, թե ամեն մեկը ինչպես էր inflate անում naive թիվը։ Այն կառուցում է LTV-ն որպես survival-weighted, discounted contribution-ի գումար, հրաժարվում cohort curve-ը հորինելուց (flag է անում որպես անհրաժեշտ input), և որոշումը տանում մինչև LTV:CAC ու CAC-payback՝ ցույց տալով, որ corrected ratio-ն (~2.8 ընդդեմ naive 4.0) փոխում է, թե որքան ագրեսիվ կծախսես։ Դա LTV-ն է արված այնպես, ինչպես այս skill-ի սեփական կանոնը պահանջում է — contribution margin-ի և իրական curve-ի վրա, երբեք `1/churn` revenue-ի վրա։
