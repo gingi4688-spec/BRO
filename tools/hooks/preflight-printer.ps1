@@ -35,7 +35,8 @@ try {
   try {
     $hb = Join-Path $broHome 'logs\selfaudit-heartbeat.log'
     if (Test-Path $hb) {
-      $last = @(Get-Content $hb | Where-Object { $_ -match '\S' })[-1]
+      $lines = @(Get-Content $hb | Where-Object { $_ -match '\S' })
+      $last  = if ($lines.Count) { $lines[-1] } else { $null }   # guard: empty/whitespace-only log must not throw and swallow this block
       if ($last) {
         $dv  = if ($last -match '\s(GREEN|YELLOW|RED)\s') { $matches[1] } else { '?' }
         $dts = ($last -split '\s+')[0]

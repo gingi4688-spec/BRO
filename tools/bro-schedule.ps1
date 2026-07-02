@@ -72,7 +72,9 @@ $desc   = if ($Autopilot) { "Bro Main-Bro daily AUTOPILOT (self-check -> BOUNDED
 try {
   $action  = New-ScheduledTaskAction -Execute $pwsh -Argument $argStr -WorkingDirectory $broHome
   $trigger = New-ScheduledTaskTrigger -Daily -At $Time
-  $set     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
+  # ExecutionTimeLimit = Zero (NO task-level timeout): Gev deliberately chose unbounded agents; a 10-min task limit
+  # could hard-kill a detached agent mid-stash (WIP left un-restored). The orchestrator itself returns in seconds.
+  $set     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit ([TimeSpan]::Zero)
   $prin    = New-ScheduledTaskPrincipal -UserId ("{0}\{1}" -f $env:USERDOMAIN, $env:USERNAME) -LogonType Interactive -RunLevel Limited
   Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $set -Principal $prin -Description $desc -Force | Out-Null
   Write-Host ("  REGISTERED daily '{0}' at {1} (current user, runs when logged on)." -f $taskName, $Time)

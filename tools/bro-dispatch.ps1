@@ -24,11 +24,13 @@ if (-not (Test-Path $ProjectPath)) { [Console]::Error.WriteLine("bro-dispatch: p
 $allowed = @(
   'Edit','Write','Read','Grep','Glob',
   'Bash(git status:*)','Bash(git diff:*)','Bash(git log:*)','Bash(git branch:*)',
-  'Bash(git checkout:*)','Bash(git switch:*)','Bash(git add:*)','Bash(git commit:*)','Bash(git restore:*)','Bash(git stash:*)',
+  'Bash(git checkout:*)','Bash(git switch:*)','Bash(git add:*)','Bash(git commit:*)','Bash(git restore:*)',
   'Bash(npm run:*)','Bash(npm test:*)','Bash(npm ci)','Bash(npm install:*)','Bash(npx:*)','Bash(node:*)','Bash(pnpm:*)','Bash(yarn:*)',
   'Bash(ls:*)','Bash(cat:*)','Bash(pwd)'
 )
-$denied = @('Bash(git push:*)','Bash(rm:*)','Bash(git reset --hard:*)','Bash(git clean:*)')
+# git stash denied to the agent so OUR pre-dispatch stash stays stash@{0} (reliable restore). git push denied at the
+# tool layer AND structurally neutralised below (pushUrl disabled) so node/npm/aliased/quoted pushes cannot publish.
+$denied = @('Bash(git push:*)','Bash(git stash:*)','Bash(rm:*)','Bash(git reset --hard:*)','Bash(git clean:*)')
 
 if (-not $Task) {
   $Task = @'
@@ -50,26 +52,44 @@ $claudeArgs = @('-p', $Task, '--permission-mode', 'acceptEdits', '--allowedTools
 # Runs claude in THIS process (foreground). For parallel/detached use, the CALLER wraps this in Start-Process
 # (e.g. the autopilot: Start-Process pwsh -File tools/bro-dispatch.ps1 -ProjectPath <p> -WindowStyle Hidden).
 Push-Location $ProjectPath
-$origBranch = (& git rev-parse --abbrev-ref HEAD 2>$null)
-$stashed = $false
+$origBranch  = (& git rev-parse --abbrev-ref HEAD 2>$null)
+$stashed     = $false
+$hadPushUrl  = $false; $origPushUrl = ''
 try {
+  # STRUCTURAL NO-PUSH: disable this repo's push URL for the whole dispatch, so NO command the agent runs can
+  # publish — not `git push`, not a node/npm child process, not a quoted `bash -c "git push"`, not an alias.
+  # This is the real "never push" guarantee; it does not depend on command-pattern matching. Restored below.
+  try { $origPushUrl = (& git config --get remote.origin.pushurl 2>$null); $hadPushUrl = -not [string]::IsNullOrEmpty("$origPushUrl") } catch {}
+  & git remote set-url --push origin 'DISABLED-BY-BRO-DISPATCH-NO-PUSH' 2>&1 | Out-Null
+
   # Auto-set-aside Gev's pre-existing WIP so it can NEVER block the dispatched Bro's commits (e.g. a prettier
-  # pre-commit gate), then restore it byte-identical after. Nothing lost; Gev is NEVER asked; the Bro's branch
-  # stays pure (no WIP mixed in). This is the "all automatic, only push on Gev" rule made structural.
+  # pre-commit gate); restore it after. The agent is denied `git stash`, so OUR stash stays stash@{0}. Nothing lost.
   if (@(& git status --porcelain 2>$null).Count -gt 0) {
     & git stash push -u -m "bro-dispatch: pre-dispatch WIP (auto)" 2>&1 | Out-Null
     $stashed = ($LASTEXITCODE -eq 0)
     if ($stashed) { Write-Host "bro-dispatch: set aside pre-existing WIP (git stash) - will restore after." }
   }
-  Write-Host "bro-dispatch: BOUNDED Bro in $ProjectPath (edits auto; git add/commit/branch allowed; push+rm denied; NO push)."
+  Write-Host "bro-dispatch: BOUNDED Bro in $ProjectPath (edits auto; git add/commit/branch allowed; push structurally disabled; stash/rm denied)."
   & claude @claudeArgs
 } finally {
-  if ($stashed) {
-    if ($origBranch) { & git checkout $origBranch 2>&1 | Out-Null }   # return to the WIP's home branch
-    & git stash pop 2>&1 | Out-Null
-    if ($LASTEXITCODE -eq 0) { Write-Host "bro-dispatch: restored pre-existing WIP (git stash pop)." }
-    else { Write-Host "bro-dispatch: WIP restore hit a conflict - WIP is PRESERVED in git stash (recover: git stash list/pop). Nothing lost." }
+  # 1) ALWAYS return to the WIP's home branch — the clean-tree case ALSO leaves us on the agent's branch, which
+  #    would otherwise let the next scheduled run execute unreviewed agent code from that checkout.
+  if ($origBranch -and $origBranch -ne 'HEAD') {
+    & git checkout $origBranch 2>&1 | Out-Null
+    if ($LASTEXITCODE -ne 0) { Write-Host "bro-dispatch: WARN - could not return to '$origBranch' (agent left uncommitted work on its branch); staying put." }
   }
+  # 2) Restore Gev's WIP ONLY if we are confirmed back on the home branch (else it would land on the agent branch);
+  #    otherwise leave it safely in the stash. --index keeps the staged/unstaged split. WIP is never lost.
+  if ($stashed) {
+    if ((& git rev-parse --abbrev-ref HEAD 2>$null) -eq $origBranch) {
+      & git stash pop --index 2>&1 | Out-Null
+      if ($LASTEXITCODE -eq 0) { Write-Host "bro-dispatch: restored pre-existing WIP (git stash pop --index)." }
+      else { & git stash pop 2>&1 | Out-Null; if ($LASTEXITCODE -eq 0) { Write-Host "bro-dispatch: restored WIP (content; index reapply skipped)." } else { Write-Host "bro-dispatch: WIP restore conflict - WIP PRESERVED in git stash (git stash list/pop). Nothing lost." } }
+    } else { Write-Host "bro-dispatch: not on '$origBranch' - WIP left safely in git stash (recover: git stash list/pop). Nothing lost." }
+  }
+  # 3) Restore the push URL exactly as it was.
+  if ($hadPushUrl) { & git remote set-url --push origin "$origPushUrl" 2>&1 | Out-Null }
+  else { & git config --unset-all remote.origin.pushurl 2>&1 | Out-Null }
   Pop-Location
 }
 exit 0

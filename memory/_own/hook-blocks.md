@@ -765,3 +765,33 @@ result: BLOCKED
 reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-02T18:07:36+04:00
+actor: hook
+session_id: e97a34e6-04ed-4784-a22c-e743f648ca5c
+action: CRITICAL_COMMAND_BLOCKED
+target: $sd = "C:\Users\Admin\AppData\Local\Temp\claude\c--Users-Admin-Desktop-Bro\e97a34e6-04ed-4784-a22c-e743f648ca5c\scratchpad\pushurl-test"
+Remove-Item -Recurse -F
+source_command: PowerShell tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-02T18:07:49+04:00
+actor: hook
+session_id: e97a34e6-04ed-4784-a22c-e743f648ca5c
+action: CRITICAL_COMMAND_BLOCKED
+target: $sd = "C:\Users\Admin\AppData\Local\Temp\claude\c--Users-Admin-Desktop-Bro\e97a34e6-04ed-4784-a22c-e743f648ca5c\scratchpad\pushurl-test"
+Remove-Item -Recurse -F
+source_command: PowerShell tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```

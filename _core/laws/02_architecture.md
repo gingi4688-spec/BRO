@@ -25,7 +25,9 @@ HY: Project, որ արդեն ուղեղ ունի, ADOPT է անում այն ի�
 
 Enforcement / Կիրառում — EN: If a project with an existing brain would be installed FRESH (losing its memory), STOP — adopt the brain (Gev-gated, hash-verified, root vacated only after the destination verifies); never copy a brain to SuperBro or another project; never blend. · HY: Եթե ուղեղ ունեցող project-ը FRESH install-վեր (ուղեղը կորցնելով), ԿԱՆԳՆԻՐ — adopt արա (Gev-gated, hash-verified, root-ը դատարկիր ՄԻԱՅՆ destination-ի verify-ից հետո); երբեք ուղեղ չպատճենես SuperBro/ուրիշ project, երբեք չblend անես։
 
-L13: <pending>
+L14: <pending>   <!-- reserved architecture-law slot; L13 is taken by 06_tokens.md (ZERO HARDCODE) -->
+
+<!-- L13 → see 06_tokens.md (ZERO HARDCODE / everything token-based) -->
 
 > **POLICY — INTENTIONALLY EMPTY · NOT FORGOTTEN / ՄԻՏՈՒՄՆԱՎՈՐ ԴԱՏԱՐԿ · ՉԻ ՄՈՌԱՑՎԵԼ**
 >

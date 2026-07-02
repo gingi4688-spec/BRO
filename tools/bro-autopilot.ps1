@@ -30,13 +30,16 @@ $brief = @("# Bro autopilot briefing — $stamp", "", "mode: $Mode")
 
 # 1) self-check (Bro's own integrity) --------------------------------------------------------------
 $sa = & pwsh -NoProfile -File 'tools/bro-selfaudit.ps1' -Quick -Log 2>&1
+$saExit = $LASTEXITCODE
 $verdictLine = (@($sa | ForEach-Object { "$_" -replace "\x1b\[[0-9;]*m", '' } | Where-Object { $_ -match '^OVERALL:' }) | Select-Object -Last 1)
-$isRed = "$verdictLine" -match 'OVERALL:\s*RED'
-$brief += "", "## self-check", "  $verdictLine"
+# FAIL-CLOSED: dispatch proceeds ONLY on an explicit GREEN/YELLOW verdict from a self-audit that actually ran
+# (exit 0=GREEN or 1=YELLOW). RED, a missing/garbled verdict line, a crash, or any other exit code HALTS dispatch.
+$okToDispatch = ("$verdictLine" -match 'OVERALL:\s*(GREEN|YELLOW)') -and ($saExit -in @(0,1))
+$brief += "", "## self-check", "  $(if ($verdictLine) { $verdictLine } else { "(no OVERALL verdict — self-audit exit=$saExit)" })"
 
-if ($isRed) {
-  $brief += "", "## DISPATCH HALTED", "  Bro's own self-check is RED — fix Bro before dispatching project work."
-  if ($Notify) { try { & msg.exe * "/TIME:180" "Bro autopilot HALTED: self-check RED. Open Bro -> RUN SELF-AUDIT." 2>$null } catch {} }
+if (-not $okToDispatch) {
+  $brief += "", "## DISPATCH HALTED", "  Self-check is not GREEN/YELLOW (RED, or the self-audit could not run) — fix Bro before dispatching. exit=$saExit"
+  if ($Notify) { try { & msg.exe * "/TIME:180" "Bro autopilot HALTED: self-check not GREEN/YELLOW. Open Bro -> RUN SELF-AUDIT." 2>$null } catch {} }
   $brief -join "`r`n" | Set-Content -Path "logs\autopilot-briefing-$date.md" -Encoding utf8
   Write-Host ($brief -join "`n")
   exit 3
@@ -72,7 +75,7 @@ foreach ($p in $targets) {
   if ($Mode -eq 'Live') {
     try {
       if ($Windows) { Start-Process 'code' -ArgumentList "-n `"$pp`"" -ErrorAction Stop; $brief += "  - ${pjid}: opened VS Code window (watch mode)" }
-      else { Start-Process 'pwsh' -ArgumentList '-NoProfile','-File',$dispatchTool,'-ProjectPath',$pp -WindowStyle Hidden -ErrorAction Stop; $brief += "  - ${pjid}: dispatched headless BOUNDED (own branch; commit; no push)" }
+      else { Start-Process 'pwsh' -ArgumentList "-NoProfile -File `"$dispatchTool`" -ProjectPath `"$pp`"" -WindowStyle Hidden -ErrorAction Stop; $brief += "  - ${pjid}: dispatched headless BOUNDED (own branch; commit; no push)" }
     } catch { $brief += "  - ${pjid}: dispatch FAILED ($($_.Exception.Message))" }
   } else {
     $brief += "  - ${pjid} [$pp]: WOULD dispatch BOUNDED (Observe — launched nothing)"
@@ -89,7 +92,7 @@ if (Test-Path $broPlan) {
   # local commit, NEVER push). Self-check already passed above (RED would have halted). Gev reviews + token-pushes.
   if ($Mode -eq 'Live' -and $pending.Count -gt 0) {
     try {
-      Start-Process 'pwsh' -ArgumentList '-NoProfile','-File',$dispatchTool,'-ProjectPath',$broHome -WindowStyle Hidden -ErrorAction Stop
+      Start-Process 'pwsh' -ArgumentList "-NoProfile -File `"$dispatchTool`" -ProjectPath `"$broHome`"" -WindowStyle Hidden -ErrorAction Stop
       $brief += "  -> dispatched Bro's OWN bounded agent (self-improve; own branch; commit; NO push; Gev reviews)"
     } catch { $brief += "  -> self-dispatch FAILED ($($_.Exception.Message))" }
   } elseif ($pending.Count -gt 0) {
