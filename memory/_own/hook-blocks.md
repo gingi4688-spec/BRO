@@ -734,3 +734,34 @@ result: BLOCKED
 reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-02T08:35:16+04:00
+actor: hook
+session_id: dba8cfdb-0dfe-430e-a651-0e516b9b7d67
+action: CRITICAL_COMMAND_BLOCKED
+target: cd "c:/Users/Admin/Desktop/Bro" && git push origin main 2>&1 && echo "" && echo "== confirm pushed ==" && git status -sb | head -1
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-02T12:15:25+04:00
+actor: hook
+session_id: dba8cfdb-0dfe-430e-a651-0e516b9b7d67
+action: CRITICAL_COMMAND_BLOCKED
+target: cd "c:\Users\Admin\Desktop\Bro"
+foreach ($id in 'EP','DB','GAA','SCOUT','MENQ') {
+  "===== $id ====="
+  pwsh -NoProfile -File tools\bro-wire-root.ps1 -ProjectId
+source_command: PowerShell tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
