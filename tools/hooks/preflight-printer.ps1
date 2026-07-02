@@ -18,6 +18,27 @@ try {
   Write-Output ("  critical:       build/push/migrate/delete/release/promote/lock require explicit Gev command (D0/§8)")
   Write-Output ("  cross-project:  OFF (opens only by explicit Gev command, §9)")
   Write-Output ("  evidence logs:  append-only (tools/bro-log.ps1); never hand-edited (§13A)")
+
+  # --- auto self-audit (quick, read-only): the Main Bro proves its integrity EVERY session -
+  #     this is agenda #3 scheduled at the session-open cadence (the cadence that matters for a repo
+  #     that only changes when Bro is in use). Best-effort; never blocks the session. ---
+  try {
+    $sa = & pwsh -NoProfile -File (Join-Path $broHome 'tools\bro-selfaudit.ps1') -Quick 2>&1
+    $overall = @($sa | ForEach-Object { "$_" -replace "\x1b\[[0-9;]*m", '' } | Where-Object { $_ -match '^OVERALL:' }) | Select-Object -Last 1
+    if ($overall) {
+      Write-Output ("  self-audit:     {0}" -f $overall.Trim())
+      Write-Output ("                  (auto quick = doctor + audit; full doctor+audit+beast: RUN SELF-AUDIT)")
+    }
+  } catch {}
+
+  # --- front door: the guided palette is the daily entry - no command memorizing (agenda #2) ---
+  try {
+    $lib = Get-Content -Raw (Join-Path $broHome 'tools\command-library.json') | ConvertFrom-Json
+    $ro  = @($lib.commands | Where-Object { $_.mode -eq 'READ' -and $_.availability -in @('CLEAN-BUILD','PHASE-2','LIVE') -and $_.name -notin @('HELP','EXIT') } | ForEach-Object { $_.name })
+    Write-Output "  FRONT DOOR:     pwsh tools/bro-palette.ps1   (menu -> preview -> YES; nothing critical without Gev)"
+    if ($ro.Count) { Write-Output ("  read-live now:  {0}" -f ($ro -join '  ·  ')) }
+  } catch {}
+
   Write-Output "============================================================="
   exit 0
 } catch { exit 0 }
