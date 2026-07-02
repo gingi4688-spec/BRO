@@ -26,19 +26,27 @@ try {
   $cmd = "$($j.tool_input.command)"
   if (-not $cmd) { exit 0 }
 
-  # approval check on the RAW command (the env-prefix token is not inside a string)
-  $approved = ($env:BRO_GEV_APPROVED -eq '1') -or ($cmd -match 'BRO_GEV_APPROVED=1')
-  if ($approved) { exit 0 }
-
-  # R-1 scrub: remove heredoc bodies, then double-quoted, then single-quoted strings,
-  # so critical words inside commit messages / prose / -m "..." cannot be mistaken for commands.
+  # R-1 scrub: remove heredoc bodies, then double-quoted, then single-quoted strings, so critical words / the
+  # approval token inside a commit message / prose / -m "..." cannot be mistaken for a command OR an approval.
   $scrub = $cmd
   $scrub = [regex]::Replace($scrub, "(?s)<<-?\s*['""]?(\w+)['""]?.*?\r?\n\1\b", ' ')
   $scrub = [regex]::Replace($scrub, '"[^"]*"', ' ')
   $scrub = [regex]::Replace($scrub, "'[^']*'", ' ')
 
-  # 1) real git push (anchored: a git ... push command segment, no separator between)
-  $isPush = $scrub -match '(?i)\bgit\b[^\n;|&]*\bpush\b'
+  # approval: the session env var, OR the token on the SCRUBBED command — a token inside a quoted commit message /
+  # prose was scrubbed away and must NOT self-approve (that was the bypass). Works for both `BRO_GEV_APPROVED=1 git
+  # push` (bash) and `$env:BRO_GEV_APPROVED=1; ...` (pwsh), since both survive the scrub outside quotes.
+  $approved = ($env:BRO_GEV_APPROVED -eq '1') -or ($scrub -match 'BRO_GEV_APPROVED=1')
+  if ($approved) { exit 0 }
+
+  # scan the bodies of -c / -Command / -e wrappers (bash -c "git push", node -e "...git push...") that the
+  # quote-scrub just removed, so a wrapped/quoted push is still seen.
+  $wrapperBodies = (([regex]::Matches($cmd, '(?is)(?:-c|-Command|-e)\s+(["''])(.*?)\1') | ForEach-Object { $_.Groups[2].Value }) -join "`n")
+
+  # 1) real git push: `push` as a git SUBCOMMAND — NOT the `--push` flag, NOT `git remote set-url --push`.
+  #    `(?<!-)` drops the flag; the raw check catches `git "push"`; the wrapper scan catches `bash -c "git push"`.
+  $pushRe = '(?im)\bgit\b[^\n;|&]*?\s(?<!-)push\b'
+  $isPush = ($scrub -match $pushRe) -or ($wrapperBodies -match $pushRe) -or ($cmd -match '(?i)\bgit\b\s+["'']?push\b')
   # 2) actual execution of a critical script (via -File, or at a command position) - NOT a mere path argument
   $crit = 'bro-(release|promote|register|install|update-spine|new-project|wire-root|cross-grant|schedule)\.ps1'
   $execViaFile = $scrub -match ("(?i)-File\b[^\n;|&]*\b" + $crit)
