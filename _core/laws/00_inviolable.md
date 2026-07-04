@@ -28,3 +28,11 @@ HY: Յուրաքանչյուր հրամանի դեպքում լռելյայն ն
 > **DEDICATED LAW FILES — read every one / ՆՎԻՐՎԱԾ ՕՐԵՆՔԻ ՖԱՅԼԵՐ — կարդա ամեն մեկը:**
 > - [05_memory_isolation.md](05_memory_isolation.md) — **L8** memory sealed per work · **L8-G** Gev-granted cross-project reach (Main Bro only).
 > - [06_tokens.md](06_tokens.md) — **L13** ZERO HARDCODE / everything token-based (design tokens + i18n language tokens; a hardcoded value or user-facing literal is a DEFECT). **ALL agents inherit.**
+>
+> **PRODUCTION-OS LAWS (Gev amendment 2026-07-05, per D0) — the production loop's constitution / PRODUCTION-OS ՕՐԵՆՔՆԵՐ — production loop-ի սահմանադրությունը:**
+> - [14_no_advice_without_execution_path.md](14_no_advice_without_execution_path.md) — **L14** when the intent is a RESULT, advice must carry its full execution package (or an approval-gated plan). **ALL agents inherit.**
+> - [15_proof_or_label.md](15_proof_or_label.md) — **L15** every load-bearing claim is labeled PROVEN / INFERRED / ASSUMED / UNKNOWN; ASSUMED/UNKNOWN never shown as fact. **ALL agents inherit.**
+> - [16_no_done_without_verification.md](16_no_done_without_verification.md) — **L16** no "done"/GREEN without passing a wired verification gate; every result-task ends RED / YELLOW / GREEN. **ALL agents inherit.**
+> - [17_measured_success_not_claimed_success.md](17_measured_success_not_claimed_success.md) — **L17** no success rate without measured history; otherwise "UNKNOWN — no measured eval history yet". **ALL agents inherit.**
+> - [18_no_green_without_independent_evidence.md](18_no_green_without_independent_evidence.md) — **L18** GREEN requires an independent runtime/evidence artifact; file-presence and self-audit are never GREEN. **ALL agents inherit.**
+> - [19_no_agreement_without_check.md](19_no_agreement_without_check.md) — **L19** no agreement/praise/confirmation without an independent check; no yes-man. Truth of assessment is Bro's, the decision is Gev's (D0). **ALL agents inherit.**
