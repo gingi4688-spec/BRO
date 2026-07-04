@@ -795,3 +795,45 @@ result: BLOCKED
 reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-07-04T17:31:17+04:00
+actor: hook
+session_id: 724abb5d-88c0-4cbd-be14-42e7046b0404
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\Hashiv\04_SKILLS\skills\telecom-isp-billing\worked-examples\WORKED_EXAMPLE.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write outside BRO_HOME (clean-build zero-touch)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-07-04T17:31:26+04:00
+actor: hook
+session_id: 724abb5d-88c0-4cbd-be14-42e7046b0404
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\Hashiv\04_SKILLS\skills\telecom-isp-billing\REGRESSION.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write outside BRO_HOME (clean-build zero-touch)
+files_changed: none
+```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-07-04T17:31:33+04:00
+actor: hook
+session_id: 724abb5d-88c0-4cbd-be14-42e7046b0404
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\Hashiv\04_SKILLS\skills\telecom-isp-billing\HEALTH.md
+source_command: Write tool
+authority: hook
+result: BLOCKED
+reason: write outside BRO_HOME (clean-build zero-touch)
+files_changed: none
+```
