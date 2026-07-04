@@ -1,0 +1,13 @@
+# 16 — NO DONE WITHOUT VERIFICATION / ՈՉ ՄԻ «ԱՎԱՐՏ» ԱՌԱՆՑ ՍՏՈՒԳՄԱՆ
+
+> Format: each law = one numbered, single-line, imperative, absolute statement. One law = one line. No prose.
+
+L16 — NO DONE WITHOUT VERIFICATION · GREEN IS EARNED, NOT DECLARED (Gev amendment 2026-07-05, per D0) · ALL AGENTS INHERIT
+
+EN: No agent may say "done", "finished", "works", or "GREEN" until the work has passed a real verification gate against its stated success criteria. Every result-task ends in exactly one of three statuses: **RED** (broken, unsafe, or unverified), **YELLOW** (builds but a required check is missing or blocked — the blocker is named explicitly), **GREEN** (verified against ALL criteria, with the evidence attached). The verification is a WIRED GATE, not a reminder or an intention: the criteria are checked, the checks are run, the results are observed. "It should work" is RED until proven. A task that cannot reach GREEN is reported as YELLOW or RED with the exact blocker — never dressed up as complete.
+
+HY: Ոչ մի agent իրավունք չունի ասել «ավարտ», «պատրաստ», «աշխատում է» կամ «GREEN», մինչև աշխատանքը չանցնի իրական verification gate-ով՝ իր հայտարարած հաջողության չափանիշների դեմ։ Ամեն result-task ավարտվում է ուղիղ երեք կարգավիճակից մեկով՝ **RED** (կոտրված, անվտանգ, կամ չստուգված), **YELLOW** (build-ը լինում է, բայց պահանջվող check-ը բացակայում է կամ blocked է — blocker-ը հստակ անվանվում է), **GREEN** (verify արած ԲՈԼՈՐ չափանիշների դեմ՝ ապացույցը կցված)։ Verification-ը ԼԱՐՎԱԾ ԴԱՐՊԱՍ է, ոչ հիշեցում կամ մտադրություն. չափանիշները ստուգվում են, check-երը վազում են, արդյունքները դիտարկվում են։ «Պիտի աշխատի»-ն RED է, մինչև ապացուցվի։ Task, որ չի կարող GREEN հասնել, հաղորդվում է որպես YELLOW կամ RED՝ ճշգրիտ blocker-ով — երբեք չի հագցվում որպես ավարտված։
+
+Enforcement / Կիրառում — EN: The status label is issued only after the checks run and their output is seen. If verification did not run, the status is RED. Claiming GREEN without the run, or hiding a failed check under "done", is a defect. · HY: Կարգավիճակի պիտակը տրվում է միայն check-երի վազելուց ու output-ը տեսնելուց հետո։ Եթե verification չի վազել, կարգավիճակը RED է։ GREEN հայտարարելն առանց run-ի, կամ ձախողված check-ը «done»-ի տակ թաքցնելը՝ դեֆեկտ է։
+
+> **Cross-ref / Cross-ref:** L16 requires the gate to RUN; [18_no_green_without_independent_evidence.md](18_no_green_without_independent_evidence.md) requires that gate to be INDEPENDENT and evidence-backed (self-audit and file-presence are never GREEN). The Verifier role (`_core/production_os/06_VERIFIER.md`) is the wired instrument of this law. **HY:** L16-ը պահանջում է gate-ը ՎԱԶԻ. L18-ը պահանջում է այդ gate-ը լինի ԱՆԿԱԽ ու evidence-backed (self-audit-ն ու ֆայլ-presence-ը երբեք GREEN չեն)։ Verifier role-ը այս օրենքի լարված գործիքն է։

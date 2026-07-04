@@ -1,0 +1,97 @@
+# Creativity, Ideation, and Design Thinking worked examples
+
+## English
+
+### Example A — Onboarding idea sprint (frame → SCAMPER → converge → prototype)
+
+**Prompt.** Build a senior-quality idea sprint to reduce abandoned onboarding.
+
+**Senior answer.** **Frame first.** User = a new signup on day 0; job-to-be-done = reach a first moment of value fast; constraint = no engineering rebuild this quarter; success signal = % reaching first value action, and onboarding-stage drop-off. The implied solution ("make the checklist nicer") is reframed as **How-Might-We help a new user reach first value before we ask for everything?**
+
+**Diverge (SCAMPER on the current checklist).** Substitute the long form with a progressive profile; Combine onboarding with the first value action; Adapt from airport boarding by showing queue/status stages; Modify by shrinking the first step to ~60 seconds; Put the support chat to use as guided setup; Eliminate optional fields until after activation; Reverse by letting the user import data *before* account completion. The Eliminate and Reverse verbs produced the two non-additive ideas — both remove or invert a step rather than adding one.
+
+**Converge (weighted DFV).** Score the finalists; "import-first" lands desirability 5, feasibility 3, viability 4. Its **make-or-break assumption** (highest impact × uncertainty) is whether new users actually have importable data ready at signup — if they don't, the whole concept collapses.
+
+**Prototype the assumption, not the polish.** Run a **fake-door import-first flow** for ~100 new users that offers import at step one and records who has data to import. Learning metric: first-value-action rate +10% **without** support tickets doubling. Owner: the onboarding PM. Kill/continue rule: if fewer than ~30% of users have importable data, kill import-first and fall back to the progressive-profile concept (next-highest DFV).
+
+**Why this passes.** It frames before it ideates — user, job, constraint, and two named success signals exist before a single idea, so the sprint answers the real problem (drop-off), not "make the checklist prettier." The divergence used a real forced-transform mechanism and it is visible *which verbs did the work*: Eliminate and Reverse produced the only two non-additive ideas, which is exactly how SCAMPER escapes feature-add fixation. Convergence is on an instrument (weighted DFV: 5/3/4), not taste, and it does not stop at the score — it isolates the single make-or-break assumption (importable data ready) by impact × uncertainty. The prototype attacks *that* assumption with the cheapest test that can fail (a fake-door measuring data-readiness), with a learning metric, an owner, and an explicit kill/continue threshold and fallback — so the answer can be proven wrong cheaply and there is a defined next move either way. No market sizes, benchmarks, or quotes are invented; the only numbers are the design's own thresholds.
+
+### Example B — Divergence-to-convergence session for a contradiction (TRIZ + Six Hats + conditions)
+
+**Prompt.** Our delivery-robot team is stuck: making the cooler bigger keeps food hot longer (good) but adds weight that wrecks battery range (bad). Run a session to get past it.
+
+**Senior answer.** **Frame + conditions.** Job = keep food hot across the route without sacrificing range; constraint = same chassis this cycle; success signal = end-of-route food temperature and battery range. Set the conditions before the room talks: a **silent Crazy-8s / brainwriting** round first (each engineer sketches independently — removes anchoring on the loudest voice and the production-blocking of one-at-a-time talking), then pool. Run the live part as **Six Thinking Hats** so the team's strong skeptic doesn't kill ideas mid-flow: Blue (goal) → White (what we actually know about heat loss and draw) → Green (generate, no criticism) → Yellow (value) → Black (risks — critique only here) → Blue (decide).
+
+**Name the contradiction (TRIZ, because this is a real tradeoff, not fixation).** This is a technical contradiction: improving *heat retention* worsens *weight/energy*. Take the contradiction to inventive principles instead of "compromise on a medium cooler":
+- **#3 Local quality / #1 Segmentation** — don't insulate the whole box uniformly; insulate only the food compartment, segment the cooler so empty space isn't heated.
+- **#35 Parameter change** — switch from passive mass-insulation to a phase-change pack pre-charged before the route (store heat in state, not in weight).
+- **#10 Preliminary action** — pre-heat the compartment at the depot so onboard energy maintains rather than raises temperature.
+- **#13 The other way round** — instead of carrying more insulation, shorten heat exposure by routing hot-food orders first (separation in time).
+
+**Converge.** Park the pure-bigger-cooler idea (it just averages the contradiction). Impact/effort triage: the **phase-change pack** is high-impact/low-effort (no chassis change) and goes first; **route-hot-orders-first** is low-effort and stacks with it. The make-or-break assumption (impact × uncertainty) for the pack: does a depot-charged phase-change pack hold temperature for the full route duration? **Prototype:** instrument 20 routes with a pre-charged pack, learning metric = end-of-route temp ≥ target with range unchanged, owner = hardware lead, kill/continue = if temperature fails on routes beyond the median duration, add the pre-heat (#10) before abandoning the approach.
+
+**Why this passes.** It correctly *chose the tool to the obstacle*: the blocker is a stated tradeoff, so it reaches for TRIZ (contradiction → inventive principles) and explicitly refuses the "medium cooler" average — which is the exact failure of treating a contradiction as something to split. The inventive principles are applied as concrete design moves (segment the insulation, phase-change pack, pre-heat at depot, reorder routes), not as slogans, and each keeps *both* desired properties instead of trading one for the other. The session also fixes the *conditions*, not just the technique: a silent brainwriting round before discussion to beat anchoring, and Six Hats to put the skeptic's critique into a defined Black slot so divergence survives. Convergence is on impact/effort, the riskiest assumption is named and sent to a 20-route prototype with a learning metric, an owner, and a kill/continue rule that has a concrete fallback (add pre-heat). Nothing is invented — the only quantities are the design's own targets and thresholds.
+
+### Example C — TRIZ physical contradiction (separation)
+
+**Prompt.** A signup form must be **long** (to capture the data that personalizes onboarding and lifts activation) and **short** (because every extra field drops completion). The team keeps averaging toward a "medium" form. Break it.
+
+**Senior answer.** This is a **physical contradiction** — the *same* parameter (form length / number of fields) must be both high and low at once. Unlike a technical contradiction (two *different* parameters trade off, which you attack with inventive principles), a physical contradiction is resolved by **separation**: satisfy the two opposite demands in different **time, space, condition, or scale**, so the parameter is high *where/when* you need it high and low *where/when* you need it low. Refuse the "medium form" — it is the average that fails both sides.
+
+The four separations, applied:
+- **In time — short *now*, long *later*.** Ask only what is needed to start (email + one field) at signup; collect the rest by **progressive profiling** across later sessions, at moments the user already sees value. Short at the high-drop-off moment, long across the lifecycle.
+- **In space / by part — split it.** A **short required core** + an **optional "personalize" branch** the motivated user can expand. Length is low on the critical path, high in the opt-in branch.
+- **In condition — make it adaptive.** Short for a simple/SMB signup; longer for an enterprise one where the data is worth the friction. Length varies by the condition that decides whether the data pays off.
+- **In scale (whole vs part) — one question per screen.** The *individual step* is short (low perceived length) while the *whole* still collects a lot; the wizard makes a long form feel short.
+
+Pick by the real constraint: if drop-off is at signup, separation-in-time (progressive profiling) is the highest-leverage move; if the data's value is segment-dependent, separation-in-condition.
+
+**Why this passes.** It names the obstacle as a **physical contradiction** (the same parameter must be high *and* low) and distinguishes it from a technical one, so it reaches for the **separation principles** rather than an inventive-principle swap or the "medium form" average that fails both. It works all four separations as concrete moves (time → progressive profiling; part → required core + optional branch; condition → adaptive by segment; scale → one-question-per-screen), each **keeping the form short where length hurts and long where it pays**, and routes the choice to the real constraint (drop-off location vs data value). Nothing invented — the moves are structural, not numeric claims.
+
+## Հայերեն
+
+### Օրինակ A — Onboarding idea sprint (frame → SCAMPER → converge → prototype)
+
+**Prompt.** Ստեղծիր senior-quality idea sprint՝ onboarding-ի abandonment-ը նվազեցնելու համար։
+
+**Senior պատասխան.** **Նախ frame։** User = day-0 նոր signup. job-to-be-done = արագ հասնել առաջին արժեքի պահին. constraint = այս եռամսյակում engineering rebuild չկա. success signal = first value action հասնող %-ը և onboarding-stage drop-off-ը։ Ենթադրվող լուծումը («checklist-ը գեղեցկացրու») reframe է արվում որպես **How-Might-We օգնենք նոր user-ին հասնել առաջին արժեքին, նախքան ամեն ինչ խնդրելը։**
+
+**Diverge (SCAMPER ընթացիկ checklist-ի վրա)։** Substitute՝ երկար form-ը progressive profile-ով. Combine՝ onboarding-ը first value action-ի հետ. Adapt՝ airport boarding-ից queue/status stage visibility. Modify՝ առաջին քայլը ~60 վայրկյան. Put to another use՝ support chat-ը guided setup. Eliminate՝ optional field-երը activation-ից հետո. Reverse՝ թույլ տալ data import-ը account completion-ից *առաջ*։ Eliminate-ն ու Reverse-ն տվեցին երկու ոչ-additive գաղափարը — երկուսն էլ հանում կամ շրջում են քայլ, ոչ ավելացնում։
+
+**Converge (weighted DFV)։** Score արա finalist-ները. «import-first»-ը՝ desirability 5, feasibility 3, viability 4։ Նրա **make-or-break assumption**-ը (ամենաբարձր impact × uncertainty) այն է, թե նոր user-երն իսկապես ունե՞ն importable data պատրաստ signup-ին — եթե ոչ, ողջ concept-ը փլուզվում է։
+
+**Prototype արա assumption-ը, ոչ հղկվածությունը։** Գործարկիր **fake-door import-first flow** ~100 նոր user-ի համար, որ առաջին քայլին import է առաջարկում և գրանցում, թե ով ունի import-ելու data։ Learning metric՝ first-value-action rate +10% **առանց** support ticket-երի կրկնապատկման։ Owner՝ onboarding PM-ը։ Kill/continue rule՝ եթե user-երի ~30%-ից քիչն ունի importable data, kill արա import-first-ը և ընկիր progressive-profile concept-ին (հաջորդ-բարձր DFV)։
+
+**Ինչու է անցնում gate-ը.** Այն frame է անում մինչ ideate անելը — user, job, constraint և երկու անվանված success signal կան մինչ առաջին գաղափարը, ուստի sprint-ը պատասխանում է իրական խնդրին (drop-off), ոչ «checklist-ը գեղեցկացնելու»։ Divergence-ն օգտագործել է իրական forced-transform mechanism, և տեսանելի է, թե *որ բայերը արեցին գործը*․ Eliminate-ն ու Reverse-ն տվեցին միակ երկու ոչ-additive գաղափարը, ինչը հենց SCAMPER-ի feature-add fixation-ից դուրս գալու ձևն է։ Convergence-ն instrument-ի վրա է (weighted DFV՝ 5/3/4), ոչ ճաշակ, և չի կանգնում score-ի վրա — այն impact × uncertainty-ով isolate է անում միակ make-or-break assumption-ը (importable data պատրաստ)։ Prototype-ը հարձակվում է *այդ* assumption-ի վրա ամենաէժան test-ով, որ կարող է fail անել (fake-door, որ չափում է data-readiness-ը)՝ learning metric-ով, owner-ով և բացահայտ kill/continue threshold-ով ու fallback-ով — ուստի պատասխանը կարող է էժան սխալ ապացուցվել, և երկու դեպքում էլ կա սահմանված հաջորդ քայլ։ Ոչ մի market size, benchmark կամ quote չի հորինվում. միակ թվերը design-ի սեփական threshold-ներն են։
+
+### Օրինակ B — Divergence-to-convergence session contradiction-ի համար (TRIZ + Six Hats + պայմաններ)
+
+**Prompt.** Մեր delivery-robot team-ը stuck է․ cooler-ը մեծացնելը ուտելիքը երկար տաք է պահում (լավ), բայց ավելացնում է weight, որ կործանում է battery range-ը (վատ)։ Վարիր session՝ սա հաղթահարելու համար։
+
+**Senior պատասխան.** **Frame + պայմաններ։** Job = ուտելիքը route-ի ողջ ընթացքում տաք պահել՝ range-ը չզոհելով. constraint = նույն chassis-ը այս cycle-ին. success signal = route-ի վերջի ուտելիքի temperature և battery range։ Սահմանիր պայմանները մինչ սենյակի խոսելը․ նախ **լուռ Crazy-8s / brainwriting** round (ամեն engineer sketch է անում անկախ — հանում է բարձր ձայնի վրա anchoring-ը և մեկ-մեկ խոսելու production-blocking-ը), հետո pool։ Live մասը վարիր որպես **Six Thinking Hats**, որ team-ի ուժեղ skeptic-ը գաղափարները չսպանի ընթացքում․ Blue (նպատակ) → White (ինչ իրականում գիտենք heat loss-ի և draw-ի մասին) → Green (ստեղծիր, առանց քննադատության) → Yellow (արժեք) → Black (ռիսկեր — critique միայն այստեղ) → Blue (որոշիր)։
+
+**Անվանի՛ր contradiction-ը (TRIZ, քանի որ սա իրական tradeoff է, ոչ fixation)։** Սա technical contradiction է․ *heat retention*-ը բարելավելը վատացնում է *weight/energy*-ն։ Contradiction-ը տար inventive principle-ների, «միջին cooler-ի վրա զիջելու» փոխարեն․
+- **#3 Local quality / #1 Segmentation** — մի՛ insulate արա ողջ box-ը միատեսակ. insulate արա միայն ուտելիքի compartment-ը, segment արա cooler-ը, որ դատարկ տարածությունը չտաքանա։
+- **#35 Parameter change** — passive mass-insulation-ից անցիր phase-change pack-ի՝ route-ից առաջ pre-charged (պահիր ջերմը state-ում, ոչ weight-ում)։
+- **#10 Preliminary action** — compartment-ը pre-heat արա depot-ում, որ onboard energy-ն պահպանի, ոչ բարձրացնի temperature-ը։
+- **#13 The other way round** — ավելի insulation կրելու փոխարեն, կարճացրու heat exposure-ը՝ hot-food order-ները route անելով առաջինը (separation ժամանակում)։
+
+**Converge։** Park արա pure-bigger-cooler գաղափարը (այն ուղղակի միջինացնում է contradiction-ը)։ Impact/effort triage․ **phase-change pack**-ը high-impact/low-effort է (chassis-ի փոփոխություն չկա) և գնում է առաջինը. **route-hot-orders-first**-ը low-effort է և stack է անում դրա հետ։ Pack-ի make-or-break assumption-ը (impact × uncertainty)․ depot-charged phase-change pack-ը պահու՞մ է temperature-ը route-ի ողջ տևողության համար։ **Prototype․** instrument արա 20 route pre-charged pack-ով, learning metric = route-ի վերջի temp ≥ target՝ range-ն անփոփոխ, owner = hardware lead, kill/continue = եթե temperature fail է անում median-ից երկար route-երում, ավելացրու pre-heat-ը (#10) մինչ approach-ը լքելը։
+
+**Ինչու է անցնում gate-ը.** Այն ճիշտ *ընտրեց գործիքը խոչընդոտին*․ blocker-ը նշված tradeoff է, ուստի վերցնում է TRIZ (contradiction → inventive principle) և բացահայտ մերժում «միջին cooler»-ի միջինը — ինչը հենց contradiction-ը կիսելու բանի պես վերաբերվելու ձախողումն է։ Inventive principle-ները կիրառվում են որպես կոնկրետ design move (segment արա insulation-ը, phase-change pack, depot-ում pre-heat, route-երը վերադասավորիր), ոչ կարգախոս, և ամեն մեկը պահում է *երկու* ցանկալի հատկությունն էլ՝ մեկը մյուսի դիմաց փոխանակելու փոխարեն։ Session-ը նաև ուղղում է *պայմանները*, ոչ միայն technique-ը․ լուռ brainwriting round մինչ քննարկումը՝ anchoring-ը հաղթելու համար, և Six Hats՝ skeptic-ի critique-ը որոշակի Black slot-ի մեջ դնելու, որ divergence-ը գոյատևի։ Convergence-ն impact/effort-ի վրա է, ամենառիսկային assumption-ն անվանված է և ուղարկված 20-route prototype-ի՝ learning metric-ով, owner-ով և kill/continue rule-ով, որ ունի կոնկրետ fallback (ավելացրու pre-heat)։ Ոչինչ չի հորինվում — միակ քանակները design-ի սեփական target-ներն ու threshold-ներն են։
+
+### Օրինակ C — TRIZ physical contradiction (separation)
+
+**Prompt.** Signup form-ը պետք է լինի **երկար** (personalize անելու և activation բարձրացնելու data հավաքելու) ԵՎ **կարճ** (որովհետև ամեն ավել դաշտ իջեցնում է completion-ը)։ Թիմը շարունակ միջինացնում է դեպի «միջին» form։ Կոտրիր այն։
+
+**Senior պատասխան.** Սա **physical contradiction** է — *նույն* parameter-ը (form-ի երկարությունը / դաշտերի քանակը) պետք է լինի և՛ high, և՛ low միաժամանակ։ Ի տարբերություն technical contradiction-ի (երկու *տարբեր* parameter trade-off են անում, ինչին հարձակվում ես inventive principle-ներով), physical contradiction-ը լուծվում է **separation**-ով․ բավարարիր երկու հակառակ պահանջը տարբեր **time, space, condition, կամ scale**-ում, որ parameter-ը high լինի *որտեղ/երբ* պետք է high, և low՝ *որտեղ/երբ* պետք է low։ Մերժի՛ր «միջին form»-ը — այն միջինն է, որ երկու կողմն էլ fail է անում։
+
+Չորս separation-ը, կիրառված․
+- **Time-ում — կարճ *հիմա*, երկար *հետո*։** Հարցրու միայն այն, ինչ պետք է սկսելու (email + մեկ դաշտ) signup-ին. մնացածը հավաքիր **progressive profiling**-ով հետագա session-ներում, այն պահերին, երբ user-ն արդեն value է տեսնում։ Կարճ՝ high-drop-off պահին, երկար՝ ողջ lifecycle-ում։
+- **Space-ում / by part — բաժանիր։** **Կարճ required core** + **optional «personalize» branch**, որ motivated user-ը կարող է ընդլայնել։ Երկարությունը low է critical path-ում, high՝ opt-in branch-ում։
+- **Condition-ում — դարձրու adaptive։** Կարճ՝ simple/SMB signup-ի. երկար՝ enterprise-ի, որտեղ data-ն արժե friction-ը։ Երկարությունը փոխվում է ըստ condition-ի, որ որոշում է՝ data-ն արժե՞ քրտինքը։
+- **Scale-ում (whole vs part) — մեկ հարց մեկ էկրանին։** *Առանձին step-ը* կարճ է (ցածր ընկալվող երկարություն), մինչ *ամբողջը* դեռ շատ է հավաքում. wizard-ը երկար form-ը կարճ է զգացնում։
+
+Ընտրիր ըստ իրական constraint-ի․ եթե drop-off-ը signup-ին է, separation-in-time-ը (progressive profiling) ամենաբարձր-leverage move-ն է. եթե data-ի value-ն segment-dependent է, separation-in-condition-ը։
+
+**Ինչու է անցնում gate-ը.** Այն անվանում է խոչընդոտը որպես **physical contradiction** (նույն parameter-ը պետք է high *և* low) և տարբերում technical-ից, ուստի վերցնում է **separation principle**-ները՝ inventive-principle swap-ի կամ «միջին form»-ի միջինի փոխարեն, որ երկուսն էլ fail է անում։ Այն worked է անում չորս separation-ն էլ որպես կոնկրետ move (time → progressive profiling. part → required core + optional branch. condition → adaptive by segment. scale → one-question-per-screen), ամեն մեկը **form-ը կարճ պահելով, որտեղ երկարությունը վնասում է, և երկար՝ որտեղ արժե**, և routing է անում ընտրությունը դեպի իրական constraint (drop-off location vs data value)։ Ոչինչ հորինված չէ — move-երը structural են, ոչ numeric claim։
