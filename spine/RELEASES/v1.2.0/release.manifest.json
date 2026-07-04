@@ -408,7 +408,7 @@
     },
     {
       "path": "skills/business-strategy-operations/SKILL.md",
-      "sha256": "822da1246eeb12e3d1196b80963946f043375d26cb93be3fc58eb241bb22e942"
+      "sha256": "38727e00a2316fc08ae9e4eb01147277644686902daf08378b2d6ad587ec4a16"
     },
     {
       "path": "skills/business-strategy-operations/worked-example.md",
@@ -416,7 +416,7 @@
     },
     {
       "path": "skills/business-strategy-operations/agents/claude.md",
-      "sha256": "b35ae213b4c5d1ab57becac0d55a94a55e8b738a820879b67fa3de29a6bb3c80"
+      "sha256": "1e532f72cc37477011eb152b03c9149babdb8d7b0dfc1bfc0469e21e17274c5e"
     },
     {
       "path": "skills/business-strategy-operations/tests/eval-prompts.md",
@@ -1723,7 +1723,7 @@
       "sha256": "9736afbf68031ed03afa4a73dd2772a4f424aeeffbf014f9cfb9949f77417995"
     }
   ],
-  "rollup_sha256": "d1b9928327558de7eae444b46b40499342c61f9accb6273c91afd73e59d914c6",
+  "rollup_sha256": "67346de581a955fc0ac699d620fb24cbca602c141a43ae3b5ef2b3083cb8bdc9",
   "cut_by": "Bro",
   "authority": "Gev-command",
   "notes": "spine release cut from the live spine (428 files)"

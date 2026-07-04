@@ -26,4 +26,13 @@
 - **Re-verification:** `secret-files=0`.
 - **Date:** 2026-07-05.
 
-> **Lesson recorded (see [`REPAIR_PATTERNS.md`](REPAIR_PATTERNS.md), [`NEVER_REPEAT.md`](NEVER_REPEAT.md)):** FL-002 was NOT planted — an independent Verifier catching an *unplanned* real defect is the proof the gate is capability, not ceremony. FL-003 is the same principle turned on the tooling: the pre-push gate caught a false-RED in its OWN heuristic before it could block a legitimate push. / FL-002-ն ու FL-003-ը նույն սկզբունքն են՝ gate-ը բռնում է իրական defect, նույնիսկ իր՛ գործիքի մեջ։
+## FL-004 — spine v1.2.0 release failed self-verify + beast-check hid it (REAL / unplanned)
+- **What failed:** after Phase-1 push, `bro-spine-verify v1.2.0` = **REJECTED (426/428)**; 2 files mismatched: `skills/business-strategy-operations/SKILL.md` and `…/agents/claude.md`.
+- **Why:** those 2 files carried **CRLF**; `bro-release` hashed them CRLF at cut time (VERIFIED 428/428 then), but `git commit` normalized them **CRLF→LF**, so the committed/checked-out payload no longer matched the manifest's CRLF hashes. Content identical — a line-ending/hash-bookkeeping break, not corruption.
+- **Second defect (why it wasn't caught pre-push):** `bro-beast-check.ps1` verified a **hardcoded `spine/RELEASES/v1.1.0`**, never the new release → its GREEN 25/25 never looked at v1.2.0. A false-GREEN on the release dimension.
+- **Gate that caught it:** the independent `bro-spine-verify v1.2.0` in post-push verification (NOT beast-check). Honest stop at YELLOW; did NOT proceed to seeding.
+- **Fix (GO-RECOVER-v1.2.0):** (1) added root `.gitattributes` (`* text=auto eol=lf`) to prevent recurrence; (2) regenerated `release.manifest.json` + `sha256.txt` from the committed LF payload (2/428 hashes updated, content unchanged); (3) fixed `bro-beast-check.ps1` to verify the **latest** release, not hardcoded v1.1.0.
+- **Re-verification:** `bro-spine-verify v1.2.0` = **VERIFIED 428/428**, rollup match; beast-check now checks the latest release.
+- **Date:** 2026-07-05.
+
+> **Lesson recorded (see [`REPAIR_PATTERNS.md`](REPAIR_PATTERNS.md), [`NEVER_REPEAT.md`](NEVER_REPEAT.md)):** FL-002 was NOT planted — an independent Verifier catching an *unplanned* real defect is the proof the gate is capability, not ceremony. FL-003 is the same principle turned on the tooling: the pre-push gate caught a false-RED in its OWN heuristic before it could block a legitimate push. FL-004 completes the trio: an independent check (spine-verify) caught a real integrity break AND exposed that a sibling gate (beast-check) was a hardcoded false-GREEN — exactly why L18 demands independent, current evidence, never a check that "looks green" without looking. / FL-002·003·004 = gate-ը բռնում է իրական defect, նույնիսկ իր՛ գործիքի մեջ, ու hardcoded false-GREEN-ը բացահայտում է (L18)։

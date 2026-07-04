@@ -33,9 +33,18 @@ ScriptOk 'registry-check'    'tools/bro-registry-check.ps1' @()
 ScriptOk "project doctor $ProjectId" 'tools/bro-project-doctor.ps1' @('-ProjectId',$ProjectId)
 ScriptOk "project audit $ProjectId"  'tools/bro-project-audit.ps1' @('-ProjectId',$ProjectId)
 
-# 8) release verify (current released spine)
-& pwsh -NoProfile -File 'tools/bro-spine-verify.ps1' -ReleaseDir 'spine/RELEASES/v1.1.0' *> $null
-Rec 'release v1.1.0 verify' ($LASTEXITCODE -eq 0) "exit=$LASTEXITCODE"
+# 8) release verify — the LATEST released spine (NOT hardcoded, so a newly cut release is
+#    actually checked; a hardcoded version let spine v1.2.0's hash mismatch hide behind GREEN — FL-004).
+# HY: verify արա ՎԵՐՋԻՆ release-ը (ոչ hardcoded), որ նոր release-ը իրապես ստուգվի (FL-004)։
+$latestRel = Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue |
+  Where-Object { Test-Path (Join-Path $_.FullName 'release.manifest.json') } |
+  Sort-Object { [version]($_.Name -replace '^v','') } | Select-Object -Last 1
+if ($latestRel) {
+  & pwsh -NoProfile -File 'tools/bro-spine-verify.ps1' -ReleaseDir $latestRel.FullName *> $null
+  Rec "release $($latestRel.Name) verify (latest)" ($LASTEXITCODE -eq 0) "exit=$LASTEXITCODE"
+} else {
+  Rec 'release verify (latest)' $false 'no release found under spine/RELEASES'
+}
 
 # 9-10) guard regression + isolation (live, via cmd stdin redirect)
 $tmp = Join-Path $env:TEMP ('beast-' + (New-Guid).ToString('N').Substring(0,8))

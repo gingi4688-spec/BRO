@@ -1,0 +1,16 @@
+# FL-004: normalize text files to LF so release-cut hashes match committed bytes
+# on every platform (a CRLF->LF normalization on commit broke spine v1.2.0 verify).
+# HY: text ֆայլերը LF, որ release-cut hash-երը համընկնեն committed bytes-ի հետ բոլոր
+# platform-ներում (CRLF->LF-ը commit-ի ժամանակ կոտրել էր spine v1.2.0 verify-ն)։
+* text=auto eol=lf
+
+# Binary assets — never normalize.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.zip binary
+*.gz binary
+*.pdf binary
