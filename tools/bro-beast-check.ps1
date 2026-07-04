@@ -78,7 +78,11 @@ try { Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue } catch {}
 
 # 11) no-secret / pre-push dry check (unpushed diff)
 $diffFiles = @(git diff --name-only origin/main..HEAD)
-$secretHit = @($diffFiles | Where-Object { $_ -match '(?i)bro\.home\.json|verifier|secrets/' })
+# Precise secret indicators only — NOT the bare word 'verifier' (that false-flagged the legitimate
+# _core/production_os/06_VERIFIER.md role doc). The passphrase-verifier SECRET lives under secrets/ and
+# is caught by the secrets path + a verifier.<secret-ext> file; plus key material / bro.home.json / .env.
+# HY: Ճշգրիտ secret ցուցիչներ միայն — ոչ մերկ 'verifier' բառը (այն false-flag էր անում 06_VERIFIER.md-ը)։
+$secretHit = @($diffFiles | Where-Object { $_ -match '(?i)bro\.home\.json|(^|[\\/])secrets[\\/]|(^|[\\/])verifier\.(json|key|dat|txt)|\.(pem|key|p12|pfx)$|(^|[\\/])id_(rsa|ed25519)|\.env$' })
 # exclude the sanctioned sealed-mirror location memory/supermemory/ (it legitimately holds project-derived
 # mirrors; whitelisted by the audit) so a mirror add/remove is not mis-flagged as cross-project contamination.
 $epPathHit = @($diffFiles | Where-Object { ($_ -match '(?i)(^|/)(EP|DB|GAA|GAAhex|IP)/') -and ($_ -notmatch '(?i)memory/supermemory/') })
