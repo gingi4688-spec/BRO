@@ -19,3 +19,18 @@ result: GREEN
 files_changed: none in repo (sandbox only)
 notes: bro-release sandbox cut v0.0.0-test/v0.0.1-test (391 files + rollup); bro-spine-verify VERIFIED; tamper -> REJECTED; bro-spine-pull VERIFIED; bro-spine-stamp stamped a sandbox manifest. OD-5: NO v1.0.0 cut; spine/RELEASES/ stays EMPTY. OD-6: live spine at root untouched.
 ```
+
+## RELEASE v1.2.0 (production_os install)
+```txt
+timestamp: 2026-07-05T03:11:35+04:00
+actor: Bro
+session_id: BRO-20260705-031135
+event: spine release cut + verified
+action: RELEASE_CUT
+target: spine/RELEASES/v1.2.0
+source_command: n/a
+authority: Gev-command (TOKEN OK Phase 1)
+result: VERIFIED
+files_changed: spine/RELEASES/v1.2.0 (428 files); bro.manifest.json
+notes: production_os + L14-L19 + UI kit + Taste Engine; rollup d1b9928327558de7
+```

@@ -1,0 +1,137 @@
+---
+name: "mobile-engineering"
+description: >-
+  use when the work is mobile app architecture, offline-first sync, app lifecycle and state restoration, mobile performance (cold start, 60fps/16ms frame budget, ANR), on-device memory management and leaks, mobile security (secure storage, certificate pinning, biometric auth, at-rest encryption), native-vs-cross-platform choice, staged release / phased rollout and remote kill switches, localization and RTL, or on-device testing strategy — for decisions, critique, planning, diagnostics, runbooks/artifacts, teaching, or evaluation. use as lead when this domain owns the central deliverable (mobile architecture plan, offline-sync design, performance-triage report, release/rollout plan, native-vs-cross-platform decision). do not use as lead when another skill owns the main artifact and the mobile angle is one input — then support it. հայերեն՝ օգտագործիր բջջային հավելվածի ճարտարագիտության աշխատանքի համար՝ ճարտարապետություն, offline-sync, lifecycle, performance, memory, security, release և native-vs-cross-platform որոշում։
+---
+
+# Mobile Engineering / Բջջային ճարտարագիտություն
+
+## English
+
+**Scope.** In: mobile app architecture (state, navigation, lifecycle/process-death restoration), offline-first sync (local store, operation log, conflict policy, idempotency), performance and battery (cold start, the 16ms/60fps frame budget, jank, ANR/main-thread, wakeups, network payload), on-device memory management (retain cycles, Context/lifecycle leaks, memory-pressure callbacks), mobile security (Keychain/KeyStore secure storage, certificate/public-key pinning, biometric auth, data-at-rest encryption), native-vs-cross-platform choice, staged release / phased rollout / remote kill switch, store-review and rollback realities, localization and RTL, and on-device testing strategy (emulator vs device, device farm). Out: product/feature scope and information architecture (product/UI own those), backend service design and data-model correctness (architecture/data own those), and threat-model / control-architecture beyond the client (security owns that — this skill owns *client-side* security hygiene). This skill designs for a hostile runtime: a process the OS can kill at any moment, a network that disappears, a device you size for, and a client you cannot patch on your schedule.
+
+**Leads / Supports.** Lead when the central deliverable is mobile-shaped: a mobile architecture plan, an offline-sync design, a performance-triage report, a release/rollout plan, or a native-vs-cross-platform decision. Support when another skill owns the artifact and the mobile angle is one input — e.g. architecture owns the system design and you supply the offline-sync contract and the client-compatibility constraint; UI owns the screen design and you supply the frame-budget and RTL realities.
+
+Conflict rules:
+- **Server API change → the old installed client is a hard constraint, not yours to wave away.** Backend may want to change a contract; you own the fact that versions N-3 are still in users' hands for months. The compatibility decision (version/expand-contract the API, or force-upgrade with a gate) is coordinated with backend/architecture, never decided as "they'll just update."
+- **Client-side security vs control architecture → defer the architecture to security.** You own secure storage, pinning, biometric gating, and at-rest encryption *on the device*; key-management policy, threat modeling, and server-side authz route to `security-privacy-engineering` (or the SOC skill).
+- **Native API need vs cross-platform velocity → the requirement arbitrates, not preference.** When a hard native dependency (a specific sensor, a tight performance floor, a platform-exclusive API) collides with cross-platform reuse, name which side the requirement is on; do not pick the stack by familiarity or resume.
+
+Apply `../shared/OPERATING_PROTOCOL.md` before answering: route first, separate facts from assumptions, keep safety boundaries, make the output executable, write equal-depth bilingual, verify on a real device, not just the simulator.
+
+### Decision rules / Որոշման կանոններ
+
+1. **Mobile ≠ a small server.** Design for process death first: the OS can kill a backgrounded app with no warning. Persist state at a save boundary and restore from saved state / deep link, never from an in-memory happy path.
+2. **Offline named "cache" → upgrade it to a sync contract.** A cache has no truth, no order, no conflict rule. Real offline needs a local store, an ordered operation log, idempotency keys, a conflict policy, retry/backoff, and a user-visible queued/synced/conflict status.
+3. **Conflict policy is "hope" → block launch.** Last-write-wins is acceptable only for low-value, single-owner fields. Collaborative or money/inventory data needs server authority, field-level merge, or explicit manual resolution.
+4. **60fps target → 16ms per frame is the budget.** Any JSON parse, image decode, disk read, or layout pass on the main thread that pushes a frame past ~16ms drops it (jank). Move heavy work off the main thread; a blocked main thread long enough is an ANR.
+5. **Performance claim with no on-device numbers → reject it.** "Feels fast" is not evidence. Require cold-start time, p95 frame time, memory footprint, and the result measured on a mid- or low-tier device, not only a flagship.
+6. **Sensitive data on device → encrypt at rest in the platform keystore, with a retention rule.** Secrets/tokens go in Keychain (iOS) / KeyStore-backed storage (Android), never in plain `UserDefaults`/`SharedPreferences` or a clear-text file; define when the data is purged.
+7. **Pinning a cert → pin the public key (SPKI), not the leaf cert, and ship a backup pin.** Leaf-cert pinning bricks the app on every renewal; pin the SPKI hash, carry a backup pin, and have a remote path to relax pinning so a bad pin is not a permanent outage.
+8. **Biometric prompt → it gates access to a key, it is not the auth.** Treat Face ID / fingerprint as a local unlock of a Keychain/KeyStore-protected secret with a passcode fallback; never as the credential itself, and never trust a "yes/no" from the OS without binding it to a key operation.
+9. **Server API change → check the oldest supported client first.** Before any contract change, identify the lowest app version still in the field and either keep the change backward-compatible (additive/expand-contract) or gate old clients with a forced-upgrade screen. Breaking N-2 silently is an outage you cannot roll back.
+10. **Risky mobile release → staged rollout + remote kill switch, because the store rollback is slow.** You cannot instantly recall a binary. Ship risky behavior behind a feature flag / remote config, roll out by percentage with crash-free and ANR guardrails, and keep a remote disable that does not need a store review.
+11. **Retain cycle / leak suspected → name the ownership, do not just "null it out."** On iOS use `weak`/`unowned` for the back-reference in a closure or delegate; on Android never hold an Activity/Context past its lifecycle (use application context, lifecycle-aware components, clear listeners). Confirm with a leak tool, not a guess.
+12. **Memory-pressure callback ignored → it is a crash waiting on a low-end device.** Respond to the OS memory-pressure / `onTrimMemory` signal: drop caches, release images, shrink in-memory state. The app that ignores it is the one the OS kills first.
+13. **RTL/localization as a late "translation pass" → it will break layout and logic.** Externalize strings, support locale-aware dates/numbers/plurals, and mirror the layout for RTL (leading/trailing, not left/right). Hard-coded strings and `left`/`right` constraints are the tells of a retrofit that will fail.
+14. **"It works in the simulator" → not verified.** Simulators hide real memory limits, thermal throttling, slow flash, real network, and real biometric/secure-enclave behavior. Verify on a representative real device (and a low-tier one) before calling it done.
+
+### Failure modes to prevent / Ձախողման ձևեր
+
+1. **Main-thread block / ANR.** Heavy work (JSON, image decode, DB, sync I/O) on the UI thread freezes frames and, held long enough, triggers an ANR ("Application Not Responding") or a watchdog kill. Tell: animations stutter under load, beachball/ANR dialogs, no background thread for parse/decode.
+2. **Memory leak / retain cycle.** A closure captures `self` strongly, a delegate is a strong reference, or an Android listener/Context outlives its Activity — memory climbs until the OS kills the app. Tell: memory rises across navigations and never drops; no `weak self`; an Activity referenced from a static/singleton.
+3. **Breaking the server API for old installed apps.** Backend changes a contract; clients on version N-2 in the field crash or silently lose data because they cannot be patched on the backend's schedule. Tell: a contract change with no oldest-client check, no expand/contract, no force-upgrade gate.
+4. **No phased rollout / no kill switch.** A risky change ships to 100% at once; the only "rollback" is a new build through store review, which is slow. Tell: a release plan with no staged percentage, no crash/ANR guardrail, no remote disable for the risky path.
+5. **Sensitive data stored in the clear.** Tokens/PII in `UserDefaults`/`SharedPreferences` or a plain file; readable on a rooted/jailbroken or backed-up device. Tell: secrets not in Keychain/KeyStore, no at-rest encryption, no retention/purge rule.
+6. **Pinning that bricks the app.** Leaf-certificate pinning with no backup pin and no remote relax path; the next cert renewal hard-fails every install. Tell: a single pinned leaf cert, no SPKI, no backup pin, no kill switch for pinning.
+7. **Offline "cache" with no conflict policy.** Two edits diverge and last-write-wins silently destroys the loser's data, or a retry without idempotency double-submits. Tell: a "cache" with no operation log, no idempotency key, no conflict rule, no synced/conflict status.
+8. **Lifecycle bug only seen under stress.** Works on the happy path, breaks on app-switch, low memory, process death, or slow network — exactly the conditions QA on a fast device and Wi-Fi never hits. Tell: state held only in memory, no restoration from saved state/deep link, no process-death test.
+9. **Performance "tuned" on a flagship only.** Optimized and measured on the newest device; janks and OOMs on the mid/low tier that most users actually carry. Tell: metrics from one high-end device, no device-tier matrix, no low-RAM run.
+10. **Biometric used as the credential.** Treating a Face ID "success" as authentication itself, with no key binding and no passcode fallback — bypassable and locks out users when biometry fails. Tell: a yes/no biometric check not bound to a Keychain/KeyStore key operation.
+11. **Localization/RTL retrofit.** Hard-coded strings, `left`/`right` constraints, naive string concatenation, non-locale dates/plurals; layout breaks and text overflows in other locales. Tell: no externalized strings, no RTL mirroring, no pseudo-locale test.
+12. **"Verified" means the simulator passed.** Shipping on simulator/emulator green while real-device thermal throttling, real flash speed, real secure enclave, and real low-RAM behavior are untested. Tell: "done" with no run on a representative physical device.
+
+### Acceptance criteria / Ընդունման չափանիշ
+
+- The artifact matches the decision (mobile architecture plan / offline-sync design / performance-triage report / release-rollout plan / native-vs-cross-platform decision), not generic advice.
+- Lifecycle is designed for process death: state restores from saved state / deep link, tested under app-switch, low memory, and network loss — not only the happy path.
+- Offline carries a real sync contract: local store, ordered operation log, idempotency, conflict policy fit to data risk, retry/backoff, and a visible queued/synced/conflict status.
+- Performance is measured on a real device (mid/low tier included): cold start, p95 frame time against the ~16ms budget, memory, and no heavy work on the main thread; ANR risk addressed.
+- Security: sensitive data in Keychain/KeyStore with at-rest encryption and a retention rule; pinning uses SPKI + backup pin + remote relax; biometrics gate a key with a fallback.
+- Compatibility: the oldest supported client is named; server-contract changes are backward-compatible or gated; no silent break of installed apps.
+- Release: staged percentage rollout with crash-free/ANR guardrails and a remote kill switch; no big-bang for a risky change.
+- **Verify on a representative real device, not just the simulator** — the real run is observed before the work is called done.
+- Bilingual EN + native HY at equal depth; assumptions and unknowns labeled; no invented benchmarks/prices/device specs.
+
+### Domain quality bar / Որակի նշաձող
+
+Scored on five dimensions (mirror `domain-rubric.md`): **lifecycle handling** (pause/resume/process-death/deep-link/network-loss states designed and tested) · **sync correctness** (local store, operation log, idempotency, authority, conflict policy, status — fit to data risk) · **performance & memory** (cold start, p95 frame time vs 16ms, memory, battery, device tier; no main-thread heavy work, leaks named) · **release & compatibility safety** (staged rollout, crash/ANR guardrails, kill switch, oldest-client/API compatibility, store constraints) · **platform & security fit** (native-vs-cross-platform driven by requirement; secure storage, pinning, biometric, at-rest encryption correct).
+
+### Deep dive & assets
+
+`manual.md` (mechanics, decision rules, failure-repair playbook, security/memory/testing/RTL sections) · `patterns.md` (6 canonical moves) · `domain-rubric.md` (5 scoring dimensions) · `worked-example.md` (offline-sync + performance triage + native-vs-cross-platform) · `output-templates.md` (offline-sync design / performance-triage report / release-rollout plan) · `red-team-gate.md` (reviewer probes) · `tests/eval-prompts.md` + `tests/red-team-prompts.md` · `OWNER_NOTES.md` (human-review triggers).
+
+## Հայերեն
+
+**Շրջանակ։** Ներսում՝ բջջային հավելվածի ճարտարապետություն (state, navigation, lifecycle/process-death-ից restore), offline-first sync (local store, operation log, conflict policy, idempotency), performance և battery (cold start, 16ms/60fps frame budget, jank, ANR/main-thread, wakeup-ներ, network payload), on-device memory management (retain cycle, Context/lifecycle leak, memory-pressure callback), բջջային security (Keychain/KeyStore secure storage, certificate/public-key pinning, biometric auth, data-at-rest encryption), native-vs-cross-platform որոշում, staged release / phased rollout / remote kill switch, store-review-ի և rollback-ի իրականությունը, localization և RTL, on-device testing strategy (emulator ընդդեմ device-ի, device farm)։ Դուրս՝ product/feature scope-ը և information architecture-ը (product/UI-ինն են), backend-ի service design-ը և data-model-ի ճշտությունը (architecture/data-ինն են), threat-model-ը / control-architecture-ը client-ից այն կողմ (security-ինն է — այս skill-ը տիրում է client կողմի security hygiene-ին)։ Այս skill-ը նախագծում է hostile runtime-ի համար՝ process, որ OS-ը կարող է ցանկացած պահի սպանել, network, որ անհետանում է, device, որի համար չափ ես տալիս, և client, որ չես կարող patch անել քո ժամանակացույցով։
+
+**Առաջատար / Աջակից։** Առաջատար, երբ կենտրոնական deliverable-ը բջջային ձև ունի՝ mobile architecture plan, offline-sync design, performance-triage report, release/rollout plan կամ native-vs-cross-platform որոշում։ Աջակից, երբ artifact-ի տերը այլ skill է, իսկ բջջային անկյունը մեկ input է. օրինակ՝ architecture-ը տիրում է system design-ին, դու տալիս ես offline-sync contract-ը և client-compatibility constraint-ը. UI-ն տիրում է screen design-ին, դու տալիս ես frame-budget-ը և RTL-ի իրականությունը։
+
+Կոնֆլիկտի կանոններ․
+- **Server API change → հին տեղադրված client-ը կոշտ constraint է, ոչ թե քո՝ ձեռքով հեռացնելու բան։** Backend-ը կարող է ուզել contract փոխել. դու տիրում ես այն փաստին, որ N-3 տարբերակները ամիսներով դեռ user-ների ձեռքին են։ Compatibility-ի որոշումը (version/expand-contract անել API-ն, թե force-upgrade gate-ով) համակարգվում է backend-ի/architecture-ի հետ, երբեք չի որոշվում որպես «նրանք պարզապես կ-update անեն»։
+- **Client կողմի security ընդդեմ control architecture-ի → architecture-ը զիջիր security-ին։** Դու տիրում ես secure storage-ին, pinning-ին, biometric gating-ին և at-rest encryption-ին հենց device-ի վրա. key-management policy-ն, threat modeling-ը և server կողմի authz-ը ուղղորդվում են `security-privacy-engineering`-ին (կամ SOC skill-ին)։
+- **Native API-ի կարիք ընդդեմ cross-platform velocity-ի → որոշում է պահանջը, ոչ նախապատվությունը։** Երբ կոշտ native dependency-ն (կոնկրետ sensor, խիստ performance floor, platform-exclusive API) բախվում է cross-platform reuse-ի հետ, անվանի՛ր, թե պահանջը որ կողմում է. stack-ը մի՛ ընտրիր ծանոթության կամ resume-ի հիման վրա։
+
+Պատասխանելուց առաջ կիրառի՛ր `../shared/OPERATING_PROTOCOL.md`-ն․ նախ ուղղորդիր, փաստերը բաժանիր ենթադրություններից, պահիր անվտանգության սահմանները, արդյունքը դարձրու կիրառելի, գրիր հավասար խորությամբ երկլեզու, ստուգիր իրական device-ի վրա, ոչ միայն simulator-ում։
+
+### Որոշման կանոններ
+
+1. **Mobile ≠ փոքր server։** Նախ նախագծիր process death-ի համար․ OS-ը կարող է background-ի app-ն առանց զգուշացման սպանել։ State-ը պահպանիր save boundary-ում և restore արա saved state-ից / deep link-ից, երբեք in-memory happy path-ից։
+2. **Offline-ն «cache» է անվանված → բարձրացրու sync contract-ի։** Cache-ը truth չունի, կարգ չունի, conflict rule չունի։ Իրական offline-ին պետք են local store, ordered operation log, idempotency key, conflict policy, retry/backoff և user-տեսանելի queued/synced/conflict status։
+3. **Conflict policy-ն «հուսանք» է → block արա launch-ը։** Last-write-wins-ը ընդունելի է միայն low-value, single-owner field-երի համար։ Collaborative կամ money/inventory data-ին պետք է server authority, field-level merge կամ բացահայտ manual resolution։
+4. **60fps target → 16ms per frame-ը budget-ն է։** Main thread-ի ցանկացած JSON parse, image decode, disk read կամ layout pass, որ frame-ը ~16ms-ից այն կողմ է հրում, drop է անում այն (jank)։ Heavy work-ը հանիր main thread-ից. բավական երկար block-ված main thread-ը ANR է։
+5. **Performance claim՝ առանց on-device թվերի → մերժիր այն։** «Feels fast»-ը evidence չէ։ Պահանջիր cold-start time, p95 frame time, memory footprint՝ չափված mid- կամ low-tier device-ի վրա, ոչ միայն flagship-ի։
+6. **Sensitive data device-ի վրա → encrypt արա at-rest՝ platform keystore-ում, retention rule-ով։** Secret/token-ը գնում է Keychain (iOS) / KeyStore-ապահովված storage (Android), երբեք plain `UserDefaults`/`SharedPreferences` կամ clear-text ֆայլ. սահմանիր, թե երբ է data-ն ջնջվում։
+7. **Cert pinning → pin արա public key-ը (SPKI), ոչ leaf cert-ը, և ship արա backup pin։** Leaf-cert pinning-ը brick է անում app-ը ամեն renewal-ին. pin արա SPKI hash-ը, կրիր backup pin և ունեցիր remote path՝ pinning-ը թուլացնելու, որ վատ pin-ը մշտական outage չլինի։
+8. **Biometric prompt → այն gate է անում մուտքը դեպի key, ինքը auth չէ։** Face ID / fingerprint-ը համարիր Keychain/KeyStore-պաշտպանված secret-ի local unlock՝ passcode fallback-ով. երբեք որպես credential ինքը, և երբեք մի՛ վստահիր OS-ի «yes/no»-ին՝ առանց այն key operation-ի հետ կապելու։
+9. **Server API change → նախ ստուգիր ամենահին supported client-ը։** Ցանկացած contract փոփոխությունից առաջ պարզիր դաշտում մնացած ամենացածր app version-ը և կա՛մ պահիր փոփոխությունը backward-compatible (additive/expand-contract), կա՛մ gate արա հին client-ները forced-upgrade screen-ով։ N-2-ը լուռ կոտրելը outage է, որ չես կարող rollback անել։
+10. **Risky mobile release → staged rollout + remote kill switch, որովհետև store rollback-ը դանդաղ է։** Չես կարող ակնթարթ հետ կանչել binary-ն։ Ship արա risky behavior-ը feature flag / remote config-ի հետևում, roll out արա percentage-ով crash-free և ANR guardrail-ներով, և պահիր remote disable, որ store review պետք չունի։
+11. **Retain cycle / leak կասկածվում է → անվանի՛ր ownership-ը, ոչ թե պարզապես «null արա»։** iOS-ում օգտագործիր `weak`/`unowned` closure-ի կամ delegate-ի back-reference-ի համար. Android-ում երբեք Activity/Context մի՛ պահիր իր lifecycle-ից այն կողմ (օգտագործիր application context, lifecycle-aware component-ներ, մաքրիր listener-ները)։ Հաստատիր leak tool-ով, ոչ գուշակությամբ։
+12. **Memory-pressure callback-ը անտեսված → low-end device-ի վրա սպասող crash է։** Արձագանքիր OS-ի memory-pressure / `onTrimMemory` signal-ին․ drop արա cache-երը, ազատիր image-ները, փոքրացրու in-memory state-ը։ Այն app-ը, որ անտեսում է, առաջինն է OS-ը սպանում։
+13. **RTL/localization որպես ուշ «translation pass» → այն կկոտրի layout-ը և logic-ը։** Externalize արա string-երը, ապահովիր locale-aware date/number/plural, և mirror արա layout-ը RTL-ի համար (leading/trailing, ոչ left/right)։ Hard-coded string-ը և `left`/`right` constraint-ը retrofit-ի tell-երն են, որ կ-fail անի։
+14. **«Simulator-ում աշխատում է» → verified չէ։** Simulator-ները թաքցնում են իրական memory limit-ը, thermal throttling-ը, դանդաղ flash-ը, իրական network-ը և իրական biometric/secure-enclave վարքը։ Ստուգիր representative իրական device-ի վրա (և low-tier-ի) մինչև done ասելը։
+
+### Ձախողման ձևեր
+
+1. **Main-thread block / ANR։** Heavy work-ը (JSON, image decode, DB, sync I/O) UI thread-ի վրա սառեցնում է frame-ները և, բավական երկար պահված, առաջացնում է ANR («Application Not Responding») կամ watchdog kill։ Tell՝ animation-ները load-ի տակ կակազում են, beachball/ANR dialog, parse/decode-ի համար background thread չկա։
+2. **Memory leak / retain cycle։** Closure-ը `self`-ը strong է բռնում, delegate-ը strong reference է, կամ Android-ի listener/Context-ը գերապրում է իր Activity-ին — memory բարձրանում է, մինչև OS-ը սպանի app-ը։ Tell՝ memory-ն բարձրանում է navigation-ների ընթացքում և երբեք չի իջնում. `weak self` չկա. Activity՝ static/singleton-ից referenced։
+3. **Server API-ի կոտրում հին տեղադրված app-երի համար։** Backend-ը contract է փոխում. դաշտում N-2 version-ի client-ները crash են լինում կամ լուռ data են կորցնում, որովհետև չեն կարող patch-վել backend-ի ժամանակացույցով։ Tell՝ contract փոփոխություն՝ առանց oldest-client ստուգման, expand/contract-ի, force-upgrade gate-ի։
+4. **Phased rollout չկա / kill switch չկա։** Risky change-ը միանգամից ship է լինում 100%-ին. միակ «rollback»-ը store review-ով նոր build է, որ դանդաղ է։ Tell՝ release plan՝ առանց staged percentage-ի, crash/ANR guardrail-ի, risky path-ի remote disable-ի։
+5. **Sensitive data՝ պահված clear-ով։** Token/PII՝ `UserDefaults`/`SharedPreferences`-ում կամ plain ֆայլում. ընթեռնելի rooted/jailbroken կամ backup-ված device-ի վրա։ Tell՝ secret-ը Keychain/KeyStore-ում չէ, at-rest encryption չկա, retention/purge rule չկա։
+6. **Pinning, որ brick է անում app-ը։** Leaf-certificate pinning՝ առանց backup pin-ի և remote relax path-ի. հաջորդ cert renewal-ը hard-fail է անում ամեն install։ Tell՝ մեկ pinned leaf cert, SPKI չկա, backup pin չկա, pinning-ի kill switch չկա։
+7. **Offline «cache»՝ առանց conflict policy-ի։** Երկու edit շեղվում են, և last-write-wins-ը լուռ ոչնչացնում է պարտվողի data-ն, կամ retry-ն առանց idempotency-ի double-submit է անում։ Tell՝ «cache»՝ առանց operation log-ի, idempotency key-ի, conflict rule-ի, synced/conflict status-ի։
+8. **Lifecycle bug, որ միայն stress-ի տակ է երևում։** Աշխատում է happy path-ում, կոտրվում է app-switch-ին, low memory-ին, process death-ին կամ slow network-ին — հենց այն պայմանները, որ արագ device-ի և Wi-Fi-ի վրա QA-ն երբեք չի հարվածում։ Tell՝ state-ը պահված միայն memory-ում, saved state/deep link-ից restoration չկա, process-death test չկա։
+9. **Performance՝ «tuned» միայն flagship-ի վրա։** Optimize-ված և չափված ամենանոր device-ի վրա. jank և OOM mid/low tier-ի վրա, որ user-ների մեծ մասն իրականում կրում է։ Tell՝ metric-ներ մեկ high-end device-ից, device-tier matrix չկա, low-RAM run չկա։
+10. **Biometric-ը՝ որպես credential։** Face ID «success»-ը համարել auth ինքնին՝ առանց key binding-ի և passcode fallback-ի — շրջանցելի է և կողպում է user-ներին, երբ biometry-ն ձախողվում է։ Tell՝ yes/no biometric check, որ Keychain/KeyStore-ի key operation-ի հետ կապված չէ։
+11. **Localization/RTL retrofit։** Hard-coded string, `left`/`right` constraint, naive string concatenation, ոչ-locale date/plural. layout-ը կոտրվում է և text-ը overflow է անում այլ locale-ներում։ Tell՝ externalized string չկա, RTL mirroring չկա, pseudo-locale test չկա։
+12. **«Verified»-ը՝ նշանակում է simulator-ն անցավ։** Ship simulator/emulator green-ի վրա, մինչ իրական device-ի thermal throttling-ը, իրական flash speed-ը, իրական secure enclave-ը և իրական low-RAM վարքը untested են։ Tell՝ «done»՝ առանց representative ֆիզիկական device-ի վրա run-ի։
+
+### Ընդունման չափանիշ
+
+- Artifact-ը համապատասխանում է որոշմանը (mobile architecture plan / offline-sync design / performance-triage report / release-rollout plan / native-vs-cross-platform որոշում), ոչ generic advice։
+- Lifecycle-ը նախագծված է process death-ի համար․ state-ը restore է լինում saved state-ից / deep link-ից, test-ված app-switch-ի, low memory-ի և network loss-ի տակ — ոչ միայն happy path-ում։
+- Offline-ը կրում է իրական sync contract՝ local store, ordered operation log, idempotency, data risk-ին համապատասխան conflict policy, retry/backoff և տեսանելի queued/synced/conflict status։
+- Performance-ը չափված է իրական device-ի վրա (mid/low tier ներառյալ)․ cold start, p95 frame time ~16ms budget-ի դեմ, memory և main thread-ի վրա heavy work չկա. ANR-ի risk-ը հասցեագրված է։
+- Security․ sensitive data-ն Keychain/KeyStore-ում՝ at-rest encryption-ով և retention rule-ով. pinning-ը օգտագործում է SPKI + backup pin + remote relax. biometric-ը gate է անում key fallback-ով։
+- Compatibility․ ամենահին supported client-ը անվանված է. server-contract փոփոխությունները backward-compatible են կամ gated. տեղադրված app-երի լուռ կոտրում չկա։
+- Release․ staged percentage rollout՝ crash-free/ANR guardrail-ներով և remote kill switch-ով. risky change-ի համար big-bang չկա։
+- **Ստուգի՛ր representative իրական device-ի վրա, ոչ միայն simulator-ում** — իրական run-ը դիտվում է մինչև done ասելը։
+- Երկլեզու EN + native HY հավասար խորությամբ. assumption-ները և unknown-ները label-ված. ոչ մի հորինված benchmark/price/device spec։
+
+### Որակի նշաձող
+
+Գնահատվում է հինգ չափանիշով (հայելի՝ `domain-rubric.md`)․ **lifecycle handling** (pause/resume/process-death/deep-link/network-loss վիճակները նախագծված և test-ված) · **sync correctness** (local store, operation log, idempotency, authority, conflict policy, status՝ data risk-ին համապատասխան) · **performance & memory** (cold start, p95 frame time ընդդեմ 16ms-ի, memory, battery, device tier. main thread-ի վրա heavy work չկա, leak-երն անվանված) · **release & compatibility safety** (staged rollout, crash/ANR guardrail, kill switch, oldest-client/API compatibility, store constraint) · **platform & security fit** (native-vs-cross-platform՝ պահանջով driven. secure storage, pinning, biometric, at-rest encryption՝ ճիշտ)։
+
+### Խորացում և asset-եր
+
+`manual.md` (մեխանիկա, որոշման կանոններ, failure-repair playbook, security/memory/testing/RTL բաժիններ) · `patterns.md` (6 canonical move) · `domain-rubric.md` (5 scoring չափանիշ) · `worked-example.md` (offline-sync + performance triage + native-vs-cross-platform) · `output-templates.md` (offline-sync design / performance-triage report / release-rollout plan) · `red-team-gate.md` (reviewer probe-եր) · `tests/eval-prompts.md` + `tests/red-team-prompts.md` · `OWNER_NOTES.md` (human-review trigger-ներ)։
