@@ -2,10 +2,11 @@
   bro-refs-check.ps1 — L1 doc hygiene: broken file links + duplicate law ids + stale TODO (Phase 8a) · READ-ONLY
   EN: Scans governance/doc markdown (_core, self, skills, docs, root) for: (1) broken relative FILE links
       [text](path.ext) whose target does not exist; (2) duplicate law-id DEFINITIONS (^L<n> —) across law files;
-      (3) stale TODO/FIXME (informational; the intentional `<pending>` law slots are NOT counted).
+      (3) stale TODO/FIXME (informational; the intentional `<pending>` law slots are NOT counted);
+      (4) orphan/dead-doc detection (informational): a governance/doc .md that no other scanned .md links to.
       Excludes spine/RELEASES (snapshots), _before, logs, memory (wikilink slugs), skills/reference/armenian (lexicon).
-      Orphan/dead-doc detection is DEFERRED (reported as a known limitation, never a silent GREEN).
-  HY: Scan՝ կոտրված file-link, կրկնվող law-id, stale TODO։ Orphan-detection-ը հետաձգված (հայտարարված limitation)։
+      Orphan-scan is informational (never flips RESULT to RED) and excludes entry points + skills/ (protocol-loaded).
+  HY: Scan՝ կոտրված file-link, կրկնվող law-id, stale TODO, orphan/dead-doc (informational)։
   Exit: 0 clean · 2 problems (broken links or duplicate law ids).
 #>
 $ErrorActionPreference = 'Stop'
@@ -53,11 +54,31 @@ $dupLaws = @($defs.GetEnumerator() | Where-Object { $_.Value.Count -gt 1 } | For
 $todo = 0
 foreach ($f in $mdFiles) { $todo += ([regex]'\b(TODO|FIXME)\b').Matches([System.IO.File]::ReadAllText($f.FullName)).Count }
 
+# (4) orphan/dead-doc detection (informational): a governance/doc .md whose FILENAME is mentioned by NO other scanned
+#     .md — via markdown link, backtick code-path, OR bare text. Basename match is deliberately conservative: it avoids
+#     false positives on docs referenced through the repo's backtick-path house style (e.g. `self/persona.md`, "read
+#     every file in /_core/laws/"), which a [](link)-only scan would wrongly flag. A true orphan = nothing references it
+#     by name anywhere. Candidates exclude entry points (README/index/CLAUDE/AGENTS/MEMORY), repo-root standalone docs,
+#     and skills/ (protocol-loaded). Informational only — never flips RESULT to RED (a standalone doc is not a defect).
+$texts = @{}
+foreach ($f in $mdFiles) { $texts[$f.FullName] = ([System.IO.File]::ReadAllText($f.FullName)).ToLower() }
+$entryNames = @('readme.md','index.md','claude.md','agents.md','memory.md')
+$orphans = @()
+foreach ($f in $mdFiles) {
+  if ($entryNames -contains $f.Name.ToLower()) { continue }
+  if ($f.Directory.FullName.TrimEnd('\') -ieq $home_.TrimEnd('\')) { continue }   # repo-root standalone docs = entry points
+  if (($f.FullName.ToLower()) -match '\\skills\\|\\_core\\laws\\') { continue }    # protocol-loaded wholesale (skills loader / "read every file in /_core/laws/"), not md-linked
+  $base = $f.Name.ToLower(); $mentioned = $false
+  foreach ($k in $texts.Keys) { if ($k -ne $f.FullName -and $texts[$k].Contains($base)) { $mentioned = $true; break } }
+  if (-not $mentioned) { $orphans += (($f.FullName.Substring($home_.Length).TrimStart('\')) -replace '\\','/') }
+}
+
 "bro-refs-check - doc hygiene / doc հիգիենա  (scanned $($mdFiles.Count) md files)"
 "  broken file links:      $($broken.Count)"; $broken | Select-Object -First 25 | ForEach-Object { "     $_" }
 "  duplicate law-id defs:  $($dupLaws.Count)"; $dupLaws | ForEach-Object { "     $_" }
 "  stale TODO/FIXME:       $todo (informational)"
-"  orphan/dead-doc scan:   DEFERRED (later phase; declared limitation, not a silent GREEN)"
+"  orphan/dead-doc scan:   $($orphans.Count) (informational; _core/self/docs .md linked from no other .md; excl. entry points, root docs, skills/ protocol-loaded)"
+$orphans | Select-Object -First 25 | ForEach-Object { "     $_" }
 if ($broken.Count -gt 0 -or $dupLaws.Count -gt 0) { "RESULT: RED (broken links or duplicate law ids)"; exit 2 }
-"RESULT: GREEN (no broken file links, no duplicate law ids; TODO=$todo info; orphan-scan deferred)"
+"RESULT: GREEN (no broken file links, no duplicate law ids; TODO=$todo info; orphan-scan=$($orphans.Count) info)"
 exit 0
