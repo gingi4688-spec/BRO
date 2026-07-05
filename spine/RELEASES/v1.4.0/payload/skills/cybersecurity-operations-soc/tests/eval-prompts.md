@@ -1,0 +1,41 @@
+# Cybersecurity Operations and SOC eval prompts
+
+## English
+
+Run these after changes. Each prompt has its own pass check — passing requires mechanism-level reasoning and a concrete artifact, not vocabulary. Do not reuse one check for another prompt.
+
+1. **Alert triage + ATT&CK.** "Triage: failed-then-successful login from an odd ASN, then a new mailbox-forwarding rule." — Pass only if it maps to ATT&CK (T1110 → T1078 → Collection), names the confirming data sources, scores severity as **impact × confidence separately**, and contains quietly while preserving evidence (capture the rule before deleting).
+2. **Detection rule (deployable).** "Write a detection for scheduled-task persistence from a user-writable path." — Pass only if it gives logic, fields, threshold, the **log source it runs on** (e.g. Windows 4698 / Sysmon), a TP case, an FP case, a tuning dimension, and ships **silent/log-only first**; fail if it is "alert on suspicious tasks."
+3. **CTI → detection.** "This report gives an actor's TTPs and three C2 IPs; make it deployable." — Pass only if it operationalizes the **TTP** into a Sigma/KQL rule against collected logs, treats the IPs as a perimeter block (not the detection), checks collection first, and records a **coverage delta**; fail if it just lists the IPs as the answer.
+4. **Severity call.** "Is this scary-looking low-signal alert a P1?" — Pass only if it scores impact and confidence **separately**, gives investigation priority (not destructive containment) to high-impact/low-confidence, and requires corroboration before any reset/block/wipe.
+5. **Incident commander / IR sequence.** "We've confirmed a compromised host — run the response." — Pass only if it sequences detection → containment → eradication → recovery, **preserves evidence before destructive steps**, scopes credential rotation + persistence hunt, chooses reimage-over-clean for privileged hosts, and (if tier-0) does a **double `krbtgt` reset** + DC rebuild.
+6. **Ransomware IR.** "File shares are encrypting and a domain account pushed the payload — respond." — Pass only if it checks **double extortion / exfiltration**, contains with the active-harm exception named, eradicates to full scope (credential rotation, krbtgt double reset, persistence hunt, reimage), recovers from **validated immutable/offline backups**, and routes ransom-payment + breach-notification to leadership/legal.
+7. **Comms / legal routing.** "Should we tell anyone, and is this a reportable breach?" — Pass only if it routes the **breach-notification clock and external messaging to legal/privacy-counsel and comms** with the evidence timeline, refuses to declare "not a breach" to dodge the clock, and keeps reliability/impact facts as the SOC's input — not the disclosure decision.
+8. **Backup recovery.** "Restore from backup and we're done." — Pass only if it restores **only from backups validated clean against the compromise timeline** and confirmed immutable/offline, verifies the backups were not themselves encrypted/deleted, and refuses to restore onto an **un-eradicated** estate (or it re-infects).
+9. **Collection blind spot.** "Was this host compromised?" with the relevant telemetry not collected. — Pass only if it says it **cannot confirm without the missing telemetry** and delivers a collection/retention gap request, rather than guessing a verdict.
+10. **Armenian equal-depth.** Ask any of prompts 1–9 in Armenian. — Pass only if the Armenian is native, equal-depth (same techniques, same mechanism, same artifact), and punctuation-clean (correct `․`/`։`/«», no homoglyphs); tech tokens (ATT&CK, Sigma, KQL, krbtgt, T1110) in English are fine.
+
+Regression checks (run alongside):
+
+- **No invented facts.** Ask for a specific CVE number, a named threat actor, or a vendor benchmark. — Pass only if it refuses to invent it or marks it verify-before-use; attribution stays caveated.
+- **No thin framework-name answer.** Ask "just give me SOC best practices." — Pass only if it expands into mechanism, a rule with a threshold, or a worked micro-example, not a list of labels.
+
+## Հայերեն
+
+Գործարկիր սրանք փոփոխություններից հետո։ Ամեն prompt ունի իր pass check-ը — անցնելը պահանջում է mechanism-level reasoning և concrete artifact, ոչ vocabulary։ Մի՛ կիրառիր մի check-ը մյուս prompt-ի համար։
+
+1. **Alert triage + ATT&CK.** «Triage․ failed, հետո success login տարօրինակ ASN-ից, հետո նոր mailbox-forwarding rule»։ — Անցնում է միայն, եթե map է անում ATT&CK-ին (T1110 → T1078 → Collection), անվանում է հաստատող data source-ները, score է անում severity-ն որպես **impact × confidence առանձին**, և contain է անում լուռ՝ ապացույց պահպանելով (rule-ը capture մինչ ջնջելը)։
+2. **Detection rule (deploy-ելի).** «Գրիր detection scheduled-task persistence-ի համար user-writable path-ից»։ — Անցնում է միայն, եթե տալիս է logic, fields, threshold, **log source-ը, որի վրա run է** (օր.՝ Windows 4698 / Sysmon), TP case, FP case, tuning dimension, և ship է անում **silent/log-only նախ**. fail՝ եթե «alert արա suspicious task-երի վրա» է։
+3. **CTI → detection.** «Այս report-ը տալիս է actor-ի TTP և երեք C2 IP. դարձրու deploy-ելի»։ — Անցնում է միայն, եթե operationalize է անում **TTP**-ն Sigma/KQL rule-ի՝ հավաքված log-ների դեմ, IP-ները վերաբերվում է որպես perimeter block (ոչ detection), նախ ստուգում collection-ը, և գրանցում **coverage delta**. fail՝ եթե պարզապես IP-ները թվարկում է որպես պատասխան։
+4. **Severity call.** «Այս վախեցնող-տեսք low-signal alert-ը P1՞ է»։ — Անցնում է միայն, եթե score է անում impact-ը և confidence-ը **առանձին**, investigation priority (ոչ destructive containment) է տալիս high-impact/low-confidence-ին, և corroboration է պահանջում ցանկացած reset/block/wipe-ից առաջ։
+5. **Incident commander / IR հերթականություն.** «Հաստատեցինք compromised host — վարիր response-ը»։ — Անցնում է միայն, եթե հերթականացնում է detection → containment → eradication → recovery, **պահպանում է ապացույց մինչ destructive քայլերը**, scope է անում credential rotation + persistence hunt, ընտրում reimage-over-clean privileged host-երի համար, և (եթե tier-0) անում **double `krbtgt` reset** + DC rebuild։
+6. **Ransomware IR.** «File share-երը encrypt են լինում, և domain account payload push արեց — արձագանքիր»։ — Անցնում է միայն, եթե ստուգում է **double extortion / exfiltration**, contain է անում active-harm բացառությունը անվանելով, eradicate է անում լրիվ scope-ով (credential rotation, krbtgt double reset, persistence hunt, reimage), recover է անում **validate-ված immutable/offline backup**-ից, և ուղղորդում ransom-payment + breach-notification leadership/legal-ին։
+7. **Comms / legal routing.** «Պետք է որևէ մեկին ասե՞նք, և սա reportable breach՞ է»։ — Անցնում է միայն, եթե **breach-notification ժամացույցը և external messaging-ը ուղղորդում է legal/privacy-counsel-ին և comms-ին** ապացույցի timeline-ով, մերժում է «breach չէ» հայտարարել ժամացույցը խույս տալու, և reliability/impact փաստերը պահում որպես SOC-ի input — ոչ disclosure-ի որոշում։
+8. **Backup recovery.** «Restore արա backup-ից, և done ենք»։ — Անցնում է միայն, եթե restore է անում **միայն compromise timeline-ի դեմ validate-ված clean backup-ից** և հաստատված immutable/offline, ստուգում է, որ backup-ները իրենք encrypt/ջնջված չէին, և մերժում restore անել **un-eradicated** estate-ի վրա (թե չէ reinfect է լինում)։
+9. **Collection blind spot.** «Այս host-ը compromised՞ էր» առնչվող telemetry-ն չհավաքված։ — Անցնում է միայն, եթե ասում է, որ **չի կարող հաստատել առանց բացակայող telemetry-ի** և deliver է անում collection/retention gap-ի request, ոչ թե verdict գուշակում։
+10. **Հայերեն equal-depth.** Հարցրու 1–9-ից որևէ մեկը հայերեն։ — Անցնում է միայն, եթե հայերենը native է, equal-depth (նույն technique-ները, նույն mechanism-ը, նույն artifact-ը) և punctuation-clean (ճիշտ `․`/`։`/«», առանց homoglyph-ի). անգլերեն tech token-ները (ATT&CK, Sigma, KQL, krbtgt, T1110) նորմալ են։
+
+Regression check-եր (գործարկիր կողքից)․
+
+- **Ոչ մի հորինված fact.** Հարցրու կոնկրետ CVE համար, named threat actor կամ vendor benchmark։ — Անցնում է միայն, եթե հրաժարվում է հորինելուց կամ նշում verify-before-use. attribution-ը caveat-ով է մնում։
+- **Ոչ բարակ framework-name պատասխան.** Հարցրու «պարզապես տուր SOC best practice-ները»։ — Անցնում է միայն, եթե դառնում է mechanism, rule՝ threshold-ով, կամ worked micro-example, ոչ label-ների ցուցակ։

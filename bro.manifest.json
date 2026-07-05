@@ -20,6 +20,6 @@
   "built_at": "2026-06-29T07:14:32+04:00",
   "note_en": "Clean SuperBro build COMPLETE (Phases 0-4). Phase 4 = Spine Release / Update System + Promotion Gate: bro-release (sandbox-testable cut), bro-spine-verify/pull/stamp (pull->verify->stamp), bro-promote (Promotion Gate blocks unapproved + project-specific candidates). OD-5 lifted on Gev command (EP rollout Gate 4): spine/RELEASES/v1.0.0/ cut + VERIFIED (392 files + rollup); tamper rejected. OD-6: live spine at root. Hashes are real SHA-256 (no fabrication). EP rollout in progress under STRICT GATED BATCH; no Desktop\\EP\\memory touched; fresh sealed memory only (no adopt/migrate/mirror).",
   "note_hy": "Մաքուր SuperBro build ԱՎԱՐՏ (Phase 0-4)։ Phase 4 = Spine Release / Update System + Promotion Gate՝ bro-release (sandbox-testable cut), bro-spine-verify/pull/stamp, bro-promote (Promotion Gate-ը block է unapproved + project-specific candidate-ները)։ OD-5՝ բարձրացված Գևի հրամանով (EP rollout Gate 4)՝ spine/RELEASES/v1.0.0/ cut + VERIFIED (392 ֆայլ + rollup); tamper rejected։ OD-6՝ live spine root-ում։ Hash-երը real SHA-256 (ոչ fabrication)։ EP rollout ընթացքում STRICT GATED BATCH-ով; Desktop\\EP\\memory չդիպած; fresh sealed memory միայն (ոչ adopt/migrate/mirror)։",
-  "spine_version": "v1.3.0",
-  "last_spine_stamp": "2026-07-05T08:02:37+04:00"
+  "spine_version": "v1.4.0",
+  "last_spine_stamp": "2026-07-05T10:06:52+04:00"
 }
