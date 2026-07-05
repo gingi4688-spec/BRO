@@ -41,10 +41,10 @@
       "project_path": "C:\\Users\\Admin\\Desktop\\GAA",
       "memory_scope": "GAA_only",
       "authority": "ProjectBro",
-      "spine_version_expected": "v1.5.0",
+      "spine_version_expected": "v1.4.1",
       "status": "INSTALLED",
       "last_audit": "n/a",
-      "last_sync": "2026-07-05T12:17:36+04:00",
+      "last_sync": "2026-07-05T10:42:39+04:00",
       "notes": "GENERAL/main project (GAAhex ISP platform); Bro installed (spine v1.0.0 392/392); brain consolidation A in progress"
     },
     {
@@ -63,10 +63,10 @@
       "project_path": "C:\\Users\\Admin\\Desktop\\Menq",
       "memory_scope": "MENQ_only",
       "authority": "ProjectBro",
-      "spine_version_expected": "v1.5.0",
+      "spine_version_expected": "v1.4.1",
       "status": "INSTALLED",
       "last_audit": "n/a",
-      "last_sync": "2026-07-05T12:16:41+04:00",
+      "last_sync": "2026-07-05T10:42:55+04:00",
       "notes": "MenQ Studio own site (landing+admin, AI business); brain adopted from harness memory"
     }
   ]
