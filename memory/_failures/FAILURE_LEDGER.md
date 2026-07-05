@@ -79,4 +79,13 @@
 - **Date:** 2026-07-05.
 - **Note:** the Code analogue of FL-002 — an independent gate catching an *unplanned* real defect proves the Code gate is capability, not ceremony.
 
+## FL-010 — L3 production-check hardcoded "Code must stay DECLARED" — stale gate, forward-fixed
+- **What failed:** after the honest Phase-9B flip of the Code contract to `STATUS: PROVEN`, `bro-selfcheck` L3 (`bro-production-check.ps1`) went RED: `Code contract dishonestly claims PROVEN (slice-2 pending)`.
+- **Why:** the L3 honesty gate hardcoded the Phase-8 truth (Code = DECLARED) and treated ANY `STATUS: PROVEN` on the Code contract as dishonest — it could not recognize a legitimately-earned PROVEN.
+- **Gate that caught it:** `bro-selfcheck` L3 itself, during Phase-9B verification BEFORE push — a check flagged a state its own rule had outgrown (the FL-003/FL-004 lineage: a gate encoding a stale assumption).
+- **Fix:** retune the gate to the new truth — Code contract MUST say PROVEN, but PROVEN is allowed ONLY with independent `CODESLICE-001` evidence in the ledger (fake-PROVEN still RED); constitution must carry `Code adapter = PROVEN` + `Universal Core = DECLARED`; require the CODESLICE-001 reference (L18).
+- **Re-verification:** `bro-selfcheck` L3 GREEN; overall selfcheck re-run GREEN.
+- **Date:** 2026-07-05.
+- **Note:** the honesty guard got STRONGER, not weaker — PROVEN now demands independent evidence instead of being forbidden outright.
+
 > **Lesson recorded (see [`REPAIR_PATTERNS.md`](REPAIR_PATTERNS.md), [`NEVER_REPEAT.md`](NEVER_REPEAT.md)):** FL-002 was NOT planted — an independent Verifier catching an *unplanned* real defect is the proof the gate is capability, not ceremony. FL-003 is the same principle turned on the tooling: the pre-push gate caught a false-RED in its OWN heuristic before it could block a legitimate push. FL-004 completes the trio: an independent check (spine-verify) caught a real integrity break AND exposed that a sibling gate (beast-check) was a hardcoded false-GREEN — exactly why L18 demands independent, current evidence, never a check that "looks green" without looking. / FL-002·003·004 = gate-ը բռնում է իրական defect, նույնիսկ իր՛ գործիքի մեջ, ու hardcoded false-GREEN-ը բացահայտում է (L18)։
