@@ -1,8 +1,8 @@
 # ai-agent-engineering — PRODUCTION CONTRACT / PRODUCTION CONTRACT
 
-> **STATUS: DECLARED.** Contract complete and anchored to this skill's `domain-rubric.md` + `tests/`. **Not PROVEN:** no independent agent-eval harness has been RUN against a built agent (L15/L18). Evals are MANDATORY for this skill's GREEN — an agent with zero eval cases run is an empty shell, never GREEN. Next proof slice: a real agent-eval harness run (build → eval cases → failure handling).
+> **STATUS: PROVEN (graded-eval, DC-002 · 2026-07-05).** An independent, blind, adversarial grader scored every `domain-rubric.md` dimension ≥4 (5-senior bar), re-derived the arithmetic, found no fabrication, and confirmed every safety/UPL/HR/dual-use gate held (DC-002 · C1 clean). Producer/grader separated (L18); session-orchestrated MEASURED evidence (L17), NOT an external human audit or a runtime slice. Evidence: `memory/_evidence/DEEPCHECK_EVIDENCE.md` + `skills/CONTRACT_MATRIX.md`. Graded-eval-PROVEN (distinct from the runtime-PROVEN reference adapters); a runtime domain slice can upgrade it later (optional).
 >
-> **ԿԱՐԳԱՎԻՃԱԿ՝ DECLARED։** Contract-ը լրիվ է, խարսխված `domain-rubric.md`-ին + tests-ին։ **Ոչ PROVEN․** անկախ agent-eval harness դեռ չի վազել կառուցված agent-ի դեմ (L15/L18)։ Eval-ը ՊԱՐՏԱԴԻՐ է GREEN-ի համար։ Հաջորդ ապացույցի slice՝ իրական agent-eval harness run։
+> **ԿԱՐԳԱՎԻՃԱԿ՝ PROVEN (graded-eval, DC-002 · 2026-07-05)։** Անկախ blind adversarial grader-ը գնահատեց `domain-rubric.md`-ի ամեն dimension ≥4 (5-senior), ինքը վերահաշվեց arithmetic-ը, չգտավ fabrication, ու հաստատեց բոլոր safety/UPL/HR/dual-use gate-երը (DC-002 · C1 clean)։ Producer/grader բաժանված (L18)․ session-orchestrated ՉԱՓՎԱԾ evidence (L17), ՈՉ արտաքին human audit կամ runtime slice։ Evidence՝ `memory/_evidence/DEEPCHECK_EVIDENCE.md`։
 
 ## The 10 answers / 10 պատասխանը
 

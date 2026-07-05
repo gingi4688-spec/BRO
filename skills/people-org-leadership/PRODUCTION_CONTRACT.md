@@ -1,8 +1,8 @@
 # people-org-leadership — PRODUCTION CONTRACT / PRODUCTION CONTRACT
 
-> **STATUS: DECLARED.** Contract complete and anchored to this skill's **HR/legal hard gate** + `domain-rubric.md` + `tests/`. **Not PROVEN:** no independent eval RUN yet, including the HR/legal-gate cases (L15/L18). Employment actions route to HR/legal before any step. Next proof slice: an L2 LLM-graded eval + HR/legal-gate cases (Block 2).
+> **STATUS: PROVEN (graded-eval, DC-002 · 2026-07-05).** An independent, blind, adversarial grader scored every `domain-rubric.md` dimension ≥4 (5-senior bar), re-derived the arithmetic, found no fabrication, and confirmed every safety/UPL/HR/dual-use gate held (DC-002 · C6 clean). Producer/grader separated (L18); session-orchestrated MEASURED evidence (L17), NOT an external human audit or a runtime slice. Evidence: `memory/_evidence/DEEPCHECK_EVIDENCE.md` + `skills/CONTRACT_MATRIX.md`. Graded-eval-PROVEN (distinct from the runtime-PROVEN reference adapters); a runtime domain slice can upgrade it later (optional).
 >
-> **ԿԱՐԳԱՎԻՃԱԿ՝ DECLARED։** Contract-ը լրիվ է, խարսխված HR/legal hard gate-ին + rubric/tests-ին։ **Ոչ PROVEN․** անկախ eval դեռ չի վազել (ներառյալ gate case-երը)։ Employment action-ը → HR/legal նախ։ Հաջորդ slice՝ L2 eval + gate cases (Block 2)։
+> **ԿԱՐԳԱՎԻՃԱԿ՝ PROVEN (graded-eval, DC-002 · 2026-07-05)։** Անկախ blind adversarial grader-ը գնահատեց `domain-rubric.md`-ի ամեն dimension ≥4 (5-senior), ինքը վերահաշվեց arithmetic-ը, չգտավ fabrication, ու հաստատեց բոլոր safety/UPL/HR/dual-use gate-երը (DC-002 · C6 clean)։ Producer/grader բաժանված (L18)․ session-orchestrated ՉԱՓՎԱԾ evidence (L17), ՈՉ արտաքին human audit կամ runtime slice։ Evidence՝ `memory/_evidence/DEEPCHECK_EVIDENCE.md`։
 
 ## The 10 answers / 10 պատասխանը
 

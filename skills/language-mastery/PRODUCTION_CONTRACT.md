@@ -1,8 +1,8 @@
 # language-mastery — PRODUCTION CONTRACT / PRODUCTION CONTRACT
 
-> **STATUS: DECLARED.** Contract complete and anchored to this skill's `domain-rubric.md` + `tests/` + the Armenian lexicon (`skills/reference/armenian/`). **Not PROVEN:** the L0 bilingual engine runs live every session, but no independent parity/register eval has been RUN through a grader (L15/L18). Next proof slice: an L2 LLM-graded translation/register/parity eval (Block 2).
+> **STATUS: PROVEN (graded-eval, DC-002 · 2026-07-05).** An independent, blind, adversarial grader scored every `domain-rubric.md` dimension ≥4 (5-senior bar), re-derived the arithmetic, found no fabrication, and confirmed every safety/UPL/HR/dual-use gate held (DC-002 · C1 clean). Producer/grader separated (L18); session-orchestrated MEASURED evidence (L17), NOT an external human audit or a runtime slice. Evidence: `memory/_evidence/DEEPCHECK_EVIDENCE.md` + `skills/CONTRACT_MATRIX.md`. Graded-eval-PROVEN (distinct from the runtime-PROVEN reference adapters); a runtime domain slice can upgrade it later (optional).
 >
-> **ԿԱՐԳԱՎԻՃԱԿ՝ DECLARED։** Contract-ը լրիվ է, խարսխված `domain-rubric.md`-ին, tests-ին ու հայերեն lexicon-ին։ **Ոչ PROVEN․** L0-ն վազում է կենդանի, բայց անկախ parity/register eval դեռ չի վազել grader-ով (L15/L18)։ Հաջորդ ապացույցի slice՝ L2 LLM-graded eval (Block 2)։
+> **ԿԱՐԳԱՎԻՃԱԿ՝ PROVEN (graded-eval, DC-002 · 2026-07-05)։** Անկախ blind adversarial grader-ը գնահատեց `domain-rubric.md`-ի ամեն dimension ≥4 (5-senior), ինքը վերահաշվեց arithmetic-ը, չգտավ fabrication, ու հաստատեց բոլոր safety/UPL/HR/dual-use gate-երը (DC-002 · C1 clean)։ Producer/grader բաժանված (L18)․ session-orchestrated ՉԱՓՎԱԾ evidence (L17), ՈՉ արտաքին human audit կամ runtime slice։ Evidence՝ `memory/_evidence/DEEPCHECK_EVIDENCE.md`։
 
 ## The 10 answers / 10 պատասխանը
 

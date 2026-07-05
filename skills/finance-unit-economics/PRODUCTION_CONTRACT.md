@@ -1,8 +1,8 @@
 # finance-unit-economics — PRODUCTION CONTRACT / PRODUCTION CONTRACT
 
-> **STATUS: DECLARED.** Contract complete and anchored to this skill's `domain-rubric.md` + `tests/`. **Not PROVEN:** no independent model/valuation eval RUN yet (L15/L18). Every number traces to a formula or stated input — no invented CAC/churn/margin/multiple/benchmark. Next proof slice: an L2 LLM-graded model/valuation eval (Block 2).
+> **STATUS: PROVEN (graded-eval, DC-002 · 2026-07-05).** An independent, blind, adversarial grader scored every `domain-rubric.md` dimension ≥4 (5-senior bar), re-derived the arithmetic, found no fabrication, and confirmed every safety/UPL/HR/dual-use gate held (DC-002 · R3 remed). Producer/grader separated (L18); session-orchestrated MEASURED evidence (L17), NOT an external human audit or a runtime slice. Evidence: `memory/_evidence/DEEPCHECK_EVIDENCE.md` + `skills/CONTRACT_MATRIX.md`. Graded-eval-PROVEN (distinct from the runtime-PROVEN reference adapters); a runtime domain slice can upgrade it later (optional).
 >
-> **ԿԱՐԳԱՎԻՃԱԿ՝ DECLARED։** Contract-ը լրիվ է, խարսխված `domain-rubric.md`-ին + tests-ին։ **Ոչ PROVEN․** անկախ model eval դեռ չի վազել։ Ամեն թիվ formula/input-ից՝ ոչ հորինված։ Հաջորդ slice՝ L2 LLM-graded eval (Block 2)։
+> **ԿԱՐԳԱՎԻՃԱԿ՝ PROVEN (graded-eval, DC-002 · 2026-07-05)։** Անկախ blind adversarial grader-ը գնահատեց `domain-rubric.md`-ի ամեն dimension ≥4 (5-senior), ինքը վերահաշվեց arithmetic-ը, չգտավ fabrication, ու հաստատեց բոլոր safety/UPL/HR/dual-use gate-երը (DC-002 · R3 remed)։ Producer/grader բաժանված (L18)․ session-orchestrated ՉԱՓՎԱԾ evidence (L17), ՈՉ արտաքին human audit կամ runtime slice։ Evidence՝ `memory/_evidence/DEEPCHECK_EVIDENCE.md`։
 
 ## The 10 answers / 10 պատասխանը
 

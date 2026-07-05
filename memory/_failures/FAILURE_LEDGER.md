@@ -98,3 +98,12 @@
 - **Re-verification:** `python -m unittest test_validator` → `OK` 4/4; `py_compile` exit 0; real report summary valid=2/invalid=7.
 - **Date:** 2026-07-05.
 - **Note:** the Data analogue of FL-001 (UI controlled ESC defect) and FL-008 (Code controlled boundary defect) — a controlled defect caught by an independent gate on a THIRD artifact class proves the Universal Core loop generalizes (§8 rule of three exceeded, not just met).
+
+## FL-012 — real (uncontrolled) arithmetic defect in a graded-eval candidate caught by an independent blind grader (DC-002)
+- **What failed:** in the DC-002 contract-proof sweep (pass-1), the `sales-revenue-growth` candidate answer stated the funnel capacity as "40 deals require ~200 SQLs / 40 opps."
+- **Why:** a genuine, UNCONTROLLED arithmetic error — at the funnel's own rates, 40 wins needs 40/0.20 = 200 opps and 200/0.50 = 400 SQLs; "40 opps → 40 wins" implies an impossible 100% win rate (off 2× on SQLs, 5× on opps).
+- **Gate that caught it:** the independent blind adversarial grader (cluster C5) re-derived the funnel math itself and FAILed the flagship funnel dimension per "any number that doesn't reconcile fails the dimension."
+- **Fix:** remediation pass R3 recomputed 40 wins → 200 opps → 400 SQLs, showed it reconciling, and demolished the pass-1 figure.
+- **Re-verification:** the independent R3 grader re-derived the fix (200 opps / 400 SQLs; +20%-leads → 48 wins; Opp→Win binding stage) → PASS.
+- **Date:** 2026-07-05.
+- **Note:** unlike the CONTROLLED defects (FL-001/008/011), this was a real uncontrolled arithmetic error — proof the graded-eval gate is capability, not ceremony (GX-008). It is the honesty anchor separating DC-002 graded-eval-PROVEN from a rubber-stamp: the 30 DECLARED→PROVEN flips ride on a grading regime that demonstrably fails real defects.
