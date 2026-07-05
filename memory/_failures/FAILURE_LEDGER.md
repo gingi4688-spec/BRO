@@ -62,4 +62,21 @@
 - **Date:** 2026-07-05.
 - **Note:** this is exactly the false-GREEN the Phase-7 plan predicted — a check that "looks green" without looking at content (L18).
 
+## FL-008 — isWithinPeriod treats the period end as exclusive (CONTROLLED)
+- **What failed:** the end date of a billing period was reported as NOT within the period.
+- **Why:** planted defect — `isWithinPeriod` boundary flipped inclusive→exclusive (`value <= end` → `value < end`).
+- **Gate that caught it:** Verifier — vitest `includes the end date (inclusive end — boundary contract)` failed (`AssertionError: expected false to be true`); exactly 1 of 13 tests, exit 1.
+- **Fix:** restore inclusive end (`< end` → `<= end`); minimal one-operator diff, no scope creep.
+- **Re-verification:** targeted test PASS + full suite 13/13; post-repair `git diff` empty (module byte-identical to the committed GREEN baseline).
+- **Date:** 2026-07-05.
+
+## FL-009 — production build fails TS5011 (missing rootDir) — REAL / unplanned
+- **What failed:** `npm run build` (`tsc -p tsconfig.build.json`) exit 2 — `TS5011: rootDir must be explicitly set`.
+- **Why:** TypeScript 6.x requires an explicit `rootDir` when emitting; the sandbox build config omitted it (would have emitted `dist/src/...`).
+- **Gate that caught it:** Verifier — the build step of the Code capability recipe, BEFORE any GREEN was claimed.
+- **Fix:** add `"rootDir": "src"` to `tsconfig.build.json` (slice config, not the module) → `dist/billingPeriod.js`+`.d.ts`, exit 0.
+- **Re-verification:** `npm run build` exit 0; full re-verify tsc/lint/test/build all 0.
+- **Date:** 2026-07-05.
+- **Note:** the Code analogue of FL-002 — an independent gate catching an *unplanned* real defect proves the Code gate is capability, not ceremony.
+
 > **Lesson recorded (see [`REPAIR_PATTERNS.md`](REPAIR_PATTERNS.md), [`NEVER_REPEAT.md`](NEVER_REPEAT.md)):** FL-002 was NOT planted — an independent Verifier catching an *unplanned* real defect is the proof the gate is capability, not ceremony. FL-003 is the same principle turned on the tooling: the pre-push gate caught a false-RED in its OWN heuristic before it could block a legitimate push. FL-004 completes the trio: an independent check (spine-verify) caught a real integrity break AND exposed that a sibling gate (beast-check) was a hardcoded false-GREEN — exactly why L18 demands independent, current evidence, never a check that "looks green" without looking. / FL-002·003·004 = gate-ը բռնում է իրական defect, նույնիսկ իր՛ գործիքի մեջ, ու hardcoded false-GREEN-ը բացահայտում է (L18)։

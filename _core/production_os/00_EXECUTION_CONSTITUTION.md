@@ -6,8 +6,9 @@
 
 > **PROOF STATUS OF THIS ENGINE / ԱՅՍ ENGINE-Ի ԱՊԱՑՈՒՅՑԻ ԿԱՐԳԱՎԻՃԱԿ (L15/L18):**
 > **UI adapter = PROVEN** — proven end-to-end on a real Next.js list-detail slice (rendered · 6 states · 4 viewports · keyboard · axe 0-serious · controlled-failure caught→repaired→re-verified; evidence in `memory/_evidence/`).
-> **Universal Core + Code adapter = DECLARED, slice-2 pending** — the loop is written from one proven adapter; per §8 the "universal" claim is EARNED only after the Code slice. Until then this engine is honestly labeled DECLARED, not measured-universal.
-> **HY:** UI adapter = PROVEN (իրական slice-ով). Universal Core + Code adapter = DECLARED, slice-2 pending — «universal»-ը վաստակվում է միայն Code slice-ից հետո։
+> **Code adapter = PROVEN** — proven end-to-end on a real pure-logic TypeScript slice (`billingPeriod`): TDD red→green 13/13 · `tsc`+`eslint`+build exit 0 · controlled boundary defect caught+repaired · unplanned TS5011 build defect caught (evidence CODESLICE-001 in `memory/_evidence/`; FL-008, FL-009 in `memory/_failures/`).
+> **Universal Core = DECLARED** — TWO proven adapters (UI + Code) now exist, so extraction is honest (§8 rule of three met); but the shared core has not yet been lifted and re-validated against both, so the "universal" claim stays DECLARED until Phase 10 extracts it and both adapters re-verify. Not measured-universal yet.
+> **HY:** UI adapter = PROVEN. Code adapter = PROVEN (իրական TypeScript slice-ով)։ Universal Core = DECLARED — երկու ապացուցված adapter հիմա կան, extraction-ն ազնիվ է, բայց shared core-ը դեռ չի հանվել ու re-validate եղել, ուստի «universal»-ը մնում է DECLARED մինչ Phase 10։
 
 ---
 

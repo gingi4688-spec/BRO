@@ -10,5 +10,10 @@
 | UISLICE-001 | Accessibility: axe 0 serious/critical across 5 states | runtime | `scratchpad/slice-evidence/axe/*.json` (all `[]` post-fix) | @axe-core/playwright analyze | **PROVEN** | y | 2026-07-05 |
 | UISLICE-001 | Controlled failure (ESC no-close) caught by the gate | runtime | run #1 failing test `drawer closes on Escape` | Playwright verdict | **PROVEN** | y | 2026-07-05 |
 | PROD-OS-001 | Universal Core generality (domain-agnostic beyond UI) | — | none yet — Code slice (proof 2) not built | — | **DECLARED / UNKNOWN** | flagged | 2026-07-05 |
+| CODESLICE-001 | Code change reaches runtime GREEN via TDD red→green | runtime | `scratchpad/phase9-code-slice/evidence/02,03` | vitest run: stub 13/13 FAIL (exit 1) → impl 13/13 PASS (exit 0) | **PROVEN** | y | 2026-07-05 |
+| CODESLICE-001 | Static + build gates pass (types/lint/build) | build output | `tsc --noEmit`=0 · `eslint`=0 · `tsc` build=0 → `dist/billingPeriod.js`+`.d.ts` | command exit codes observed | **PROVEN** | y | 2026-07-05 |
+| CODESLICE-001 | Controlled boundary defect caught by the gate | runtime | `evidence/09,10`: `isWithinPeriod` `<=`→`<` | vitest: exactly 1 test RED (`expected false to be true`), exit 1 | **PROVEN** | y | 2026-07-05 |
+| CODESLICE-001 | Unplanned build-config defect (TS5011) caught | build output | `evidence/07`: first `build` exit 2 (missing rootDir) → fixed | tsc build exit code observed | **PROVEN** | y | 2026-07-05 |
+| PROD-OS-001 | Universal Core generality — progress after proof 2 | reasoning | TWO proven adapters now exist (UI + Code); extraction+revalidation against both = Phase 10 | not yet run against an extracted core | **DECLARED / UNKNOWN** | flagged | 2026-07-05 |
 
 > **Note (L18):** UISLICE-001 rows are PROVEN by independent runtime artifacts (Playwright + axe + screenshots), not by builder assertion or file-presence. PROD-OS-001 is honestly UNKNOWN until the Code slice runs. / UISLICE-001-ը PROVEN է անկախ runtime artifact-ով. PROD-OS-001-ը ազնվորեն UNKNOWN է մինչ Code slice-ը։

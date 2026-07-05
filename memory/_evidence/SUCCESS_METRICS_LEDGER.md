@@ -15,11 +15,24 @@
 | last verified | 2026-07-05 | |
 | **success rate** | **UNKNOWN — n=1** | one measured build is not a rate; do not claim a percentage. Expected confidence MEDIUM–HIGH based on architecture completeness, NOT on measured history. |
 
-## Workflows: code_fix · audit · agent_creation · research_answer · bilingual_quality · memory_isolation
+## Workflow: code_fix
+
+| metric | value | note |
+|---|---|---|
+| attempts (measured) | **1** | the `billingPeriod` pure-logic TypeScript slice |
+| passed (first-pass, no repair) | **0** | stub run failed 13/13 by design (TDD red); first build hit TS5011 |
+| passed (final, after repair) | **1** | 13/13 green · tsc/eslint/build exit 0 |
+| repaired | 1 | FL-008 (controlled boundary) + FL-009 (unplanned build-config), one cycle |
+| avg repair cycles | 1.0 | |
+| common failure types | boundary/off-by-one (1 controlled) · build-config (1 unplanned) | |
+| last verified | 2026-07-05 | |
+| **success rate** | **UNKNOWN — n=1** | one measured build is not a rate. Expected confidence MEDIUM–HIGH from architecture, NOT measured history. |
+
+## Workflows: audit · agent_creation · research_answer · bilingual_quality · memory_isolation
 
 | workflow | measured history | success rate |
 |---|---|---|
-| code_fix | none yet (Code slice pending) | **UNKNOWN** |
+| code_fix | measured n=1 (see "Workflow: code_fix" above) | **UNKNOWN — n=1** |
 | audit · agent_creation · research_answer · bilingual_quality · memory_isolation | none yet | **UNKNOWN** |
 
 > **Rule (L17):** every cell above is either a measured count or an explicit UNKNOWN. No rate is stated without the records behind it. / Ամեն վանդակ՝ չափված թիվ կամ բացահայտ UNKNOWN։ Ոչ մի rate առանց գրառման։

@@ -14,7 +14,7 @@
 ## The two check families / Երկու check ընտանիք
 
 - **Quality gate** (organ 10, → [`08_FINAL_REPORT.md`](../08_FINAL_REPORT.md)): serious task → full structure + labels + freshness; simple → short. Applied to every production report. / quality gate՝ serious → full struct, simple → կարճ։
-- **Capability check** (per artifact): the artifact-specific GREEN recipe. UI's is PROVEN and wired: [`ui/verification/UI_VERIFICATION_CHECKLIST.md`](../ui/verification/UI_VERIFICATION_CHECKLIST.md) (tsc + eslint + build + Playwright + axe + controlled-failure). Code/research/audit/finance/agent recipes are DECLARED until each earns its slice. / capability check՝ artifact-ի GREEN recipe. UI-ինը PROVEN ու wired է. մնացածը DECLARED։
+- **Capability check** (per artifact): the artifact-specific GREEN recipe. UI's is PROVEN and wired: [`ui/verification/UI_VERIFICATION_CHECKLIST.md`](../ui/verification/UI_VERIFICATION_CHECKLIST.md) (tsc + eslint + build + Playwright + axe + controlled-failure). **Code's is now PROVEN and wired** ([`code/verification/CODE_VERIFICATION_CHECKLIST.md`](../code/verification/CODE_VERIFICATION_CHECKLIST.md): tsc + eslint + test + build + red→green + controlled-failure). Research/audit/finance/agent recipes are DECLARED until each earns its slice. / capability check՝ artifact-ի GREEN recipe. UI-ինն ու Code-ինը PROVEN ու wired են. մնացածը DECLARED։
 
 ## Status honesty / Կարգավիճակի ազնվություն (L15/L18)
 

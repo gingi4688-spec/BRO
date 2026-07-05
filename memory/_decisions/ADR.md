@@ -20,3 +20,10 @@
 - **Status:** ACCEPTED · in progress (this session).
 - **Decision:** all install writes go in-home on a feature branch, committed per-phase; the irreversible tail (spine release + seed 5 bros + push) runs LAST through `bro-release`/`bro-update-spine`/`git push` with `BRO_GEV_APPROVED=1`, after the beast-check verifies the tree.
 - **Consequences:** reversible until the remote; D0 gates honored; the wall/release integrity is preserved.
+
+## ADR-004 — Code adapter PROVEN (proof slice 2); Universal Core extraction now honest
+
+- **Status:** ACCEPTED (Gev, 2026-07-05) · Universal Core still DECLARED until extracted+validated.
+- **Context:** ADR-001 set the rule of three — extract the Universal Core only after TWO proven adapters. UI was proven (UISLICE-001); Code was the missing second slice.
+- **Decision:** the Code adapter (`skills/software-systems-architecture/PRODUCTION_CONTRACT.md`) flips DECLARED→PROVEN on a real sandbox slice (`billingPeriod`, TypeScript): red→green 13/13, `tsc`+`eslint`+build exit 0, controlled boundary defect caught+repaired (FL-008), unplanned build-config defect caught (FL-009). Evidence: CODESLICE-001.
+- **Consequences:** two proven adapters now exist → Universal Core extraction is honest and unblocked (Phase 10). The Universal Core label itself remains DECLARED until the shared core is lifted from both slices and both re-validate — proving generality is measured (L17), not a byproduct of the second slice.

@@ -3,7 +3,7 @@
   "role": "SuperBro",
   "project_id": "_super",
   "skills_manifest_version": "v7_6",
-  "skills_manifest_hash": "sha256:35a4ada08c7db83635998341d2d41628283bd9fcaed9f1f45901ca4d48651728",
+  "skills_manifest_hash": "sha256:d25b48cedc217f413bfd3d685e4382cca09994898d8f7c229022ef8cbe9dddac",
   "agents_manifest_hash": "sha256:7827629c463885f9e0ab229df957eb518311fa4e2c79d42828fc15133c8c0c79",
   "memory_schema_version": "v1",
   "memory_scope": "own_only",
