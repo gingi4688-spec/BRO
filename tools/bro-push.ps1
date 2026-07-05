@@ -27,6 +27,16 @@ if ($env:BRO_GEV_APPROVED -ne '1') { Fail "bro-push: REFUSED — push is Gev-gat
 if ($NoVerify -and -not $Reason)   { Fail "bro-push: REFUSED — -NoVerify requires -Reason (recorded justification for skipping the pre-push gate)." 2 }
 
 Push-Location $ProjectPath
+# SELF-HEAL (#1 cause of "push always blocks"): a KILLED bro-dispatch never runs its finally, leaving the push URL
+# poisoned as 'DISABLED-BY-BRO-DISPATCH-NO-PUSH' — every later push then fails on that bogus URL, even WITH the token.
+# Clear it so push falls back to the real fetch URL. Safe: only touches the exact sentinel value bro-dispatch sets.
+try {
+  $pu = (& git config --get remote.origin.pushurl 2>$null)
+  if ("$pu" -eq 'DISABLED-BY-BRO-DISPATCH-NO-PUSH') {
+    & git config --unset-all remote.origin.pushurl 2>&1 | Out-Null
+    Write-Host "bro-push: SELF-HEAL - cleared a leftover DISABLED push URL from a killed dispatch (push now uses the real fetch URL)."
+  }
+} catch {}
 # SELF-HEAL: if a prior bro-push was KILLED mid-run, Gev's WIP may be left in a "bro-push: pre-push WIP (auto)"
 # stash. Restore it now (when the tree is clean, no conflict risk) BEFORE we stash again, so it is never buried/lost.
 try {
