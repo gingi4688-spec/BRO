@@ -16,7 +16,7 @@ param(
   [string]$ProjectPath = '',
   [string]$MemoryScope = '',
   [string]$Authority = 'ProjectBro',
-  [string]$SpineVersionExpected = 'v1.0.0',
+  [string]$SpineVersionExpected = '',
   [string]$Notes = '',
   [string]$RegistryPath = '',
   [switch]$Retire,
@@ -70,7 +70,7 @@ elseif ($pl.StartsWith(($broHome.ToLower().TrimEnd('\') + '\'))) { $refuse = 'pa
 "    project_path:           $ProjectPath"
 "    memory_scope:           $MemoryScope"
 "    authority:              $Authority"
-"    spine_version_expected: $SpineVersionExpected"
+"    spine_version_expected: $(if ($SpineVersionExpected) { $SpineVersionExpected } else { '(set at install to the resolved release)' })"
 "    status:                 REGISTERED"
 "  files_affected: memory/_own/registry.json (metadata only); NO project content"
 

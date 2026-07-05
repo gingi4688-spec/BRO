@@ -19,7 +19,7 @@ param(
   [string]$ProjectPath = '',
   [string]$Name = '',
   [string]$Description = '',
-  [string]$Version = 'v1.0.0',
+  [string]$Version = '',
   [switch]$Rollback,
   [switch]$Yes,
   [switch]$Execute
@@ -64,7 +64,7 @@ if ($Rollback) {
 "NEW PROJECT FACTORY - " + $(if ($Execute) { 'REAL mode' } else { 'DRY-RUN (preview)' })
 "  project:     $ProjectId  ($Name)"
 "  path:        $ProjectPath"
-"  scope:       $memScope   release: $Version"
+"  scope:       $memScope   release: $(if ($Version) { $Version } else { 'latest (resolved + verified by bro-install)' })"
 "  description: " + $(if ($Description) { $Description } else { '(none given - recommend one for the CLAUDE.md identity)' })
 "  plan:        mkdir -> register -> install (bro/+spine+wall+root-wall+gitignore) -> CLAUDE.md (L8) -> docs/ intake -> READY"
 

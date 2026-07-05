@@ -44,4 +44,13 @@
 - **Date:** 2026-07-05.
 - **Prevention:** the tool fix means GAA/SCOUT/MENQ will not hit the same RED.
 
+## FL-006 — future-bro bootstrap born-stale (default v1.0.0, not latest) — REAL, proactively caught
+- **What:** a new factory-born Bro (`bro-new-project -ProjectId X`, no explicit `-Version`) would be born on spine **v1.0.0** — missing all of v1.1.0 + v1.2.0 (production-OS laws L14–L19, the `production_os` engine, UI kit, contracts, Taste Engine). Born-stale, non-production, inconsistent with the v1.2.0 roster; the whole upgrade would silently not reach new agents.
+- **Why:** three hardcoded `v1.0.0` defaults + no latest-resolver — `bro-new-project.ps1:22`, `bro-install.ps1:27`, `bro-register.ps1:19`.
+- **Gate that caught it:** Bro's own Phase-6 read-only verify of the bootstrap scripts — flagged **before** declaring the upgrade "perfect". Proactive discovery, not a runtime failure.
+- **Fix (Phase 6B):** `bro-install` now resolves the **latest release by default** (highest under `spine/RELEASES/`), which **MUST pass `bro-spine-verify` before use** (no birth on a REJECTED release, no silent downgrade); explicit `-Version` still overrides; `bro-install` sets the registry `spine_version_expected` to the pulled version on install (FL-005 consistency at birth); `bro-new-project` + `bro-register` default to `''` (pass-through / set-at-install).
+- **Re-verification:** DRY no-`-Version` → resolves **v1.2.0**; DRY `-Version v1.1.0` → **v1.1.0** (override); latest release VERIFIED 428/428; DRY created nothing.
+- **Date:** 2026-07-05.
+- **Prevention:** future Bros are born at the latest **verified** spine automatically — the upgrade is now future-proof.
+
 > **Lesson recorded (see [`REPAIR_PATTERNS.md`](REPAIR_PATTERNS.md), [`NEVER_REPEAT.md`](NEVER_REPEAT.md)):** FL-002 was NOT planted — an independent Verifier catching an *unplanned* real defect is the proof the gate is capability, not ceremony. FL-003 is the same principle turned on the tooling: the pre-push gate caught a false-RED in its OWN heuristic before it could block a legitimate push. FL-004 completes the trio: an independent check (spine-verify) caught a real integrity break AND exposed that a sibling gate (beast-check) was a hardcoded false-GREEN — exactly why L18 demands independent, current evidence, never a check that "looks green" without looking. / FL-002·003·004 = gate-ը բռնում է իրական defect, նույնիսկ իր՛ գործիքի մեջ, ու hardcoded false-GREEN-ը բացահայտում է (L18)։

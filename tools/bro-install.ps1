@@ -24,7 +24,7 @@
 param(
   [string]$ProjectId = '',
   [string]$ProjectPath = '',
-  [string]$Version = 'v1.0.0',
+  [string]$Version = '',
   [string]$RegistryPath = '',
   [switch]$Rollback,
   [switch]$Adopt,
@@ -109,6 +109,24 @@ if ($Adopt) {
     exit 0
   } catch { "  ERROR during adopt: $($_.Exception.Message)"; exit 6 }
 }
+# ---- INSTALL: resolve the spine release (default = latest VERIFIED release; explicit -Version overrides) ----
+# Born-latest (FL-006): an empty -Version resolves to the HIGHEST release under spine/RELEASES, which MUST pass
+# bro-spine-verify before use — never birth a Bro on a REJECTED release, and never silently downgrade to an older one.
+# HY: դատարկ -Version-ը լուծվում է դեպի ամենաբարձր release-ը, որ ՊԱՐՏԱԴԻՐ անցնում է bro-spine-verify. ոչ silent downgrade։
+if (-not $Version) {
+  $latestRel = Get-ChildItem 'spine/RELEASES' -Directory -ErrorAction SilentlyContinue |
+    Where-Object { Test-Path (Join-Path $_.FullName 'release.manifest.json') } |
+    Sort-Object { try { [version]($_.Name -replace '^v','') } catch { [version]'0.0.0' } } | Select-Object -Last 1
+  if (-not $latestRel) { "  REFUSED: no release found under spine/RELEASES to resolve 'latest' (cut one first, or pass -Version). STOP."; exit 4 }
+  $Version = $latestRel.Name
+  "  resolved latest release: $Version (no -Version given; born-latest)"
+}
+# The chosen release (resolved OR explicit) MUST verify before use — no birth on a REJECTED release.
+$relDirChk = Join-Path 'spine\RELEASES' $Version
+if (-not (Test-Path (Join-Path $relDirChk 'release.manifest.json'))) { "  REFUSED: release $Version not found at $relDirChk. STOP."; exit 4 }
+& pwsh -NoProfile -File (Join-Path $PSScriptRoot 'bro-spine-verify.ps1') -ReleaseDir $relDirChk *> $null
+if ($LASTEXITCODE -ne 0) { "  REFUSED: release $Version FAILS bro-spine-verify (REJECTED) — will not birth a Bro on an unverified release; NOT downgrading silently. STOP."; exit 5 }
+
 $relDir   = Join-Path (Join-Path 'spine\RELEASES' $Version) ''
 $relMfPath= Join-Path $relDir 'release.manifest.json'
 
@@ -236,9 +254,11 @@ try {
   try {
     $fts2 = Get-Date -Format "yyyyMMdd-HHmmss"
     Copy-Item 'memory/_own/registry.json' (Join-Path '_before' "registry-$fts2.json") -Force
-    $entry.status = 'INSTALLED'; $entry.last_sync = $stampTs
+    # Set spine_version_expected to the ACTUAL pulled version (FL-005/FL-006: registry<->manifest must agree, so a
+    # born Bro is registry-consistent from minute one regardless of what register defaulted).
+    $entry.status = 'INSTALLED'; $entry.last_sync = $stampTs; $entry.spine_version_expected = $Version
     ($reg | ConvertTo-Json -Depth 6) | Set-Content 'memory/_own/registry.json' -Encoding utf8
-    "  registry: $ProjectId status REGISTERED -> INSTALLED (snapshot _before/registry-$fts2.json)"
+    "  registry: $ProjectId status REGISTERED -> INSTALLED, spine_version_expected -> $Version (snapshot _before/registry-$fts2.json)"
   } catch { "  WARN: install ok but registry status update failed: $($_.Exception.Message)" }
 
   "  INSTALLED $ProjectId at $broDir (spine pulled $Version, VERIFIED $(@($relMf.files).Count) files, stamped)."
