@@ -13,7 +13,7 @@
 
 ## Mode A / Mode B
 
-- **Mode A (default, live now):** the professional baseline distilled here — start immediately, never block. / պրոֆեսիոնալ baseline. սկսիր անմիջապես, մի block արա։
-- **Mode B (sharpening):** as Gev adds 15–20 labeled examples, the token values / component choices / answer patterns retune toward them. Examples **sharpen**, never **block**, the core. / Gev-ի labeled օրինակներով token-ները retune են. սրում են, ոչ block։
+- **Mode A (baseline floor, always live):** the professional baseline distilled here — start immediately, never block. Stays the floor even under Mode B. / պրոֆեսիոնալ baseline, միշտ կենդանի հատակ. սկսիր անմիջապես, մի block արա։
+- **Mode B (taste-tuned) — ACTIVE since 2026-07-05:** activated on Gev's explicit go with **20 Gev-labeled examples** (`MODE_B_INTAKE.md`, GX-001..010 + BX-001..010, ≥15 threshold, gauge GREEN). Token values / component choices / answer-shape retune toward Gev's taste. Examples **sharpen**, never **block**, the core; the evidence floors (a11y, verify-before-done, no-fake-green, D0 gates) stay **absolute**. / ԱԿՏԻՎ 2026-07-05-ից՝ 20 Gev-labeled օրինակով. token-ները retune են. սրում են, ոչ block. evidence floor-երը՝ բացարձակ։
 
 > **Slots are open, not empty:** this engine starts with the taste already known from `self/personalization.md` + the `gev-*` standards; the example banks grow as Gev labels more. / Slot-երը բաց են, ոչ դատարկ. աճում են երբ Գևը պիտակում է։

@@ -59,7 +59,7 @@ else { $status='YELLOW'; $code=1 }
 "  activation threshold:      >= $Threshold Gev-labeled entries (target $Threshold-$Target)"
 "  gap to activation:         $([Math]::Max(0, $Threshold - $gevLabeled)) more Gev-labeled example(s) needed"
 "  intake template:           $(if(Test-Path $intake){'present'}else{'MISSING'}) ($intake)"
-"  Mode in effect:            $(if($status -eq 'GREEN'){'Mode-B READY (>= threshold) — Gev to confirm activation'}else{'Mode-A (professional baseline, live) — Mode-B awaiting Gev'})"
+"  Mode in effect:            $(if($status -eq 'GREEN'){'Mode-B ACTIVE (>= threshold; activated 2026-07-05 on Gev go) — Mode-A stays the floor'}else{'Mode-A (professional baseline, live) — Mode-B awaiting Gev'})"
 if ($fail.Count) { $fail | ForEach-Object { "  [FAIL] $_" } }
 "RESULT: $status ($(if($status -eq 'GREEN'){"Mode-B ready: $gevLabeled Gev-labeled >= $Threshold"}elseif($status -eq 'RED'){'intake/rubric/honesty problem'}else{"awaiting Gev: $gevLabeled/$Threshold Gev-labeled — no invented taste, Mode-A live"}))"
 exit $code

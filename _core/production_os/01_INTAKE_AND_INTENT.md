@@ -17,8 +17,8 @@ Rule: when the user wants a **result**, an advice-only answer is a defect (L14).
 
 ## 2. Mode selection / Mode-ի ընտրություն
 
-- **Mode A (default):** professional baseline — start immediately, never block on missing taste examples. / պրոֆեսիոնալ baseline. սկսիր անմիջապես, մի block արա։
-- **Mode B (taste-tuned):** engages when Gev's labeled examples exist ([`self/gev_standard/`](../../self/gev_standard/)); sharpens tokens/components/answers toward Gev's taste. Examples **sharpen**, never **block**, the core. / միանում է երբ Gev-ի labeled օրինակները կան. սրում է, ոչ block։
+- **Mode A (baseline floor, always live):** professional baseline — start immediately, never block on missing taste examples. Stays the floor even under Mode B. / պրոֆեսիոնալ baseline, միշտ կենդանի հատակ. սկսիր անմիջապես, մի block արա։
+- **Mode B (taste-tuned) — ACTIVE since 2026-07-05:** activated on Gev's explicit go with **20 Gev-labeled examples** (GX/BX in [`self/gev_standard/MODE_B_INTAKE.md`](../../self/gev_standard/MODE_B_INTAKE.md), ≥15 threshold, gauge GREEN). Sharpens tokens / component choices / answer-shape toward Gev's taste — preferred answer shape = **verdict → what's proven → what's not proven → caveat → exact next command**; Armenian-first, direct, no fake hype. Examples **sharpen**, never **block**; the evidence floors (a11y, verify-before-done, no-fake-green, D0 gates) stay **absolute** regardless of Mode. / ԱԿՏԻՎ 2026-07-05-ից՝ Գևի բացահայտ go-ով, 20 Gev-labeled օրինակով. սրում է token/component/պատասխանի-ձև, ոչ block. evidence floor-երը մնում են բացարձակ։
 
 ## 3. Domain routing / Domain routing
 
