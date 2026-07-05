@@ -837,3 +837,19 @@ result: BLOCKED
 reason: write outside BRO_HOME (clean-build zero-touch)
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-05T06:16:51+04:00
+actor: hook
+session_id: 41a9a80a-b77d-4435-8df5-b54be60f222c
+action: CRITICAL_COMMAND_BLOCKED
+target: Set-Location "C:\Users\Admin\Desktop\Bro"
+"=== bro-selfcheck -Log (writes canonical heartbeat) ==="
+pwsh -NoProfile -File tools/bro-selfcheck.ps1 -Log 2>&1 | Se
+source_command: PowerShell tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
