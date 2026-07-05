@@ -10,7 +10,7 @@
   Exit: 0 L1-GREEN · 1 YELLOW (dirty tree / non-critical) · 2 RED (real L1 failure).
 #>
 [CmdletBinding()]
-param([switch]$Log, [switch]$Notify)
+param([switch]$Log, [switch]$Notify, [switch]$Deep)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
@@ -58,8 +58,8 @@ if ($refs.exit    -ne 0) { AddItem 'OI-DOC-REFS'     'MED'  'broken doc links or
 if ($prod.exit    -ne 0) { AddItem 'OI-PRODUCTION'   'HIGH' 'production label/ledger/engine problem (L3 static)' }
 if ($behav.exit   -eq 2) { AddItem 'OI-BEHAV-CASES'  'MED'  'behavioral eval cases missing/malformed' }
 if ($taste.exit   -ne 0) { AddItem 'OI-TASTE'        'MED'  'taste banks/failure-learning/repeated-mistake problem (L4)' }
-AddItem 'OI-L2-LLM-GRADE'  'LOW' 'L2 behavioral LLM grading is on-demand/weekly (not a daily deterministic check)'
-AddItem 'OI-L4-LLM-GRADE'  'LOW' 'L4 taste quality LLM grading is on-demand/weekly (not a daily deterministic check)'
+AddItem 'OI-L2-LLM-GRADE'  'LOW' 'L2 behavioral LLM grading: on-demand via tools/bro-deepcheck.ps1 (reads recorded evidence memory/_evidence/DEEPCHECK_EVIDENCE.md); not a daily deterministic check'
+AddItem 'OI-L4-LLM-GRADE'  'LOW' 'L4 taste QUALITY LLM grading: on-demand via tools/bro-deepcheck.ps1; Mode-B design/decision grade YELLOW awaiting Gev-labeled examples; not a daily check'
 AddItem 'OI-UI-SMOKE'      'LOW' 'L3 UI runtime smoke is on-demand/weekly (foundation only; not a daily check)'
 AddItem 'OI-ORPHAN-SCAN'   'LOW' 'orphan/dead-doc detection deferred in refs-check'
 
@@ -109,5 +109,14 @@ if ($Log) { try { Add-Content -Path 'logs\selfaudit-heartbeat.log' -Value ("$sta
 if ($Notify -and $verdict -eq 'RED') {
   $alert = "Bro self-check vNext RED @ ${stamp}: real L1 integrity failure. Open Bro and run RUN SELF-CHECK."
   try { & msg.exe * "/TIME:180" $alert 2>$null } catch {}
+}
+# -Deep (ADDITIVE, on-demand): also print the L2/L4 deep grade (bro-deepcheck). This does NOT change the daily verdict
+# or $code — the daily cron never passes -Deep, so the deterministic daily path stays byte-identical. The deep grade is
+# honestly LLM-blocked/YELLOW unless a real recorded grade exists (L18); shown as info, never folded into daily GREEN.
+# For the deep-specific exit code, run tools/bro-deepcheck.ps1 directly.
+if ($Deep) {
+  ''
+  '--- DEEP (on-demand L2/L4 LLM grade — ADDITIVE; NOT part of the daily verdict/exit) ---'
+  & pwsh -NoProfile -File 'tools/bro-deepcheck.ps1' 2>&1 | ForEach-Object { "$_" -replace "\x1b\[[0-9;]*m", '' }
 }
 exit $code
