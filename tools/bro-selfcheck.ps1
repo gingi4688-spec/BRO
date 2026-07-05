@@ -60,7 +60,7 @@ if ($behav.exit   -eq 2) { AddItem 'OI-BEHAV-CASES'  'MED'  'behavioral eval cas
 if ($taste.exit   -ne 0) { AddItem 'OI-TASTE'        'MED'  'taste banks/failure-learning/repeated-mistake problem (L4)' }
 AddItem 'OI-L2-LLM-GRADE'  'LOW' 'L2 behavioral LLM grading: on-demand via tools/bro-deepcheck.ps1 (reads recorded evidence memory/_evidence/DEEPCHECK_EVIDENCE.md); not a daily deterministic check'
 AddItem 'OI-L4-LLM-GRADE'  'LOW' 'L4 taste QUALITY LLM grading: on-demand via tools/bro-deepcheck.ps1; Mode-B design/decision grade YELLOW awaiting Gev-labeled examples; not a daily check'
-AddItem 'OI-UI-SMOKE'      'LOW' 'L3 UI runtime smoke is on-demand/weekly (foundation only; not a daily check)'
+AddItem 'OI-UI-SMOKE'      'LOW' 'L3 UI runtime smoke: on-demand via tools/checks/bro-ui-smoke.ps1 (reads recorded Playwright/axe evidence memory/_evidence/UI_SMOKE_EVIDENCE.md); not a daily deterministic check'
 AddItem 'OI-ORPHAN-SCAN'   'LOW' 'orphan/dead-doc detection deferred in refs-check'
 
 $oiPath = 'logs/OPEN_ITEMS.md'    # logs/ = runtime artifacts dir (NOT memory/_own, which is isolation-whitelisted)
