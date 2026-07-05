@@ -25,4 +25,6 @@
 
 On the CRM slice the Verifier ran Playwright + axe and caught **4** issues on run #1: the planted ESC-no-close defect **and** 3 unplanned `color-contrast (serious)` on the Churned badge — proving the gate catches real, unplanned defects, not just the one it was told about. After repair: **23/23 GREEN, axe 0 serious**. Evidence: `memory/_evidence/`, `memory/_failures/`. / Verifier-ը բռնեց 4 issue run #1-ին (planted ESC + 3 չնախատեսված contrast) → repair-ից հետո 23/23 GREEN։
 
+On the Code slice the Verifier ran `tsc` + `eslint` + `vitest` + build and caught the planted boundary defect (exactly 1 test, `expected false to be true`) **and** an unplanned build defect (TS5011) — the same gate, catching real defects in a non-UI class. Then GREEN: 13/13, static 0/0/0. / Code slice-ում Verifier-ը վազեցրեց tsc+eslint+vitest+build ու բռնեց planted boundary defect-ը (1 test) ԵՎ չնախատեսված build defect (TS5011) — նույն gate, ոչ-UI դասում։
+
 On fail → [`07_REPAIRER.md`](07_REPAIRER.md). On GREEN → [`08_FINAL_REPORT.md`](08_FINAL_REPORT.md).

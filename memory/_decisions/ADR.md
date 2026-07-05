@@ -27,3 +27,10 @@
 - **Context:** ADR-001 set the rule of three — extract the Universal Core only after TWO proven adapters. UI was proven (UISLICE-001); Code was the missing second slice.
 - **Decision:** the Code adapter (`skills/software-systems-architecture/PRODUCTION_CONTRACT.md`) flips DECLARED→PROVEN on a real sandbox slice (`billingPeriod`, TypeScript): red→green 13/13, `tsc`+`eslint`+build exit 0, controlled boundary defect caught+repaired (FL-008), unplanned build-config defect caught (FL-009). Evidence: CODESLICE-001.
 - **Consequences:** two proven adapters now exist → Universal Core extraction is honest and unblocked (Phase 10). The Universal Core label itself remains DECLARED until the shared core is lifted from both slices and both re-validate — proving generality is measured (L17), not a byproduct of the second slice.
+
+## ADR-005 — Universal Core PROVEN by extraction from two proven adapters
+
+- **Status:** ACCEPTED (Gev, 2026-07-05).
+- **Context:** ADR-001's rule of three — extract the Universal Core only after TWO proven adapters. UI (UISLICE-001) + Code (CODESLICE-001) are now both proven via the same documented loop.
+- **Decision:** flip Universal Core DECLARED→PROVEN. The core (loop + Executor/Verifier/Repairer + statuses + gates + ledgers + label system + contract template) is audited adapter-neutral; the reference runs in 05–08 now show each role across BOTH artifact classes; the `ui/` and `code/` recipes stay adapter-specific. Extraction record: `_core/production_os/UNIVERSAL_CORE.md`. Evidence: UNIV-CORE-001. Extraction was validate+generalize+relabel, NOT a rewrite (guards the empty-abstraction trap).
+- **Consequences:** generality is measured (two artifact classes, independent runtime evidence), not asserted (L17). The engine is ready to propagate via a v1.3.0 spine release + reseed (Phase 10C). The honesty gate (`bro-production-check`) is retuned: Universal PROVEN requires BOTH adapter proofs referenced (fake-universal still RED). UI re-validation is evidence-backed (recorded), not a fresh run — honestly labeled.

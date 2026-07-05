@@ -31,4 +31,6 @@ Every final report is delivered in English and native Armenian, equal load — t
 
 The CRM slice's Gate-2 delivery used this format: Verdict GREEN · what I understood · the slice · why · commands+outputs · verification (23/23, axe 0 serious, 10 screenshots) · risks · needs-Gev (GO-INSTALL). / CRM slice-ի Gate-2 delivery-ն օգտագործեց այս ֆորմատը՝ Verdict GREEN · verification (23/23, axe 0 serious, 10 screenshot) · needs-Gev (GO-INSTALL)։
 
+The Code slice's Phase-9 delivery used the same fixed format: Verdict GREEN · what I understood · the slice (`billingPeriod`) · why · commands + exit codes · verification (13/13, tsc/lint/build 0, controlled + unplanned defects caught) · risks · needs-Gev (ledger + contract flip). Same format, a non-UI artifact — evidence the report structure is domain-agnostic. / Code slice-ի delivery-ն օգտագործեց նույն ֆորմատը՝ ոչ-UI artifact-ով, ապացույց որ struct-ը domain-agnostic է։
+
 End of the loop. Evidence, decision, failure, and success-metric are sealed to the ledgers (`memory/_evidence/`, `memory/_decisions/`, `memory/_failures/`). / Loop-ի վերջ։ Evidence/decision/failure/success-metric-ը կնքվում են ledger-ներում։

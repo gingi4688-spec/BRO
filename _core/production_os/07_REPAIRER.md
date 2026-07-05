@@ -24,4 +24,6 @@ Max **3** automatic repair cycles. After the 3rd failure, STOP and escalate to G
 
 On the CRM slice the Repairer fixed **FL-001** (flip `CONTROLLED_DEFECT_ESC_NOOP` → false; drawer closes on Escape) and **FL-002** (Churned badge → solid destructive fill, white-on-red 4.77:1 ≥ AA) — two defects, two minimal fixes, no scope creep → re-verify **23/23 GREEN**. Recorded in `memory/_failures/FAILURE_LEDGER.md`. / Repairer-ը ուղղեց FL-001 (ESC) ու FL-002 (contrast) → re-verify 23/23 GREEN, գրանցված failure ledger-ում։
 
+On the Code slice the Repairer fixed **FL-008** (boundary `< end` → `<= end`, a minimal one-operator diff) and **FL-009** (add `"rootDir": "src"`) — two defects, two minimal fixes, no scope creep → re-verify **13/13 GREEN**. Same discipline, different artifact class. / Code slice-ում Repairer-ը ուղղեց FL-008-ն ու FL-009-ը՝ երկու min fix, ոչ scope creep → 13/13 GREEN։ նույն կարգապահություն, ուրիշ դաս։
+
 On GREEN → [`08_FINAL_REPORT.md`](08_FINAL_REPORT.md). On cap-hit → escalate to Gev. / GREEN → Final Report. cap → escalate Գևին։

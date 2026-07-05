@@ -23,4 +23,6 @@ The Executor builds to the artifact's PROVEN bar (L18): UI → real components f
 
 On the CRM slice the Executor built the list-detail page: 6 states, drawer (Base UI focus-trap), StatusBadge, role-gating, keyboard model — from shadcn tokens + kit only, in a sandbox (no repo write). Then handed to the Verifier. / CRM slice-ում Executor-ը կառուցեց list-detail էջը՝ 6 state, drawer, StatusBadge, role-gating, keyboard — shadcn token+kit-ից, sandbox-ում, հետո հանձնեց Verifier-ին։
 
+On the Code slice the Executor built `billingPeriod.ts` (pure UTC date math, no render/I-O): the failing tests first (TDD red 13/13), then the implementation to green — the same role, a different artifact class (logic, not UI). Then handed to the Verifier. / Code slice-ում Executor-ը կառուցեց `billingPeriod.ts`-ը՝ ձախողվող test-երն առաջ (red 13/13), հետո implementation → green. նույն role, ուրիշ artifact-դաս (logic, ոչ UI)։
+
 Hand-off → [`06_VERIFIER.md`](06_VERIFIER.md).

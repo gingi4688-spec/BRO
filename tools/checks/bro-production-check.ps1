@@ -32,7 +32,10 @@ if ((Has $cdC '(?m)STATUS:\s*PROVEN') -and -not (Has 'memory/_evidence/EVIDENCE_
 $const = '_core/production_os/00_EXECUTION_CONSTITUTION.md'
 if (-not (Has $const 'UI adapter = PROVEN'))       { $fail += "constitution missing 'UI adapter = PROVEN'" }
 if (-not (Has $const 'Code adapter = PROVEN'))     { $fail += "constitution missing 'Code adapter = PROVEN'" }
-if (-not (Has $const 'Universal Core = DECLARED')) { $fail += "constitution missing 'Universal Core = DECLARED' label" }
+# Universal Core is PROVEN as of Phase 10B. Honesty guard (L18): PROVEN requires BOTH adapter proofs referenced —
+# a "universal" claim without two proven artifact classes is fake-universal (still RED).
+if (-not (Has $const 'Universal Core = PROVEN'))   { $fail += "constitution missing 'Universal Core = PROVEN' label" }
+if ((Has $const 'Universal Core = PROVEN') -and -not ((Has 'memory/_evidence/EVIDENCE_LEDGER.md' 'UISLICE-001') -and (Has 'memory/_evidence/EVIDENCE_LEDGER.md' 'CODESLICE-001'))) { $fail += "Universal Core claims PROVEN but a UISLICE-001/CODESLICE-001 adapter proof is missing (fake-universal)" }
 
 # (3) ledgers non-empty with REAL entries (not just headers)
 if (-not (Has 'memory/_failures/FAILURE_LEDGER.md' 'FL-00')) { $fail += 'FAILURE_LEDGER has no FL-0## entries' }
@@ -46,7 +49,7 @@ if (-not (Has 'memory/_evidence/EVIDENCE_LEDGER.md' 'CODESLICE-001')) { $fail +=
 
 "bro-production-check - L3 static production health / L3 static production առողջություն"
 "  production_os engine:   $(if(($fail | Where-Object {$_ -match 'production_os'}).Count){'MISSING'}else{'present'})"
-"  label honesty:          UI=PROVEN, Code=PROVEN, Universal=DECLARED, constitution honest  ->  $(if(($fail | Where-Object {$_ -match 'contract|constitution|fake-PROVEN'}).Count){'INCONSISTENT'}else{'OK'})"
+"  label honesty:          UI=PROVEN, Code=PROVEN, Universal=PROVEN(2-adapter), constitution honest  ->  $(if(($fail | Where-Object {$_ -match 'contract|constitution|fake-PROVEN|fake-universal'}).Count){'INCONSISTENT'}else{'OK'})"
 "  ledger freshness:       failure/evidence/decision/success  ->  $(if(($fail | Where-Object {$_ -match 'LEDGER'}).Count){'STALE/EMPTY'}else{'OK'})"
 "  UI adapter proof (L18): UISLICE-001 referenced  ->  $(if(($fail | Where-Object {$_ -match 'UISLICE'}).Count){'MISSING'}else{'OK'})"
 "  UI runtime smoke:       ON-DEMAND (weekly) via tools/checks/bro-ui-smoke.ps1 — NOT run here, never faked GREEN (L18)"
