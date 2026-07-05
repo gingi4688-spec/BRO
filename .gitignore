@@ -12,6 +12,7 @@ logs/autopilot-briefing-*.md
 # Daily Self-Check vNext generated artifacts (local carry-forward, regenerated each run — never dirty the tree)
 logs/OPEN_ITEMS.md
 logs/selfcheck-report.md
+change-requests/CR_PROPOSALS.md
 
 # os / editor cruft
 .DS_Store

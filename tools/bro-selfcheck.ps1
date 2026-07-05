@@ -55,7 +55,6 @@ if ($refs.exit    -ne 0) { AddItem 'OI-DOC-REFS'     'MED'  'broken doc links or
 AddItem 'OI-L2-BEHAVIORAL' 'MED' 'L2 behavioral evals not implemented (Phase 8d)'
 AddItem 'OI-L3-PRODUCTION' 'MED' 'L3 production/UI-capability checks not implemented (Phase 8c)'
 AddItem 'OI-L4-TASTE'      'MED' 'L4 Gev-taste evals not implemented (Phase 8d)'
-AddItem 'OI-L5-PLANNER'    'MED' 'L5 improvement-planner not implemented (Phase 8b)'
 AddItem 'OI-ORPHAN-SCAN'   'LOW' 'orphan/dead-doc detection deferred in refs-check'
 
 $oiPath = 'logs/OPEN_ITEMS.md'    # logs/ = runtime artifacts dir (NOT memory/_own, which is isolation-whitelisted)
@@ -69,6 +68,9 @@ $curIds = @($items | ForEach-Object { $_.id })
 $resolved = @($firstSeen.Keys | Where-Object { $_ -notin $curIds })
 if ($resolved.Count) { $oiLines += @('','## Resolved this run'); $resolved | ForEach-Object { $oiLines += "- [$_] status=RESOLVED ($today)" } }
 Set-Content -Path $oiPath -Value $oiLines -Encoding utf8
+
+# --- L5: improvement planner (propose-only; runs after OPEN_ITEMS is written) ---
+$planner = RunCheck 'tools/checks/bro-improvement-planner.ps1' @()
 
 # --- layered report ---
 $rep = @(
@@ -84,7 +86,8 @@ $rep = @(
   ("  content-hash  exit={0}  {1}   [closes format-only false-GREEN]" -f $content.exit,$content.result),
   ("  all-projects  exit={0}  {1}" -f $allproj.exit,$allproj.result),
   ("  doc-hygiene   exit={0}  {1}" -f $refs.exit,$refs.result),"",
-  "L2 BEHAVIORAL: DEFERRED (8d)   L3 PRODUCTION: DEFERRED (8c)   L4 TASTE: DEFERRED (8d)   L5 IMPROVE: DEFERRED (8b)","",
+  "L2 BEHAVIORAL: DEFERRED (8d)   L3 PRODUCTION: DEFERRED (8c)   L4 TASTE: DEFERRED (8d)",
+  ("L5 IMPROVE:    {0}" -f $planner.result),"",
   "tree: $(if($treeDirty){'DIRTY ('+$porcelain.Count+' uncommitted)'}else{'CLEAN'})   open_items: $($items.Count) (logs/OPEN_ITEMS.md)","",
   "SEAL — GREEN(L1) does NOT mean behavior/production/taste verified (L2-L5 deferred), code bug-free, or a push",
   "       authorized — ONLY that L1 structural + content-hash + all-projects + doc-hygiene passed at this commit (L15/L18).",
