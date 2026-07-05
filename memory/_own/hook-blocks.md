@@ -884,3 +884,19 @@ result: BLOCKED
 reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-05T10:03:59+04:00
+actor: hook
+session_id: 49d8dc79-ccda-4540-ab38-43e087c0371d
+action: CRITICAL_COMMAND_BLOCKED
+target: R="/c/Users/Admin/Desktop/Bro"
+echo "=== bro manifest ignore status per project ===" 
+for p in "EP:/c/Users/Admin/Desktop/EP" "GAA:/c/Users/Admin/Desktop/GAA" "
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
