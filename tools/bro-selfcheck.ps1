@@ -61,6 +61,7 @@ if ($taste.exit   -ne 0) { AddItem 'OI-TASTE'        'MED'  'taste banks/failure
 AddItem 'OI-L2-LLM-GRADE'  'LOW' 'L2 behavioral LLM grading: on-demand via tools/bro-deepcheck.ps1 (reads recorded evidence memory/_evidence/DEEPCHECK_EVIDENCE.md); not a daily deterministic check'
 AddItem 'OI-L4-LLM-GRADE'  'LOW' 'L4 taste QUALITY LLM grading: on-demand via tools/bro-deepcheck.ps1; Mode-B design/decision grade YELLOW awaiting Gev-labeled examples; not a daily check'
 AddItem 'OI-UI-SMOKE'      'LOW' 'L3 UI runtime smoke: on-demand via tools/checks/bro-ui-smoke.ps1 (reads recorded Playwright/axe evidence memory/_evidence/UI_SMOKE_EVIDENCE.md); not a daily deterministic check'
+AddItem 'OI-MODEB'         'LOW' 'Mode-B (Gev-taste) awaiting Gev-labeled examples (>= 15 to activate; Mode-A live meanwhile) — intake self/gev_standard/MODE_B_INTAKE.md; gauge tools/checks/bro-modeb-check.ps1'
 AddItem 'OI-ORPHAN-SCAN'   'LOW' 'orphan/dead-doc detection deferred in refs-check'
 
 $oiPath = 'logs/OPEN_ITEMS.md'    # logs/ = runtime artifacts dir (NOT memory/_own, which is isolation-whitelisted)
