@@ -64,10 +64,10 @@
       "memory_scope": "MENQ_only",
       "authority": "ProjectBro",
       "spine_version_expected": "v1.5.0",
-      "status": "INSTALLED",
+      "status": "RETIRED",
       "last_audit": "n/a",
       "last_sync": "2026-07-05T12:16:41+04:00",
-      "notes": "MenQ Studio own site (landing+admin, AI business); brain adopted from harness memory"
+      "notes": "MenQ Studio own site (landing+admin, AI business); RETIRED 2026-07-05 (Gev, token): local project-bro folder Desktop\\Menq deleted by Gev, project now lives GitHub-only on menqstudio/webpage; brain had been adopted from harness memory. Excluded from all-projects health-check."
     }
   ]
 }

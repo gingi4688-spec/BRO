@@ -962,3 +962,17 @@ result: BLOCKED
 reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-07-05T18:56:24+04:00
+actor: hook
+session_id: c87044f8-1223-430e-b44d-b36b0b08f6de
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Desktop\MenQ_App\app\src-tauri\tauri.conf.json
+source_command: Edit tool
+authority: hook
+result: BLOCKED
+reason: write outside BRO_HOME (clean-build zero-touch)
+files_changed: none
+```
