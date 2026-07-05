@@ -9,6 +9,10 @@
 # autopilot runtime briefings (daily artifacts — never dirty the tree)
 logs/autopilot-briefing-*.md
 
+# Daily Self-Check vNext generated artifacts (local carry-forward, regenerated each run — never dirty the tree)
+memory/_own/OPEN_ITEMS.md
+memory/_own/selfcheck-report.md
+
 # os / editor cruft
 .DS_Store
 Thumbs.db

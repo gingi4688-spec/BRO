@@ -53,4 +53,13 @@
 - **Date:** 2026-07-05.
 - **Prevention:** future Bros are born at the latest **verified** spine automatically — the upgrade is now future-proof.
 
+## FL-007 — SuperBro manifest hashes STALE, hidden by a format-only audit (REAL, proactively caught)
+- **What:** `skills_manifest_hash` (`sha256:308ab3…`) and `agents_manifest_hash` (`sha256:315b8d…`) in `bro.manifest.json` did **not** match actual content (computed `d25b48…` / `7827…`) — stale since the v1.2.0 release added skill contracts without re-stamping.
+- **Why it passed GREEN:** `bro-audit` only checks the hash is **well-formed** (`^sha256:[0-9a-f]{64}$`), not that it **matches** content (RM §3). Format-only = a stale hash reads GREEN.
+- **Gate that caught it:** the new L1 **`bro-content-hash-check`** (Phase 8a) — CONTENT match, not format.
+- **Fix:** defined a canonical content-hash recipe (rollup sha256 over sorted `relpath:sha256` for `skills/**` + `.claude/agents/**`); re-stamped the manifest to the content baseline; the check recomputes+compares each run → **future drift is now detected**.
+- **Re-verification:** content-hash MATCH (skills + agents); audit still GREEN (format valid).
+- **Date:** 2026-07-05.
+- **Note:** this is exactly the false-GREEN the Phase-7 plan predicted — a check that "looks green" without looking at content (L18).
+
 > **Lesson recorded (see [`REPAIR_PATTERNS.md`](REPAIR_PATTERNS.md), [`NEVER_REPEAT.md`](NEVER_REPEAT.md)):** FL-002 was NOT planted — an independent Verifier catching an *unplanned* real defect is the proof the gate is capability, not ceremony. FL-003 is the same principle turned on the tooling: the pre-push gate caught a false-RED in its OWN heuristic before it could block a legitimate push. FL-004 completes the trio: an independent check (spine-verify) caught a real integrity break AND exposed that a sibling gate (beast-check) was a hardcoded false-GREEN — exactly why L18 demands independent, current evidence, never a check that "looks green" without looking. / FL-002·003·004 = gate-ը բռնում է իրական defect, նույնիսկ իր՛ գործիքի մեջ, ու hardcoded false-GREEN-ը բացահայտում է (L18)։
