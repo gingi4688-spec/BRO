@@ -1,0 +1,18 @@
+# mobile-engineering — PRODUCTION CONTRACT / PRODUCTION CONTRACT
+
+> **STATUS: PROVEN (graded-eval, DC-002 · 2026-07-05).** An independent, blind, adversarial grader scored every `domain-rubric.md` dimension ≥4 (5-senior bar), re-derived the arithmetic, found no fabrication, and confirmed every safety/UPL/HR/dual-use gate held (DC-002 · C2 clean). Producer/grader separated (L18); session-orchestrated MEASURED evidence (L17), NOT an external human audit or a runtime slice. Evidence: `memory/_evidence/DEEPCHECK_EVIDENCE.md` + `skills/CONTRACT_MATRIX.md`. Graded-eval-PROVEN (distinct from the runtime-PROVEN reference adapters); a runtime domain slice can upgrade it later (optional).
+>
+> **ԿԱՐԳԱՎԻՃԱԿ՝ PROVEN (graded-eval, DC-002 · 2026-07-05)։** Անկախ blind adversarial grader-ը գնահատեց `domain-rubric.md`-ի ամեն dimension ≥4 (5-senior), ինքը վերահաշվեց arithmetic-ը, չգտավ fabrication, ու հաստատեց բոլոր safety/UPL/HR/dual-use gate-երը (DC-002 · C2 clean)։ Producer/grader բաժանված (L18)․ session-orchestrated ՉԱՓՎԱԾ evidence (L17), ՈՉ արտաքին human audit կամ runtime slice։ Evidence՝ `memory/_evidence/DEEPCHECK_EVIDENCE.md`։
+
+## The 10 answers / 10 պատասխանը
+
+1. **Artifacts** — mobile architecture plans, offline-first sync designs, lifecycle/state-restoration logic, performance-triage reports (cold start, 60fps, ANR), secure-storage/pinning designs, native-vs-cross-platform decisions, staged-rollout/kill-switch plans, localization/RTL. / mobile arch, offline-sync, lifecycle, perf triage, secure storage, native-vs-cross, rollout plan, RTL։
+2. **Inputs** — platform target(s) · connectivity model · perf budget · security requirements · store/release constraints · device matrix. / platform · connectivity · perf budget · security · store · device matrix։
+3. **Evidence** — sync reducer tested (offline→online converges) · conflict resolution deterministic · frame budget met (16ms) · secure storage verified · rollout has a kill switch. / sync converges · conflict deterministic · 16ms · secure storage · kill switch։
+4. **Verification gate** — pure sync/lifecycle logic under tests (Code adapter) · perf measured on-device · security check (no plaintext secrets) · staged-rollout gate. / logic tested · perf measured · security · rollout gate։
+5. **GREEN** — the offline-sync/lifecycle logic passes tests, conflicts resolve deterministically, evidence independent of author say-so (L18); device-level perf/security is measured, not asserted. / logic tested, conflict deterministic, perf measured, independent։
+6. **YELLOW** — logic tested but on-device perf/security not measured, or rollout lacks a kill switch. / logic tested բայց perf/security չmeasured կամ rollout առանց kill-switch-ի։
+7. **RED** — a sync design that loses writes on conflict · secrets in plaintext storage · a "fast" claim with no on-device measurement · a rollout with no kill switch. / sync loses writes · plaintext secret · fast առանց measurement · rollout առանց kill-switch-ի։
+8. **Approval-required (D0)** — store submission · production rollout · touching real user data/keys. Gev-gated. / store submit · prod rollout · real user data/keys։ Gev-gated։
+9. **Refusal / boundary** — no data-losing sync · no insecure at-rest secrets · no perf/battery claim without measurement. / ոչ data-losing sync · ոչ insecure secret · ոչ perf claim առանց measurement-ի։
+10. **Eval cases (scaffold, DECLARED)** — `tests/eval-prompts.md` (sync/lifecycle/perf prompts) + `tests/red-team-prompts.md` (write-loss + plaintext-secret traps). Prompts written; **not yet RUN** through an independent grader — that RUN is the next proof slice.

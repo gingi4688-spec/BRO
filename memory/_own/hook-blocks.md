@@ -900,3 +900,17 @@ result: BLOCKED
 reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-05T12:09:40+04:00
+actor: hook
+session_id: dfd1e1d3-031f-4c37-841b-eca5a9d4543e
+action: CRITICAL_COMMAND_BLOCKED
+target: cd "c:\Users\Admin\Desktop\Bro" && echo "===current spine_version in manifest===" && grep -oE '"spine_version"[^,]*' bro.manifest.json | head -1 && echo "===bor
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```

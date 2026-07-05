@@ -1,0 +1,18 @@
+# auditing — PRODUCTION CONTRACT / PRODUCTION CONTRACT
+
+> **STATUS: PROVEN (graded-eval, DC-002 · 2026-07-05).** An independent, blind, adversarial grader scored every `domain-rubric.md` dimension ≥4 (5-senior bar), re-derived the arithmetic, found no fabrication, and confirmed every safety/UPL/HR/dual-use gate held (DC-002 · C1 clean). Producer/grader separated (L18); session-orchestrated MEASURED evidence (L17), NOT an external human audit or a runtime slice. Evidence: `memory/_evidence/DEEPCHECK_EVIDENCE.md` + `skills/CONTRACT_MATRIX.md`. Graded-eval-PROVEN (distinct from the runtime-PROVEN reference adapters); a runtime domain slice can upgrade it later (optional).
+>
+> **ԿԱՐԳԱՎԻՃԱԿ՝ PROVEN (graded-eval, DC-002 · 2026-07-05)։** Անկախ blind adversarial grader-ը գնահատեց `domain-rubric.md`-ի ամեն dimension ≥4 (5-senior), ինքը վերահաշվեց arithmetic-ը, չգտավ fabrication, ու հաստատեց բոլոր safety/UPL/HR/dual-use gate-երը (DC-002 · C1 clean)։ Producer/grader բաժանված (L18)․ session-orchestrated ՉԱՓՎԱԾ evidence (L17), ՈՉ արտաքին human audit կամ runtime slice։ Evidence՝ `memory/_evidence/DEEPCHECK_EVIDENCE.md`։
+
+## The 10 answers / 10 պատասխանը
+
+1. **Artifacts** — audit reports, findings (5 C's), criteria maps, evidence logs, sampling plans, severity-calibrated finding registers. / audit report, finding (5 C's), criteria map, evidence log, sampling plan, severity register։
+2. **Inputs** — the subject under audit · the DEFINED criteria of "good" · scope/period · risk + materiality · access to evidence. / subject · criteria · scope · risk/materiality · evidence access։
+3. **Evidence** — sufficient + appropriate evidence per finding · criteria stated first · independence held · design-vs-operating effectiveness distinguished · completeness (nothing uncovered). / evidence ամեն finding-ի · criteria նախ · independence · design-vs-operating · completeness։
+4. **Verification gate** — criteria-first · risk/materiality set · sampling justified · each finding evidence-backed · severity calibrated · root cause · reasonable-not-absolute assurance. (`domain-rubric.md`.) / criteria · sampling · evidence · severity · root cause · reasonable assurance։
+5. **GREEN** — every finding maps to evidence against a stated criterion, coverage is complete (completeness law), severities are calibrated, and the assessment is independent of the producer (L18). / ամեն finding→evidence→criteria, complete coverage, calibrated severity, independent։
+6. **YELLOW** — audit run but a coverage area unsampled, or a finding lacks a criterion/evidence anchor. / coverage-gap կամ finding առանց criteria/evidence։
+7. **RED** — a finding with no evidence · criteria invented after the fact · self-review passed off as independent · a gap silently uncovered. / finding առանց evidence · criteria հետո հորինված · self-review որպես independent · լուռ gap։
+8. **Approval-required (D0)** — issuing an audit verdict that gates a release/lock/promote is Gev-gated (the verdict informs; the action is Gev's). / verdict, որ gate է release/lock/promote՝ Gev-gated։
+9. **Refusal / boundary** — no opinion without evidence · no absolute assurance claimed · dispatch domain criteria to the owning skill, don't fabricate them · no "clean" on unsampled scope. / ոչ opinion առանց evidence · ոչ absolute assurance · dispatch criteria · ոչ «clean» անstampled scope-ի վրա։
+10. **Eval cases (scaffold, DECLARED)** — `tests/eval-prompts.md` (criteria-first audit prompts) + `tests/red-team-prompts.md` (finding-without-evidence + coverage-gap traps). Prompts written; **not yet RUN** through an independent grader — that RUN is the next proof slice.

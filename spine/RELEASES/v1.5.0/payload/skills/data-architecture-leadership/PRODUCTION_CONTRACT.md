@@ -1,0 +1,18 @@
+# data-architecture-leadership — PRODUCTION CONTRACT / PRODUCTION CONTRACT
+
+> **STATUS: PROVEN (graded-eval, DC-002 · 2026-07-05).** An independent, blind, adversarial grader scored every `domain-rubric.md` dimension ≥4 (5-senior bar), re-derived the arithmetic, found no fabrication, and confirmed every safety/UPL/HR/dual-use gate held (DC-002 · R1 remed). Producer/grader separated (L18); session-orchestrated MEASURED evidence (L17), NOT an external human audit or a runtime slice. Evidence: `memory/_evidence/DEEPCHECK_EVIDENCE.md` + `skills/CONTRACT_MATRIX.md`. Graded-eval-PROVEN (distinct from the runtime-PROVEN reference adapters); a runtime domain slice can upgrade it later (optional).
+>
+> **ԿԱՐԳԱՎԻՃԱԿ՝ PROVEN (graded-eval, DC-002 · 2026-07-05)։** Անկախ blind adversarial grader-ը գնահատեց `domain-rubric.md`-ի ամեն dimension ≥4 (5-senior), ինքը վերահաշվեց arithmetic-ը, չգտավ fabrication, ու հաստատեց բոլոր safety/UPL/HR/dual-use gate-երը (DC-002 · R1 remed)։ Producer/grader բաժանված (L18)․ session-orchestrated ՉԱՓՎԱԾ evidence (L17), ՈՉ արտաքին human audit կամ runtime slice։ Evidence՝ `memory/_evidence/DEEPCHECK_EVIDENCE.md`։
+
+## The 10 answers / 10 պատասխանը
+
+1. **Artifacts** — warehouse/lake/lakehouse/mesh selections, dimensional / Data-Vault / 3NF models + grain, data contracts + schema-evolution rules, MDM/golden-record rulebooks, governance + decision-rights maps, medallion layering, team-maturity/coaching plans. / store selection, dimensional model, data contract, MDM rulebook, governance map, medallion, maturity plan։
+2. **Inputs** — workloads + consumers · data domains · SLAs · org/ownership context · existing platform · governance requirements. / workload+consumer · domain · SLA · org · platform · governance։
+3. **Evidence** — the decision matrix scores options against stated criteria · grain declared · contract specifies schema + evolution mode · MDM survivorship rules explicit · trade-offs recorded. / decision matrix · grain · contract · MDM survivorship · trade-offs։
+4. **Verification gate** — criteria stated before the choice · trade-off record present · contract testable · governance decision-rights unambiguous · review against `domain-rubric.md`. / criteria նախ · trade-off · contract testable · decision-rights · review։
+5. **GREEN** — the recommendation is scored against explicit criteria with a trade-off record, contract/grain/MDM rules are testable, reviewed independently (L18). / criteria-scored, trade-off, testable rules, independent review։
+6. **YELLOW** — decision made but the trade-off record or the alternative scoring is missing. / որոշում առանց trade-off record-ի կամ alternative-ի։
+7. **RED** — a store/model choice with no criteria or trade-offs · a data contract with no evolution mode · MDM with no survivorship rule · governance with ambiguous ownership. / choice առանց criteria · contract առանց evolution · MDM առանց survivorship · ambiguous ownership։
+8. **Approval-required (D0)** — adopting an architecture standard · promoting a contract to org-wide. Gev-gated. / architecture standard · org-wide contract։ Gev-gated։
+9. **Refusal / boundary** — no architecture verdict without criteria + trade-offs · route pipeline build to `data-engineering-pipelines`, role/hiring to `operating-data-roles`. / ոչ verdict առանց criteria/trade-off · dispatch build/role։
+10. **Eval cases (scaffold, DECLARED)** — `tests/eval-prompts.md` (store-selection/modeling/contract prompts) + `tests/red-team-prompts.md` (no-criteria-choice + evolution-less-contract traps). Prompts written; **not yet RUN** through an independent grader — that RUN is the next proof slice.
