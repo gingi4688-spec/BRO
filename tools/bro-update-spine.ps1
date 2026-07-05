@@ -2,9 +2,10 @@
   bro-update-spine.ps1 — UPDATE PROJECT BRO SPINE (DRY default · gated real mode, Phase 3 + Gate-3, §6A Flow 2 / B6)
   EN: Default = DRY preview. Real update requires -Execute AND -Yes AND BRO_GEV_APPROVED=1; the project must be
       INSTALLED and the release present. Real update PULLS the release payload into <ProjectPath>\bro\spine,
-      VERIFIES every hash, and STAMPS spine_version. A pull is the Bro's own action (never forced, B6).
+      VERIFIES every hash, STAMPS spine_version, and BUMPS the registry spine_version_expected (registry<->manifest
+      must agree, else project-doctor RED-flags a correct update — FL-005). A pull is the Bro's own action (B6).
   HY: Default = DRY preview։ Real update-ը պահանջում է -Execute + -Yes + BRO_GEV_APPROVED=1, INSTALLED project ու
-      առկա release։ Pull -> verify ամ. hash -> stamp։ Pull-ը Bro-ի սեփական գործողությունն է (երբեք forced, B6)։
+      առկա release։ Pull -> verify ամ. hash -> stamp -> registry bump (registry<->manifest պիտի համաձայնեն, FL-005)։
   Exit: 0 ok · 2 inputs · 3 refused · 4 not installed / release missing · 5 verify fail.
 #>
 param(
@@ -56,5 +57,24 @@ if ($mismatch.Count -gt 0 -or $missing.Count -gt 0) { "  VERIFY FAILED: mismatch
 $mf = Get-Content -Raw (Join-Path $broDir 'bro.manifest.json') | ConvertFrom-Json
 $mf.spine_version = $Version
 ($mf | ConvertTo-Json -Depth 8) | Set-Content (Join-Path $broDir 'bro.manifest.json') -Encoding utf8
-"  UPDATED $ProjectId spine -> $Version (VERIFIED $(@($relMf.files).Count) files, stamped)."
+
+# Atomically bump the SuperBro registry so registry <-> manifest AGREE after a successful update. Without this,
+# project-doctor reads the stale expected version and RED-flags a correctly-updated bro (FL-005). ProjectId-scoped;
+# snapshot to _before/ first (reversible; L11 forward-fix). / HY: registry-ն bump արա, որ registry<->manifest
+# համաձայնեն. այլապես doctor-ը stale version կկարդա ու RED կտա (FL-005)։
+try {
+  $regPath = 'memory/_own/registry.json'
+  $reg2 = Get-Content -Raw $regPath | ConvertFrom-Json
+  $rEntry = @($reg2.projects) | Where-Object { "$($_.project_id)" -eq $ProjectId } | Select-Object -First 1
+  if ($rEntry) {
+    $fts = Get-Date -Format "yyyyMMdd-HHmmss"
+    Copy-Item $regPath (Join-Path '_before' "registry-$fts.json") -Force
+    $rEntry.spine_version_expected = $Version
+    $rEntry.last_sync = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
+    ($reg2 | ConvertTo-Json -Depth 6) | Set-Content $regPath -Encoding utf8
+    "  registry: $ProjectId spine_version_expected -> $Version (snapshot _before/registry-$fts.json)"
+  } else { "  WARN: stamped but registry entry for $ProjectId not found (registry NOT bumped)." }
+} catch { "  WARN: stamped but registry bump failed: $($_.Exception.Message)" }
+
+"  UPDATED $ProjectId spine -> $Version (VERIFIED $(@($relMf.files).Count) files, stamped, registry bumped)."
 exit 0
