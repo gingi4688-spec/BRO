@@ -18,7 +18,8 @@ param(
   [switch]$Register,
   [switch]$Remove,
   [switch]$Status,
-  [switch]$Autopilot
+  [switch]$Autopilot,
+  [switch]$VNext
 )
 $ErrorActionPreference = 'Stop'
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}   # L0/F1: render Armenian, not '???'
@@ -67,9 +68,12 @@ if (-not $pwsh) { $pwsh = (Get-Command powershell -ErrorAction SilentlyContinue)
 if (-not $pwsh) { Fail "scheduler error: no pwsh/powershell on PATH to run the task." 5 }
 # -Autopilot flips the daily task to the full autopilot (self-check -> bounded dispatch -> briefing); the
 # autopilot's step-1 self-check runs with -Log, so the heartbeat log (surfaced at session-open) keeps updating.
-$script = if ($Autopilot) { Join-Path $broHome 'tools\bro-autopilot.ps1' } else { Join-Path $broHome 'tools\bro-selfaudit.ps1' }
+# -VNext points the daily task at the Daily Self-Check vNext (bro-selfcheck: L1 structural + L2 behavioral-validate +
+# L3 production-static + L4 taste-deterministic + L5 planner). DETERMINISTIC daily path only — LLM grading + UI smoke
+# stay on-demand/weekly (never in the unattended cron). Rollback = plain -Register (-> bro-selfaudit). -Autopilot wins.
+$script = if ($Autopilot) { Join-Path $broHome 'tools\bro-autopilot.ps1' } elseif ($VNext) { Join-Path $broHome 'tools\bro-selfcheck.ps1' } else { Join-Path $broHome 'tools\bro-selfaudit.ps1' }
 $argStr = if ($Autopilot) { "-NoProfile -File `"$script`" -Mode Live -Notify" } else { "-NoProfile -File `"$script`" -Log -Notify" }
-$desc   = if ($Autopilot) { "Bro Main-Bro daily AUTOPILOT (self-check -> BOUNDED dispatch of project bros on their own branches -> briefing; NEVER pushes)" } else { "Bro Main-Bro daily self-audit heartbeat (doctor + audit + beast); verdict -> logs/selfaudit-heartbeat.log" }
+$desc   = if ($Autopilot) { "Bro Main-Bro daily AUTOPILOT (self-check -> BOUNDED dispatch of project bros on their own branches -> briefing; NEVER pushes)" } elseif ($VNext) { "Bro Main-Bro daily Self-Check vNext (L1-L5 deterministic: structural+content-hash+all-projects+refs+production+behavioral-validate+taste+planner); verdict -> logs/selfaudit-heartbeat.log. LLM grading + UI smoke are on-demand/weekly, NOT in this daily task." } else { "Bro Main-Bro daily self-audit heartbeat (doctor + audit + beast); verdict -> logs/selfaudit-heartbeat.log" }
 try {
   $action  = New-ScheduledTaskAction -Execute $pwsh -Argument $argStr -WorkingDirectory $broHome
   $trigger = New-ScheduledTaskTrigger -Daily -At $Time

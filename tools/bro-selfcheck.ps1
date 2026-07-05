@@ -10,7 +10,7 @@
   Exit: 0 L1-GREEN · 1 YELLOW (dirty tree / non-critical) · 2 RED (real L1 failure).
 #>
 [CmdletBinding()]
-param([switch]$Log)
+param([switch]$Log, [switch]$Notify)
 $ErrorActionPreference = 'Stop'
 Set-Location -Path (Join-Path $PSScriptRoot '..')
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
@@ -102,5 +102,12 @@ $rep = @(
   '```')
 Set-Content -Path 'logs/selfcheck-report.md' -Value $rep -Encoding utf8
 $rep | ForEach-Object { $_ }
-if ($Log) { try { Add-Content -Path 'logs\selfcheck-l1.log' -Value ("$stamp  $verdict  doctor=$($doctor.exit) audit=$($audit.exit) beast=$($beast.exit)(x$attempts) content=$($content.exit) allproj=$($allproj.exit) refs=$($refs.exit) tree=$(if($treeDirty){'DIRTY'}else{'CLEAN'}) commit=$sha") -Encoding utf8 } catch {} }
+# -Log: append ONE verdict line to the canonical heartbeat (same file bro-selfaudit uses + the SessionStart front door
+# reads), so a cron pointed at vNext keeps the front-door "last daily" working. Gitignored via *.log — never dirties tree.
+if ($Log) { try { Add-Content -Path 'logs\selfaudit-heartbeat.log' -Value ("$stamp  $verdict  [vNext] doctor=$($doctor.exit) audit=$($audit.exit) beast=$($beast.exit)(x$attempts) content=$($content.exit) allproj=$($allproj.exit) refs=$($refs.exit) prod=$($prod.exit) behav=$($behav.exit) taste=$($taste.exit) tree=$(if($treeDirty){'DIRTY'}else{'CLEAN'}) commit=$sha") -Encoding utf8 } catch {} }
+# -Notify: RED-only OS alert for the unattended daily task (YELLOW = dirty WIP, no alert), mirroring bro-selfaudit.
+if ($Notify -and $verdict -eq 'RED') {
+  $alert = "Bro self-check vNext RED @ ${stamp}: real L1 integrity failure. Open Bro and run RUN SELF-CHECK."
+  try { & msg.exe * "/TIME:180" $alert 2>$null } catch {}
+}
 exit $code
