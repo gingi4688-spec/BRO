@@ -914,3 +914,51 @@ result: BLOCKED
 reason: critical SuperBro script execution requires explicit Gev approval (set BRO_GEV_APPROVED=1)
 files_changed: none
 ```
+
+## BLOCK - forbidden-path-write-guard
+```txt
+timestamp: 2026-07-05T14:08:10+04:00
+actor: hook
+session_id: dfd1e1d3-031f-4c37-841b-eca5a9d4543e
+action: WRITE_BLOCKED
+target: C:\Users\Admin\Downloads\MenQ_BLUEPRINT.md
+source_command: Edit tool
+authority: hook
+result: BLOCKED
+reason: write outside BRO_HOME (clean-build zero-touch)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-05T16:08:47+04:00
+actor: hook
+session_id: dfd1e1d3-031f-4c37-841b-eca5a9d4543e
+action: CRITICAL_COMMAND_BLOCKED
+target: git -C "C:/Users/Admin/Desktop/MenQ ╒è╒í╒░╒Ñ╒╜╒┐" init -q && git -C "C:/Users/Admin/Desktop/MenQ ╒è╒í╒░╒Ñ╒╜╒┐" branch -M main && git -C "C:/Users/Admin/Desktop/
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
+
+## BLOCK - critical-command-gate
+```txt
+timestamp: 2026-07-05T16:56:29+04:00
+actor: hook
+session_id: 086ea514-5fc5-47dd-b1d9-370940c946d3
+action: CRITICAL_COMMAND_BLOCKED
+target: set -e
+cd "c:/Users/Admin/Desktop/Bro"
+
+# 1) evidence log
+git add memory/_own/hook-blocks.md
+git commit -q -F - <<'EOF'
+chore(evidence): append 2 hook BLOCK rec
+source_command: Bash tool
+authority: hook
+result: BLOCKED
+reason: git push (push = Gev-gated critical action, §8A) requires explicit Gev approval (set BRO_GEV_APPROVED=1)
+files_changed: none
+```
