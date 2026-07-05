@@ -58,7 +58,7 @@ AddItem 'OI-L4-TASTE'      'MED' 'L4 Gev-taste evals not implemented (Phase 8d)'
 AddItem 'OI-L5-PLANNER'    'MED' 'L5 improvement-planner not implemented (Phase 8b)'
 AddItem 'OI-ORPHAN-SCAN'   'LOW' 'orphan/dead-doc detection deferred in refs-check'
 
-$oiPath = 'memory/_own/OPEN_ITEMS.md'
+$oiPath = 'logs/OPEN_ITEMS.md'    # logs/ = runtime artifacts dir (NOT memory/_own, which is isolation-whitelisted)
 $firstSeen = @{}
 if (Test-Path $oiPath) { foreach ($ln in Get-Content $oiPath) { $m=[regex]::Match($ln,'\[(OI-[A-Z0-9-]+)\].*first=(\d{4}-\d{2}-\d{2})'); if ($m.Success) { $firstSeen[$m.Groups[1].Value]=$m.Groups[2].Value } } }
 $oiLines = @('# OPEN ITEMS — Daily Self-Check carry-forward / բաց կետեր (carry-forward)','',
@@ -85,11 +85,11 @@ $rep = @(
   ("  all-projects  exit={0}  {1}" -f $allproj.exit,$allproj.result),
   ("  doc-hygiene   exit={0}  {1}" -f $refs.exit,$refs.result),"",
   "L2 BEHAVIORAL: DEFERRED (8d)   L3 PRODUCTION: DEFERRED (8c)   L4 TASTE: DEFERRED (8d)   L5 IMPROVE: DEFERRED (8b)","",
-  "tree: $(if($treeDirty){'DIRTY ('+$porcelain.Count+' uncommitted)'}else{'CLEAN'})   open_items: $($items.Count) (memory/_own/OPEN_ITEMS.md)","",
+  "tree: $(if($treeDirty){'DIRTY ('+$porcelain.Count+' uncommitted)'}else{'CLEAN'})   open_items: $($items.Count) (logs/OPEN_ITEMS.md)","",
   "SEAL — GREEN(L1) does NOT mean behavior/production/taste verified (L2-L5 deferred), code bug-free, or a push",
   "       authorized — ONLY that L1 structural + content-hash + all-projects + doc-hygiene passed at this commit (L15/L18).",
   '```')
-Set-Content -Path 'memory/_own/selfcheck-report.md' -Value $rep -Encoding utf8
+Set-Content -Path 'logs/selfcheck-report.md' -Value $rep -Encoding utf8
 $rep | ForEach-Object { $_ }
 if ($Log) { try { Add-Content -Path 'logs\selfcheck-l1.log' -Value ("$stamp  $verdict  doctor=$($doctor.exit) audit=$($audit.exit) beast=$($beast.exit)(x$attempts) content=$($content.exit) allproj=$($allproj.exit) refs=$($refs.exit) tree=$(if($treeDirty){'DIRTY'}else{'CLEAN'}) commit=$sha") -Encoding utf8 } catch {} }
 exit $code
