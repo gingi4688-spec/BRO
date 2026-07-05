@@ -89,3 +89,12 @@
 - **Note:** the honesty guard got STRONGER, not weaker — PROVEN now demands independent evidence instead of being forbidden outright.
 
 > **Lesson recorded (see [`REPAIR_PATTERNS.md`](REPAIR_PATTERNS.md), [`NEVER_REPEAT.md`](NEVER_REPEAT.md)):** FL-002 was NOT planted — an independent Verifier catching an *unplanned* real defect is the proof the gate is capability, not ceremony. FL-003 is the same principle turned on the tooling: the pre-push gate caught a false-RED in its OWN heuristic before it could block a legitimate push. FL-004 completes the trio: an independent check (spine-verify) caught a real integrity break AND exposed that a sibling gate (beast-check) was a hardcoded false-GREEN — exactly why L18 demands independent, current evidence, never a check that "looks green" without looking. / FL-002·003·004 = gate-ը բռնում է իրական defect, նույնիսկ իր՛ գործիքի մեջ, ու hardcoded false-GREEN-ը բացահայտում է (L18)։
+
+## FL-011 — controlled data-validation defect caught by golden-report conformance (3rd artifact class)
+- **What failed:** in the v1.4.0 3rd-shape slice (DATASLICE-001), the status-set validation was intentionally disabled (`if False and …`, accepting any status).
+- **Why:** a CONTROLLED defect, to prove the golden-conformance gate has teeth on a Data artifact class (not only UI/Code).
+- **Gate that caught it:** the golden-report conformance test (`test_validator.py`) — INV-005 "Shipped" wrongly passed, summary flipped to valid 3/invalid 6 vs golden 2/7 → `FAILED (failures=3)`.
+- **Fix:** restore the status-set check (`status ∈ {Paid,Overdue,Pending}`).
+- **Re-verification:** `python -m unittest test_validator` → `OK` 4/4; `py_compile` exit 0; real report summary valid=2/invalid=7.
+- **Date:** 2026-07-05.
+- **Note:** the Data analogue of FL-001 (UI controlled ESC defect) and FL-008 (Code controlled boundary defect) — a controlled defect caught by an independent gate on a THIRD artifact class proves the Universal Core loop generalizes (§8 rule of three exceeded, not just met).

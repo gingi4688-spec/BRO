@@ -30,6 +30,7 @@ None of the above names a single domain — they are the core, and each role now
 
 - **UI adapter** — `_core/production_os/ui/` (design-tokens · component-kit · page-templates · `verification/UI_VERIFICATION_CHECKLIST.md`: render/states/viewports/keyboard/axe/Playwright). PROVEN (UISLICE-001).
 - **Code adapter** — `_core/production_os/code/verification/CODE_VERIFICATION_CHECKLIST.md` (tsc/lint/test/build/red→green/controlled-failure). PROVEN (CODESLICE-001).
+- **Data adapter** — `_core/production_os/data/verification/DATA_VERIFICATION_CHECKLIST.md` (golden-report conformance over a labeled dataset · red→green · controlled-defect). PROVEN (DATASLICE-001) — the 3rd artifact class, §8 rule of three exceeded.
 - **Per-skill contracts** — `skills/<skill>/PRODUCTION_CONTRACT.md` (each skill's artifact-specific 10 answers). UI (`frontend-ux-product-design`) + Code (`software-systems-architecture`) PROVEN; the other 30 DECLARED, filled opportunistically.
 - **The artifact→proof routing row** (`00` §4) — lists what counts as GREEN per artifact; the recipes live in the adapters.
 
@@ -42,4 +43,4 @@ None of the above names a single domain — they are the core, and each role now
 
 ## Honest limits / Ազնիվ սահմաններ
 
-Two proven adapters clear §8's **minimum** (rule of three), not a ceiling. A third, different-shape slice (e.g. research-cite or a different language) would harden generality further — deferred, not required. UI re-validation is evidence-backed (recorded), not a fresh run. / Երկու adapter-ը բավարարում է §8-ի **նվազագույնը**, ոչ առաստաղը. 3-րդ slice-ը կկարծրացնի, բայց հետաձգված է։
+Two proven adapters clear §8's **minimum** (rule of three); a **third, different-shape slice is now DONE** — **DATASLICE-001** (Data validation/transformation, Python, golden-report conformance over a labeled dataset, with real red→green + a controlled defect caught+repaired). Generality is now measured across **three** artifact classes (UI + Code + Data), L17. The Universal Core label stays **PROVEN** — the *same* PROVEN, now backed by three artifact classes instead of two, not inflated. UI re-validation is evidence-backed (recorded), not a fresh run. / Երկու adapter-ը բավարարում է §8-ի նվազագույնը. **3-րդ slice-ը հիմա DONE է** (DATASLICE-001, Data, Python, golden-report conformance, real red→green + controlled defect)։ Generality-ն չափված է **երեք** artifact-դասով (UI+Code+Data)։ Universal Core-ը մնում է PROVEN՝ նույն PROVEN-ը, հիմա 3 դասով, ոչ ուռճացված։
