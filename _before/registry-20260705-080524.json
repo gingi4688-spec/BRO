@@ -19,10 +19,10 @@
       "project_path": "C:\\Users\\Admin\\Desktop\\EP",
       "memory_scope": "EP_only",
       "authority": "ProjectBro",
-      "spine_version_expected": "v1.3.0",
+      "spine_version_expected": "v1.2.0",
       "status": "INSTALLED",
       "last_audit": "n/a",
-      "last_sync": "2026-07-05T08:05:24+04:00",
+      "last_sync": "2026-07-05T04:33:37+04:00",
       "notes": "founding pilot (EP); brain adopted EP\\memory -> EP\\bro\\memory (2 files, hash-verified); project-root memory vacated per Gev (B7/L12)"
     },
     {
@@ -41,10 +41,10 @@
       "project_path": "C:\\Users\\Admin\\Desktop\\GAA",
       "memory_scope": "GAA_only",
       "authority": "ProjectBro",
-      "spine_version_expected": "v1.3.0",
+      "spine_version_expected": "v1.2.0",
       "status": "INSTALLED",
       "last_audit": "n/a",
-      "last_sync": "2026-07-05T08:06:01+04:00",
+      "last_sync": "2026-07-05T04:43:36+04:00",
       "notes": "GENERAL/main project (GAAhex ISP platform); Bro installed (spine v1.0.0 392/392); brain consolidation A in progress"
     },
     {
@@ -52,10 +52,10 @@
       "project_path": "C:\\Users\\Admin\\Desktop\\Scout Project",
       "memory_scope": "SCOUT_only",
       "authority": "ProjectBro",
-      "spine_version_expected": "v1.3.0",
+      "spine_version_expected": "v1.2.0",
       "status": "INSTALLED",
       "last_audit": "n/a",
-      "last_sync": "2026-07-05T08:06:24+04:00",
+      "last_sync": "2026-07-05T04:44:09+04:00",
       "notes": "first project (HMEM-HASK scout system); DB-from-0 clean rebuild; brain in bro/memory wrapped+adopted"
     },
     {
@@ -63,10 +63,10 @@
       "project_path": "C:\\Users\\Admin\\Desktop\\Menq",
       "memory_scope": "MENQ_only",
       "authority": "ProjectBro",
-      "spine_version_expected": "v1.3.0",
+      "spine_version_expected": "v1.2.0",
       "status": "INSTALLED",
       "last_audit": "n/a",
-      "last_sync": "2026-07-05T08:06:51+04:00",
+      "last_sync": "2026-07-05T04:44:39+04:00",
       "notes": "MenQ Studio own site (landing+admin, AI business); brain adopted from harness memory"
     }
   ]
